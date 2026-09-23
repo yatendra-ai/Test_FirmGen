@@ -1,0 +1,1022 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_motor_control",
+  "revision": "97440920ff2473f6318908f49f49169d",
+  "provenance": {
+    "project_path": "C:\\Users\\YatendraBhargava\\Downloads\\23-9-26\\motor\\motor_control",
+    "chat_id": "14056c19-f482-4c45-b04c-ad9ef894553b",
+    "revision": "97440920ff2473f6318908f49f49169d",
+    "generated_at_ms": 1790168535150,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "CMakeLists.txt",
+      "Core/Inc/main.h",
+      "Core/Inc/stm32g4xx_hal_conf.h",
+      "Core/Inc/stm32g4xx_it.h",
+      "Core/Inc/stm32g4xx_nucleo_conf.h",
+      "Core/Src/main.c",
+      "Core/Src/stm32g4xx_hal_msp.c",
+      "Core/Src/stm32g4xx_it.c",
+      "Core/Src/system_stm32g4xx.c",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h",
+      "firmware/osal/osal.h",
+      "firmware/platforms/stm32/ihm16m1_platform.c",
+      "firmware/platforms/stm32/ihm16m1_platform.h",
+      "firmware/platforms/stm32/uart_platform.c",
+      "firmware/platforms/stm32/uart_platform.h",
+      "firmware/platforms/stm32/watchdog_platform.c",
+      "firmware/platforms/stm32/watchdog_platform.h",
+      "firmware/services/drive_safety/drive_safety.c",
+      "firmware/services/drive_safety/drive_safety.h",
+      "firmware/services/motor_control/motor_control.c",
+      "firmware/services/motor_control/motor_control.h",
+      "firmware/services/uart_command/uart_command.c",
+      "firmware/services/uart_command/uart_command.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h"
+    ],
+    "file_hashes": {
+      "Core/Src/system_stm32g4xx.c": "2f1a41b4752e2b5c56e4af094b97a4b3",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "firmware/services/motor_control/motor_control.c": "b342e48620d12e2ffa15288e28117f02",
+      "Core/Inc/stm32g4xx_hal_conf.h": "4160be8a5a503da02e825462e8d96369",
+      "firmware/platforms/stm32/ihm16m1_platform.h": "f436105c1838cd0f49d90274ee81389a",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c": "a8580016d4c7c466926fb19855d5d6fd",
+      "firmware/services/drive_safety/drive_safety.h": "548f2f8a5b94194da9d3fd57ac2efca8",
+      "firmware/services/motor_control/motor_control.h": "a71423c1c535379f8d638227cf6a29b7",
+      "Core/Inc/main.h": "42e7c5411bf0f6c97159270371ff9e50",
+      "firmware/app/app.c": "ad5303c6c8317c53b613f535384afe61",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h": "81d6f2362cc320fbdf6c9e6a937894b9",
+      "firmware/platforms/stm32/uart_platform.c": "44e8d21a1fdfcf3875eec7a9c34708de",
+      "Core/Src/main.c": "51dae8e8c23d49147f8ed9b1b16b2cc5",
+      "Core/Inc/stm32g4xx_it.h": "4bad17705285fb045885fcdfaa8a702f",
+      "firmware/app/app.h": "ebc6cfe87fb8e2ab299633dd7a067f3b",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "firmware/utils/logger/logger.h": "642efceba068f0cfa4a70d8ce56bbd82",
+      "Core/Src/stm32g4xx_hal_msp.c": "3f78c94c9052bed8232b519f6aafc66a",
+      "firmware/platforms/stm32/ihm16m1_platform.c": "1c09d9ee765865bcec390c5a9686d7ba",
+      "firmware/platforms/stm32/watchdog_platform.c": "91c476762b934927519fff806d932d6b",
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "firmware/osal/osal.h": "f2f2c13784f7a100461b180f4028062b",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "firmware/platforms/stm32/uart_platform.h": "bbd73565dd0d4a35571332c191a944cc",
+      "firmware/platforms/stm32/watchdog_platform.h": "095b4e2625caa69ede5dfa6b2af6b01c",
+      "firmware/utils/logger/logger.c": "a0aa546944c77a82f438514b1f38d8cc",
+      "Core/Inc/stm32g4xx_nucleo_conf.h": "ff84cde17dec523deeddd2c1b31f0fed",
+      "Core/Src/stm32g4xx_it.c": "cd7dea533b6db06228631f234e01499c",
+      "firmware/services/uart_command/uart_command.c": "ff0503808630814639c862d2246907c2",
+      "firmware/configs/app_config.h": "2889adccd38bb1f79ded876022ffa3c2",
+      "firmware/bsp/board.h": "9d556d6cd8201444b48903cec7803f37",
+      "firmware/services/uart_command/uart_command.h": "258769dbfb47e8c851dd1a17046ccfeb",
+      "firmware/services/drive_safety/drive_safety.c": "ebdcee3262f7bdb089ee361d3fd06d27",
+      "CMakeLists.txt": "a83d6d91918550fb184b34fe40c32ae7",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba"
+    },
+    "target_chip": null,
+    "config_hash": null,
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "stale"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "stm32"
+      },
+      "source_refs": [
+        {
+          "file": "Core/Src/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "97440920ff2473f6318908f49f49169d"
+      },
+      "ownership": {
+        "primary_files": [
+          "Core/Src/main.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "gpio_output_pc9",
+      "node_type": "gpio_output",
+      "label": "PC9",
+      "properties": {
+        "pin": "PC9"
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/ihm16m1_platform.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "97440920ff2473f6318908f49f49169d"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/stm32/ihm16m1_platform.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "physical",
+      "ai_summary": "Drives a digital output signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "gpio_input_pa11",
+      "node_type": "gpio_input",
+      "label": "PA11",
+      "properties": {
+        "pin": "PA11"
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/ihm16m1_platform.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "97440920ff2473f6318908f49f49169d"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/stm32/ihm16m1_platform.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "physical",
+      "ai_summary": "Reads a digital input signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "timer_app_start",
+      "node_type": "timer",
+      "label": "Task app_start",
+      "properties": {
+        "task_name": "app_start",
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "97440920ff2473f6318908f49f49169d"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/app/app.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "runtime",
+      "ai_summary": "Schedules periodic callbacks for time-based workflow.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "uart_device_lpuart1",
+      "node_type": "uart_device",
+      "label": "LPUART1",
+      "properties": {
+        "port": 1,
+        "baud_rate": 115200
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/uart_platform.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "97440920ff2473f6318908f49f49169d"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/stm32/uart_platform.c"
+        ]
+      },
+      "editable_fields": [
+        "baud_rate"
+      ],
+      "layer": "physical",
+      "ai_summary": "Represents a UART peripheral with mapped serial pins.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_boot_timer_app_start_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "timer_app_start",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "symbol": "app_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_timer_app_start_gpio_output_pc9_drives",
+      "source_node_id": "timer_app_start",
+      "target_node_id": "gpio_output_pc9",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/ihm16m1_platform.c",
+          "line": 40,
+          "symbol": "ihm16m1_platform_gpio_init",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "drives",
+      "validated": false
+    },
+    {
+      "id": "e_boot_uart_device_lpuart1_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "uart_device_lpuart1",
+      "kind": "hardware",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/uart_platform.c",
+          "symbol": "LPUART1",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_timer_app_start_reads_en_fault_pa11",
+      "source_node_id": "timer_app_start",
+      "target_node_id": "gpio_input_pa11",
+      "kind": "hardware",
+      "confidence": 0.99,
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "line": 25,
+          "symbol": "app_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/stm32/ihm16m1_platform.c",
+          "line": 29,
+          "symbol": "ihm16m1_platform_gpio_init",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/stm32/ihm16m1_platform.c",
+          "line": 118,
+          "symbol": "ihm16m1_platform_gpio_read",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "reads",
+      "validated": false
+    }
+  ],
+  "layers": {
+    "physical": [
+      "gpio_output_pc9",
+      "gpio_input_pa11",
+      "uart_device_lpuart1"
+    ],
+    "runtime": [
+      "timer_app_start"
+    ],
+    "network": [],
+    "system": [
+      "boot"
+    ]
+  },
+  "partitions": [],
+  "components": [],
+  "modules": [
+    {
+      "id": "Core_Inc",
+      "label": "Core/Inc",
+      "path": "Core/Inc",
+      "kind": "module",
+      "files": [
+        "Core/Inc/main.h",
+        "Core/Inc/stm32g4xx_hal_conf.h",
+        "Core/Inc/stm32g4xx_it.h",
+        "Core/Inc/stm32g4xx_nucleo_conf.h"
+      ]
+    },
+    {
+      "id": "Core_Src",
+      "label": "Core/Src",
+      "path": "Core/Src",
+      "kind": "module",
+      "files": [
+        "Core/Src/main.c",
+        "Core/Src/stm32g4xx_hal_msp.c",
+        "Core/Src/stm32g4xx_it.c",
+        "Core/Src/system_stm32g4xx.c"
+      ]
+    },
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "drivers_x_nucleo_ihm16m1_x_nucleo_ihm16m1",
+      "label": "drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1",
+      "path": "drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1",
+      "kind": "driver",
+      "files": [
+        "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+        "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "platforms_stm32",
+      "label": "platforms/stm32",
+      "path": "platforms/stm32",
+      "kind": "platform",
+      "files": [
+        "firmware/platforms/stm32/ihm16m1_platform.c",
+        "firmware/platforms/stm32/ihm16m1_platform.h",
+        "firmware/platforms/stm32/uart_platform.c",
+        "firmware/platforms/stm32/uart_platform.h",
+        "firmware/platforms/stm32/watchdog_platform.c",
+        "firmware/platforms/stm32/watchdog_platform.h"
+      ]
+    },
+    {
+      "id": "services_drive_safety",
+      "label": "services/drive_safety",
+      "path": "services/drive_safety",
+      "kind": "module",
+      "files": [
+        "firmware/services/drive_safety/drive_safety.c",
+        "firmware/services/drive_safety/drive_safety.h"
+      ]
+    },
+    {
+      "id": "services_motor_control",
+      "label": "services/motor_control",
+      "path": "services/motor_control",
+      "kind": "module",
+      "files": [
+        "firmware/services/motor_control/motor_control.c",
+        "firmware/services/motor_control/motor_control.h"
+      ]
+    },
+    {
+      "id": "services_uart_command",
+      "label": "services/uart_command",
+      "path": "services/uart_command",
+      "kind": "module",
+      "files": [
+        "firmware/services/uart_command/uart_command.c",
+        "firmware/services/uart_command/uart_command.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "Core_Src",
+      "to": "Core_Inc",
+      "via": "include",
+      "file": "Core/Src/main.c",
+      "line": 20,
+      "symbol": "main.h"
+    },
+    {
+      "from": "Core_Src",
+      "to": "app",
+      "via": "include",
+      "file": "Core/Src/main.c",
+      "line": 21,
+      "symbol": "app.h"
+    },
+    {
+      "from": "Core_Src",
+      "to": "platforms_stm32",
+      "via": "include",
+      "file": "Core/Src/stm32g4xx_it.c",
+      "line": 24,
+      "symbol": "uart_platform.h"
+    },
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 6,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "platforms_stm32",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 7,
+      "symbol": "ihm16m1_platform.h"
+    },
+    {
+      "from": "app",
+      "to": "services_drive_safety",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 11,
+      "symbol": "drive_safety.h"
+    },
+    {
+      "from": "app",
+      "to": "services_motor_control",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 8,
+      "symbol": "motor_control.h"
+    },
+    {
+      "from": "app",
+      "to": "services_uart_command",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 9,
+      "symbol": "uart_command.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 8,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "platforms_stm32",
+      "to": "Core_Inc",
+      "via": "include",
+      "file": "firmware/platforms/stm32/ihm16m1_platform.c",
+      "line": 6,
+      "symbol": "main.h"
+    },
+    {
+      "from": "platforms_stm32",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/platforms/stm32/ihm16m1_platform.c",
+      "line": 5,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "platforms_stm32",
+      "to": "drivers_x_nucleo_ihm16m1_x_nucleo_ihm16m1",
+      "via": "include",
+      "file": "firmware/platforms/stm32/ihm16m1_platform.h",
+      "line": 7,
+      "symbol": "x_nucleo_ihm16m1.h"
+    },
+    {
+      "from": "services_drive_safety",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/services/drive_safety/drive_safety.c",
+      "line": 5,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "services_motor_control",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/services/motor_control/motor_control.c",
+      "line": 5,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "services_motor_control",
+      "to": "drivers_x_nucleo_ihm16m1_x_nucleo_ihm16m1",
+      "via": "include",
+      "file": "firmware/services/motor_control/motor_control.h",
+      "line": 7,
+      "symbol": "x_nucleo_ihm16m1.h"
+    },
+    {
+      "from": "services_uart_command",
+      "to": "platforms_stm32",
+      "via": "include",
+      "file": "firmware/services/uart_command/uart_command.c",
+      "line": 9,
+      "symbol": "uart_platform.h"
+    },
+    {
+      "from": "services_uart_command",
+      "to": "services_motor_control",
+      "via": "include",
+      "file": "firmware/services/uart_command/uart_command.c",
+      "line": 8,
+      "symbol": "motor_control.h"
+    }
+  ],
+  "task_flows": [
+    {
+      "task_node_id": "timer_app_start",
+      "task_label": "app_start",
+      "entry_fn": "app_start",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task app_start",
+          "kind": "entry",
+          "file": "firmware/app/app.c",
+          "line": 14
+        },
+        {
+          "id": "f2",
+          "label": "ihm16m1_platform_start()",
+          "kind": "step",
+          "file": "firmware/app/app.c",
+          "line": 25
+        },
+        {
+          "id": "f3",
+          "label": "(status != X_NUCLEO_IHM16M1_OK)",
+          "kind": "decision",
+          "file": "firmware/app/app.c",
+          "line": 26
+        },
+        {
+          "id": "f4",
+          "label": "(x_nucleo_ihm16m1_handle_size() > sizeo…",
+          "kind": "decision",
+          "file": "firmware/app/app.c",
+          "line": 42
+        },
+        {
+          "id": "f5",
+          "label": "x_nucleo_ihm16m1_init(p_handle)",
+          "kind": "step",
+          "file": "firmware/app/app.c",
+          "line": 45
+        },
+        {
+          "id": "f6",
+          "label": "(status != X_NUCLEO_IHM16M1_OK)",
+          "kind": "decision",
+          "file": "firmware/app/app.c",
+          "line": 46
+        },
+        {
+          "id": "f7",
+          "label": "(!motor_control_init(&control_io))",
+          "kind": "decision",
+          "file": "firmware/app/app.c",
+          "line": 53
+        },
+        {
+          "id": "f8",
+          "label": "(!uart_command_init())",
+          "kind": "decision",
+          "file": "firmware/app/app.c",
+          "line": 57
+        },
+        {
+          "id": "f9",
+          "label": "(!watchdog_platform_start())",
+          "kind": "decision",
+          "file": "firmware/app/app.c",
+          "line": 61
+        },
+        {
+          "id": "f10",
+          "label": "Loop forever",
+          "kind": "step",
+          "file": "firmware/app/app.c",
+          "line": 65
+        },
+        {
+          "id": "f11",
+          "label": "uart_command_process()",
+          "kind": "transaction",
+          "file": "firmware/app/app.c",
+          "line": 66
+        },
+        {
+          "id": "f12",
+          "label": "motor_control_process(APP_MOTOR_CONTROL_PERIOD_MS)",
+          "kind": "step",
+          "file": "firmware/app/app.c",
+          "line": 67
+        },
+        {
+          "id": "f13",
+          "label": "watchdog_platform_kick()",
+          "kind": "step",
+          "file": "firmware/app/app.c",
+          "line": 68
+        },
+        {
+          "id": "f14",
+          "label": "ihm16m1_platform_delay(NULL)",
+          "kind": "timer",
+          "file": "firmware/app/app.c",
+          "line": 69
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f11",
+          "to": "f12",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f12",
+          "to": "f13",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f13",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f14",
+          "to": "f10",
+          "label": "next cycle",
+          "loop_back": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "headline": "5 nodes, 1 connections — valid",
+    "node_count": 5,
+    "edge_count": 1,
+    "warnings": [
+      "Unknown node type 'timer'"
+    ]
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph Hardware\n    h_pwm[\"Three-phase PWM<br/>TIM1: PA8, PA9, PA10\"]\n    h_fault[\"Driver fault input<br/>PA11\"]\n    h_stby[\"Driver standby output<br/>PC9\"]\n    h_adc[\"Phase-current ADC inputs<br/>PC1, PC2, PC3\"]\n    h_uart[\"Command UART<br/>LPUART1: PA2 TX, PA3 RX\"]\n    h_iwdg[\"Independent watchdog<br/>IWDG\"]\n  end\n\n  subgraph Drive_stack\n    h_platform[\"STM32 motor platform<br/>firmware/platforms/stm32/ihm16m1_platform.c\"]\n    h_driver[\"Motor driver adapter<br/>x_nucleo_ihm16m1\"]\n    h_motor[\"Motor control service<br/>firmware/services/motor_control/motor_control.c\"]\n  end\n\n  subgraph Command_path\n    h_app[\"Application runtime<br/>firmware/app/app.c: app_start\"]\n    h_uartplatform[\"UART platform<br/>firmware/platforms/stm32/uart_platform.c\"]\n    h_uartcmd[\"UART command service<br/>firmware/services/uart_command/uart_command.c\"]\n    h_console[\"Console over UART<br/>uart_platform_write\"]\n    h_watchdog[\"Watchdog platform<br/>firmware/platforms/stm32/watchdog_platform.c\"]\n  end\n\n  h_app -->|ihm16m1_platform_start| h_platform\n  h_platform -->|HAL_TIM_PWM_Start and compare updates| h_pwm\n  h_platform -->|HAL_GPIO_ReadPin| h_fault\n  h_platform -->|HAL_GPIO_WritePin| h_stby\n  h_platform -->|HAL_ADC_Start and HAL_ADC_GetValue| h_adc\n  h_platform -->|x_nucleo_ihm16m1 IO callbacks| h_driver\n  h_app -->|x_nucleo_ihm16m1_init| h_driver\n  h_driver -->|x_nucleo_ihm16m1_drive_motor| h_motor\n  h_motor -->|pwm_enable and driver commands| h_driver\n  h_app -->|motor_control_init and motor_control_process| h_motor\n  h_app -->|uart_command_init and uart_command_process| h_uartcmd\n  h_uartcmd -->|uart_platform_start and uart_platform_read_line| h_uartplatform\n  h_uartplatform -->|HAL_UART_Init and HAL_UART_Receive_IT| h_uart\n  h_uartcmd -->|uart_platform_write| h_console\n  h_console -->|HAL_UART_Transmit| h_uart\n  h_app -->|watchdog_platform_start and watchdog_platform_kick| h_watchdog",
+      "authored_by_model": true,
+      "node_notes": {
+        "h_platform": "STM32 motor platform is a step in this firmware's runtime flow. The cite firmware/platforms/stm32/ihm16m1_platform.c is the source evidence for it.",
+        "h_uart": "Command UART is a step in this firmware's runtime flow. The cite LPUART1: PA2 TX, PA3 RX is the source evidence for it.",
+        "h_fault": "Driver fault input is a step in this firmware's runtime flow. The cite PA11 is the source evidence for it.",
+        "h_adc": "Phase-current ADC inputs is a step in this firmware's runtime flow. The cite PC1, PC2, PC3 is the source evidence for it.",
+        "h_motor": "Motor control service is a step in this firmware's runtime flow. The cite firmware/services/motor_control/motor_control.c is the source evidence for it.",
+        "h_uartcmd": "UART command service is a step in this firmware's runtime flow. The cite firmware/services/uart_command/uart_command.c is the source evidence for it.",
+        "h_pwm": "Three-phase PWM is a step in this firmware's runtime flow. The cite TIM1: PA8, PA9, PA10 is the source evidence for it.",
+        "h_uartplatform": "UART platform is a step in this firmware's runtime flow. The cite firmware/platforms/stm32/uart_platform.c is the source evidence for it.",
+        "h_watchdog": "Watchdog platform is a step in this firmware's runtime flow. The cite firmware/platforms/stm32/watchdog_platform.c is the source evidence for it.",
+        "h_driver": "Motor driver adapter is a step in this firmware's runtime flow. The cite x_nucleo_ihm16m1 is the source evidence for it.",
+        "h_stby": "Driver standby output is a step in this firmware's runtime flow. The cite PC9 is the source evidence for it.",
+        "h_iwdg": "Independent watchdog is a step in this firmware's runtime flow. The cite IWDG is the source evidence for it.",
+        "h_console": "Console over UART is a step in this firmware's runtime flow. The cite uart_platform_write is the source evidence for it.",
+        "h_app": "Application runtime is a step in this firmware's runtime flow. The cite firmware/app/app.c: app_start is the source evidence for it."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "mermaid": "flowchart TD\n  subgraph timer_app_start\n    l_boot[\"Enter application runtime<br/>Core/Src/main.c:58\"]\n    l_platform[\"Start TIM1 PWM, ADC1, and motor GPIO<br/>firmware/app/app.c:18\"]\n    l_platform_ok{\"Platform start succeeded — firmware/app/app.c:19\"}\n    l_driver[\"Initialize three-PWM STSPIN830 adapter<br/>firmware/app/app.c:28\"]\n    l_driver_ok{\"Driver initialization succeeded — firmware/app/app.c:33\"}\n    l_motor[\"Initialize motor control with PWM enable callback<br/>firmware/app/app.c:38\"]\n    l_motor_ok{\"Motor control initialization succeeded — firmware/app/app.c:39\"}\n    l_uart[\"Start LPUART1 command reception<br/>firmware/app/app.c:43\"]\n    l_uart_ok{\"UART initialization succeeded — firmware/app/app.c:44\"}\n    l_wdg[\"Start independent watchdog<br/>firmware/app/app.c:48\"]\n    l_wdg_ok{\"Watchdog start succeeded — firmware/app/app.c:49\"}\n    l_read[\"Poll for a complete UART command line<br/>firmware/app/app.c:53\"]\n    l_line{\"Complete command line available — firmware/services/uart_command/uart_command.c…\"}\n    l_command[\"Parse command and update motor request<br/>firmware/services/uart_command/uart_…\"]\n    l_motor_tick[\"Advance motor state and apply duty<br/>firmware/app/app.c:54\"]\n    l_kick[\"Refresh watchdog<br/>firmware/app/app.c:55\"]\n    l_delay[\"Delay for control period<br/>firmware/app/app.c:56\"]\n    l_fail[\"Return from app_start on initialization failure<br/>firmware/app/app.c:20\"]\n    l_boot -->  l_platform -->  l_platform_ok\n    l_platform_ok -->|yes| l_driver\n    l_platform_ok -->|no| l_fail\n    l_driver -->  l_driver_ok\n    l_driver_ok -->|yes| l_motor\n    l_driver_ok -->|no| l_fail\n    l_motor -->  l_motor_ok\n    l_motor_ok -->|yes| l_uart\n    l_motor_ok -->|no| l_fail\n    l_uart -->  l_uart_ok\n    l_uart_ok -->|yes| l_wdg\n    l_uart_ok -->|no| l_fail\n    l_wdg -->  l_wdg_ok\n    l_wdg_ok -->|yes| l_read\n    l_wdg_ok -->|no| l_fail\n    l_read -->  l_line\n    l_line -->|yes| l_command\n    l_line -->|no| l_motor_tick\n    l_command -->  l_motor_tick\n    l_motor_tick -->  l_kick -->  l_delay\n    l_delay -->|1 ms| l_read\n  end",
+      "authored_by_model": true,
+      "node_notes": {
+        "l_read": "Poll for a complete UART command line is a step in this firmware's runtime flow. The cite firmware/app/app.c:53 is the source evidence for it.",
+        "l_motor": "Initialize motor control with PWM enable callback is a step in this firmware's runtime flow. The cite firmware/app/app.c:38 is the source evidence for it.",
+        "l_uart": "Start LPUART1 command reception is a step in this firmware's runtime flow. The cite firmware/app/app.c:43 is the source evidence for it.",
+        "l_motor_ok": "Motor control initialization succeeded — firmware/app/app.c:39 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "l_motor_tick": "Advance motor state and apply duty is a step in this firmware's runtime flow. The cite firmware/app/app.c:54 is the source evidence for it.",
+        "l_fail": "Return from app_start on initialization failure is a step in this firmware's runtime flow. The cite firmware/app/app.c:20 is the source evidence for it.",
+        "l_line": "Complete command line available — firmware/services/uart_command/uart_command.c… is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "l_boot": "Enter application runtime is a step in this firmware's runtime flow. The cite Core/Src/main.c:58 is the source evidence for it.",
+        "l_driver_ok": "Driver initialization succeeded — firmware/app/app.c:33 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "l_platform_ok": "Platform start succeeded — firmware/app/app.c:19 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "l_uart_ok": "UART initialization succeeded — firmware/app/app.c:44 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "l_wdg": "Start independent watchdog is a step in this firmware's runtime flow. The cite firmware/app/app.c:48 is the source evidence for it.",
+        "l_driver": "Initialize three-PWM STSPIN830 adapter is a step in this firmware's runtime flow. The cite firmware/app/app.c:28 is the source evidence for it.",
+        "l_delay": "Delay for control period is a step in this firmware's runtime flow. The cite firmware/app/app.c:56 is the source evidence for it.",
+        "l_kick": "Refresh watchdog is a step in this firmware's runtime flow. The cite firmware/app/app.c:55 is the source evidence for it.",
+        "l_command": "Parse command and update motor request is a step in this firmware's runtime flow. The cite firmware/services/uart_command/uart_… is the source evidence for it.",
+        "l_platform": "Start TIM1 PWM, ADC1, and motor GPIO is a step in this firmware's runtime flow. The cite firmware/app/app.c:18 is the source evidence for it.",
+        "l_wdg_ok": "Watchdog start succeeded — firmware/app/app.c:49 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system."
+      }
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "mermaid": "sequenceDiagram\n  participant Boot as \"main\"\n  participant App as \"app_start\"\n  participant Platform as \"IHM16M1 platform\"\n  participant Driver as \"x_nucleo_ihm16m1\"\n  participant UART as \"LPUART1\"\n  participant Commands as \"uart_command\"\n  participant Motor as \"motor_control\"\n  participant Watchdog as \"IWDG\"\n  participant PWM as \"TIM1 PWM\"\n\n  Boot->>App: call app_start\n  App->>Platform: ihm16m1_platform_start\n  Platform->>PWM: HAL_TIM_PWM_Start on channels 1 to 3\n  Platform->>Platform: configure PA8 PA9 PA10 PA11 PC9 and ADC1\n  App->>Driver: x_nucleo_ihm16m1_init\n  Driver->>Platform: disable PWM and set standby\n  Platform->>PWM: set all compares to zero\n  App->>Motor: motor_control_init\n  Motor->>Driver: pwm_enable false\n  App->>UART: uart_platform_start\n  UART-->>App: start interrupt line reception\n  App->>Watchdog: watchdog_platform_start\n  loop every 1 ms\n    App->>Commands: uart_command_process\n    alt complete command line available\n      Commands->>UART: uart_platform_read_line\n      Commands->>Motor: start stop speed or direction request\n      alt STATUS command\n        Commands->>Motor: motor_control_get_status\n        Commands->>UART: uart_platform_write\n        UART-->>Commands: HAL_UART_Transmit\n      end\n    else no complete line\n      Commands-->>App: return without command\n    end\n    App->>Motor: motor_control_process with 1 ms\n    Motor->>Driver: x_nucleo_ihm16m1_drive_motor\n    Driver->>Platform: pwm_set for U V and W\n    Platform->>PWM: update TIM1 compare values\n    App->>Watchdog: watchdog_platform_kick\n    App->>Platform: ihm16m1_platform_delay for 1 ms\n  end",
+      "participants": [
+        "Boot",
+        "App",
+        "Platform",
+        "Driver",
+        "UART",
+        "Commands",
+        "Motor",
+        "Watchdog",
+        "PWM"
+      ],
+      "generated_from": [
+        "Core/Src/main.c",
+        "firmware/platforms/stm32/ihm16m1_platform.c",
+        "firmware/app/app.c",
+        "firmware/platforms/stm32/uart_platform.c"
+      ],
+      "grounding": 0.11111111,
+      "authored_by_model": true
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [],
+  "read_only": false,
+  "graph_version": 6,
+  "generation": {
+    "mode": "static",
+    "triggered_by": "mount",
+    "analyzed_at_ms": 1790168535150,
+    "input_files": [
+      "CMakeLists.txt",
+      "Core/Inc/main.h",
+      "Core/Inc/stm32g4xx_hal_conf.h",
+      "Core/Inc/stm32g4xx_it.h",
+      "Core/Inc/stm32g4xx_nucleo_conf.h",
+      "Core/Src/main.c",
+      "Core/Src/stm32g4xx_hal_msp.c",
+      "Core/Src/stm32g4xx_it.c",
+      "Core/Src/system_stm32g4xx.c",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h",
+      "firmware/osal/osal.h",
+      "firmware/platforms/stm32/ihm16m1_platform.c",
+      "firmware/platforms/stm32/ihm16m1_platform.h",
+      "firmware/platforms/stm32/uart_platform.c",
+      "firmware/platforms/stm32/uart_platform.h",
+      "firmware/platforms/stm32/watchdog_platform.c",
+      "firmware/platforms/stm32/watchdog_platform.h",
+      "firmware/services/drive_safety/drive_safety.c",
+      "firmware/services/drive_safety/drive_safety.h",
+      "firmware/services/motor_control/motor_control.c",
+      "firmware/services/motor_control/motor_control.h",
+      "firmware/services/uart_command/uart_command.c",
+      "firmware/services/uart_command/uart_command.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h"
+    ]
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": [],
+    "last_diff": {
+      "from_revision": "3124dc14743aa081178519751e33b00b",
+      "to_revision": "97440920ff2473f6318908f49f49169d",
+      "nodes_added": [
+        "uart_device_lpuart1",
+        "timer_app_start"
+      ],
+      "nodes_removed": [],
+      "nodes_changed": [],
+      "edges_added": [
+        "e_boot_timer_app_start_spawns",
+        "e_timer_app_start_gpio_output_pc9_drives",
+        "e_boot_uart_device_lpuart1_initializes"
+      ],
+      "edges_removed": [
+        "e_boot_initializes_gpio_output_pc9",
+        "e_boot_initializes_gpio_input_pa11"
+      ]
+    }
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 1,
+    "validated_at_ms": 1790168535150
+  }
+}

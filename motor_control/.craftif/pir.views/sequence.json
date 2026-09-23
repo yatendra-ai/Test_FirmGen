@@ -1,0 +1,10 @@
+{
+  "schema_version": "3.0.0",
+  "view": "sequence",
+  "revision": "97440920ff2473f6318908f49f49169d",
+  "graph_version": 6,
+  "generated_at_ms": 1790168595741,
+  "mermaid": "sequenceDiagram\n  participant Boot as \"main\"\n  participant App as \"app_start\"\n  participant Platform as \"IHM16M1 platform\"\n  participant Driver as \"x_nucleo_ihm16m1\"\n  participant UART as \"LPUART1\"\n  participant Commands as \"uart_command\"\n  participant Motor as \"motor_control\"\n  participant Watchdog as \"IWDG\"\n  participant PWM as \"TIM1 PWM\"\n\n  Boot->>App: call app_start\n  App->>Platform: ihm16m1_platform_start\n  Platform->>PWM: HAL_TIM_PWM_Start on channels 1 to 3\n  Platform->>Platform: configure PA8 PA9 PA10 PA11 PC9 and ADC1\n  App->>Driver: x_nucleo_ihm16m1_init\n  Driver->>Platform: disable PWM and set standby\n  Platform->>PWM: set all compares to zero\n  App->>Motor: motor_control_init\n  Motor->>Driver: pwm_enable false\n  App->>UART: uart_platform_start\n  UART-->>App: start interrupt line reception\n  App->>Watchdog: watchdog_platform_start\n  loop every 1 ms\n    App->>Commands: uart_command_process\n    alt complete command line available\n      Commands->>UART: uart_platform_read_line\n      Commands->>Motor: start stop speed or direction request\n      alt STATUS command\n        Commands->>Motor: motor_control_get_status\n        Commands->>UART: uart_platform_write\n        UART-->>Commands: HAL_UART_Transmit\n      end\n    else no complete line\n      Commands-->>App: return without command\n    end\n    App->>Motor: motor_control_process with 1 ms\n    Motor->>Driver: x_nucleo_ihm16m1_drive_motor\n    Driver->>Platform: pwm_set for U V and W\n    Platform->>PWM: update TIM1 compare values\n    App->>Watchdog: watchdog_platform_kick\n    App->>Platform: ihm16m1_platform_delay for 1 ms\n  end",
+  "title": "Sequence Diagram",
+  "authored_by_model": true
+}

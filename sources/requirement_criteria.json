@@ -1,0 +1,1285 @@
+{
+  "job_id": "72bd93d3-15e6-4837-9116-dc1c0c17a4e6",
+  "document_id": "d6048fbd-5d6a-4f1f-b7cf-43d03d17b87a",
+  "saved_at": "2026-09-23T11:55:11.198Z",
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "MCU, Inverter & Motor Hardware Configuration",
+      "criteria": [
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "inspection",
+          "criterion": "The build configuration and target documentation identify NUCLEO-G431RB as the firmware target, and the recorded target test uses that board.",
+          "observable": "MCU/board target configuration and target test record",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Board assembled per Target Hardware."
+          ],
+          "procedure": [
+            "Inspect the project target configuration and build output metadata.",
+            "Inspect the recorded target test setup and confirm it identifies NUCLEO-G431RB."
+          ],
+          "expected": "The target is identified as NUCLEO-G431RB in both the build configuration and the target test record.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "inspection",
+          "criterion": "The motor-driver board listed in the hardware configuration and test setup is X-NUCLEO-IHM16M1 populated with the STSPIN830.",
+          "observable": "Hardware bill of materials, board markings, and test setup record",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Board assembled per Target Hardware."
+          ],
+          "procedure": [
+            "Inspect the hardware bill of materials and board markings.",
+            "Inspect the test setup record for the installed motor-driver board."
+          ],
+          "expected": "The installed and documented motor-driver board is X-NUCLEO-IHM16M1 with an STSPIN830.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "inspection",
+          "criterion": "The motor identified in the test setup and documentation is GBM2804H-100T and its configured pole-pair count is 7.",
+          "observable": "Motor label, motor configuration parameter, and test documentation",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Firmware tested on GBM2804H-100T."
+          ],
+          "procedure": [
+            "Inspect the motor label and test setup documentation.",
+            "Inspect the firmware motor configuration for the pole-pair parameter."
+          ],
+          "expected": "The motor model is GBM2804H-100T and the pole-pair parameter equals 7.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-004",
+          "verifiability": "inspection",
+          "criterion": "The documented laboratory supply setting for the system is 12 V DC.",
+          "observable": "Laboratory power-supply display or setup record",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "External supply provided."
+          ],
+          "procedure": [
+            "Inspect the connected laboratory supply setting or its setup record.",
+            "Confirm the voltage and supply type."
+          ],
+          "expected": "The supply is DC and its set voltage is 12 V.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "When a run command is applied, PWM activity is observable on each of the U, V, and W motor outputs.",
+          "observable": "Oscilloscope traces on the U, V, and W motor-driver outputs",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Motor connected to U, V, W outputs.",
+            "The motor-driver board and inverter are powered.",
+            "The firmware is in a run-command state with no active motor-control fault."
+          ],
+          "procedure": [
+            "Connect oscilloscope channels to the U, V, and W outputs relative to the appropriate measurement reference.",
+            "Apply a motor run command.",
+            "Capture all three output waveforms during the commanded run."
+          ],
+          "expected": "Each of U, V, and W has a continuous PWM waveform during the commanded run.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "When a motor-control fault is injected or detected, the U, V, and W drive outputs are disabled.",
+          "observable": "U, V, and W output levels or PWM duty after fault detection",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Motor connected to U, V, and W outputs.",
+            "The inverter is powered and producing PWM before the fault.",
+            "A controllable motor-control fault condition is available."
+          ],
+          "procedure": [
+            "Start the motor command and verify PWM is present on U, V, and W.",
+            "Inject or trigger the specified motor-control fault.",
+            "Observe the three outputs after fault handling completes."
+          ],
+          "expected": "PWM is disabled on U, V, and W after the fault is detected.",
+          "source": "derived",
+          "rationale": "The requirement's failure behavior explicitly requires disabling outputs on any motor-control fault; this criterion makes that safety action observable at the three phase outputs.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "hardware",
+          "criterion": "During motor operation, the firmware reports phase-current samples from the IHM16M1 three-shunt sensing network, and the reported samples vary when motor load or phase conduction changes.",
+          "observable": "Firmware phase-current sample values and their ADC input connections",
+          "observable_kind": "state",
+          "preconditions": [
+            "IHM16M1 is assembled with its three shunt networks.",
+            "The shunt-sense outputs are connected to the configured ADC inputs.",
+            "The motor is operating under a controllable load."
+          ],
+          "procedure": [
+            "Start the motor at a safe operating point and record the firmware's phase-current samples.",
+            "Change the motor load or operating phase conditions.",
+            "Record the samples again and correlate the ADC inputs with the IHM16M1 shunt-sense outputs."
+          ],
+          "expected": "The samples are sourced from the three-shunt ADC channels and at least one phase-current sample changes when load or phase conduction changes.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "hardware",
+          "criterion": "When phase-current sensing is made unavailable, the motor-drive outputs are disabled.",
+          "observable": "PWM or gate-drive signals after ADC/current-sensing failure",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is commanded to run and drive outputs are active.",
+            "The IHM16M1 shunt-sense signals are connected before the fault.",
+            "A controllable loss or invalidation of the current-sensing path is available."
+          ],
+          "procedure": [
+            "Run the motor and verify active drive signals.",
+            "Disconnect or invalidate the configured current-sensing path.",
+            "Observe the motor-drive outputs after the sensing fault is detected."
+          ],
+          "expected": "Motor-drive PWM is disabled after current sensing becomes unavailable.",
+          "source": "derived",
+          "rationale": "The failure behavior explicitly requires disabling motor drive when sensing is unavailable; observing the drive outputs verifies the required safety response.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "inspection",
+          "criterion": "The firmware's three-phase drive implementation selects MCU hardware PWM peripherals rather than software-toggled GPIO timing.",
+          "observable": "PWM peripheral initialization, channel configuration, and output-routing code",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "PWM outputs are routed to the motor-driver inputs."
+          ],
+          "procedure": [
+            "Inspect the three-phase drive initialization and update code.",
+            "Identify the configured MCU timer/PWM peripheral channels and their output pins.",
+            "Confirm that the phase duty updates write PWM peripheral compare registers rather than scheduling GPIO transitions."
+          ],
+          "expected": "All three inverter phases are assigned to MCU hardware PWM channels, with duty controlled through PWM peripheral registers.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "hardware",
+          "criterion": "During steady motor operation, the three inverter PWM waveforms remain continuously hardware-timed without observable CPU-jitter artifacts.",
+          "observable": "Oscilloscope capture of the three PWM output waveforms",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM outputs are routed to the motor-driver inputs.",
+            "The MCU firmware is running the motor-control loop.",
+            "The inverter is commanded to produce PWM."
+          ],
+          "procedure": [
+            "Probe the three inverter PWM outputs with an oscilloscope.",
+            "Capture a sufficiently long interval during steady motor operation while the CPU performs normal firmware work.",
+            "Inspect pulse timing and edge placement across the capture."
+          ],
+          "expected": "PWM pulses remain present for the full capture and their period and edge timing remain hardware-timed without missing pulses or observable CPU-scheduling jitter artifacts.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "hardware",
+          "criterion": "When a detected inverter or motor-control fault occurs, the hardware PWM outputs are disabled.",
+          "observable": "Three-phase PWM output signals after fault detection",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The inverter is producing PWM before the fault.",
+            "A controllable fault condition recognized by the firmware is available."
+          ],
+          "procedure": [
+            "Start PWM generation and verify output activity.",
+            "Trigger the detected fault condition.",
+            "Observe the three PWM outputs after the fault response."
+          ],
+          "expected": "PWM output is disabled on all three inverter phases after fault detection.",
+          "source": "derived",
+          "rationale": "The requirement's failure behavior requires PWM shutdown on a detected fault; checking all three outputs verifies that the hardware PWM safety action is applied to the complete inverter.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "Sensorless FOC & Motor Operating Control",
+      "criteria": [
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "The motor operates under closed-loop sensorless FOC with valid commutation and torque control throughout the specified speed range.",
+          "observable": "Phase-current waveforms, estimated rotor angle/speed, and measured motor response while commanded speed and load are varied.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Target hardware is assembled.",
+            "Three-phase motor is connected.",
+            "The specified speed range and safe operating limits are configured."
+          ],
+          "procedure": [
+            "Power the target and start the motor under speed control.",
+            "Command operating points spanning the specified speed range.",
+            "Observe phase currents and the sensorless estimator while applying representative torque demand.",
+            "Record whether commutation remains synchronized and torque follows the command at each operating point."
+          ],
+          "expected": "Closed-loop sensorless commutation remains synchronized and commanded torque is controlled at every tested speed in the specified range.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "A failed-to-converge sensorless observer causes the motor drive to be disabled.",
+          "observable": "Observer convergence/fault status and the three PWM outputs after inducing or simulating estimator non-convergence.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor and target are connected.",
+            "A test condition is available that causes the observer/estimator to fail to converge."
+          ],
+          "procedure": [
+            "Start the motor or enter the estimator-active state.",
+            "Apply the estimator non-convergence condition.",
+            "Observe the estimator status and PWM outputs."
+          ],
+          "expected": "An estimator failure is indicated and all motor-drive PWM outputs are disabled.",
+          "source": "derived",
+          "rationale": "The requirement explicitly specifies the failure behavior when the observer/estimator does not converge; the criterion checks both the failure indication and the required safety action.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "hardware",
+          "criterion": "Immediately after power-on or reset, before any START command, the motor is stationary and all motor PWM outputs are disabled.",
+          "observable": "Motor shaft motion and the three-phase PWM output signals before a START command is issued.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The system has just been powered on or reset.",
+            "No START command has been sent."
+          ],
+          "procedure": [
+            "Power on or reset the target.",
+            "Do not send any motor command.",
+            "Observe the shaft and measure all three PWM outputs during initialization and the pre-command interval."
+          ],
+          "expected": "The shaft does not rotate and all motor PWM outputs remain disabled until START is received.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "The measured shaft rotation direction matches each commanded direction for both CW and CCW commands.",
+          "observable": "Measured shaft direction after issuing CW and CCW direction commands.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is connected and free to rotate.",
+            "The system is in a state that accepts START and direction commands."
+          ],
+          "procedure": [
+            "Start the motor with a CW direction command and measure shaft direction.",
+            "Stop the motor using the normal stop procedure.",
+            "Start the motor with a CCW direction command and measure shaft direction."
+          ],
+          "expected": "The first run rotates clockwise and the second run rotates counter-clockwise, with no direction-command mismatch.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "hardware",
+          "criterion": "A valid SPEED command issued during running changes the motor to the new target speed without entering the stopped state.",
+          "observable": "Motor state, measured speed, and speed-command/status values during an in-run speed change.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is running under speed control.",
+            "The new SPEED command is within the allowed range."
+          ],
+          "procedure": [
+            "Start the motor and wait for steady running.",
+            "Issue a new valid SPEED command without issuing STOP.",
+            "Record the motor state and speed throughout the transition."
+          ],
+          "expected": "The commanded speed changes to the new value, the motor remains in the run state throughout the transition, and no stop state occurs between the two speeds.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "A running CW motor commanded to reverse decelerates through zero before any reverse torque is applied and then accelerates CCW.",
+          "observable": "Measured signed speed, phase current/torque direction, and motor state after a DIR CCW command.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is running CW at a steady speed within the specified operating range.",
+            "Speed and torque direction can be measured."
+          ],
+          "procedure": [
+            "Run the motor steadily in the CW direction.",
+            "Issue DIR CCW while the motor is running.",
+            "Capture signed speed and torque direction from the command through reversal."
+          ],
+          "expected": "Signed speed reaches 0 RPM before torque changes to the CCW direction; the motor subsequently accelerates CCW, and no reverse-torque spike occurs before the zero-speed crossing.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "If the controller cannot complete the commanded reversal sequence, it rejects the direction change and continues operating in the current direction.",
+          "observable": "Direction-command result, motor direction, and controller status when reversal sequencing is made impossible.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor is running in a known direction.",
+            "A test condition is present that prevents completion of the controlled reversal sequence."
+          ],
+          "procedure": [
+            "Issue a direction command for the opposite direction.",
+            "Observe the command result, status, and measured motor direction."
+          ],
+          "expected": "The opposite-direction command is refused and the motor remains in its original direction.",
+          "source": "derived",
+          "rationale": "The failure behavior requires refusal rather than an unsafe partial reversal when the required sequencing cannot be achieved.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "hardware",
+          "criterion": "When startup is prevented, the controller aborts within the configured maximum startup time or attempt count, disables PWM, and reports a startup fault in STATUS.",
+          "observable": "Elapsed startup time or attempt counter, three-phase PWM outputs, and STATUS fault field after a failed MOTOR START.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor is at standstill.",
+            "Operating limits are configured.",
+            "A rotor lock, extreme load, or other controlled condition prevents startup."
+          ],
+          "procedure": [
+            "Apply the startup-preventing condition.",
+            "Issue MOTOR START.",
+            "Measure elapsed time and/or count startup attempts until the controller aborts.",
+            "Read STATUS and measure the PWM outputs."
+          ],
+          "expected": "The abort occurs no later than the configured maximum startup time or attempt count; STATUS indicates a startup fault and all PWM outputs are disabled.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "hardware",
+          "criterion": "After a startup fault, the drive remains disabled until the fault is cleared and a new START command is issued.",
+          "observable": "Latched fault status, PWM outputs, and motor state after fault, clear, and restart commands.",
+          "observable_kind": "state",
+          "preconditions": [
+            "A startup fault has been induced and reported.",
+            "The motor is at standstill."
+          ],
+          "procedure": [
+            "After the startup fault, verify that no START command is sent and observe PWM and STATUS.",
+            "Clear the fault without issuing START and observe again.",
+            "Issue a new START command under valid startup conditions."
+          ],
+          "expected": "The fault remains latched and PWM remains disabled before clear plus new START; only after both actions may the drive leave the fault-disabled state.",
+          "source": "derived",
+          "rationale": "The stated postcondition defines a latched fault and requires both fault clearing and a new START before another startup attempt.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-001",
+          "verifiability": "hardware",
+          "criterion": "Every startup attempt in a representative series reaches the running state and sustained rotation without manual intervention or a fault.",
+          "observable": "Motor state, measured rotation, and fault status for each startup attempt.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor is at standstill.",
+            "The motor, supply, and parameters are within configured operating limits."
+          ],
+          "procedure": [
+            "Perform the defined series of startup attempts from standstill.",
+            "For each attempt, issue START and observe until the controller reports running.",
+            "Check sustained rotation and fault status without intervening commands."
+          ],
+          "expected": "Each attempt reaches the running state with sustained rotation, no manual intervention, and no fault indication.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-002",
+          "verifiability": "hardware",
+          "criterion": "With a fixed SPEED command and constant load, the motor remains synchronized and STATUS reports an approximately constant estimated speed throughout the observation interval.",
+          "observable": "Motor rotation, synchronism, fixed SPEED command, and STATUS estimated-speed samples over the observation interval.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is running within operating limits.",
+            "A fixed SPEED command is active.",
+            "The mechanical load is constant."
+          ],
+          "procedure": [
+            "Start the motor and apply a fixed SPEED command.",
+            "Wait for the running condition to establish.",
+            "Observe motor synchronism and record STATUS estimated speed over the defined observation interval."
+          ],
+          "expected": "No loss of synchronism occurs and the STATUS estimated-speed samples remain approximately constant for the full observation interval.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-003",
+          "verifiability": "hardware",
+          "criterion": "A stop command decelerates the motor to standstill without oscillation or reverse kick and leaves the drive disabled.",
+          "observable": "Measured signed speed, shaft behavior, motor state, and PWM outputs after STOP.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is running.",
+            "The motor and supply are within operating limits."
+          ],
+          "procedure": [
+            "Run the motor at a representative speed.",
+            "Issue the stop command.",
+            "Measure signed speed and observe shaft behavior through standstill, then measure PWM outputs and read motor state."
+          ],
+          "expected": "Speed decreases to 0 RPM, no uncontrolled oscillation or reverse kick is observed, the motor is stopped, and all drive PWM outputs are disabled.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-001",
+          "verifiability": "inspection",
+          "criterion": "Project artifacts contain the final speed, startup, and current tuning parameters together with validation results for the actual motor and supply, dated or otherwise attributable before extended runtime testing.",
+          "observable": "Committed configuration/tuning artifacts and the motor-and-supply validation report or equivalent recorded test results.",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The actual motor and supply are identified.",
+            "Project and validation artifacts are available for inspection."
+          ],
+          "procedure": [
+            "Inspect the final firmware configuration and tuning records.",
+            "Verify that speed, startup, and current limits are recorded.",
+            "Inspect the validation results for the identified motor and supply and their timing relative to extended runtime testing."
+          ],
+          "expected": "All three limit groups have recorded final values, the records identify the actual motor and supply, validation results are present, and the validation predates extended runtime testing.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "UART Command & Status Interface",
+      "criteria": [
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "inspection",
+          "criterion": "The UART configuration in the firmware build is set to 115200 baud with 8 data bits, no parity, and 1 stop bit.",
+          "observable": "UART peripheral configuration in source and generated build configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The NUCLEO-G431RB firmware configuration and build artifacts are available."
+          ],
+          "procedure": [
+            "Inspect the UART initialization code and target configuration.",
+            "Confirm the baud rate and frame-format fields."
+          ],
+          "expected": "115200 baud, 8 data bits, no parity, and 1 stop bit (8-N-1).",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "hardware",
+          "criterion": "A terminal or UART loopback exchanges command and response data successfully using the configured interface.",
+          "observable": "Received UART bytes in the terminal or loopback capture",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-G431RB.",
+            "A host is connected to the UART pins.",
+            "The host terminal is configured for 115200 8-N-1."
+          ],
+          "procedure": [
+            "Open the host terminal at 115200 8-N-1.",
+            "Transmit a supported command such as STATUS.",
+            "Capture the UART response."
+          ],
+          "expected": "The transmitted command is received by the firmware and a valid response is received without framing or communication errors.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "A valid MOTOR START command causes the motor to rotate and the subsequent STATUS response to report the run state.",
+          "observable": "Motor shaft motion and STATUS state field",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware is initialized.",
+            "The motor is stopped.",
+            "A valid direction and speed are configured.",
+            "Start safety conditions are satisfied.",
+            "The UART link is established."
+          ],
+          "procedure": [
+            "Send the exact command MOTOR START over UART.",
+            "Observe the motor shaft.",
+            "Send STATUS over UART and parse the system-state field."
+          ],
+          "expected": "The motor is rotating and STATUS reports RUN or the project-defined equivalent run state.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "A MOTOR START command issued while a stated start-safety condition is violated does not start the motor.",
+          "observable": "Motor motion and reported system state after the rejected command",
+          "observable_kind": "state",
+          "preconditions": [
+            "The firmware is initialized.",
+            "The motor is stopped.",
+            "At least one configured start-safety condition is deliberately violated.",
+            "The UART link is established."
+          ],
+          "procedure": [
+            "Send MOTOR START over UART.",
+            "Observe the motor and query STATUS."
+          ],
+          "expected": "The motor remains stopped and the system does not enter RUN; the response/state indicates the project-defined safety refusal or fault behavior.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "hardware",
+          "criterion": "A MOTOR STOP command issued while the motor is running leaves the motor stationary and disables the PWM outputs at the end of the stop sequence.",
+          "observable": "Motor shaft motion and PWM output signals after stop completion",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is running.",
+            "The UART link is established.",
+            "A logic analyzer or oscilloscope is connected to the PWM outputs."
+          ],
+          "procedure": [
+            "Send the exact command MOTOR STOP over UART.",
+            "Wait until the stop sequence completes.",
+            "Observe the motor and measure the PWM outputs."
+          ],
+          "expected": "The shaft is stationary and all motor-drive PWM outputs are disabled after the stop sequence completes.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "hardware",
+          "criterion": "SPEED commands for 300 RPM, 1000 RPM, and a valid intermediate RPM update the target-speed field to the commanded value.",
+          "observable": "Target-speed field in STATUS responses",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The system is initialized.",
+            "The UART link is established.",
+            "The motor may be stopped or running."
+          ],
+          "procedure": [
+            "Send SPEED 300 and query STATUS.",
+            "Send SPEED 1000 and query STATUS.",
+            "Send SPEED with a valid intermediate value and query STATUS.",
+            "Parse the target-speed field after each command."
+          ],
+          "expected": "The reported target speeds are respectively 300 RPM, 1000 RPM, and exactly the commanded intermediate value.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "A DIR CW command causes the commanded direction field to become CW and subsequent motor rotation to be clockwise.",
+          "observable": "STATUS direction field and motor rotation direction",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The system is initialized.",
+            "The motor can be started safely.",
+            "The UART link is established."
+          ],
+          "procedure": [
+            "Send DIR CW over UART.",
+            "Query STATUS and inspect the direction field.",
+            "Start the motor if it is stopped.",
+            "Observe the rotation direction."
+          ],
+          "expected": "STATUS reports direction=CW and the motor rotates clockwise.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "hardware",
+          "criterion": "A DIR CCW command causes the commanded direction field to become CCW and subsequent motor rotation to be counter-clockwise.",
+          "observable": "STATUS direction field and motor rotation direction",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The system is initialized.",
+            "The motor can be started safely.",
+            "The UART link is established."
+          ],
+          "procedure": [
+            "Send DIR CCW over UART.",
+            "Query STATUS and inspect the direction field.",
+            "Start the motor if it is stopped.",
+            "Observe the rotation direction."
+          ],
+          "expected": "STATUS reports direction=CCW and the motor rotates counter-clockwise.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-005",
+          "verifiability": "hardware",
+          "criterion": "Sending STATUS over an established UART link produces a response payload containing the system state, target speed, estimated actual speed, commanded direction, and fault status fields.",
+          "observable": "STATUS response payload",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running.",
+            "The UART link is established.",
+            "The system has reached a known initialized state."
+          ],
+          "procedure": [
+            "Send the exact command STATUS over UART.",
+            "Capture the complete response payload.",
+            "Parse the response for the required field names and values."
+          ],
+          "expected": "One response payload is received and contains fields for state, target speed, estimated actual speed, direction, and fault status.",
+          "source": "derived",
+          "rationale": "The requirement requires all required status fields, and DIAG-001 through DIAG-005 define the fields that STATUS must provide.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-006",
+          "verifiability": "hardware",
+          "criterion": "Each unknown, malformed, or truncated UART command leaves the system state, target speed, direction, and fault status identical to their values before the command.",
+          "observable": "STATUS snapshots taken before and after invalid UART inputs",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The UART link is established.",
+            "The system is in a known STOPPED or RUN state.",
+            "The target speed, direction, and fault status can be reported by STATUS."
+          ],
+          "procedure": [
+            "Query STATUS and record state, target speed, direction, and fault status.",
+            "Send STAR, SPEED 42a, and a truncated command frame individually.",
+            "Query STATUS after each invalid input.",
+            "Compare every recorded field with its corresponding pre-command value."
+          ],
+          "expected": "For every invalid input, state, target speed, direction, and fault status are unchanged.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-007",
+          "verifiability": "hardware",
+          "criterion": "SPEED 200 and SPEED 1100 are rejected without changing the previously valid target speed or system state.",
+          "observable": "Target-speed and system-state fields in STATUS responses",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The system is initialized.",
+            "The UART link is established.",
+            "A valid target speed has already been set.",
+            "The system is in a known state."
+          ],
+          "procedure": [
+            "Query STATUS and record the target speed and system state.",
+            "Send SPEED 200 and query STATUS.",
+            "Restore or verify the same valid baseline if needed.",
+            "Send SPEED 1100 and query STATUS.",
+            "Compare the results with the baseline."
+          ],
+          "expected": "After each out-of-range command, the target speed equals the prior valid value and the system state is unchanged.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-001",
+          "verifiability": "hardware",
+          "criterion": "The STATUS response contains a state field whose value unambiguously identifies the current system state.",
+          "observable": "State field in the STATUS response",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The system is in a known state.",
+            "The UART link is established."
+          ],
+          "procedure": [
+            "Place the system in a known state such as INIT, STOPPED, RUN, or FAULT.",
+            "Send STATUS.",
+            "Parse the state field."
+          ],
+          "expected": "The response contains a non-ambiguous state value matching the actual state, such as INIT, STOPPED, RUN, or FAULT.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-002",
+          "verifiability": "hardware",
+          "criterion": "The target-speed field in STATUS equals the most recently commanded valid target speed.",
+          "observable": "Numeric target-speed field in the STATUS response",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The system is initialized.",
+            "The UART link is established.",
+            "A valid target speed in the range 300–1000 RPM has been commanded."
+          ],
+          "procedure": [
+            "Send a valid SPEED command.",
+            "Send STATUS.",
+            "Parse the numeric target-speed field."
+          ],
+          "expected": "The field is numeric and equals the commanded value in RPM, within the inclusive range 300–1000 RPM.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-003",
+          "verifiability": "hardware",
+          "criterion": "The STATUS response contains a numeric estimated-actual-speed field expressed in RPM.",
+          "observable": "Estimated actual-speed field in the STATUS response",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running.",
+            "The UART link is established."
+          ],
+          "procedure": [
+            "Send STATUS.",
+            "Parse the estimated actual-speed field."
+          ],
+          "expected": "The response contains a parseable numeric value representing estimated speed in RPM at the query time.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-004",
+          "verifiability": "hardware",
+          "criterion": "The direction field in STATUS is either CW or CCW and matches the most recent DIR command.",
+          "observable": "Direction field in the STATUS response",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The system is initialized.",
+            "The UART link is established."
+          ],
+          "procedure": [
+            "Send DIR CW and query STATUS.",
+            "Send DIR CCW and query STATUS."
+          ],
+          "expected": "The direction field reports CW after DIR CW and CCW after DIR CCW.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-005",
+          "verifiability": "hardware",
+          "criterion": "The STATUS response contains a fault-status field that changes to the faulted indication when a known fault is induced.",
+          "observable": "Fault-status field in STATUS before and during an induced fault",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Fault detection is implemented.",
+            "The UART link is established.",
+            "A representative fault can be safely induced."
+          ],
+          "procedure": [
+            "Query STATUS with no active fault and record the fault-status field.",
+            "Induce a known fault.",
+            "Query STATUS again.",
+            "Compare the reported fault status with the induced condition."
+          ],
+          "expected": "The response contains a fault-status field, and during the induced fault it indicates that a fault is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-006",
+          "verifiability": "hardware",
+          "criterion": "When each representative fault is active, STATUS reports a non-null fault code matching that fault category.",
+          "observable": "Fault-code field in STATUS during induced undervoltage, overcurrent, current-sense, and startup-timeout faults",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "STATUS is available.",
+            "The fault-inducing test setup is prepared.",
+            "Each representative fault can be induced safely and independently."
+          ],
+          "procedure": [
+            "Induce an undervoltage-limit fault and query STATUS.",
+            "Induce an overcurrent-limit fault and query STATUS.",
+            "Induce a current-sense fault and query STATUS.",
+            "Induce a startup-timeout fault and query STATUS.",
+            "Record the fault code for each condition."
+          ],
+          "expected": "Each STATUS response contains a non-null code, and the codes identify respectively undervoltage-limit, overcurrent-limit, current-sense, and startup-failure categories.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "Drive Safety, Fault Handling & Reset Protection",
+      "criteria": [
+        {
+          "requirement_id": "SF-001",
+          "verifiability": "hardware",
+          "criterion": "Measured steady-state and transient phase RMS motor current remains at or below the configured maximum, with the configured maximum no greater than 1.5 A RMS unless a lower validated project limit is configured.",
+          "observable": "Phase-current measurement RMS value and configured current-limit value during steady-state operation and specified speed transients",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Current sensing is operational.",
+            "A maximum RMS current limit is configured.",
+            "The motor is operating in steady state and through the specified speed transients."
+          ],
+          "procedure": [
+            "Record the configured RMS current limit.",
+            "Run the motor at steady state over the applicable operating range.",
+            "Apply the specified speed transients while recording phase current.",
+            "Calculate or read the measured phase RMS current and compare each value with the configured limit."
+          ],
+          "expected": "For every recorded interval, measured phase RMS current is <= the configured limit; the configured limit is <=1.5 A RMS unless a lower validated limit is explicitly configured.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-002",
+          "verifiability": "hardware",
+          "criterion": "When a detectable motor-driver fault is asserted while the motor is running, all inverter PWM outputs enter the disabled state and produce no subsequent drive pulses.",
+          "observable": "Inverter PWM output signals after motor-driver fault assertion",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is running.",
+            "The motor-driver fault input or condition is detectable by the firmware.",
+            "PWM outputs are enabled before the fault is asserted.",
+            "A means of observing all inverter PWM outputs is connected."
+          ],
+          "procedure": [
+            "Start the motor and confirm that PWM pulses are present.",
+            "Assert the motor-driver fault condition.",
+            "Capture all PWM outputs from the instant of fault assertion onward.",
+            "Check the output state and pulse count after the assertion."
+          ],
+          "expected": "PWM outputs transition to the disabled state and no drive pulse occurs after the fault assertion.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-002",
+          "verifiability": "target",
+          "criterion": "After a motor-control fault disables PWM, the firmware remains in the disabled condition until the fault is cleared and a new START command is received.",
+          "observable": "PWM-enable state and motor-control state after fault clear without and with a new START command",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor is running and PWM has been disabled by a motor-control fault.",
+            "The fault can be cleared and a START command can be issued."
+          ],
+          "procedure": [
+            "Clear the motor-control fault without issuing START.",
+            "Inspect the PWM-enable state and motor-control state.",
+            "Issue a new START command.",
+            "Inspect the PWM-enable state again."
+          ],
+          "expected": "PWM remains disabled before the new START command and may be enabled only after the fault is cleared and the new START command is received.",
+          "source": "derived",
+          "rationale": "The requirement's failure behavior specifies that the drive remains disabled until both fault clearance and a new START command; this criterion checks both parts of that recovery gate.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-003",
+          "verifiability": "hardware",
+          "criterion": "An attempted start or continued run with either a configured voltage-limit violation or a configured current-limit violation results in drive inhibition or automatic stop with PWM disabled.",
+          "observable": "START result, motor-running state, PWM outputs, and reported fault status while voltage or current is outside its configured limit",
+          "observable_kind": "state",
+          "preconditions": [
+            "Voltage and current limits are configured.",
+            "Voltage and current violation conditions can be generated or applied safely.",
+            "The firmware can detect both violation types."
+          ],
+          "procedure": [
+            "Apply a voltage condition outside the configured voltage limits and attempt to start the motor; record the START result and PWM state.",
+            "Run the motor, then apply a current condition outside the configured current limits; record the motor state and PWM state.",
+            "Repeat as needed for each supported lower- and upper-limit violation."
+          ],
+          "expected": "For every out-of-limit condition, START is refused or an already-running motor is stopped, PWM is disabled, and fault status is reported.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-004",
+          "verifiability": "hardware",
+          "criterion": "A START command issued while measured DC supply voltage is below the configured minimum or above the configured maximum is refused and leaves the drive disabled.",
+          "observable": "START response, PWM-enable state, and measured DC voltage at the time of the command",
+          "observable_kind": "state",
+          "preconditions": [
+            "Minimum and maximum DC voltage thresholds are configured.",
+            "DC supply voltage measurement is operational.",
+            "The supply can be safely set below the minimum and above the maximum."
+          ],
+          "procedure": [
+            "Set the DC supply below the configured minimum and verify the measured value is out of range.",
+            "Issue START and record the command response and PWM state.",
+            "Set the DC supply above the configured maximum and repeat the START test."
+          ],
+          "expected": "For both below-minimum and above-maximum conditions, START is refused and PWM remains disabled.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-004",
+          "verifiability": "hardware",
+          "criterion": "When the measured DC supply voltage crosses either configured threshold while the motor is running, the drive is disabled and STATUS indicates a fault.",
+          "observable": "DC supply voltage crossing, inverter PWM outputs, motor-running state, and STATUS value",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor is running with PWM enabled.",
+            "Minimum and maximum DC voltage thresholds are configured.",
+            "DC supply voltage measurement and STATUS reporting are operational."
+          ],
+          "procedure": [
+            "Run the motor within the configured voltage range.",
+            "Change the DC supply below the minimum and record the voltage crossing, PWM state, and STATUS.",
+            "Restore the supply to the valid range, restart the motor, then change the supply above the maximum and repeat."
+          ],
+          "expected": "For each threshold crossing, PWM is disabled, the motor is no longer driven, and STATUS indicates a fault.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-004",
+          "verifiability": "target",
+          "criterion": "After a voltage-limit shutdown, the drive remains disabled while the measured voltage is out of range and does not restart until the voltage is valid and a new START command is received.",
+          "observable": "PWM-enable state and motor-control state after voltage recovery, before and after a new START command",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor has been stopped by an out-of-range DC supply voltage.",
+            "The supply can be returned to the configured valid range."
+          ],
+          "procedure": [
+            "Keep the supply out of range and verify PWM remains disabled.",
+            "Return the supply to the valid range without issuing START and verify PWM remains disabled.",
+            "Issue a new START command and inspect the drive state."
+          ],
+          "expected": "PWM remains disabled while voltage is out of range and after voltage recovery without START; it can resume only after valid voltage and a new START command.",
+          "source": "derived",
+          "rationale": "The failure behavior states that the drive remains disabled until voltage returns within range and a new START is issued; the criterion verifies that recovery does not occur automatically.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-005",
+          "verifiability": "hardware",
+          "criterion": "While running closed-loop control, inducing a phase-current sensing disconnection, ADC rail or saturation value, or ADC-DMA disable causes PWM to be disabled with no subsequent drive pulses and STATUS to indicate a faulted state.",
+          "observable": "Phase-current sensor or ADC condition, inverter PWM outputs, and STATUS value after each induced sensor fault",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is running under closed-loop control.",
+            "Phase-current sensing and ADC/DMA fault injection or equivalent test access is available.",
+            "PWM outputs and STATUS are observable."
+          ],
+          "procedure": [
+            "Run the motor and confirm PWM activity and a non-fault STATUS.",
+            "Induce a phase-current shunt-signal disconnection, force an ADC reading to a rail or saturation value, and disable ADC DMA in separate test runs.",
+            "For each fault, capture PWM outputs from fault injection onward and read STATUS."
+          ],
+          "expected": "For every induced sensor fault, PWM is disabled, no drive pulse occurs after fault detection/assertion, and STATUS indicates the FAULT state.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-005",
+          "verifiability": "target",
+          "criterion": "After a phase-current sensing fault is cleared, the firmware keeps the drive disabled until START is issued again.",
+          "observable": "PWM-enable state and motor-control state after clearing the injected phase-current fault",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor has entered FAULT and PWM has been disabled because of a phase-current sensing fault.",
+            "The injected sensor fault can be cleared."
+          ],
+          "procedure": [
+            "Clear the injected sensing fault without issuing START.",
+            "Inspect the motor-control state and PWM-enable state.",
+            "Issue START and inspect the states again."
+          ],
+          "expected": "The system remains in FAULT or an equivalent non-driving state with PWM disabled before START, and does not resume driving until START is issued.",
+          "source": "derived",
+          "rationale": "The requirement's failure behavior explicitly requires disabled operation until the fault is cleared and START is reissued; this checks the restart interlock.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-006",
+          "verifiability": "hardware",
+          "criterion": "Following an induced watchdog reset or brown-out while the motor is running, PWM outputs remain inactive during reset and after reboot until a new valid START command is received.",
+          "observable": "Inverter PWM signals across the reset or brown-out event and after reboot",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The system is running and producing PWM before the reset test.",
+            "Watchdog reset and brown-out events can be induced safely.",
+            "PWM outputs can be observed continuously across reset and reboot."
+          ],
+          "procedure": [
+            "Run the motor and confirm PWM activity.",
+            "Induce a watchdog reset and capture PWM through reset and reboot; do not issue START.",
+            "Repeat the capture for a brown-out event.",
+            "Issue a valid START command after initialization and inspect PWM again."
+          ],
+          "expected": "No PWM activity is present during either reset or reboot, no PWM appears before the new valid START command, and PWM may resume only after initialization and START.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-006",
+          "verifiability": "target",
+          "criterion": "After either a watchdog reset or brown-out reboot, STATUS reports STOPPED before any new START command is received.",
+          "observable": "STATUS value after reboot and before START",
+          "observable_kind": "state",
+          "preconditions": [
+            "A watchdog reset or brown-out has completed and firmware initialization has completed.",
+            "No START command has been issued after reboot."
+          ],
+          "procedure": [
+            "Read STATUS immediately after the system is available following each reset type.",
+            "Do not issue START before reading STATUS."
+          ],
+          "expected": "STATUS is STOPPED for both watchdog-reset and brown-out recovery before any START command.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "hardware",
+          "criterion": "A deliberate control-software hang while the motor is running causes the watchdog to reset the MCU, after which the motor remains stopped with PWM disabled until a new START command is received.",
+          "observable": "Reset indication or reboot sequence, PWM outputs, motor state, and post-reboot START response",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The system is running with the watchdog enabled.",
+            "The control task can be deliberately prevented from servicing the watchdog.",
+            "PWM outputs and MCU reset or reboot indication are observable."
+          ],
+          "procedure": [
+            "Start the motor and verify PWM activity.",
+            "Induce the deliberate software hang.",
+            "Observe the MCU reset or reboot and monitor PWM through and after the reset.",
+            "After reboot, verify the motor remains stopped and issue no START.",
+            "Issue a new START command and observe the resulting drive state."
+          ],
+          "expected": "The MCU resets after the control software stops servicing the watchdog; PWM is disabled after reset, the motor remains stopped before START, and a new START is required before operation resumes.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    }
+  ]
+}

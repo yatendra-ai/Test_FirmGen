@@ -1,0 +1,30 @@
+{
+  "schema_version": "3.0.0",
+  "view": "lld",
+  "revision": "97440920ff2473f6318908f49f49169d",
+  "graph_version": 6,
+  "generated_at_ms": 1790168595740,
+  "mermaid": "flowchart TD\n  subgraph timer_app_start\n    l_boot[\"Enter application runtime<br/>Core/Src/main.c:58\"]\n    l_platform[\"Start TIM1 PWM, ADC1, and motor GPIO<br/>firmware/app/app.c:18\"]\n    l_platform_ok{\"Platform start succeeded — firmware/app/app.c:19\"}\n    l_driver[\"Initialize three-PWM STSPIN830 adapter<br/>firmware/app/app.c:28\"]\n    l_driver_ok{\"Driver initialization succeeded — firmware/app/app.c:33\"}\n    l_motor[\"Initialize motor control with PWM enable callback<br/>firmware/app/app.c:38\"]\n    l_motor_ok{\"Motor control initialization succeeded — firmware/app/app.c:39\"}\n    l_uart[\"Start LPUART1 command reception<br/>firmware/app/app.c:43\"]\n    l_uart_ok{\"UART initialization succeeded — firmware/app/app.c:44\"}\n    l_wdg[\"Start independent watchdog<br/>firmware/app/app.c:48\"]\n    l_wdg_ok{\"Watchdog start succeeded — firmware/app/app.c:49\"}\n    l_read[\"Poll for a complete UART command line<br/>firmware/app/app.c:53\"]\n    l_line{\"Complete command line available — firmware/services/uart_command/uart_command.c…\"}\n    l_command[\"Parse command and update motor request<br/>firmware/services/uart_command/uart_…\"]\n    l_motor_tick[\"Advance motor state and apply duty<br/>firmware/app/app.c:54\"]\n    l_kick[\"Refresh watchdog<br/>firmware/app/app.c:55\"]\n    l_delay[\"Delay for control period<br/>firmware/app/app.c:56\"]\n    l_fail[\"Return from app_start on initialization failure<br/>firmware/app/app.c:20\"]\n    l_boot -->  l_platform -->  l_platform_ok\n    l_platform_ok -->|yes| l_driver\n    l_platform_ok -->|no| l_fail\n    l_driver -->  l_driver_ok\n    l_driver_ok -->|yes| l_motor\n    l_driver_ok -->|no| l_fail\n    l_motor -->  l_motor_ok\n    l_motor_ok -->|yes| l_uart\n    l_motor_ok -->|no| l_fail\n    l_uart -->  l_uart_ok\n    l_uart_ok -->|yes| l_wdg\n    l_uart_ok -->|no| l_fail\n    l_wdg -->  l_wdg_ok\n    l_wdg_ok -->|yes| l_read\n    l_wdg_ok -->|no| l_fail\n    l_read -->  l_line\n    l_line -->|yes| l_command\n    l_line -->|no| l_motor_tick\n    l_command -->  l_motor_tick\n    l_motor_tick -->  l_kick -->  l_delay\n    l_delay -->|1 ms| l_read\n  end",
+  "title": "Low-Level Design (Firmware Workflow)",
+  "node_notes": {
+    "l_read": "Poll for a complete UART command line is a step in this firmware's runtime flow. The cite firmware/app/app.c:53 is the source evidence for it.",
+    "l_motor": "Initialize motor control with PWM enable callback is a step in this firmware's runtime flow. The cite firmware/app/app.c:38 is the source evidence for it.",
+    "l_uart": "Start LPUART1 command reception is a step in this firmware's runtime flow. The cite firmware/app/app.c:43 is the source evidence for it.",
+    "l_motor_ok": "Motor control initialization succeeded — firmware/app/app.c:39 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+    "l_motor_tick": "Advance motor state and apply duty is a step in this firmware's runtime flow. The cite firmware/app/app.c:54 is the source evidence for it.",
+    "l_fail": "Return from app_start on initialization failure is a step in this firmware's runtime flow. The cite firmware/app/app.c:20 is the source evidence for it.",
+    "l_line": "Complete command line available — firmware/services/uart_command/uart_command.c… is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+    "l_boot": "Enter application runtime is a step in this firmware's runtime flow. The cite Core/Src/main.c:58 is the source evidence for it.",
+    "l_driver_ok": "Driver initialization succeeded — firmware/app/app.c:33 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+    "l_platform_ok": "Platform start succeeded — firmware/app/app.c:19 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+    "l_uart_ok": "UART initialization succeeded — firmware/app/app.c:44 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+    "l_wdg": "Start independent watchdog is a step in this firmware's runtime flow. The cite firmware/app/app.c:48 is the source evidence for it.",
+    "l_driver": "Initialize three-PWM STSPIN830 adapter is a step in this firmware's runtime flow. The cite firmware/app/app.c:28 is the source evidence for it.",
+    "l_delay": "Delay for control period is a step in this firmware's runtime flow. The cite firmware/app/app.c:56 is the source evidence for it.",
+    "l_kick": "Refresh watchdog is a step in this firmware's runtime flow. The cite firmware/app/app.c:55 is the source evidence for it.",
+    "l_command": "Parse command and update motor request is a step in this firmware's runtime flow. The cite firmware/services/uart_command/uart_… is the source evidence for it.",
+    "l_platform": "Start TIM1 PWM, ADC1, and motor GPIO is a step in this firmware's runtime flow. The cite firmware/app/app.c:18 is the source evidence for it.",
+    "l_wdg_ok": "Watchdog start succeeded — firmware/app/app.c:49 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system."
+  },
+  "authored_by_model": true
+}

@@ -1,0 +1,135 @@
+{
+  "job_id": "72bd93d3-15e6-4837-9116-dc1c0c17a4e6",
+  "document_id": "d6048fbd-5d6a-4f1f-b7cf-43d03d17b87a",
+  "frozen_at": "2026-09-23T11:53:48.835Z",
+  "requirement_count": 39,
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "MCU, Inverter & Motor Hardware Configuration",
+      "description": "Covers the target MCU board, motor-driver hardware, motor and power-supply configuration, phase connections, current sensing, and hardware PWM outputs.",
+      "requirements": [
+        "The firmware shall target the NUCLEO-G431RB MCU board.",
+        "The system shall use the X-NUCLEO-IHM16M1 motor-driver board (STSPIN830).",
+        "The target motor shall be the GBM2804H-100T gimbal motor with 7 pole pairs.",
+        "The system supply shall be 12 V DC.",
+        "The firmware shall drive the three-phase motor via U, V, and W outputs to the motor connection.",
+        "The firmware shall measure motor phase currents using the X-NUCLEO-IHM16M1 three-shunt current-sensing circuitry.",
+        "The firmware shall use MCU hardware PWM generation for the three-phase inverter drive signals."
+      ],
+      "requirement_ids": [
+        "HW-001",
+        "HW-002",
+        "HW-003",
+        "HW-004",
+        "IF-001",
+        "IF-002",
+        "IF-004"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-2",
+      "name": "Sensorless FOC & Motor Operating Control",
+      "description": "Covers sensorless FOC execution, motor state transitions, speed and direction control, startup and stopping behavior, and commissioning of control parameters on the target motor and supply.",
+      "requirements": [
+        "The firmware shall implement sensorless Field-Oriented Control (FOC) for three-phase motor control.",
+        "After system initialization, the motor shall remain stopped until a valid START command is received.",
+        "The firmware shall support clockwise and counter-clockwise motor rotation as commanded.",
+        "The firmware shall allow changing the target speed while the motor is running without requiring a stop.",
+        "If a direction change is commanded while the motor is running, the firmware shall perform a controlled deceleration to zero speed before applying torque in the new direction.",
+        "If the motor fails to achieve sustained rotation within a bounded startup time or number of attempts from standstill, the firmware shall declare a startup fault and disable PWM.",
+        "The system shall achieve reliable motor startup from standstill.",
+        "The system shall maintain stable rotation at the commanded speed.",
+        "The system shall perform a controlled motor stop when stopping is commanded.",
+        "Final speed, startup, and current limits shall be tuned and validated on the actual motor and supply before extended operation."
+      ],
+      "requirement_ids": [
+        "FR-001",
+        "FR-002",
+        "FR-003",
+        "FR-009",
+        "FR-010",
+        "FR-011",
+        "PERF-001",
+        "PERF-002",
+        "PERF-003",
+        "NFR-001"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-3",
+      "name": "UART Command & Status Interface",
+      "description": "Covers the UART transport configuration, command parsing and validation, runtime motor commands, malformed-command handling, and formatted system-status responses.",
+      "requirements": [
+        "The firmware shall provide a UART interface configured for 115200 baud, 8 data bits, no parity, 1 stop bit (8-N-1).",
+        "Upon receiving \"MOTOR START\" over UART, the firmware shall start the motor and enter the run state.",
+        "Upon receiving \"MOTOR STOP\" over UART, the firmware shall stop the motor.",
+        "Upon receiving \"SPEED <RPM>\" over UART, the firmware shall set the target speed to the specified value within the allowed range of 300 to 1000 RPM.",
+        "Upon receiving \"DIR CW\" over UART, the firmware shall set the commanded direction to clockwise.",
+        "Upon receiving \"DIR CCW\" over UART, the firmware shall set the commanded direction to counter-clockwise.",
+        "The firmware shall implement the STATUS command over UART to report the system status.",
+        "The firmware shall ignore unrecognized or malformed UART commands without changing the system state.",
+        "The firmware shall reject SPEED commands outside 300–1000 RPM and shall not change the target speed in response.",
+        "The STATUS command shall include the current system state.",
+        "The STATUS command shall include the target speed.",
+        "The STATUS command shall include the estimated actual speed.",
+        "The STATUS command shall include the current commanded direction (CW or CCW).",
+        "The STATUS command shall include the current fault status.",
+        "When a fault is present, the STATUS response shall include a fault code that identifies the fault category (e.g., undervoltage limit, overcurrent limit, sensor fault, startup failure)."
+      ],
+      "requirement_ids": [
+        "IF-003",
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-007",
+        "FR-008",
+        "IF-005",
+        "IF-006",
+        "IF-007",
+        "DIAG-001",
+        "DIAG-002",
+        "DIAG-003",
+        "DIAG-004",
+        "DIAG-005",
+        "DIAG-006"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-4",
+      "name": "Drive Safety, Fault Handling & Reset Protection",
+      "description": "Covers current, voltage, and operating-limit enforcement; phase-sensor and motor-control fault responses; watchdog protection; and safe PWM and motor behavior across faults and MCU resets.",
+      "requirements": [
+        "The firmware shall limit motor current so that RMS current does not exceed 1.5 A RMS or a lower validated project limit.",
+        "On detection of a motor-control fault, the firmware shall immediately disable PWM output to the inverter.",
+        "The system shall not operate the motor outside the configured voltage and current limits.",
+        "The firmware shall prevent motor start and shall stop the motor and disable PWM when the measured DC supply voltage is outside the configured allowable range.",
+        "The firmware shall detect loss or out-of-range behavior of phase current measurements (e.g., disconnection, saturation, rail) and immediately disable PWM, entering a fault state.",
+        "On any MCU reset, watchdog reset, or brown-out event, the firmware shall ensure PWM outputs are disabled and the motor remains stopped until initialization completes and a valid START command is received.",
+        "The firmware shall enable a watchdog that resets the MCU if the control software fails to service it within a configured interval, ensuring fail-safe shutdown of the drive on software hang."
+      ],
+      "requirement_ids": [
+        "SF-001",
+        "SF-002",
+        "SF-003",
+        "SF-004",
+        "SF-005",
+        "SF-006",
+        "NFR-002"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    }
+  ],
+  "file_checksum": "d1de6a96f93a6a9a58f5afff7b60e7e8b47c9379b804c57085d5a21389c9b272"
+}

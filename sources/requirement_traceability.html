@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirement traceability</title>
+<style>
+:root {
+  --ink: #14171a; --dim: #5b6570; --line: #dfe3e8; --bg: #ffffff; --panel: #f6f7f9;
+  --ok: #157347; --warn: #9a5b00; --bad: #a5262b; --accent: #1f4e79;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #e6e9ec; --dim: #98a3ae; --line: #2c333a; --bg: #14171a; --panel: #1c2126;
+          --ok: #4ec27f; --warn: #e0a75a; --bad: #f08a8f; --accent: #8ab4e8; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 2.5rem 1.5rem 5rem; background: var(--bg); color: var(--ink);
+  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1180px; margin: 0 auto; }
+h1 { font-size: 1.7rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
+h2 { font-size: 1.15rem; margin: 2.5rem 0 .3rem; padding-top: 1.2rem;
+  border-top: 1px solid var(--line); }
+h3 { font-size: .95rem; margin: 1.6rem 0 .4rem; }
+p { margin: .5rem 0; }
+.sub { color: var(--dim); font-size: .875rem; }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  padding: .9rem 1.1rem; margin: 1.2rem 0; }
+.lead p:first-child { margin-top: 0; } .lead p:last-child { margin-bottom: 0; }
+.void { border-color: var(--bad); }
+.void strong { color: var(--bad); }
+.meta { color: var(--dim); font-size: .85rem; margin: .2rem 0 .8rem; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .84rem; }
+th, td { text-align: left; vertical-align: top; padding: .45rem .6rem;
+  border-bottom: 1px solid var(--line); }
+th { color: var(--dim); font-weight: 600; font-size: .74rem; text-transform: uppercase;
+  letter-spacing: .04em; white-space: nowrap; }
+td code { font-size: .82em; }
+code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+.none { color: var(--dim); }
+.pill { display: inline-block; padding: .1rem .45rem; border-radius: 999px;
+  font-size: .72rem; font-weight: 600; white-space: nowrap; border: 1px solid currentColor; }
+.s-verified { color: var(--ok); } .s-tests { color: var(--accent); }
+.s-impl { color: var(--warn); } .s-none { color: var(--bad); }
+.flag { color: var(--bad); font-size: .72rem; display: block; margin-top: .2rem; }
+ul { margin: .4rem 0; padding-left: 1.2rem; } li { margin: .18rem 0; }
+</style>
+</head><body><main>
+<h1>Requirement traceability</h1>
+<p class="sub">Generated 2026-09-23T13:50:24.455984600+00:00 · specification frozen 2026-09-23T12:24:48.066Z</p>
+<div class="lead"><p>39 of 39 requirements have code recorded against them — 0 with tests passing, 0 with tests written but not passing, 39 implemented with no test at all. 0 have nothing recorded.</p>
+</div>
+<div class="lead"><p><strong>Host unit tests.</strong> No host unit-test results have been imported for this project. Host tests run on a separate machine; nothing here rests on host test evidence.</p></div>
+<p class="sub">Derived from what the agent recorded with <code>requirement_trace</code> and from the frozen specification. An em dash means nothing was recorded, which is not the same as nothing being needed.</p>
+<h2>MCU, Inverter &amp; Motor Hardware Configuration</h2>
+<p class="meta">gate: deferred · tasks: 4/4 done · recorded in: 4f4e8899-c422-4086-a97c-72b9121765de</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>HW-001</code></td><td>The firmware shall target the NUCLEO-G431RB MCU board.</td><td>inspection</td><td>The build configuration and target documentation identify NUCLEO-G431RB as the firmware target, and the recorded target test uses that board. (expected: The target is identified as NUCLEO-G431RB in both the build configuration and the target test record.)</td><td><code>CMakeLists.txt<br>firmware/README.md<br>firmware/configs/app_config.h</code></td><td><code>main</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-002</code></td><td>The system shall use the X-NUCLEO-IHM16M1 motor-driver board (STSPIN830).</td><td>inspection</td><td>The motor-driver board listed in the hardware configuration and test setup is X-NUCLEO-IHM16M1 populated with the STSPIN830. (expected: The installed and documented motor-driver board is X-NUCLEO-IHM16M1 with an STSPIN830.)</td><td><code>firmware/README.md<br>firmware/bsp/board.h<br>firmware/configs/app_config.h</code></td><td><code>board_name</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-003</code></td><td>The target motor shall be the GBM2804H-100T gimbal motor with 7 pole pairs.</td><td>inspection</td><td>The motor identified in the test setup and documentation is GBM2804H-100T and its configured pole-pair count is 7. (expected: The motor model is GBM2804H-100T and the pole-pair parameter equals 7.)</td><td><code>firmware/README.md<br>firmware/bsp/board.h<br>firmware/configs/app_config.h</code></td><td><code>board_name</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-004</code></td><td>The system supply shall be 12 V DC.</td><td>inspection</td><td>The documented laboratory supply setting for the system is 12 V DC. (expected: The supply is DC and its set voltage is 12 V.)</td><td><code>firmware/README.md<br>firmware/bsp/board.h<br>firmware/configs/app_config.h</code></td><td><code>board_name</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-001</code></td><td>The firmware shall drive the three-phase motor via U, V, and W outputs to the motor connection.</td><td>hardware / instrument</td><td>When a run command is applied, PWM activity is observable on each of the U, V, and W motor outputs. (expected: Each of U, V, and W has a continuous PWM waveform during the commanded run.)<br>When a motor-control fault is injected or detected, the U, V, and W drive outputs are disabled. (expected: PWM is disabled on U, V, and W after the fault is detected.)</td><td><code>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/ihm16m1_platform.c</code></td><td><code>ihm16m1_platform_pwm_enable<br>ihm16m1_platform_pwm_set<br>ihm16m1_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-002</code></td><td>The firmware shall measure motor phase currents using the X-NUCLEO-IHM16M1 three-shunt current-sensing circuitry.</td><td>hardware / instrument</td><td>During motor operation, the firmware reports phase-current samples from the IHM16M1 three-shunt sensing network, and the reported samples vary when motor load or phase conduction changes. (expected: The samples are sourced from the three-shunt ADC channels and at least one phase-current sample changes when load or phase conduction changes.)<br>When phase-current sensing is made unavailable, the motor-drive outputs are disabled. (expected: Motor-drive PWM is disabled after current sensing becomes unavailable.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/ihm16m1_platform.c</code></td><td><code>ihm16m1_platform_adc_read</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-004</code></td><td>The firmware shall use MCU hardware PWM generation for the three-phase inverter drive signals.</td><td>inspection<br>hardware / instrument</td><td>The firmware's three-phase drive implementation selects MCU hardware PWM peripherals rather than software-toggled GPIO timing. (expected: All three inverter phases are assigned to MCU hardware PWM channels, with duty controlled through PWM peripheral registers.)<br>During steady motor operation, the three inverter PWM waveforms remain continuously hardware-timed without observable CPU-jitter artifacts. (expected: PWM pulses remain present for the full capture and their period and edge timing remain hardware-timed without missing pulses or observable CPU-scheduling jitter artifacts.)<br>When a detected inverter or motor-control fault occurs, the hardware PWM outputs are disabled. (expected: PWM output is disabled on all three inverter phases after fault detection.)</td><td><code>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/ihm16m1_platform.c</code></td><td><code>ihm16m1_platform_pwm_enable<br>ihm16m1_platform_pwm_set<br>ihm16m1_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>HW-001</code> — <span class="sub">Build targets STM32G431xx and project documentation identifies NUCLEO-G431RB; target inspection is grounded by the detected board but not yet flashed.</span></li>
+<li><code>HW-002</code>, <code>HW-003</code>, <code>HW-004</code> — <span class="sub">Configuration and README record X-NUCLEO-IHM16M1/STSPIN830, GBM2804H-100T, 7 pole pairs, and 12 V DC.</span></li>
+<li><code>IF-001</code>, <code>IF-004</code> — <span class="sub">TIM1 CH1/CH2/CH3 hardware PWM is configured for U/V/W in three-PWM mode; startup leaves compare values at zero and the driver in standby.</span></li>
+<li><code>IF-002</code> — <span class="sub">Three ADC channel mappings and callback reads are implemented; raw samples are returned because the supplied manual does not establish a complete conversion formula.</span></li>
+</ul>
+<h2>Sensorless FOC &amp; Motor Operating Control</h2>
+<p class="meta">gate: deferred · tasks: 6/6 done · recorded in: 14056c19-f482-4c45-b04c-ad9ef894553b</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-001</code></td><td>The firmware shall implement sensorless Field-Oriented Control (FOC) for three-phase motor control.</td><td>hardware / instrument</td><td>The motor operates under closed-loop sensorless FOC with valid commutation and torque control throughout the specified speed range. (expected: Closed-loop sensorless commutation remains synchronized and commanded torque is controlled at every tested speed in the specified range.)<br>A failed-to-converge sensorless observer causes the motor drive to be disabled. (expected: An estimator failure is indicated and all motor-drive PWM outputs are disabled.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/motor_control/motor_control.h</code></td><td><code>motor_control_apply_duty<br>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-002</code></td><td>After system initialization, the motor shall remain stopped until a valid START command is received.</td><td>hardware / instrument</td><td>Immediately after power-on or reset, before any START command, the motor is stationary and all motor PWM outputs are disabled. (expected: The shaft does not rotate and all motor PWM outputs remain disabled until START is received.)</td><td><code>firmware/app/app.c<br>firmware/services/motor_control/motor_control.c</code></td><td><code>motor_control_init<br>motor_control_process<br>motor_control_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-003</code></td><td>The firmware shall support clockwise and counter-clockwise motor rotation as commanded.</td><td>hardware / instrument</td><td>The measured shaft rotation direction matches each commanded direction for both CW and CCW commands. (expected: The first run rotates clockwise and the second run rotates counter-clockwise, with no direction-command mismatch.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/motor_control/motor_control.h</code></td><td><code>motor_control_set_direction<br>motor_control_set_speed<br>motor_control_stop</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-009</code></td><td>The firmware shall allow changing the target speed while the motor is running without requiring a stop.</td><td>hardware / instrument</td><td>A valid SPEED command issued during running changes the motor to the new target speed without entering the stopped state. (expected: The commanded speed changes to the new value, the motor remains in the run state throughout the transition, and no stop state occurs between the two speeds.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/motor_control/motor_control.h</code></td><td><code>motor_control_set_direction<br>motor_control_set_speed<br>motor_control_stop</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-010</code></td><td>If a direction change is commanded while the motor is running, the firmware shall perform a controlled deceleration to zero speed before applying torque in the new direction.</td><td>hardware / instrument</td><td>A running CW motor commanded to reverse decelerates through zero before any reverse torque is applied and then accelerates CCW. (expected: Signed speed reaches 0 RPM before torque changes to the CCW direction; the motor subsequently accelerates CCW, and no reverse-torque spike occurs before the zero-speed crossing.)<br>If the controller cannot complete the commanded reversal sequence, it rejects the direction change and continues operating in the current direction. (expected: The opposite-direction command is refused and the motor remains in its original direction.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/motor_control/motor_control.h</code></td><td><code>motor_control_set_direction<br>motor_control_set_speed<br>motor_control_stop</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-011</code></td><td>If the motor fails to achieve sustained rotation within a bounded startup time or number of attempts from standstill, the firmware shall declare a startup fault and disable PWM.</td><td>hardware / instrument</td><td>When startup is prevented, the controller aborts within the configured maximum startup time or attempt count, disables PWM, and reports a startup fault in STATUS. (expected: The abort occurs no later than the configured maximum startup time or attempt count; STATUS indicates a startup fault and all PWM outputs are disabled.)<br>After a startup fault, the drive remains disabled until the fault is cleared and a new START command is issued. (expected: The fault remains latched and PWM remains disabled before clear plus new START; only after both actions may the drive leave the fault-disabled state.)</td><td><code>firmware/app/app.c<br>firmware/services/motor_control/motor_control.c</code></td><td><code>motor_control_init<br>motor_control_process<br>motor_control_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-001</code></td><td>The system shall achieve reliable motor startup from standstill.</td><td>hardware / instrument</td><td>Every startup attempt in a representative series reaches the running state and sustained rotation without manual intervention or a fault. (expected: Each attempt reaches the running state with sustained rotation, no manual intervention, and no fault indication.)</td><td><code>firmware/configs/app_config.h<br>firmware/services/motor_control/motor_control.c</code></td><td><code>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-002</code></td><td>The system shall maintain stable rotation at the commanded speed.</td><td>hardware / instrument</td><td>With a fixed SPEED command and constant load, the motor remains synchronized and STATUS reports an approximately constant estimated speed throughout the observation interval. (expected: No loss of synchronism occurs and the STATUS estimated-speed samples remain approximately constant for the full observation interval.)</td><td><code>firmware/configs/app_config.h<br>firmware/services/motor_control/motor_control.c</code></td><td><code>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-003</code></td><td>The system shall perform a controlled motor stop when stopping is commanded.</td><td>hardware / instrument</td><td>A stop command decelerates the motor to standstill without oscillation or reverse kick and leaves the drive disabled. (expected: Speed decreases to 0 RPM, no uncontrolled oscillation or reverse kick is observed, the motor is stopped, and all drive PWM outputs are disabled.)</td><td><code>firmware/configs/app_config.h<br>firmware/services/motor_control/motor_control.c</code></td><td><code>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>NFR-001</code></td><td>Final speed, startup, and current limits shall be tuned and validated on the actual motor and supply before extended operation.</td><td>inspection</td><td>Project artifacts contain the final speed, startup, and current tuning parameters together with validation results for the actual motor and supply, dated or otherwise attributable before extended runtime testing. (expected: All three limit groups have recorded final values, the records identify the actual motor and supply, validation results are present, and the validation predates extended runtime testing.)</td><td><code>firmware/README.md<br>firmware/configs/app_config.h</code></td><td><code>APP_MOTOR_ALIGN_TIME_MS<br>APP_MOTOR_MAX_SPEED_RPM<br>APP_MOTOR_MIN_SPEED_RPM<br>APP_MOTOR_STARTUP_TIMEOUT_MS</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>FR-001</code> — <span class="sub">A bounded control state machine and three-phase duty output path are implemented, but true closed-loop sensorless FOC/observer feedback is not implemented; the observer-unavailable path intentionally faults before RUN.</span></li>
+<li><code>FR-002</code>, <code>FR-011</code> — <span class="sub">Initialization disables PWM and enters STOPPED; START is not invoked by the current app; startup has a bounded timeout and fault state.</span></li>
+<li><code>FR-003</code>, <code>FR-009</code>, <code>FR-010</code> — <span class="sub">Signed direction, bounded speed setters, and a deceleration transition are present, but no UART command path or hardware validation exists.</span></li>
+<li><code>PERF-001</code>, <code>PERF-002</code>, <code>PERF-003</code> — <span class="sub">Startup/stop timing contracts and safe PWM shutdown path exist; performance cannot be claimed because the observer is unavailable and no motor run was observed.</span></li>
+<li><code>NFR-001</code> — <span class="sub">Configuration records commissioning defaults and identifies the actual motor/supply, but validation results and final tuned values are not present.</span></li>
+</ul>
+<h2>UART Command &amp; Status Interface</h2>
+<p class="meta">gate: deferred · tasks: 4/4 done · recorded in: 14056c19-f482-4c45-b04c-ad9ef894553b</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>IF-003</code></td><td>The firmware shall provide a UART interface configured for 115200 baud, 8 data bits, no parity, 1 stop bit (8-N-1).</td><td>inspection<br>hardware / instrument</td><td>The UART configuration in the firmware build is set to 115200 baud with 8 data bits, no parity, and 1 stop bit. (expected: 115200 baud, 8 data bits, no parity, and 1 stop bit (8-N-1).)<br>A terminal or UART loopback exchanges command and response data successfully using the configured interface. (expected: The transmitted command is received by the firmware and a valid response is received without framing or communication errors.)</td><td><code>firmware/platforms/stm32/uart_platform.c</code></td><td><code>uart_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-004</code></td><td>Upon receiving &quot;MOTOR START&quot; over UART, the firmware shall start the motor and enter the run state.</td><td>hardware / instrument</td><td>A valid MOTOR START command causes the motor to rotate and the subsequent STATUS response to report the run state. (expected: The motor is rotating and STATUS reports RUN or the project-defined equivalent run state.)<br>A MOTOR START command issued while a stated start-safety condition is violated does not start the motor. (expected: The motor remains stopped and the system does not enter RUN; the response/state indicates the project-defined safety refusal or fault behavior.)</td><td><code>firmware/platforms/stm32/uart_platform.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_parse_speed<br>uart_command_process<br>uart_platform_read_line</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-005</code></td><td>Upon receiving &quot;MOTOR STOP&quot; over UART, the firmware shall stop the motor.</td><td>hardware / instrument</td><td>A MOTOR STOP command issued while the motor is running leaves the motor stationary and disables the PWM outputs at the end of the stop sequence. (expected: The shaft is stationary and all motor-drive PWM outputs are disabled after the stop sequence completes.)</td><td><code>firmware/platforms/stm32/uart_platform.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_parse_speed<br>uart_command_process<br>uart_platform_read_line</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-006</code></td><td>Upon receiving &quot;SPEED &lt;RPM&gt;&quot; over UART, the firmware shall set the target speed to the specified value within the allowed range of 300 to 1000 RPM.</td><td>hardware / instrument</td><td>SPEED commands for 300 RPM, 1000 RPM, and a valid intermediate RPM update the target-speed field to the commanded value. (expected: The reported target speeds are respectively 300 RPM, 1000 RPM, and exactly the commanded intermediate value.)</td><td><code>firmware/platforms/stm32/uart_platform.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_parse_speed<br>uart_command_process<br>uart_platform_read_line</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-007</code></td><td>Upon receiving &quot;DIR CW&quot; over UART, the firmware shall set the commanded direction to clockwise.</td><td>hardware / instrument</td><td>A DIR CW command causes the commanded direction field to become CW and subsequent motor rotation to be clockwise. (expected: STATUS reports direction=CW and the motor rotates clockwise.)</td><td><code>firmware/platforms/stm32/uart_platform.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_parse_speed<br>uart_command_process<br>uart_platform_read_line</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-008</code></td><td>Upon receiving &quot;DIR CCW&quot; over UART, the firmware shall set the commanded direction to counter-clockwise.</td><td>hardware / instrument</td><td>A DIR CCW command causes the commanded direction field to become CCW and subsequent motor rotation to be counter-clockwise. (expected: STATUS reports direction=CCW and the motor rotates counter-clockwise.)</td><td><code>firmware/platforms/stm32/uart_platform.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_parse_speed<br>uart_command_process<br>uart_platform_read_line</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-005</code></td><td>The firmware shall implement the STATUS command over UART to report the system status.</td><td>hardware / instrument</td><td>Sending STATUS over an established UART link produces a response payload containing the system state, target speed, estimated actual speed, commanded direction, and fault status fields. (expected: One response payload is received and contains fields for state, target speed, estimated actual speed, direction, and fault status.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_direction_name<br>uart_command_state_name<br>uart_command_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-006</code></td><td>The firmware shall ignore unrecognized or malformed UART commands without changing the system state.</td><td>hardware / instrument</td><td>Each unknown, malformed, or truncated UART command leaves the system state, target speed, direction, and fault status identical to their values before the command. (expected: For every invalid input, state, target speed, direction, and fault status are unchanged.)</td><td><code>firmware/platforms/stm32/uart_platform.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_parse_speed<br>uart_command_process<br>uart_platform_read_line</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-007</code></td><td>The firmware shall reject SPEED commands outside 300–1000 RPM and shall not change the target speed in response.</td><td>hardware / instrument</td><td>SPEED 200 and SPEED 1100 are rejected without changing the previously valid target speed or system state. (expected: After each out-of-range command, the target speed equals the prior valid value and the system state is unchanged.)</td><td><code>firmware/platforms/stm32/uart_platform.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_parse_speed<br>uart_command_process<br>uart_platform_read_line</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-001</code></td><td>The STATUS command shall include the current system state.</td><td>hardware / instrument</td><td>The STATUS response contains a state field whose value unambiguously identifies the current system state. (expected: The response contains a non-ambiguous state value matching the actual state, such as INIT, STOPPED, RUN, or FAULT.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_direction_name<br>uart_command_state_name<br>uart_command_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-002</code></td><td>The STATUS command shall include the target speed.</td><td>hardware / instrument</td><td>The target-speed field in STATUS equals the most recently commanded valid target speed. (expected: The field is numeric and equals the commanded value in RPM, within the inclusive range 300–1000 RPM.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_direction_name<br>uart_command_state_name<br>uart_command_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-003</code></td><td>The STATUS command shall include the estimated actual speed.</td><td>hardware / instrument</td><td>The STATUS response contains a numeric estimated-actual-speed field expressed in RPM. (expected: The response contains a parseable numeric value representing estimated speed in RPM at the query time.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_direction_name<br>uart_command_state_name<br>uart_command_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-004</code></td><td>The STATUS command shall include the current commanded direction (CW or CCW).</td><td>hardware / instrument</td><td>The direction field in STATUS is either CW or CCW and matches the most recent DIR command. (expected: The direction field reports CW after DIR CW and CCW after DIR CCW.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_direction_name<br>uart_command_state_name<br>uart_command_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-005</code></td><td>The STATUS command shall include the current fault status.</td><td>hardware / instrument</td><td>The STATUS response contains a fault-status field that changes to the faulted indication when a known fault is induced. (expected: The response contains a fault-status field, and during the induced fault it indicates that a fault is present.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_direction_name<br>uart_command_state_name<br>uart_command_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-006</code></td><td>When a fault is present, the STATUS response shall include a fault code that identifies the fault category (e.g., undervoltage limit, overcurrent limit, sensor fault, startup failure).</td><td>hardware / instrument</td><td>When each representative fault is active, STATUS reports a non-null fault code matching that fault category. (expected: Each STATUS response contains a non-null code, and the codes identify respectively undervoltage-limit, overcurrent-limit, current-sense, and startup-failure categories.)</td><td><code>firmware/services/motor_control/motor_control.c<br>firmware/services/uart_command/uart_command.c</code></td><td><code>uart_command_direction_name<br>uart_command_state_name<br>uart_command_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>IF-003</code> — <span class="sub">LPUART1 is configured in source for 115200 baud, 8 data bits, no parity, one stop bit; hardware exchange was not verified because the monitor received no bytes.</span></li>
+<li><code>FR-004</code>, <code>FR-005</code>, <code>FR-006</code>, <code>FR-007</code>, <code>FR-008</code>, <code>IF-006</code>, <code>IF-007</code> — <span class="sub">Strict exact command matching and bounded line reception are implemented and dispatch to the existing motor-control API; hardware command behavior was not observed.</span></li>
+<li><code>IF-005</code>, <code>DIAG-001</code>, <code>DIAG-002</code>, <code>DIAG-003</code>, <code>DIAG-004</code>, <code>DIAG-005</code>, <code>DIAG-006</code> — <span class="sub">STATUS formatting includes state, target RPM, estimated RPM, direction, fault indication, and code; no UART response was captured on hardware.</span></li>
+</ul>
+<h2>Drive Safety, Fault Handling &amp; Reset Protection</h2>
+<p class="meta">gate: deferred · tasks: 5/5 done · recorded in: 14056c19-f482-4c45-b04c-ad9ef894553b</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>SF-001</code></td><td>The firmware shall limit motor current so that RMS current does not exceed 1.5 A RMS or a lower validated project limit.</td><td>hardware / instrument</td><td>Measured steady-state and transient phase RMS motor current remains at or below the configured maximum, with the configured maximum no greater than 1.5 A RMS unless a lower validated project limit is configured. (expected: For every recorded interval, measured phase RMS current is &lt;= the configured limit; the configured limit is &lt;=1.5 A RMS unless a lower validated limit is explicitly configured.)</td><td><code>firmware/configs/app_config.h<br>firmware/services/drive_safety/drive_safety.c<br>firmware/services/drive_safety/drive_safety.h<br>firmware/services/motor_control/motor_control.c</code></td><td><code>drive_safety_validate<br>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>SF-002</code></td><td>On detection of a motor-control fault, the firmware shall immediately disable PWM output to the inverter.</td><td>hardware / instrument<br>on-target test</td><td>When a detectable motor-driver fault is asserted while the motor is running, all inverter PWM outputs enter the disabled state and produce no subsequent drive pulses. (expected: PWM outputs transition to the disabled state and no drive pulse occurs after the fault assertion.)<br>After a motor-control fault disables PWM, the firmware remains in the disabled condition until the fault is cleared and a new START command is received. (expected: PWM remains disabled before the new START command and may be enabled only after the fault is cleared and the new START command is received.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/ihm16m1_platform.c<br>firmware/services/motor_control/motor_control.c</code></td><td><code>ihm16m1_platform_pwm_enable<br>motor_control_disable_pwm<br>motor_control_init</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>SF-003</code></td><td>The system shall not operate the motor outside the configured voltage and current limits.</td><td>hardware / instrument</td><td>An attempted start or continued run with either a configured voltage-limit violation or a configured current-limit violation results in drive inhibition or automatic stop with PWM disabled. (expected: For every out-of-limit condition, START is refused or an already-running motor is stopped, PWM is disabled, and fault status is reported.)</td><td><code>firmware/configs/app_config.h<br>firmware/services/drive_safety/drive_safety.c<br>firmware/services/drive_safety/drive_safety.h<br>firmware/services/motor_control/motor_control.c</code></td><td><code>drive_safety_validate<br>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>SF-004</code></td><td>The firmware shall prevent motor start and shall stop the motor and disable PWM when the measured DC supply voltage is outside the configured allowable range.</td><td>hardware / instrument<br>on-target test</td><td>A START command issued while measured DC supply voltage is below the configured minimum or above the configured maximum is refused and leaves the drive disabled. (expected: For both below-minimum and above-maximum conditions, START is refused and PWM remains disabled.)<br>When the measured DC supply voltage crosses either configured threshold while the motor is running, the drive is disabled and STATUS indicates a fault. (expected: For each threshold crossing, PWM is disabled, the motor is no longer driven, and STATUS indicates a fault.)<br>After a voltage-limit shutdown, the drive remains disabled while the measured voltage is out of range and does not restart until the voltage is valid and a new START command is received. (expected: PWM remains disabled while voltage is out of range and after voltage recovery without START; it can resume only after valid voltage and a new START command.)</td><td><code>firmware/configs/app_config.h<br>firmware/services/drive_safety/drive_safety.c<br>firmware/services/drive_safety/drive_safety.h<br>firmware/services/motor_control/motor_control.c</code></td><td><code>drive_safety_validate<br>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>SF-005</code></td><td>The firmware shall detect loss or out-of-range behavior of phase current measurements (e.g., disconnection, saturation, rail) and immediately disable PWM, entering a fault state.</td><td>hardware / instrument<br>on-target test</td><td>While running closed-loop control, inducing a phase-current sensing disconnection, ADC rail or saturation value, or ADC-DMA disable causes PWM to be disabled with no subsequent drive pulses and STATUS to indicate a faulted state. (expected: For every induced sensor fault, PWM is disabled, no drive pulse occurs after fault detection/assertion, and STATUS indicates the FAULT state.)<br>After a phase-current sensing fault is cleared, the firmware keeps the drive disabled until START is issued again. (expected: The system remains in FAULT or an equivalent non-driving state with PWM disabled before START, and does not resume driving until START is issued.)</td><td><code>firmware/configs/app_config.h<br>firmware/services/drive_safety/drive_safety.c<br>firmware/services/drive_safety/drive_safety.h<br>firmware/services/motor_control/motor_control.c</code></td><td><code>drive_safety_validate<br>motor_control_process</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>SF-006</code></td><td>On any MCU reset, watchdog reset, or brown-out event, the firmware shall ensure PWM outputs are disabled and the motor remains stopped until initialization completes and a valid START command is received.</td><td>hardware / instrument<br>on-target test</td><td>Following an induced watchdog reset or brown-out while the motor is running, PWM outputs remain inactive during reset and after reboot until a new valid START command is received. (expected: No PWM activity is present during either reset or reboot, no PWM appears before the new valid START command, and PWM may resume only after initialization and START.)<br>After either a watchdog reset or brown-out reboot, STATUS reports STOPPED before any new START command is received. (expected: STATUS is STOPPED for both watchdog-reset and brown-out recovery before any START command.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/ihm16m1_platform.c<br>firmware/services/motor_control/motor_control.c</code></td><td><code>ihm16m1_platform_pwm_enable<br>motor_control_disable_pwm<br>motor_control_init</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>NFR-002</code></td><td>The firmware shall enable a watchdog that resets the MCU if the control software fails to service it within a configured interval, ensuring fail-safe shutdown of the drive on software hang.</td><td>hardware / instrument</td><td>A deliberate control-software hang while the motor is running causes the watchdog to reset the MCU, after which the motor remains stopped with PWM disabled until a new START command is received. (expected: The MCU resets after the control software stops servicing the watchdog; PWM is disabled after reset, the motor remains stopped before START, and a new START is required before operation resumes.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/watchdog_platform.c</code></td><td><code>watchdog_platform_kick<br>watchdog_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>SF-001</code>, <code>SF-003</code>, <code>SF-004</code>, <code>SF-005</code> — <span class="sub">Safety validation is now reachable through the optional motor-control safety callback seam, but app_start currently supplies NULL because the project lacks validated bus-voltage/current conversion and sampling integration. Raw plausibility thresholds are configured; hardware limits are not verified.</span></li>
+<li><code>SF-002</code>, <code>SF-006</code> — <span class="sub">PWM compare values are cleared and STBY asserted on shutdown and initialization; reset and fault behavior were not instrumented on hardware.</span></li>
+<li><code>NFR-002</code> — <span class="sub">Independent watchdog is initialized and serviced in the main loop; deliberate watchdog reset and post-reset PWM behavior were not hardware-verified.</span></li>
+</ul>
+<h2>Gaps</h2>
+<p class="sub">Listed rather than omitted. A matrix showing only what was built cannot be told apart from one showing full coverage.</p>
+<h3>Board checks owed (34)</h3>
+<p class="sub">The worklist for whoever has the hardware, and the counterpart of the host-test list below. A `hardware` or `target` criterion with nothing observed: no host test and no reading of the code will ever close it.</p>
+<ul>
+<li><code>IF-001</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>IF-002</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>IF-004</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>FR-001</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-002</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-003</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-009</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-010</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-011</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>PERF-001</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>PERF-002</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>PERF-003</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>IF-003</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-004</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-005</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-006</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-007</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-008</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-005</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-006</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-007</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-001</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-002</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-003</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-004</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-005</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-006</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>SF-001</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-002</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-003</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-004</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-005</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-006</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>NFR-002</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+</ul>
+<h3>NOT unit-testable (39) — do not write host tests for these</h3>
+<p class="sub">No `host` criterion, so no unit test can cover them however it is written. Listed explicitly because the untested count otherwise reads as a backlog of unit tests owed, and closing one of these with a host test means inventing an assertion that passes without checking the thing.</p>
+<ul>
+<li><code>HW-001</code> — checked by inspection <span class="sub">· MCU, Inverter &amp; Motor Hardware Configuration</span></li>
+<li><code>HW-002</code> — checked by inspection <span class="sub">· MCU, Inverter &amp; Motor Hardware Configuration</span></li>
+<li><code>HW-003</code> — checked by inspection <span class="sub">· MCU, Inverter &amp; Motor Hardware Configuration</span></li>
+<li><code>HW-004</code> — checked by inspection <span class="sub">· MCU, Inverter &amp; Motor Hardware Configuration</span></li>
+<li><code>IF-001</code> — checked by hardware / instrument <span class="sub">· MCU, Inverter &amp; Motor Hardware Configuration</span></li>
+<li><code>IF-002</code> — checked by hardware / instrument <span class="sub">· MCU, Inverter &amp; Motor Hardware Configuration</span></li>
+<li><code>IF-004</code> — checked by inspection, hardware / instrument <span class="sub">· MCU, Inverter &amp; Motor Hardware Configuration</span></li>
+<li><code>FR-001</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>FR-002</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>FR-003</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>FR-009</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>FR-010</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>FR-011</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>PERF-001</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>PERF-002</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>PERF-003</code> — checked by hardware / instrument <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>NFR-001</code> — checked by inspection <span class="sub">· Sensorless FOC &amp; Motor Operating Control</span></li>
+<li><code>IF-003</code> — checked by inspection, hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>FR-004</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>FR-005</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>FR-006</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>FR-007</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>FR-008</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-005</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-006</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-007</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>DIAG-001</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>DIAG-002</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>DIAG-003</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>DIAG-004</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>DIAG-005</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>DIAG-006</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>SF-001</code> — checked by hardware / instrument <span class="sub">· Drive Safety, Fault Handling &amp; Reset Protection</span></li>
+<li><code>SF-002</code> — checked by hardware / instrument, on-target test <span class="sub">· Drive Safety, Fault Handling &amp; Reset Protection</span></li>
+<li><code>SF-003</code> — checked by hardware / instrument <span class="sub">· Drive Safety, Fault Handling &amp; Reset Protection</span></li>
+<li><code>SF-004</code> — checked by hardware / instrument, on-target test <span class="sub">· Drive Safety, Fault Handling &amp; Reset Protection</span></li>
+<li><code>SF-005</code> — checked by hardware / instrument, on-target test <span class="sub">· Drive Safety, Fault Handling &amp; Reset Protection</span></li>
+<li><code>SF-006</code> — checked by hardware / instrument, on-target test <span class="sub">· Drive Safety, Fault Handling &amp; Reset Protection</span></li>
+<li><code>NFR-002</code> — checked by hardware / instrument <span class="sub">· Drive Safety, Fault Handling &amp; Reset Protection</span></li>
+</ul>
+<h3>Implemented, never tested (39)</h3>
+<p class="sub">Code exists and no test is recorded against it.</p>
+<ul>
+<li><code>HW-001</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>HW-002</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>HW-003</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>HW-004</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>IF-001</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>IF-002</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>IF-004</code> <span class="sub">(MCU, Inverter &amp; Motor Hardware Configuration)</span></li>
+<li><code>FR-001</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-002</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-003</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-009</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-010</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>FR-011</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>PERF-001</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>PERF-002</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>PERF-003</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>NFR-001</code> <span class="sub">(Sensorless FOC &amp; Motor Operating Control)</span></li>
+<li><code>IF-003</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-004</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-005</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-006</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-007</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-008</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-005</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-006</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-007</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-001</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-002</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-003</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-004</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-005</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>DIAG-006</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>SF-001</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-002</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-003</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-004</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-005</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>SF-006</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+<li><code>NFR-002</code> <span class="sub">(Drive Safety, Fault Handling &amp; Reset Protection)</span></li>
+</ul>
+</main></body></html>
