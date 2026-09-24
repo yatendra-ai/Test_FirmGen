@@ -1,0 +1,2355 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_vehicle_monitor",
+  "revision": "86a23f881097aa36b54fdf893f3e81f7",
+  "provenance": {
+    "project_path": "C:\\Users\\YatendraBhargava\\Downloads\\24-9-26\\gopala\\vehicle_monitor",
+    "chat_id": "29ce0a85-c3a6-412f-a563-5c13a90ef91d",
+    "revision": "86a23f881097aa36b54fdf893f3e81f7",
+    "generated_at_ms": 1790241866717,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "CMakeLists.txt",
+      "components/firmgen_telemetry/firmgen_proto_monitor.c",
+      "components/firmgen_telemetry/firmgen_telemetry.c",
+      "components/firmgen_telemetry/include/firmgen_proto_monitor.h",
+      "components/firmgen_telemetry/include/firmgen_telemetry.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h",
+      "firmware/interfaces/dht22_port.h",
+      "firmware/interfaces/mpu6050_port.h",
+      "firmware/interfaces/network_service.h",
+      "firmware/modules/threshold_evaluator.c",
+      "firmware/osal/osal.h",
+      "firmware/platforms/esp32/dht22_port_esp32.c",
+      "firmware/platforms/esp32/diagnostics_service_esp32.c",
+      "firmware/platforms/esp32/mpu6050_port_esp32.c",
+      "firmware/platforms/esp32/network_service_esp32.c",
+      "firmware/platforms/esp32/osal_freertos.c",
+      "firmware/platforms/esp32/threshold_service_esp32.c",
+      "firmware/services/dht22_service.c",
+      "firmware/services/dht22_service.h",
+      "firmware/services/diagnostics_service.h",
+      "firmware/services/mpu6050_service.c",
+      "firmware/services/mpu6050_service.h",
+      "firmware/services/threshold_service.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "main/entry.c",
+      "sdkconfig",
+      "sdkconfig.defaults"
+    ],
+    "file_hashes": {
+      "firmware/platforms/esp32/osal_freertos.c": "ec9840309e7a18371b603bd9fef45287",
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/services/mpu6050_service.c": "f6642a175238315a5937b6208aaab4fd",
+      "firmware/interfaces/dht22_port.h": "1096f10d4b6bb11be677b1664e470577",
+      "firmware/app/app.c": "d7697b331e01384b10f094dcda9ecc63",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c": "4d971ca6616b6d8cfc69d67c2a06467e",
+      "firmware/platforms/esp32/diagnostics_service_esp32.c": "53c4bf76bd20ab1556d20a61e8584a95",
+      "firmware/configs/app_config.h": "ef8c8101a026f01fdeed46e308c2d0be",
+      "firmware/interfaces/network_service.h": "d9eaced6ca04199f0b516ed38dced082",
+      "firmware/services/threshold_service.h": "962f3927af28c98ff3210678eb0b5f00",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "firmware/app/app.h": "ebc6cfe87fb8e2ab299633dd7a067f3b",
+      "main/entry.c": "112870a6ae4d68af6a6173e331f96ff5",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h": "e3e0f5ca1eaace2baaff555a3028d40b",
+      "firmware/osal/osal.h": "9e93e5096d971aa31beb162503c0e4f3",
+      "firmware/platforms/esp32/threshold_service_esp32.c": "1feee046cde219782d0a219c89cea655",
+      "components/firmgen_telemetry/firmgen_telemetry.c": "1bd610a3815339f8339d104264314123",
+      "firmware/utils/logger/logger.h": "2c284c641c88c6a4fff52db62e8d1ea5",
+      "firmware/interfaces/mpu6050_port.h": "f63914a16ef2677a9927463e668992d0",
+      "sdkconfig": "987f5917a1829fb6ecc98eed864df252",
+      "firmware/services/dht22_service.h": "55d91fc7211171fd40cf4837cc8979e2",
+      "firmware/bsp/board.h": "ba9866f5a0b90fc8beb3e6691db43c8a",
+      "firmware/modules/threshold_evaluator.c": "a7dd01a6a5c222d56a165a98545d3e24",
+      "firmware/utils/logger/logger.c": "8e992fef35c9a4678ec38e60902d741d",
+      "sdkconfig.defaults": "2058a52db4a1ebbc406a279527effb42",
+      "firmware/services/diagnostics_service.h": "43460594ba639cdb20e9717be75ec2f5",
+      "firmware/platforms/esp32/dht22_port_esp32.c": "48fa9547e0fe97f06161cefa63b53eb6",
+      "firmware/platforms/esp32/network_service_esp32.c": "8590ab13ee097745ef3b01f4a1dfcab5",
+      "firmware/services/mpu6050_service.h": "02c70e4075c88bc5d6a5db634ddcab17",
+      "CMakeLists.txt": "4616f34ee92fab8d4af447b039f903a0",
+      "components/firmgen_telemetry/firmgen_proto_monitor.c": "241635b0bc2faddff8e09466a629ec5a",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "components/firmgen_telemetry/include/firmgen_telemetry.h": "7bbbec251547af78a7dd067c70d46db8",
+      "firmware/platforms/esp32/mpu6050_port_esp32.c": "f7b4162cbe37711f3f6d0bbe14d94d03",
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "firmware/services/dht22_service.c": "da335ff3029aac7364b0f9f11010c32e",
+      "components/firmgen_telemetry/include/firmgen_proto_monitor.h": "201c0bd06a85f69ce82e741f9c85dbb2"
+    },
+    "board_id": "ESP32-C3-DevKitM-1",
+    "target_chip": "esp32c3",
+    "config_hash": "sdkconfig.defaults:2058a52db4a1ebbc406a279527effb42|sdkconfig:987f5917a1829fb6ecc98eed864df252",
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "stale"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "esp32c3"
+      },
+      "source_refs": [
+        {
+          "file": "main/entry.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "main/entry.c"
+        ]
+      },
+      "editable_fields": [
+        "log_level"
+      ],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "dht22_data_gpio",
+      "node_type": "gpio_input",
+      "label": "DHT22 DATA GPIO (GPIO 2, APP_DHT22_DATA_GPIO)",
+      "properties": {
+        "pin": 2
+      },
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "line": 11,
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/esp32/dht22_port_esp32.c",
+          "line": 87,
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/configs/app_config.h"
+        ]
+      },
+      "editable_fields": [
+        "pin"
+      ],
+      "layer": "physical",
+      "ai_summary": "Reads GPIO 2 as an input signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "mpu6050_scl_gpio",
+      "node_type": "gpio_input",
+      "label": "MPU6050 SCL GPIO (GPIO 8, APP_MPU6050_SCL_GPIO)",
+      "properties": {
+        "pin": 8
+      },
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/configs/app_config.h"
+        ]
+      },
+      "editable_fields": [
+        "pin"
+      ],
+      "layer": "physical",
+      "ai_summary": "Reads GPIO 8 as an input signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "mpu6050_sda_gpio",
+      "node_type": "gpio_input",
+      "label": "MPU6050 SDA GPIO (GPIO 9, APP_MPU6050_SDA_GPIO)",
+      "properties": {
+        "pin": 9
+      },
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/configs/app_config.h"
+        ]
+      },
+      "editable_fields": [
+        "pin"
+      ],
+      "layer": "physical",
+      "ai_summary": "Reads GPIO 9 as an input signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "fg_proto",
+      "node_type": "rtos_task",
+      "label": "Task fg_proto",
+      "properties": {
+        "task_name": "fg_proto",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "components/firmgen_telemetry/firmgen_proto_monitor.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for fg_proto.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "fg_telemetry",
+      "node_type": "rtos_task",
+      "label": "Task fg_telemetry",
+      "properties": {
+        "task_name": "fg_telemetry",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "components/firmgen_telemetry/firmgen_telemetry.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for fg_telemetry.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "dht22_task",
+      "node_type": "rtos_task",
+      "label": "Task dht22_task",
+      "properties": {
+        "task_name": "dht22_task",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/app/app.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for dht22_task.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "mpu6050_task",
+      "node_type": "rtos_task",
+      "label": "Task mpu6050_task",
+      "properties": {
+        "task_name": "mpu6050_task",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/app/app.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for mpu6050_task.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "network_task",
+      "node_type": "rtos_task",
+      "label": "Task network_task",
+      "properties": {
+        "task_name": "network_task",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/app/app.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for network_task.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "diagnostics_task",
+      "node_type": "rtos_task",
+      "label": "Task diagnostics_task",
+      "properties": {
+        "task_name": "diagnostics_task",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/esp32/diagnostics_service_esp32.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for diagnostics_task.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "wifi",
+      "node_type": "wifi_manager",
+      "label": "WiFi",
+      "properties": {
+        "mode": "station",
+        "ssid": "GopalaSutharsan",
+        "password": "123987456"
+      },
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/configs/app_config.h"
+        ]
+      },
+      "editable_fields": [
+        "ssid",
+        "password",
+        "mode"
+      ],
+      "layer": "network",
+      "ai_summary": "Manages Wi-Fi connectivity for SSID `GopalaSutharsan`.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "mqtt",
+      "node_type": "mqtt_client",
+      "label": "MQTT",
+      "properties": {
+        "broker_url": "mqtt://broker.hivemq.com:1883",
+        "qos": 0
+      },
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "components/firmgen_telemetry/firmgen_proto_monitor.c"
+        ]
+      },
+      "editable_fields": [
+        "broker_url",
+        "topic",
+        "client_id",
+        "qos"
+      ],
+      "layer": "network",
+      "ai_summary": "Handles MQTT broker communication and message routing.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "i2c_device",
+      "node_type": "i2c_device",
+      "label": "I2C Device",
+      "properties": {
+        "address": "0x68",
+        "clock_hz": 100000
+      },
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "components/firmgen_telemetry/firmgen_proto_monitor.c"
+        ]
+      },
+      "editable_fields": [
+        "sda_pin",
+        "scl_pin",
+        "address",
+        "clock_hz"
+      ],
+      "layer": "physical",
+      "ai_summary": "Represents an I2C peripheral with mapped bus pins.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "uart_device",
+      "node_type": "uart_device",
+      "label": "UART Device",
+      "properties": {
+        "port": 1,
+        "baud_rate": 115200
+      },
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "components/firmgen_telemetry/firmgen_proto_monitor.c"
+        ]
+      },
+      "editable_fields": [
+        "port",
+        "baud_rate",
+        "tx_pin",
+        "rx_pin"
+      ],
+      "layer": "physical",
+      "ai_summary": "Represents a UART peripheral with mapped serial pins.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "mpu6050_i2c",
+      "node_type": "i2c_device",
+      "label": "MPU6050 I2C Device",
+      "properties": {
+        "address": "0x68U",
+        "clock_hz": 100000
+      },
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/configs/app_config.h"
+        ]
+      },
+      "editable_fields": [
+        "sda_pin",
+        "scl_pin",
+        "address",
+        "clock_hz"
+      ],
+      "layer": "physical",
+      "ai_summary": "Represents an I2C peripheral with mapped bus pins.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "storage_manager",
+      "node_type": "storage_manager",
+      "label": "Storage Manager",
+      "properties": {
+        "backend": "nvs",
+        "namespace": "app"
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/esp32/network_service_esp32.c"
+        ]
+      },
+      "editable_fields": [
+        "backend",
+        "namespace"
+      ],
+      "layer": "system",
+      "ai_summary": "Persists runtime state and configuration data.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "event_handler",
+      "node_type": "event_handler",
+      "label": "Event Handler",
+      "properties": {
+        "event_id": -1
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "86a23f881097aa36b54fdf893f3e81f7"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/esp32/network_service_esp32.c"
+        ]
+      },
+      "editable_fields": [
+        "event_base",
+        "event_id"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Queues and dispatches asynchronous firmware events.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_boot_fg_proto_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "fg_proto",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 588,
+          "symbol": "fg_proto",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_fg_telemetry_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "fg_telemetry",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 411,
+          "symbol": "fg_telemetry",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_dht22_task_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "dht22_task",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "line": 29,
+          "symbol": "dht22_task",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_mpu6050_task_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "mpu6050_task",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "line": 30,
+          "symbol": "mpu6050_task",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_network_task_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "network_task",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "line": 31,
+          "symbol": "network_task",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_diagnostics_task_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "diagnostics_task",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 73,
+          "symbol": "diagnostics_task",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_wifi_starts",
+      "source_node_id": "boot",
+      "target_node_id": "wifi",
+      "kind": "network",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "symbol": "WiFi",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "starts",
+      "validated": false
+    },
+    {
+      "id": "e_boot_mqtt_starts",
+      "source_node_id": "boot",
+      "target_node_id": "mqtt",
+      "kind": "network",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "symbol": "MQTT",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "starts",
+      "validated": false
+    },
+    {
+      "id": "e_boot_i2c_device_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "i2c_device",
+      "kind": "hardware",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "symbol": "I2C Device",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_boot_uart_device_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "uart_device",
+      "kind": "hardware",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "symbol": "UART Device",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_boot_mpu6050_i2c_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "mpu6050_i2c",
+      "kind": "hardware",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "symbol": "MPU6050 I2C Device",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_boot_storage_manager_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "storage_manager",
+      "kind": "dependency",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "symbol": "Storage Manager",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_boot_event_handler_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "event_handler",
+      "kind": "dependency",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "symbol": "Event Handler",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "edge",
+      "source_node_id": "dht22_data_gpio",
+      "target_node_id": "dht22_task",
+      "kind": "execution",
+      "confidence": 0.96,
+      "source_refs": [
+        {
+          "file": "firmware/platforms/esp32/dht22_port_esp32.c",
+          "line": 87,
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/app/app.c",
+          "line": 15,
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "validated": false
+    },
+    {
+      "id": "e_mpu6050_scl_binds_i2c",
+      "source_node_id": "mpu6050_scl_gpio",
+      "target_node_id": "mpu6050_i2c",
+      "kind": "hardware",
+      "confidence": 0.99,
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "line": 14,
+          "symbol": "APP_MPU6050_SCL_GPIO",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/esp32/mpu6050_port_esp32.c",
+          "line": 12,
+          "symbol": "mpu6050_port_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "binds",
+      "validated": false
+    },
+    {
+      "id": "e_mpu6050_sda_binds_i2c",
+      "source_node_id": "mpu6050_sda_gpio",
+      "target_node_id": "mpu6050_i2c",
+      "kind": "hardware",
+      "confidence": 0.99,
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "line": 15,
+          "symbol": "APP_MPU6050_SDA_GPIO",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/esp32/mpu6050_port_esp32.c",
+          "line": 12,
+          "symbol": "mpu6050_port_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "binds",
+      "validated": false
+    },
+    {
+      "id": "e_mpu6050_task_reads_device",
+      "source_node_id": "mpu6050_task",
+      "target_node_id": "mpu6050_i2c",
+      "kind": "hardware",
+      "confidence": 0.97,
+      "source_refs": [
+        {
+          "file": "firmware/app/app.c",
+          "line": 20,
+          "symbol": "mpu6050_task",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/services/mpu6050_service.c",
+          "line": 70,
+          "symbol": "mpu6050_service_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/esp32/mpu6050_port_esp32.c",
+          "line": 44,
+          "symbol": "mpu6050_port_read",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "reads",
+      "validated": false
+    }
+  ],
+  "layers": {
+    "physical": [
+      "dht22_data_gpio",
+      "mpu6050_scl_gpio",
+      "mpu6050_sda_gpio",
+      "i2c_device",
+      "uart_device",
+      "mpu6050_i2c"
+    ],
+    "runtime": [
+      "fg_proto",
+      "fg_telemetry",
+      "dht22_task",
+      "mpu6050_task",
+      "network_task",
+      "diagnostics_task",
+      "event_handler"
+    ],
+    "network": [
+      "wifi",
+      "mqtt"
+    ],
+    "system": [
+      "boot",
+      "storage_manager"
+    ]
+  },
+  "partitions": [],
+  "components": [
+    {
+      "id": "main",
+      "path": "main/CMakeLists.txt",
+      "requires": [
+        "esp_driver_gpio",
+        "esp_driver_i2c",
+        "esp_timer",
+        "esp_wifi",
+        "esp_event",
+        "esp_netif",
+        "mqtt",
+        "nvs_flash",
+        "freertos",
+        "log",
+        "firmgen_telemetry"
+      ],
+      "source_files": []
+    }
+  ],
+  "modules": [
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "components_firmgen_telemetry",
+      "label": "components/firmgen_telemetry",
+      "path": "components/firmgen_telemetry",
+      "kind": "module",
+      "files": [
+        "components/firmgen_telemetry/firmgen_proto_monitor.c",
+        "components/firmgen_telemetry/firmgen_telemetry.c"
+      ]
+    },
+    {
+      "id": "components_firmgen_telemetry_include",
+      "label": "components/firmgen_telemetry/include",
+      "path": "components/firmgen_telemetry/include",
+      "kind": "module",
+      "files": [
+        "components/firmgen_telemetry/include/firmgen_proto_monitor.h",
+        "components/firmgen_telemetry/include/firmgen_telemetry.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "drivers_mpu6050_mpu_6000_mpu_6050",
+      "label": "drivers/mpu6050/mpu_6000_mpu_6050",
+      "path": "drivers/mpu6050/mpu_6000_mpu_6050",
+      "kind": "driver",
+      "files": [
+        "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c",
+        "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h"
+      ]
+    },
+    {
+      "id": "interfaces",
+      "label": "interfaces",
+      "path": "interfaces",
+      "kind": "module",
+      "files": [
+        "firmware/interfaces/dht22_port.h",
+        "firmware/interfaces/mpu6050_port.h",
+        "firmware/interfaces/network_service.h"
+      ]
+    },
+    {
+      "id": "main",
+      "label": "main",
+      "path": "main",
+      "kind": "entrypoint",
+      "files": [
+        "main/entry.c"
+      ]
+    },
+    {
+      "id": "modules",
+      "label": "modules",
+      "path": "modules",
+      "kind": "module",
+      "files": [
+        "firmware/modules/threshold_evaluator.c"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "platforms_esp32",
+      "label": "platforms/esp32",
+      "path": "platforms/esp32",
+      "kind": "platform",
+      "files": [
+        "firmware/platforms/esp32/dht22_port_esp32.c",
+        "firmware/platforms/esp32/diagnostics_service_esp32.c",
+        "firmware/platforms/esp32/mpu6050_port_esp32.c",
+        "firmware/platforms/esp32/network_service_esp32.c",
+        "firmware/platforms/esp32/osal_freertos.c",
+        "firmware/platforms/esp32/threshold_service_esp32.c"
+      ]
+    },
+    {
+      "id": "services",
+      "label": "services",
+      "path": "services",
+      "kind": "module",
+      "files": [
+        "firmware/services/dht22_service.c",
+        "firmware/services/dht22_service.h",
+        "firmware/services/diagnostics_service.h",
+        "firmware/services/mpu6050_service.c",
+        "firmware/services/mpu6050_service.h",
+        "firmware/services/threshold_service.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 2,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "interfaces",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 7,
+      "symbol": "network_service.h"
+    },
+    {
+      "from": "app",
+      "to": "osal",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 6,
+      "symbol": "osal.h"
+    },
+    {
+      "from": "app",
+      "to": "services",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 4,
+      "symbol": "dht22_service.h"
+    },
+    {
+      "from": "app",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 3,
+      "symbol": "logger.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 18,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "components_firmgen_telemetry",
+      "to": "components_firmgen_telemetry_include",
+      "via": "include",
+      "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+      "line": 37,
+      "symbol": "firmgen_proto_monitor.h"
+    },
+    {
+      "from": "main",
+      "to": "app",
+      "via": "include",
+      "file": "main/entry.c",
+      "line": 2,
+      "symbol": "app.h"
+    },
+    {
+      "from": "main",
+      "to": "components_firmgen_telemetry_include",
+      "via": "include",
+      "file": "main/entry.c",
+      "line": 3,
+      "symbol": "firmgen_telemetry.h"
+    },
+    {
+      "from": "modules",
+      "to": "services",
+      "via": "include",
+      "file": "firmware/modules/threshold_evaluator.c",
+      "line": 1,
+      "symbol": "threshold_service.h"
+    },
+    {
+      "from": "platforms_esp32",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/platforms/esp32/dht22_port_esp32.c",
+      "line": 6,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "platforms_esp32",
+      "to": "interfaces",
+      "via": "include",
+      "file": "firmware/platforms/esp32/dht22_port_esp32.c",
+      "line": 1,
+      "symbol": "dht22_port.h"
+    },
+    {
+      "from": "platforms_esp32",
+      "to": "osal",
+      "via": "include",
+      "file": "firmware/platforms/esp32/osal_freertos.c",
+      "line": 1,
+      "symbol": "osal.h"
+    },
+    {
+      "from": "platforms_esp32",
+      "to": "services",
+      "via": "include",
+      "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+      "line": 1,
+      "symbol": "diagnostics_service.h"
+    },
+    {
+      "from": "services",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/services/dht22_service.c",
+      "line": 5,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "services",
+      "to": "drivers_mpu6050_mpu_6000_mpu_6050",
+      "via": "include",
+      "file": "firmware/services/mpu6050_service.c",
+      "line": 7,
+      "symbol": "mpu6050.h"
+    },
+    {
+      "from": "services",
+      "to": "interfaces",
+      "via": "include",
+      "file": "firmware/services/dht22_service.c",
+      "line": 6,
+      "symbol": "dht22_port.h"
+    },
+    {
+      "from": "services",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/services/mpu6050_service.c",
+      "line": 6,
+      "symbol": "logger.h"
+    }
+  ],
+  "task_flows": [
+    {
+      "task_node_id": "fg_proto",
+      "task_label": "fg_proto",
+      "entry_fn": "monitor_task",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task monitor_task",
+          "kind": "entry",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 521
+        },
+        {
+          "id": "f2",
+          "label": "Loop forever",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 523
+        },
+        {
+          "id": "f3",
+          "label": "vTaskDelay(pdMS_TO_TICKS(FGP_INTERVAL_MS))",
+          "kind": "timer",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 524
+        },
+        {
+          "id": "f4",
+          "label": "auto_sample_wifi()",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 525
+        },
+        {
+          "id": "f5",
+          "label": "esp_timer_get_time()",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 530
+        },
+        {
+          "id": "f6",
+          "label": "ob_reset()",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 539
+        },
+        {
+          "id": "f7",
+          "label": "ob_printf(\"{\\\"p\\\":\\\"proto_monitor\\\",\\\"v\\\":3,\\\"ts_…)",
+          "kind": "output",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 540
+        },
+        {
+          "id": "f8",
+          "label": "Loop while (ring_pop(&e))",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 545
+        },
+        {
+          "id": "f9",
+          "label": "(s_line_len > FGP_LINE_BUF - 512u && e.…",
+          "kind": "decision",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 553
+        },
+        {
+          "id": "f10",
+          "label": "(s_line_len > FGP_LINE_BUF - 256u)",
+          "kind": "decision",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 554
+        },
+        {
+          "id": "f11",
+          "label": "emit_entry(&e)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 555
+        },
+        {
+          "id": "f12",
+          "label": "ob_printf(\"]}\\n\")",
+          "kind": "output",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 559
+        },
+        {
+          "id": "f13",
+          "label": "fwrite(s_line)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 560
+        },
+        {
+          "id": "f14",
+          "label": "fflush(stdout)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_proto_monitor.c",
+          "line": 561
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f11",
+          "to": "f8",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f8",
+          "to": "f12",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f12",
+          "to": "f13",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f13",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f14",
+          "to": "f2",
+          "label": "next cycle",
+          "loop_back": true
+        }
+      ]
+    },
+    {
+      "task_node_id": "fg_telemetry",
+      "task_label": "fg_telemetry",
+      "entry_fn": "telemetry_task",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task telemetry_task",
+          "kind": "entry",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 375
+        },
+        {
+          "id": "f2",
+          "label": "sample_tasks(NULL)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 377
+        },
+        {
+          "id": "f3",
+          "label": "emit_boot_event()",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 378
+        },
+        {
+          "id": "f4",
+          "label": "Loop forever",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 380
+        },
+        {
+          "id": "f5",
+          "label": "uxTaskGetStackHighWaterMark(NULL)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 381
+        },
+        {
+          "id": "f6",
+          "label": "core_sample(&core)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 386
+        },
+        {
+          "id": "f7",
+          "label": "psram_sample(&psram)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 387
+        },
+        {
+          "id": "f8",
+          "label": "health_sample(&health)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 388
+        },
+        {
+          "id": "f9",
+          "label": "emit_json(&core)",
+          "kind": "step",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 390
+        },
+        {
+          "id": "f10",
+          "label": "vTaskDelay(pdMS_TO_TICKS(FG_INTERVAL_MS))",
+          "kind": "timer",
+          "file": "components/firmgen_telemetry/firmgen_telemetry.c",
+          "line": 392
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f4",
+          "label": "next cycle",
+          "loop_back": true
+        }
+      ]
+    },
+    {
+      "task_node_id": "dht22_task",
+      "task_label": "dht22_task",
+      "entry_fn": "dht22_task",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task dht22_task",
+          "kind": "entry",
+          "file": "firmware/app/app.c",
+          "line": 13
+        },
+        {
+          "id": "f2",
+          "label": "dht22_service_start()",
+          "kind": "step",
+          "file": "firmware/app/app.c",
+          "line": 15
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        }
+      ]
+    },
+    {
+      "task_node_id": "mpu6050_task",
+      "task_label": "mpu6050_task",
+      "entry_fn": "mpu6050_task",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task mpu6050_task",
+          "kind": "entry",
+          "file": "firmware/app/app.c",
+          "line": 20
+        },
+        {
+          "id": "f2",
+          "label": "mpu6050_service_start()",
+          "kind": "step",
+          "file": "firmware/app/app.c",
+          "line": 22
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        }
+      ]
+    },
+    {
+      "task_node_id": "network_task",
+      "task_label": "network_task",
+      "entry_fn": "network_service_task",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task network_service_task",
+          "kind": "entry",
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "line": 334
+        },
+        {
+          "id": "f2",
+          "label": "(!g_initialized)",
+          "kind": "decision",
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "line": 336
+        },
+        {
+          "id": "f3",
+          "label": "xEventGroupCreate()",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "line": 337
+        },
+        {
+          "id": "f4",
+          "label": "xQueueCreate(APP_MQTT_QUEUE_DEPTH)",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "line": 338
+        },
+        {
+          "id": "f5",
+          "label": "((g_network_events != NULL) && (g_messa…",
+          "kind": "decision",
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "line": 339
+        },
+        {
+          "id": "f6",
+          "label": "network_task_loop()",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "line": 342
+        },
+        {
+          "id": "f7",
+          "label": "vTaskDelete(NULL)",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/network_service_esp32.c",
+          "line": 345
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        }
+      ]
+    },
+    {
+      "task_node_id": "diagnostics_task",
+      "task_label": "diagnostics_task",
+      "entry_fn": "diagnostics_task",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task diagnostics_task",
+          "kind": "entry",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 36
+        },
+        {
+          "id": "f2",
+          "label": "esp_task_wdt_add(NULL)",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 46
+        },
+        {
+          "id": "f3",
+          "label": "ESP_LOGI(TAG)",
+          "kind": "output",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 47
+        },
+        {
+          "id": "f4",
+          "label": "diagnostics_reset_name(esp_reset_reason())",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 49
+        },
+        {
+          "id": "f5",
+          "label": "esp_reset_reason()",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 49
+        },
+        {
+          "id": "f6",
+          "label": "Loop forever",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 50
+        },
+        {
+          "id": "f7",
+          "label": "(xQueueReceive(g_command_queue, &comman…",
+          "kind": "decision",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 52
+        },
+        {
+          "id": "f8",
+          "label": "(command == '?')",
+          "kind": "decision",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 53
+        },
+        {
+          "id": "f9",
+          "label": "ESP_LOGI(TAG)",
+          "kind": "output",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 54
+        },
+        {
+          "id": "f10",
+          "label": "dht22_service_sample()",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 55
+        },
+        {
+          "id": "f11",
+          "label": "mpu6050_service_state()",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 56
+        },
+        {
+          "id": "f12",
+          "label": "network_service_publish_failures()",
+          "kind": "output",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 57
+        },
+        {
+          "id": "f13",
+          "label": "ESP_LOGW(TAG)",
+          "kind": "error",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 59
+        },
+        {
+          "id": "f14",
+          "label": "esp_task_wdt_reset()",
+          "kind": "step",
+          "file": "firmware/platforms/esp32/diagnostics_service_esp32.c",
+          "line": 62
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f11",
+          "to": "f12",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f13",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f12",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f13",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f14",
+          "to": "f6",
+          "label": "next cycle",
+          "loop_back": true
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "headline": "Resolved DHT22 GPIO configuration and connected sensor GPIO paths to their runtime tasks.",
+    "node_count": 0,
+    "edge_count": 0,
+    "warnings": []
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph VehicleInputs[\"Vehicle sensing\"]\n    dht22[\"Climate sensor<br/>DATA GPIO 2\"]\n    mpu6050[\"Motion sensor<br/>I2C address 0x68\"]\n    scl[\"I2C clock<br/>GPIO 8\"]\n    sda[\"I2C data<br/>GPIO 9\"]\n    i2c[\"I2C bus<br/>100 kHz\"]\n  end\n  subgraph Firmware[\"Application firmware\"]\n    entry[\"Firmware entry<br/>main/entry.c\"]\n    app[\"Application startup<br/>firmware/app/app.c\"]\n    dhtsvc[\"DHT22 sampling service<br/>firmware/services/dht22_service.c\"]\n    mpusvc[\"MPU6050 sampling service<br/>firmware/services/mpu6050_service.c\"]\n    network[\"Network service<br/>firmware/platforms/esp32/network_service_esp32.c\"]\n    threshold[\"Threshold evaluator<br/>firmware/modules/threshold_evaluator.c\"]\n    diagnostics[\"Diagnostics task<br/>firmware/platforms/esp32/diagnostics_service_esp32.c\"]\n  end\n  subgraph Connectivity[\"Vehicle telemetry transport\"]\n    wifi[\"WiFi station<br/>GopalaSutharsan\"]\n    mqtt[\"MQTT broker<br/>mqtt://broker.hivemq.com:1883\"]\n    telemetry[\"Telemetry topic<br/>vehicle/cabin/telemetry\"]\n    alert[\"Alert topic<br/>vehicle/cabin/alert\"]\n  end\n  subgraph PersistenceAndLogs[\"Persistence and diagnostics\"]\n    nvs[\"NVS configuration<br/>vehicle and thresholds namespaces\"]\n    uart[\"Console and UART logging<br/>ESP_LOGI / ESP_LOGW / ESP_LOGE\"]\n    proto[\"Protocol monitor<br/>components/firmgen_telemetry\"]\n    rtos[\"RTOS telemetry<br/>components/firmgen_telemetry\"]\n  end\n\n  entry -->|app_main| app\n  entry -->|firmgen_telemetry_start| rtos\n  entry -->|firmgen_proto_monitor_start| proto\n  app -->|osal_task_create| dhtsvc\n  app -->|osal_task_create| mpusvc\n  app -->|osal_task_create| network\n  app -->|diagnostics_service_start| diagnostics\n  dht22 -->|GPIO reads and handshake| dhtsvc\n  dhtsvc -->|dht22_service_sample| network\n  scl -->|I2C SCL| i2c\n  sda -->|I2C SDA| i2c\n  i2c -->|i2c_master_transmit_receive| mpu6050\n  mpu6050 -->|register samples| mpusvc\n  mpusvc -->|mpu6050_service_state| network\n  network -->|esp_wifi_init and esp_wifi_start| wifi\n  wifi -->|TCP transport| mqtt\n  network -->|esp_mqtt_client_publish| telemetry\n  network -->|esp_mqtt_client_publish| alert\n  network -->|threshold_service_trigger| threshold\n  network -->|nvs_open, nvs_get, nvs_set| nvs\n  diagnostics -->|ESP_LOGI and ESP_LOGW| uart\n  dhtsvc -->|ESP_LOGI and failure state| uart\n  mpusvc -->|ESP_LOGI and failure state| uart\n  network -->|ESP_LOGI and ESP_LOGW| uart\n  proto -->|JSON protocol events| uart\n  rtos -->|JSON RTOS metrics| uart",
+      "authored_by_model": true,
+      "node_notes": {
+        "alert": "This is the real MQTT alert sink for vehicle/cabin/alert. The network service publishes it when threshold_service_trigger reports a configured climate or g-force violation.",
+        "rtos": "This component emits boot/reset and periodic RTOS metrics such as heap, CPU, task, and uptime data. main/entry.c starts it through firmgen_telemetry_start and the component emits JSON on UART0.",
+        "mqtt": "This is the configured MQTT TCP endpoint at broker.hivemq.com port 1883. network_start_mqtt loads the endpoint and starts an esp_mqtt_client instance.",
+        "threshold": "This box evaluates configured temperature, humidity, and maximum-axis g-force limits. firmware/modules/threshold_evaluator.c implements threshold_service_trigger, while threshold_service_load obtains persisted settings.",
+        "entry": "This is the application entry shim that starts both Firmgen components and then calls app_start. main/entry.c provides the app_main implementation and its three startup calls.",
+        "dhtsvc": "This service continuously decodes DHT22 frames, validates checksums, stores climate values, and exposes dht22_service_sample. The implementation is firmware/services/dht22_service.c and uses the platform port contract.",
+        "mpusvc": "This service initializes and samples the MPU6050, then stores lateral, longitudinal, and vertical acceleration state. firmware/services/mpu6050_service.c connects the portable driver callbacks to the ESP32 I2C port.",
+        "i2c": "This is the ESP-IDF I2C master bus used by the MPU6050. i2c_new_master_bus and i2c_master_bus_add_device establish the bus and device at 100000 Hz.",
+        "nvs": "This is the nonvolatile configuration store for the vehicle MQTT endpoint and threshold records. The network and threshold services use nvs_open, nvs_get, nvs_set, and nvs_commit.",
+        "app": "This is the application startup owner for the sensor, network, and diagnostics tasks. firmware/app/app.c uses osal_task_create for DHT22, MPU6050, and network work and starts diagnostics separately.",
+        "mpu6050": "This box is the MPU6050 motion sensor at I2C address 0x68. Its register identity check, reset, configuration, and accelerometer reads are implemented by firmware/services/mpu6050_service.c and the MPU6050 driver.",
+        "network": "This is the network aggregation and publication service. firmware/platforms/esp32/network_service_esp32.c reads both sensor states, initializes NVS, starts WiFi and MQTT, queues failures, and evaluates alert thresholds.",
+        "diagnostics": "Diagnostics task is a step in this firmware's runtime flow. The cite firmware/platforms/esp32/diagnostics_service_esp32.c is the source evidence for it.",
+        "dht22": "This box is the DHT22 climate sensor wired to data GPIO 2. The ESP32 port performs open-drain signaling and reads the frame through gpio_get_level and gpio_set_level in firmware/platforms/esp32/dht22_port_esp32.c.",
+        "uart": "This is the console/UART logging sink for application and diagnostic messages. ESP_LOGI, ESP_LOGW, and ESP_LOGE are used throughout the sensor, network, and diagnostics implementations.",
+        "wifi": "This is the ESP-IDF WiFi station configured with APP_WIFI_SSID and its event handlers. network_start_wifi calls esp_wifi_init, esp_wifi_set_mode, and esp_wifi_start.",
+        "scl": "This is the MPU6050 I2C clock binding on GPIO 8. firmware/platforms/esp32/mpu6050_port_esp32.c assigns APP_MPU6050_SCL_GPIO to the i2c_master_bus_config_t SCL field.",
+        "sda": "This is the MPU6050 I2C data binding on GPIO 9. The same ESP-IDF bus configuration assigns APP_MPU6050_SDA_GPIO to the SDA field.",
+        "proto": "This component monitors wrapped I2C, UART, WiFi, and MQTT calls and emits protocol JSON. main/entry.c starts it through firmgen_proto_monitor_start, and the component documentation specifies UART0 output.",
+        "telemetry": "This is the real MQTT telemetry sink for vehicle/cabin/telemetry. The network service publishes JSON containing temperature, humidity, and three acceleration axes."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "mermaid": "flowchart TD\n  subgraph DhtTask[\"dht22_task\"]\n    dht_init[\"Open DHT22 port<br/>dht22_service.c:67\"]\n    dht_read[\"Read frame and verify checksum<br/>dht22_service.c:80\"]\n    dht_retry{\"Read valid — dht22_service.c:80\"}\n    dht_store[\"Decode and publish climate sample<br/>dht22_service.c:81\"]\n    dht_fail[\"Increment failure count<br/>dht22_service.c:87\"]\n    dht_wait[\"Wait 2000 ms<br/>dht22_service.c:92\"]\n    dht_init -->    dht_read -->    dht_retry\n    dht_retry -->|yes| dht_store -->    dht_wait -->    dht_read\n    dht_retry -->|no| dht_fail -->    dht_wait\n  end\n  subgraph MpuTask[\"mpu6050_task\"]\n    mpu_start[\"Start I2C and initialize sensor<br/>mpu6050_service.c:92\"]\n    mpu_ready{\"Sensor initialized — mpu6050_service.c:117\"}\n    mpu_sample[\"Read accelerometer sample<br/>mpu6050_service.c:120\"]\n    mpu_sample_ok{\"Sample read succeeds — mpu6050_service.c:120\"}\n    mpu_state[\"Update vehicle-axis state<br/>mpu6050_service.c:122\"]\n    mpu_error[\"Count initialization or read failure<br/>mpu6050_service.c:118\"]\n    mpu_delay[\"Wait 100 ms or retry after 1000 ms<br/>mpu6050_service.c:118\"]\n    mpu_start -->    mpu_ready\n    mpu_ready -->|no| mpu_error -->    mpu_delay -->    mpu_start\n    mpu_ready -->|yes| mpu_sample -->    mpu_sample_ok\n    mpu_sample_ok -->|yes| mpu_state -->    mpu_delay -->    mpu_start\n    mpu_sample_ok -->|no| mpu_error\n  end\n  subgraph NetworkTask[\"network_task\"]\n    net_nvs[\"Initialize NVS and load thresholds<br/>network_service_esp32.c:365\"]\n    net_wifi[\"Start WiFi station<br/>network_service_esp32.c:214\"]\n    net_mqtt[\"Start MQTT client<br/>network_service_esp32.c:251\"]\n    net_retry{\"WiFi retry requested — network_service_esp32.c:374\"}\n    net_read[\"Read latest climate and motion state<br/>network_service_esp32.c:382\"]\n    net_valid{\"Both samples valid — network_service_esp32.c:385\"}\n    net_publish[\"Publish telemetry or queue it<br/>network_service_esp32.c:389\"]\n    net_alert{\"Threshold exceeded — network_service_esp32.c:393\"}\n    net_alert_publish[\"Publish or queue alert<br/>network_service_esp32.c:396\"]\n    net_flush[\"Flush queued MQTT messages<br/>network_service_esp32.c:391\"]\n    net_wait[\"Wait until next telemetry period<br/>network_service_esp32.c:407\"]\n    net_nvs -->    net_wifi -->    net_mqtt -->    net_retry\n    net_retry -->|yes| net_read\n    net_retry -->|no| net_read\n    net_read -->    net_valid\n    net_valid -->|yes| net_publish -->    net_alert\n    net_valid -->|no| net_wait\n    net_alert -->|yes| net_alert_publish -->    net_flush -->    net_wait\n    net_alert -->|no| net_flush\n    net_wait -->    net_retry\n  end\n  subgraph DiagnosticsTask[\"diagnostics_task\"]\n    diag_watchdog[\"Register task watchdog<br/>diagnostics_service_esp32.c:48\"]\n    diag_status[\"Log startup health status<br/>diagnostics_service_esp32.c:51\"]\n    diag_receive[\"Wait for command up to 250 ms<br/>diagnostics_service_esp32.c:56\"]\n    diag_command{\"Command is question mark — diagnostics_service_esp32.c:57\"}\n    diag_health[\"Log DHT22, IMU, and MQTT failures<br/>diagnostics_service_esp32.c:59\"]\n    diag_unknown[\"Log unknown diagnostics command<br/>diagnostics_service_esp32.c:64\"]\n    diag_reset[\"Reset task watchdog<br/>diagnostics_service_esp32.c:67\"]\n    diag_watchdog -->    diag_status -->    diag_receive -->    diag_command\n    diag_command -->|yes| diag_health -->    diag_reset -->    diag_receive\n    diag_command -->|no command or other| diag_unknown -->    diag_reset\n  end\n  subgraph ProtocolMonitorTask[\"fg_proto\"]\n    proto_start[\"Start protocol monitor<br/>main/entry.c:10\"]\n    proto_capture[\"Capture I2C, WiFi, UART, and MQTT events<br/>firmgen_proto_monitor.c\"]\n    proto_emit[\"Emit protocol JSON on UART0<br/>firmgen_proto_monitor.c\"]\n    proto_start -->    proto_capture -->    proto_emit -->|500 ms| proto_capture\n  end\n  subgraph TelemetryTask[\"fg_telemetry\"]\n    telemetry_start[\"Start RTOS telemetry<br/>main/entry.c:9\"]\n    telemetry_boot[\"Emit previous reset report<br/>firmgen_telemetry.c\"]\n    telemetry_sample[\"Sample heap, CPU, tasks, and uptime<br/>firmgen_telemetry.c\"]\n    telemetry_emit[\"Emit RTOS JSON on UART0<br/>firmgen_telemetry.c\"]\n    telemetry_start -->    telemetry_boot -->    telemetry_sample -->    telemetry_emit -->|500 ms| telemetry_sample\n  end",
+      "authored_by_model": true,
+      "node_notes": {
+        "net_nvs": "Initialize NVS and load thresholds is a step in this firmware's runtime flow. The cite network_service_esp32.c:365 is the source evidence for it.",
+        "net_alert": "Threshold exceeded — network_service_esp32.c:393 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "telemetry_sample": "Sample heap, CPU, tasks, and uptime is a step in this firmware's runtime flow. The cite firmgen_telemetry.c is the source evidence for it.",
+        "net_valid": "Both samples valid — network_service_esp32.c:385 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "diag_health": "Log DHT22, IMU, and MQTT failures is a step in this firmware's runtime flow. The cite diagnostics_service_esp32.c:59 is the source evidence for it.",
+        "net_retry": "WiFi retry requested — network_service_esp32.c:374 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "proto_capture": "Capture I2C, WiFi, UART, and MQTT events is a step in this firmware's runtime flow. The cite firmgen_proto_monitor.c is the source evidence for it.",
+        "dht_fail": "Increment failure count is a step in this firmware's runtime flow. The cite dht22_service.c:87 is the source evidence for it.",
+        "diag_reset": "Reset task watchdog is a step in this firmware's runtime flow. The cite diagnostics_service_esp32.c:67 is the source evidence for it.",
+        "diag_status": "Log startup health status is a step in this firmware's runtime flow. The cite diagnostics_service_esp32.c:51 is the source evidence for it.",
+        "dht_store": "Decode and publish climate sample is a step in this firmware's runtime flow. The cite dht22_service.c:81 is the source evidence for it.",
+        "mpu_state": "Update vehicle-axis state is a step in this firmware's runtime flow. The cite mpu6050_service.c:122 is the source evidence for it.",
+        "telemetry_emit": "Emit RTOS JSON on UART0 is a step in this firmware's runtime flow. The cite firmgen_telemetry.c is the source evidence for it.",
+        "proto_emit": "Emit protocol JSON on UART0 is a step in this firmware's runtime flow. The cite firmgen_proto_monitor.c is the source evidence for it.",
+        "net_wifi": "Start WiFi station is a step in this firmware's runtime flow. The cite network_service_esp32.c:214 is the source evidence for it.",
+        "diag_command": "Command is question mark — diagnostics_service_esp32.c:57 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "mpu_start": "Start I2C and initialize sensor is a step in this firmware's runtime flow. The cite mpu6050_service.c:92 is the source evidence for it.",
+        "net_mqtt": "Start MQTT client is a step in this firmware's runtime flow. The cite network_service_esp32.c:251 is the source evidence for it.",
+        "mpu_sample": "Read accelerometer sample is a step in this firmware's runtime flow. The cite mpu6050_service.c:120 is the source evidence for it.",
+        "diag_receive": "Wait for command up to 250 ms is a step in this firmware's runtime flow. The cite diagnostics_service_esp32.c:56 is the source evidence for it.",
+        "dht_read": "Read frame and verify checksum is a step in this firmware's runtime flow. The cite dht22_service.c:80 is the source evidence for it.",
+        "net_read": "Read latest climate and motion state is a step in this firmware's runtime flow. The cite network_service_esp32.c:382 is the source evidence for it.",
+        "net_flush": "Flush queued MQTT messages is a step in this firmware's runtime flow. The cite network_service_esp32.c:391 is the source evidence for it.",
+        "telemetry_start": "Start RTOS telemetry is a step in this firmware's runtime flow. The cite main/entry.c:9 is the source evidence for it.",
+        "dht_retry": "Read valid — dht22_service.c:80 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "mpu_sample_ok": "Sample read succeeds — mpu6050_service.c:120 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "mpu_delay": "Wait 100 ms or retry after 1000 ms is a step in this firmware's runtime flow. The cite mpu6050_service.c:118 is the source evidence for it.",
+        "diag_watchdog": "Register task watchdog is a step in this firmware's runtime flow. The cite diagnostics_service_esp32.c:48 is the source evidence for it.",
+        "mpu_ready": "Sensor initialized — mpu6050_service.c:117 is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "diag_unknown": "Log unknown diagnostics command is a step in this firmware's runtime flow. The cite diagnostics_service_esp32.c:64 is the source evidence for it.",
+        "telemetry_boot": "Emit previous reset report is a step in this firmware's runtime flow. The cite firmgen_telemetry.c is the source evidence for it.",
+        "net_wait": "Wait until next telemetry period is a step in this firmware's runtime flow. The cite network_service_esp32.c:407 is the source evidence for it.",
+        "mpu_error": "Count initialization or read failure is a step in this firmware's runtime flow. The cite mpu6050_service.c:118 is the source evidence for it.",
+        "proto_start": "Start protocol monitor is a step in this firmware's runtime flow. The cite main/entry.c:10 is the source evidence for it.",
+        "net_publish": "Publish telemetry or queue it is a step in this firmware's runtime flow. The cite network_service_esp32.c:389 is the source evidence for it.",
+        "dht_init": "Open DHT22 port is a step in this firmware's runtime flow. The cite dht22_service.c:67 is the source evidence for it.",
+        "dht_wait": "Wait 2000 ms is a step in this firmware's runtime flow. The cite dht22_service.c:92 is the source evidence for it.",
+        "net_alert_publish": "Publish or queue alert is a step in this firmware's runtime flow. The cite network_service_esp32.c:396 is the source evidence for it."
+      }
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "mermaid": "sequenceDiagram\n  participant Boot as app_main\n  participant App as app_start\n  participant DHT as dht22_task\n  participant IMU as mpu6050_task\n  participant Net as network_service_task\n  participant WiFi as WiFi station\n  participant MQTT as MQTT broker transport\n  participant Diag as diagnostics_task\n  participant UART as Console UART\n  Boot->>Boot: firmgen_telemetry_start\n  Boot->>Boot: firmgen_proto_monitor_start\n  Boot->>App: app_start\n  App->>DHT: osal_task_create\n  App->>IMU: osal_task_create\n  App->>Net: osal_task_create\n  App->>Diag: diagnostics_service_start\n  DHT->>DHT: gpio_config on GPIO 2\n  DHT->>DHT: Read and decode DHT22 frame\n  IMU->>IMU: Configure I2C GPIO 9 and GPIO 8\n  IMU->>IMU: Probe address 0x68 and read acceleration\n  Net->>Net: Initialize NVS and load thresholds\n  Net->>WiFi: esp_wifi_start\n  WiFi-->>Net: IP_EVENT_STA_GOT_IP\n  Net->>MQTT: esp_mqtt_client_start\n  loop DHT22 every 2000 ms\n    DHT->>DHT: Sample climate data\n  end\n  loop MPU6050 every 100 ms\n    IMU->>IMU: Read motion state\n  end\n  loop Network service runtime\n    Net->>Net: Read climate and motion snapshots\n    alt Both samples are valid\n      Net->>MQTT: Publish vehicle/cabin/telemetry\n      Net->>Net: Evaluate configured thresholds\n      alt Threshold is crossed\n        Net->>MQTT: Publish vehicle/cabin/alert\n      end\n    end\n    alt WiFi retry bit is set\n      Net->>WiFi: esp_wifi_connect\n    end\n  end\n  loop Diagnostics command polling\n    Diag->>Diag: xQueueReceive for 250 ms\n    alt Command is question mark\n      Diag->>UART: ESP_LOGI HEALTH counters\n    else Unknown command\n      Diag->>UART: ESP_LOGW unknown diagnostics command\n    end\n  end\n  loop Firmgen emitters every 500 ms\n    Boot->>UART: RTOS and protocol JSON telemetry\n  end",
+      "participants": [
+        "Boot",
+        "App",
+        "DHT",
+        "IMU",
+        "Net",
+        "WiFi",
+        "MQTT",
+        "Diag",
+        "UART"
+      ],
+      "generated_from": [
+        "main/entry.c",
+        "firmware/configs/app_config.h",
+        "components/firmgen_telemetry/firmgen_proto_monitor.c",
+        "components/firmgen_telemetry/firmgen_telemetry.c",
+        "firmware/app/app.c",
+        "firmware/platforms/esp32/diagnostics_service_esp32.c",
+        "firmware/platforms/esp32/network_service_esp32.c"
+      ],
+      "grounding": 0.33333334,
+      "authored_by_model": true
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [
+    {
+      "kind": "llm_property_rejected",
+      "message": "Refine tried to set `macro` on node dht22_data_gpio; hardware facts come from extraction only.",
+      "node_id": "dht22_data_gpio",
+      "property": "macro",
+      "strict_evidence": true
+    },
+    {
+      "kind": "llm_property_rejected",
+      "message": "Refine tried to set `mode` on node dht22_data_gpio; hardware facts come from extraction only.",
+      "node_id": "dht22_data_gpio",
+      "property": "mode",
+      "strict_evidence": true
+    },
+    {
+      "kind": "llm_property_rejected",
+      "message": "Refine tried to set `pull_up` on node dht22_data_gpio; hardware facts come from extraction only.",
+      "node_id": "dht22_data_gpio",
+      "property": "pull_up",
+      "strict_evidence": true
+    },
+    {
+      "kind": "llm_property_rejected",
+      "message": "Refine tried to set `pull_down` on node dht22_data_gpio; hardware facts come from extraction only.",
+      "node_id": "dht22_data_gpio",
+      "property": "pull_down",
+      "strict_evidence": true
+    },
+    {
+      "kind": "llm_property_rejected",
+      "message": "Refine tried to set `interrupt` on node dht22_data_gpio; hardware facts come from extraction only.",
+      "node_id": "dht22_data_gpio",
+      "property": "interrupt",
+      "strict_evidence": true
+    }
+  ],
+  "read_only": false,
+  "graph_version": 9,
+  "generation": {
+    "mode": "hybrid_refine",
+    "model": "local_openai_proxy/gpt-5.6-luna",
+    "triggered_by": "mount",
+    "analyzed_at_ms": 1790241889497,
+    "input_files": [
+      "CMakeLists.txt",
+      "components/firmgen_telemetry/firmgen_proto_monitor.c",
+      "components/firmgen_telemetry/firmgen_telemetry.c",
+      "components/firmgen_telemetry/include/firmgen_proto_monitor.h",
+      "components/firmgen_telemetry/include/firmgen_telemetry.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h",
+      "firmware/interfaces/dht22_port.h",
+      "firmware/interfaces/mpu6050_port.h",
+      "firmware/interfaces/network_service.h",
+      "firmware/modules/threshold_evaluator.c",
+      "firmware/osal/osal.h",
+      "firmware/platforms/esp32/dht22_port_esp32.c",
+      "firmware/platforms/esp32/diagnostics_service_esp32.c",
+      "firmware/platforms/esp32/mpu6050_port_esp32.c",
+      "firmware/platforms/esp32/network_service_esp32.c",
+      "firmware/platforms/esp32/osal_freertos.c",
+      "firmware/platforms/esp32/threshold_service_esp32.c",
+      "firmware/services/dht22_service.c",
+      "firmware/services/dht22_service.h",
+      "firmware/services/diagnostics_service.h",
+      "firmware/services/mpu6050_service.c",
+      "firmware/services/mpu6050_service.h",
+      "firmware/services/threshold_service.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "main/entry.c",
+      "sdkconfig",
+      "sdkconfig.defaults"
+    ],
+    "token_usage": {
+      "prompt_tokens": 12587,
+      "completion_tokens": 2110
+    }
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": [],
+    "last_diff": {
+      "from_revision": "86a23f881097aa36b54fdf893f3e81f7",
+      "to_revision": "86a23f881097aa36b54fdf893f3e81f7",
+      "nodes_added": [],
+      "nodes_removed": [],
+      "nodes_changed": [],
+      "edges_added": [
+        "edge"
+      ],
+      "edges_removed": [
+        "e_network_publishes_mqtt",
+        "e_diagnostics_reads_mpu6050",
+        "e_mpu6050_i2c_binds_sda_gpio",
+        "e_network_reads_dht22",
+        "e_network_reads_mpu6050",
+        "e_mpu6050_task_reads_i2c",
+        "e_diagnostics_reads_dht22",
+        "e_dht22_task_drives_data_gpio",
+        "e_mpu6050_i2c_binds_scl_gpio",
+        "e_network_depends_on_wifi"
+      ]
+    }
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "validated_at_ms": 1790241889497
+  }
+}

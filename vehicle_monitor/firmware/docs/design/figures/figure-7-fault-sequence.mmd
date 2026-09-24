@@ -1,0 +1,12 @@
+sequenceDiagram
+    autonumber
+    participant diagnostics_task
+    participant dht22_data_gpio as DHT22 DATA GPIO (GPIO 2, APP_DHT22_DATA_GPIO)
+    participant diagnostics as Console / UART logging
+    alt transfer fails or returns invalid data
+        diagnostics_task->>dht22_data_gpio: bounded read
+        dht22_data_gpio-->diagnostics_task: timeout or invalid response
+        diagnostics_task->>diagnostics: ESP_LOGW(TAG) (firmware/platforms/esp32/diagnostics_service_esp32.c:59)
+    else transfer succeeds
+        dht22_data_gpio-->diagnostics_task: valid sample
+    end

@@ -1,0 +1,138 @@
+{
+  "schema": "firmgen.test_handover.worklist/1",
+  "layers": {
+    "compilable": [
+      {
+        "layer": "modules",
+        "sources": 1
+      }
+    ],
+    "needs_mock": [
+      {
+        "layer": "services",
+        "blocked_by": "mpu6050_service.c",
+        "reason": "includes logger.h, which pulls the vendor SDK"
+      },
+      {
+        "layer": "utils",
+        "blocked_by": "logger.c",
+        "reason": "includes logger.h, which pulls the vendor SDK"
+      },
+      {
+        "layer": "app",
+        "blocked_by": "app.c",
+        "reason": "includes logger.h, which pulls the vendor SDK"
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "FR-016",
+      "category": "DHT22 Climate Sensing",
+      "statement": "For each DHT22 sample, the firmware shall verify the sensor checksum; on checksum failure it shall retry once within the same 2000 ms cycle and, if still invalid, shall not update the published temperature/humidity for that cycle.",
+      "criteria": [
+        "When a DHT22 frame has an invalid checksum, the sampling logic performs exactly one retry before completing the sample cycle. (expected: Two checksum validation attempts occur: the initial attempt followed by exactly one retry within the same sampling cycle.)",
+        "When both the initial DHT22 frame and its single retry have invalid checksums, the published temperature and humidity remain equal to the last valid values for that cycle. (expected: The published temperature and humidity after the failed cycle are unchanged from the previously published values.)",
+        "When both DHT22 checksum validation attempts fail, the sampling logic records an error event for the failed sample. (expected: At least one error event identifying the failed DHT22 sample or checksum failure is recorded during that cycle.)",
+        "When both DHT22 checksum validation attempts fail, the DHT22 failure counter increases by one and the sampling cycle returns to its periodic loop without publishing new sensor values. (expected: The failure counter is initial value plus one, the published values are unchanged, and the sampling cycle completes so the periodic loop can proceed.)"
+      ],
+      "code": {
+        "files": [
+          "firmware/services/dht22_service.c",
+          "firmware/services/dht22_service.h",
+          "firmware/configs/app_config.h"
+        ],
+        "symbols": [
+          "dht22_service_start",
+          "dht22_checksum_valid",
+          "dht22_try_read"
+        ]
+      },
+      "tests_already_cited": []
+    },
+    {
+      "requirement_id": "FR-010",
+      "category": "Alert Threshold Configuration & Evaluation",
+      "statement": "The firmware shall maintain a configurable alert threshold for temperature.",
+      "criteria": [
+        "After the runtime configuration method sets the temperature threshold to a value different from its previous value, the stored threshold equals the new value and temperature evaluation uses that value for alert decisions. (expected: The configured threshold equals V_new, and the evaluation result matches comparison with V_new rather than V_old.)"
+      ],
+      "code": {
+        "files": [
+          "firmware/services/threshold_service.h",
+          "firmware/platforms/esp32/threshold_service_esp32.c",
+          "firmware/modules/threshold_evaluator.c",
+          "firmware/configs/app_config.h"
+        ],
+        "symbols": [
+          "threshold_service_update",
+          "threshold_service_active",
+          "threshold_service_trigger"
+        ]
+      },
+      "tests_already_cited": []
+    },
+    {
+      "requirement_id": "FR-011",
+      "category": "Alert Threshold Configuration & Evaluation",
+      "statement": "The firmware shall maintain a configurable alert threshold for humidity.",
+      "criteria": [
+        "After the runtime configuration method sets the humidity threshold to a value different from its previous value, the stored threshold equals the new value and humidity evaluation uses that value for alert decisions. (expected: The configured threshold equals V_new, and the evaluation result matches comparison with V_new rather than V_old.)"
+      ],
+      "code": {
+        "files": [
+          "firmware/services/threshold_service.h",
+          "firmware/platforms/esp32/threshold_service_esp32.c",
+          "firmware/modules/threshold_evaluator.c",
+          "firmware/configs/app_config.h"
+        ],
+        "symbols": [
+          "threshold_service_update",
+          "threshold_service_active",
+          "threshold_service_trigger"
+        ]
+      },
+      "tests_already_cited": []
+    },
+    {
+      "requirement_id": "FR-012",
+      "category": "Alert Threshold Configuration & Evaluation",
+      "statement": "The firmware shall maintain a configurable alert threshold for G-force.",
+      "criteria": [
+        "After the runtime configuration method sets the G-force threshold to a different value in g, the stored threshold equals the new value and G-force evaluation uses that value for alert decisions. (expected: The configured threshold equals V_new g, and the evaluation result matches comparison with V_new rather than V_old.)"
+      ],
+      "code": {
+        "files": [
+          "firmware/services/threshold_service.h",
+          "firmware/platforms/esp32/threshold_service_esp32.c",
+          "firmware/modules/threshold_evaluator.c",
+          "firmware/configs/app_config.h"
+        ],
+        "symbols": [
+          "threshold_service_update",
+          "threshold_service_active",
+          "threshold_service_trigger"
+        ]
+      },
+      "tests_already_cited": []
+    },
+    {
+      "requirement_id": "NFR-002",
+      "category": "Alert Threshold Configuration & Evaluation",
+      "statement": "Updates to configurable alert thresholds shall be stored atomically in non‑volatile memory and shall persist across power cycles; after reset the most recently committed values shall be in effect.",
+      "criteria": [
+        "When the non-volatile storage write reports a persistence failure, the configuration logic retains the last known-good threshold values and emits an error log. (expected: All active thresholds remain equal to the last known-good values, and the log contains an error entry identifying the persistence failure.)"
+      ],
+      "code": {
+        "files": [
+          "firmware/platforms/esp32/threshold_service_esp32.c"
+        ],
+        "symbols": [
+          "threshold_service_load",
+          "threshold_service_update"
+        ]
+      },
+      "tests_already_cited": []
+    }
+  ]
+}

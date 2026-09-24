@@ -1,0 +1,41 @@
+flowchart LR
+    boot(["Boot / app_main"])
+    dht22_data_gpio["DHT22 DATA GPIO #40;GPIO 2, APP_DHT22_DATA_GPIO#41;<br/>pin=2"]
+    mpu6050_scl_gpio["MPU6050 SCL GPIO #40;GPIO 8, APP_MPU6050_SCL_GPIO#41;<br/>pin=8"]
+    mpu6050_sda_gpio["MPU6050 SDA GPIO #40;GPIO 9, APP_MPU6050_SDA_GPIO#41;<br/>pin=9"]
+    fg_proto("Task fg_proto")
+    fg_telemetry("Task fg_telemetry")
+    dht22_task("Task dht22_task")
+    mpu6050_task("Task mpu6050_task")
+    network_task("Task network_task")
+    diagnostics_task("Task diagnostics_task")
+    wifi["WiFi"]
+    mqtt["MQTT"]
+    i2c_device["I2C Device"]
+    uart_device["UART Device"]
+    mpu6050_i2c["MPU6050 I2C Device"]
+    storage_manager["Storage Manager"]
+    event_handler["Event Handler"]
+    boot -->|spawns| fg_proto
+    boot -->|spawns| fg_telemetry
+    boot -->|spawns| dht22_task
+    boot -->|spawns| mpu6050_task
+    boot -->|spawns| network_task
+    boot -->|spawns| diagnostics_task
+    boot -->|starts| wifi
+    boot -->|starts| mqtt
+    boot -->|initializes| i2c_device
+    boot -->|initializes| uart_device
+    boot -->|initializes| mpu6050_i2c
+    boot -->|initializes| storage_manager
+    boot -->|initializes| event_handler
+    dht22_task -->|drives| dht22_data_gpio
+    mpu6050_i2c -->|binds| mpu6050_scl_gpio
+    mpu6050_i2c -->|binds| mpu6050_sda_gpio
+    mpu6050_task -->|reads| mpu6050_i2c
+    network_task -->|reads| dht22_task
+    network_task -->|reads| mpu6050_task
+    network_task -->|depends_on| wifi
+    network_task -->|publishes| mqtt
+    diagnostics_task -->|reads| dht22_task
+    diagnostics_task -->|reads| mpu6050_task

@@ -1,0 +1,56 @@
+flowchart TD
+  subgraph VehicleInputs["Vehicle sensing"]
+    dht22["Climate sensor<br/>DATA GPIO 2"]
+    mpu6050["Motion sensor<br/>I2C address 0x68"]
+    scl["I2C clock<br/>GPIO 8"]
+    sda["I2C data<br/>GPIO 9"]
+    i2c["I2C bus<br/>100 kHz"]
+  end
+  subgraph Firmware["Application firmware"]
+    entry["Firmware entry<br/>main/entry.c"]
+    app["Application startup<br/>firmware/app/app.c"]
+    dhtsvc["DHT22 sampling service<br/>firmware/services/dht22_service.c"]
+    mpusvc["MPU6050 sampling service<br/>firmware/services/mpu6050_service.c"]
+    network["Network service<br/>firmware/platforms/esp32/network_service_esp32.c"]
+    threshold["Threshold evaluator<br/>firmware/modules/threshold_evaluator.c"]
+    diagnostics["Diagnostics task<br/>firmware/platforms/esp32/diagnostics_service_esp32.c"]
+  end
+  subgraph Connectivity["Vehicle telemetry transport"]
+    wifi["WiFi station<br/>GopalaSutharsan"]
+    mqtt["MQTT broker<br/>mqtt://broker.hivemq.com:1883"]
+    telemetry["Telemetry topic<br/>vehicle/cabin/telemetry"]
+    alert["Alert topic<br/>vehicle/cabin/alert"]
+  end
+  subgraph PersistenceAndLogs["Persistence and diagnostics"]
+    nvs["NVS configuration<br/>vehicle and thresholds namespaces"]
+    uart["Console and UART logging<br/>ESP_LOGI / ESP_LOGW / ESP_LOGE"]
+    proto["Protocol monitor<br/>components/firmgen_telemetry"]
+    rtos["RTOS telemetry<br/>components/firmgen_telemetry"]
+  end
+
+  entry -->|app_main| app
+  entry -->|firmgen_telemetry_start| rtos
+  entry -->|firmgen_proto_monitor_start| proto
+  app -->|osal_task_create| dhtsvc
+  app -->|osal_task_create| mpusvc
+  app -->|osal_task_create| network
+  app -->|diagnostics_service_start| diagnostics
+  dht22 -->|GPIO reads and handshake| dhtsvc
+  dhtsvc -->|dht22_service_sample| network
+  scl -->|I2C SCL| i2c
+  sda -->|I2C SDA| i2c
+  i2c -->|i2c_master_transmit_receive| mpu6050
+  mpu6050 -->|register samples| mpusvc
+  mpusvc -->|mpu6050_service_state| network
+  network -->|esp_wifi_init and esp_wifi_start| wifi
+  wifi -->|TCP transport| mqtt
+  network -->|esp_mqtt_client_publish| telemetry
+  network -->|esp_mqtt_client_publish| alert
+  network -->|threshold_service_trigger| threshold
+  network -->|nvs_open, nvs_get, nvs_set| nvs
+  diagnostics -->|ESP_LOGI and ESP_LOGW| uart
+  dhtsvc -->|ESP_LOGI and failure state| uart
+  mpusvc -->|ESP_LOGI and failure state| uart
+  network -->|ESP_LOGI and ESP_LOGW| uart
+  proto -->|JSON protocol events| uart
+  rtos -->|JSON RTOS metrics| uart

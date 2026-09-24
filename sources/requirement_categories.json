@@ -1,0 +1,167 @@
+{
+  "job_id": "c7bed342-9359-4a70-9b89-b92e291114fc",
+  "document_id": "687fce11-97f3-4194-b33a-04044c30e1c9",
+  "frozen_at": "2026-09-24T07:56:53.021Z",
+  "requirement_count": 43,
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "ESP32-C3 Platform & Power",
+      "description": "Covers the selected development board and the system power-input hardware requirements.",
+      "requirements": [
+        "The microcontroller unit shall be an ESP32-C3 development board.",
+        "The system power input shall be 5 V supplied via micro‑USB from a 12 V automotive adapter."
+      ],
+      "requirement_ids": [
+        "HW-001",
+        "HW-004"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-2",
+      "name": "DHT22 Climate Sensing",
+      "description": "Covers DHT22 selection, GPIO power and signal wiring, periodic temperature and humidity acquisition, and sample validation behavior.",
+      "requirements": [
+        "The firmware shall read temperature from the DHT22 every 2000 ms.",
+        "The firmware shall read humidity from the DHT22 every 2000 ms.",
+        "For each DHT22 sample, the firmware shall verify the sensor checksum; on checksum failure it shall retry once within the same 2000 ms cycle and, if still invalid, shall not update the published temperature/humidity for that cycle.",
+        "The DHT22 data output shall be connected to ESP32-C3 GPIO2.",
+        "The DHT22 VCC pin shall be connected to 3.3 V.",
+        "The DHT22 GND pin shall be connected to ground.",
+        "The climate sensor shall be a DHT22 providing temperature and humidity."
+      ],
+      "requirement_ids": [
+        "FR-002",
+        "FR-003",
+        "FR-016",
+        "IF-006",
+        "IF-007",
+        "IF-008",
+        "HW-002"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-3",
+      "name": "MPU6050 Motion Sensing & I2C Driver",
+      "description": "Covers MPU6050 hardware and I2C wiring, startup validation and configuration, acceleration acquisition, unit conversion, and vehicle-axis mapping.",
+      "requirements": [
+        "The firmware shall read X, Y, and Z acceleration from the MPU6050.",
+        "The firmware shall convert the MPU6050 acceleration readings to G-force units for output.",
+        "The firmware shall map IMU axes such that X corresponds to lateral (cornering), Y to longitudinal (acceleration/braking), and Z to vertical (bumps).",
+        "At startup, the firmware shall verify MPU6050 presence via its identity register and initialize it to a defined measurement range and filtering configuration so acceleration‑to‑g conversion is deterministic.",
+        "The MPU6050 SCL pin shall be connected to ESP32-C3 GPIO8.",
+        "The MPU6050 SDA pin shall be connected to ESP32-C3 GPIO9.",
+        "The MPU6050 VCC pin shall be connected to 3.3 V.",
+        "The MPU6050 GND pin shall be connected to ground.",
+        "The inertial measurement unit shall be an MPU6050 3-axis accelerometer."
+      ],
+      "requirement_ids": [
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-017",
+        "IF-009",
+        "IF-010",
+        "IF-011",
+        "IF-012",
+        "HW-003"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-4",
+      "name": "WiFi & MQTT Communication",
+      "description": "Covers WiFi provisioning and reconnection, MQTT broker configuration and recovery, telemetry and alert publishing, message schemas and topics, timing, bounded queueing, and non-blocking communication behavior.",
+      "requirements": [
+        "The system shall monitor interior cabin climate and vehicle ride dynamics using the ESP32-C3 and shall publish the data over MQTT.",
+        "The firmware shall connect to WiFi automatically on startup.",
+        "The firmware shall reconnect to WiFi if the connection drops.",
+        "The firmware shall publish climate and motion data as a single JSON payload to MQTT every 2000 ms.",
+        "The firmware shall persist the WiFi SSID and password in non‑volatile storage so the device can connect automatically on startup without user interaction.",
+        "The firmware shall detect MQTT broker disconnection and automatically reconnect and resume periodic and alert publications without user intervention.",
+        "The device shall use WiFi SSID \"GopalaSutharsan\" for network association.",
+        "The device shall use the WiFi password \"123987456\" to authenticate to the specified SSID.",
+        "Each periodic telemetry JSON message shall include the keys: temp_c, humidity_percent, lateral_g, longitudinal_g, and vertical_g.",
+        "Alert messages shall be published to the MQTT topic \"vehicle/cabin/alert\" on a threshold event.",
+        "Each alert JSON message shall include temp_c, humidity_percent, lateral_g, longitudinal_g, vertical_g, and a field \"trigger\" indicating which metric triggered the alert.",
+        "The firmware shall provide a configurable MQTT broker hostname/IP and TCP port used for publishing telemetry and alerts.",
+        "Each periodic telemetry message shall be published on MQTT topic \"vehicle/cabin/telemetry\" at 2000 ms intervals.",
+        "MQTT publish operations shall use a finite timeout and shall not block the 2000 ms sensor sampling schedule; if a publish cannot complete within the timeout, the attempt shall be aborted and normal sampling shall continue.",
+        "WiFi connection and reconnection attempts shall use finite timeouts and a backoff strategy and shall not block sensor acquisition or alert evaluation.",
+        "Any internal queueing of MQTT messages shall be bounded to prevent RAM exhaustion; when the bound is reached, the oldest unsent telemetry shall be discarded in favor of newer data."
+      ],
+      "requirement_ids": [
+        "FR-001",
+        "FR-007",
+        "FR-008",
+        "FR-009",
+        "FR-014",
+        "FR-015",
+        "IF-001",
+        "IF-002",
+        "IF-003",
+        "IF-004",
+        "IF-005",
+        "IF-013",
+        "IF-014",
+        "NFR-001",
+        "NFR-003",
+        "NFR-004"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-5",
+      "name": "Alert Threshold Configuration & Evaluation",
+      "description": "Covers configurable climate and G-force thresholds, immediate alert evaluation and publication triggers, and atomic non-volatile persistence of threshold values.",
+      "requirements": [
+        "The firmware shall maintain a configurable alert threshold for temperature.",
+        "The firmware shall maintain a configurable alert threshold for humidity.",
+        "The firmware shall maintain a configurable alert threshold for G-force.",
+        "The firmware shall publish immediately to the alert topic when any configured threshold is exceeded, independent of the regular 2000 ms cycle.",
+        "Updates to configurable alert thresholds shall be stored atomically in non‑volatile memory and shall persist across power cycles; after reset the most recently committed values shall be in effect."
+      ],
+      "requirement_ids": [
+        "FR-010",
+        "FR-011",
+        "FR-012",
+        "FR-013",
+        "NFR-002"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-6",
+      "name": "Diagnostics, Security & Fault Recovery",
+      "description": "Covers boot and on-demand serial diagnostics, credential redaction, sensor and publish health counters, watchdog and brown-out recovery, and post-reset service resumption.",
+      "requirements": [
+        "The firmware shall enable a watchdog mechanism and, upon watchdog expiration or brown‑out reset, shall automatically reboot and resume WiFi association and MQTT telemetry without user action.",
+        "On boot, the firmware shall output a single‑line status over the serial console including: firmware version, configured SSID, MQTT broker endpoint, and sensor initialization results; credentials shall be redacted.",
+        "The firmware shall maintain counters of sensor read failures per sensor and MQTT publish failures and shall make them available via the serial console on request.",
+        "The firmware shall not include WiFi or MQTT credentials in telemetry payloads or console logs and shall redact them in any status output."
+      ],
+      "requirement_ids": [
+        "SF-001",
+        "DIAG-001",
+        "DIAG-002",
+        "SEC-001"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    }
+  ],
+  "file_checksum": "7b2e4ac8affc94f1381ca5e3574896f3d16279741b2fe4862569400a0c738af8"
+}

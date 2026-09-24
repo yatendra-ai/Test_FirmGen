@@ -1,0 +1,73 @@
+flowchart TD
+  subgraph DhtTask["dht22_task"]
+    dht_init["Open DHT22 port<br/>dht22_service.c:67"]
+    dht_read["Read frame and verify checksum<br/>dht22_service.c:80"]
+    dht_retry{"Read valid — dht22_service.c:80"}
+    dht_store["Decode and publish climate sample<br/>dht22_service.c:81"]
+    dht_fail["Increment failure count<br/>dht22_service.c:87"]
+    dht_wait["Wait 2000 ms<br/>dht22_service.c:92"]
+    dht_init -->  dht_read -->  dht_retry
+    dht_retry -->|yes| dht_store -->  dht_wait -->  dht_read
+    dht_retry -->|no| dht_fail -->  dht_wait
+  end
+  subgraph MpuTask["mpu6050_task"]
+    mpu_start["Start I2C and initialize sensor<br/>mpu6050_service.c:92"]
+    mpu_ready{"Sensor initialized — mpu6050_service.c:117"}
+    mpu_sample["Read accelerometer sample<br/>mpu6050_service.c:120"]
+    mpu_sample_ok{"Sample read succeeds — mpu6050_service.c:120"}
+    mpu_state["Update vehicle-axis state<br/>mpu6050_service.c:122"]
+    mpu_error["Count initialization or read failure<br/>mpu6050_service.c:118"]
+    mpu_delay["Wait 100 ms or retry after 1000 ms<br/>mpu6050_service.c:118"]
+    mpu_start -->  mpu_ready
+    mpu_ready -->|no| mpu_error -->  mpu_delay -->  mpu_start
+    mpu_ready -->|yes| mpu_sample -->  mpu_sample_ok
+    mpu_sample_ok -->|yes| mpu_state -->  mpu_delay -->  mpu_start
+    mpu_sample_ok -->|no| mpu_error
+  end
+  subgraph NetworkTask["network_task"]
+    net_nvs["Initialize NVS and load thresholds<br/>network_service_esp32.c:365"]
+    net_wifi["Start WiFi station<br/>network_service_esp32.c:214"]
+    net_mqtt["Start MQTT client<br/>network_service_esp32.c:251"]
+    net_retry{"WiFi retry requested — network_service_esp32.c:374"}
+    net_read["Read latest climate and motion state<br/>network_service_esp32.c:382"]
+    net_valid{"Both samples valid — network_service_esp32.c:385"}
+    net_publish["Publish telemetry or queue it<br/>network_service_esp32.c:389"]
+    net_alert{"Threshold exceeded — network_service_esp32.c:393"}
+    net_alert_publish["Publish or queue alert<br/>network_service_esp32.c:396"]
+    net_flush["Flush queued MQTT messages<br/>network_service_esp32.c:391"]
+    net_wait["Wait until next telemetry period<br/>network_service_esp32.c:407"]
+    net_nvs -->  net_wifi -->  net_mqtt -->  net_retry
+    net_retry -->|yes| net_read
+    net_retry -->|no| net_read
+    net_read -->  net_valid
+    net_valid -->|yes| net_publish -->  net_alert
+    net_valid -->|no| net_wait
+    net_alert -->|yes| net_alert_publish -->  net_flush -->  net_wait
+    net_alert -->|no| net_flush
+    net_wait -->  net_retry
+  end
+  subgraph DiagnosticsTask["diagnostics_task"]
+    diag_watchdog["Register task watchdog<br/>diagnostics_service_esp32.c:48"]
+    diag_status["Log startup health status<br/>diagnostics_service_esp32.c:51"]
+    diag_receive["Wait for command up to 250 ms<br/>diagnostics_service_esp32.c:56"]
+    diag_command{"Command is question mark — diagnostics_service_esp32.c:57"}
+    diag_health["Log DHT22, IMU, and MQTT failures<br/>diagnostics_service_esp32.c:59"]
+    diag_unknown["Log unknown diagnostics command<br/>diagnostics_service_esp32.c:64"]
+    diag_reset["Reset task watchdog<br/>diagnostics_service_esp32.c:67"]
+    diag_watchdog -->  diag_status -->  diag_receive -->  diag_command
+    diag_command -->|yes| diag_health -->  diag_reset -->  diag_receive
+    diag_command -->|no command or other| diag_unknown -->  diag_reset
+  end
+  subgraph ProtocolMonitorTask["fg_proto"]
+    proto_start["Start protocol monitor<br/>main/entry.c:10"]
+    proto_capture["Capture I2C, WiFi, UART, and MQTT events<br/>firmgen_proto_monitor.c"]
+    proto_emit["Emit protocol JSON on UART0<br/>firmgen_proto_monitor.c"]
+    proto_start -->  proto_capture -->  proto_emit -->|500 ms| proto_capture
+  end
+  subgraph TelemetryTask["fg_telemetry"]
+    telemetry_start["Start RTOS telemetry<br/>main/entry.c:9"]
+    telemetry_boot["Emit previous reset report<br/>firmgen_telemetry.c"]
+    telemetry_sample["Sample heap, CPU, tasks, and uptime<br/>firmgen_telemetry.c"]
+    telemetry_emit["Emit RTOS JSON on UART0<br/>firmgen_telemetry.c"]
+    telemetry_start -->  telemetry_boot -->  telemetry_sample -->  telemetry_emit -->|500 ms| telemetry_sample
+  end

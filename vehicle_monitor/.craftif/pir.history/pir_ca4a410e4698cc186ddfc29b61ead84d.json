@@ -1,0 +1,397 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_vehicle_monitor",
+  "revision": "ca4a410e4698cc186ddfc29b61ead84d",
+  "provenance": {
+    "project_path": "C:\\Users\\YatendraBhargava\\Downloads\\24-9-26\\gopala\\vehicle_monitor",
+    "chat_id": "29ce0a85-c3a6-412f-a563-5c13a90ef91d",
+    "revision": "ca4a410e4698cc186ddfc29b61ead84d",
+    "generated_at_ms": 1790237044625,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "CMakeLists.txt",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h",
+      "firmware/interfaces/dht22_port.h",
+      "firmware/osal/osal.h",
+      "firmware/services/dht22_service.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "main/entry.c",
+      "sdkconfig",
+      "sdkconfig.defaults"
+    ],
+    "file_hashes": {
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "firmware/bsp/board.h": "ba9866f5a0b90fc8beb3e6691db43c8a",
+      "firmware/configs/app_config.h": "e766ed26f1e9e37df97aedbc14b050e1",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba",
+      "firmware/app/app.h": "ebc6cfe87fb8e2ab299633dd7a067f3b",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "firmware/utils/logger/logger.c": "8e992fef35c9a4678ec38e60902d741d",
+      "firmware/osal/osal.h": "9e93e5096d971aa31beb162503c0e4f3",
+      "firmware/app/app.c": "6de318e73f38c75aa291216cc7c0b9cc",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h": "e3e0f5ca1eaace2baaff555a3028d40b",
+      "firmware/interfaces/dht22_port.h": "5cef7ffa8e53808d2cd27c9caf333486",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "firmware/services/dht22_service.h": "b087383f7d91ab31de435b43c040f496",
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "firmware/utils/logger/logger.h": "2c284c641c88c6a4fff52db62e8d1ea5",
+      "main/entry.c": "86aaa3bc61772628c601798f4d9dea56",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c": "4d971ca6616b6d8cfc69d67c2a06467e",
+      "sdkconfig.defaults": "bb2b229b3fb1b8cd16dcf6927e49300a",
+      "sdkconfig": "06f08ef0d6c5bff3dfdc7d1dff1aa1fc",
+      "CMakeLists.txt": "4616f34ee92fab8d4af447b039f903a0"
+    },
+    "target_chip": "esp32c3",
+    "config_hash": "sdkconfig.defaults:bb2b229b3fb1b8cd16dcf6927e49300a|sdkconfig:06f08ef0d6c5bff3dfdc7d1dff1aa1fc",
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "pending"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "esp32c3"
+      },
+      "source_refs": [
+        {
+          "file": "main/entry.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "ca4a410e4698cc186ddfc29b61ead84d"
+      },
+      "ownership": {
+        "primary_files": [
+          "main/entry.c"
+        ]
+      },
+      "editable_fields": [
+        "log_level"
+      ],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "dht22_data_gpio",
+      "node_type": "gpio_input",
+      "label": "DHT22 DATA GPIO (GPIO 2, APP_DHT22_DATA_GPIO)",
+      "properties": {
+        "pin": 2
+      },
+      "source_refs": [
+        {
+          "file": "firmware/configs/app_config.h",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "ca4a410e4698cc186ddfc29b61ead84d"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/configs/app_config.h"
+        ]
+      },
+      "editable_fields": [
+        "pin"
+      ],
+      "layer": "physical",
+      "ai_summary": "Reads GPIO 2 as an input signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [],
+  "layers": {
+    "physical": [
+      "dht22_data_gpio"
+    ],
+    "runtime": [],
+    "network": [],
+    "system": [
+      "boot"
+    ]
+  },
+  "partitions": [],
+  "components": [
+    {
+      "id": "main",
+      "path": "main/CMakeLists.txt",
+      "requires": [
+        "esp_driver_gpio",
+        "esp_timer",
+        "esp_wifi",
+        "esp_event",
+        "nvs_flash",
+        "freertos",
+        "log"
+      ],
+      "source_files": []
+    }
+  ],
+  "modules": [
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "drivers_mpu6050_mpu_6000_mpu_6050",
+      "label": "drivers/mpu6050/mpu_6000_mpu_6050",
+      "path": "drivers/mpu6050/mpu_6000_mpu_6050",
+      "kind": "driver",
+      "files": [
+        "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c",
+        "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h"
+      ]
+    },
+    {
+      "id": "interfaces",
+      "label": "interfaces",
+      "path": "interfaces",
+      "kind": "module",
+      "files": [
+        "firmware/interfaces/dht22_port.h"
+      ]
+    },
+    {
+      "id": "main",
+      "label": "main",
+      "path": "main",
+      "kind": "entrypoint",
+      "files": [
+        "main/entry.c"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "services",
+      "label": "services",
+      "path": "services",
+      "kind": "module",
+      "files": [
+        "firmware/services/dht22_service.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 2,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 3,
+      "symbol": "logger.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 18,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "main",
+      "to": "app",
+      "via": "include",
+      "file": "main/entry.c",
+      "line": 2,
+      "symbol": "app.h"
+    },
+    {
+      "from": "services",
+      "to": "interfaces",
+      "via": "include",
+      "file": "firmware/services/dht22_service.h",
+      "line": 6,
+      "symbol": "dht22_port.h"
+    }
+  ],
+  "task_flows": [],
+  "summary": {
+    "headline": "2 nodes, 0 connections — valid",
+    "node_count": 2,
+    "edge_count": 0,
+    "warnings": []
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph entry_path[\"Entry path\"]\n    main_entry[\"Firmware entry<br/>main/entry.c:5\"]\n    app_owner[\"Application startup<br/>firmware/app/app.c:8\"]\n    logger_api[\"Logging sink<br/>ESP_LOGI via firmware/utils/logger/logger.h\"]\n    main_entry -->|app_start API| app_owner\n    app_owner -->|ESP_LOGI startup message| logger_api\n  end\n  subgraph sensor_contracts[\"Sensor contracts\"]\n    dht22[\"DHT22 temperature and humidity sensor<br/>DATA GPIO 2\"]\n    app_config[\"Application configuration<br/>APP_DHT22_DATA_GPIO in firmware/configs/app_confi…\"]\n    dht_port[\"DHT22 port contract<br/>dht22_port_t in firmware/interfaces/dht22_port.h\"]\n    dht_service[\"DHT22 processing service<br/>dht22_service_process_cycle in firmware/services/d…\"]\n    app_config -->|APP_DHT22_DATA_GPIO| dht_port\n    dht22 -->|data_gpio 2| dht_port\n    dht_service -->|dht22_port_t| dht_port\n  end\n  subgraph inert_driver[\"Portable motion driver\"]\n    mpu_driver[\"MPU6050 register driver<br/>firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c\"]\n    mpu_io[\"Register I/O callback contract<br/>mpu6050_io_t in mpu6050.h\"]\n    mpu_driver -->|mpu6050_io_t callbacks| mpu_io\n  end",
+      "authored_by_model": true,
+      "node_notes": {
+        "dht_service": "This box defines the service-level DHT22 processing API that consumes a dht22_port_t and produces a dht22_sample_t. firmware/services/dht22_service.h provides the contract, but the supplied files do not show a runtime caller or implementation.",
+        "main_entry": "This box is the ESP-IDF entry shim that exposes app_main and delegates immediately to app_start. The evidence is main/entry.c lines 4-8, including the app_start call.",
+        "app_owner": "This box owns the implemented application startup behavior and emits the firmware-started message. firmware/app/app.c lines 8-10 define app_start and call ESP_LOGI through logger.h.",
+        "mpu_io": "This box is the callback-based register transport required by the MPU6050 driver. firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h defines mpu6050_io_t with read, write, and delay_ms callbacks and leaves the physical bus to the integrator.",
+        "logger_api": "This is the only evidenced runtime sink: the application uses ESP_LOGI through the logger wrapper. firmware/utils/logger/logger.h re-exports esp_log.h, and app.c supplies the startup message.",
+        "dht_port": "This box is the vendor-agnostic DHT22 I/O contract carrying data_gpio, read_frame, and delay_ms callbacks. firmware/interfaces/dht22_port.h defines dht22_port_t and its GPIO-bearing interface.",
+        "mpu_driver": "This box is the portable MPU6050 register driver and its sample, power, FIFO, and interrupt operations. firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c implements the API, but no platform bus or application binding is supplied.",
+        "dht22": "This box represents the configured DHT22 data connection on GPIO 2. The pin is stated in the diagram brief and APP_DHT22_DATA_GPIO is defined as 2 in firmware/configs/app_config.h.",
+        "app_config": "This configuration box supplies the DHT22 GPIO value and sampling constants. firmware/configs/app_config.h defines APP_DHT22_DATA_GPIO as 2, along with the two-second sample period and retry limit."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "mermaid": "flowchart TD\n  subgraph startup_flow[\"One-shot startup\"]\n    boot[\"ESP-IDF invokes entry point<br/>main/entry.c:5\"]\n    call_app[\"Call application startup<br/>main/entry.c:7\"]\n    start_app[\"Emit firmware startup log<br/>firmware/app/app.c:8-10\"]\n    boot -->|app_main| call_app\n    call_app -->|app_start| start_app\n  end",
+      "authored_by_model": true,
+      "node_notes": {
+        "start_app": "This step logs the literal firmware-started status and then returns. firmware/app/app.c lines 8-10 implement app_start with ESP_LOGI, so no sensor sampling or task execution is evidenced in the runtime flow.",
+        "call_app": "This step performs the only startup delegation shown in the sources. main/entry.c calls app_start without creating a task or starting a periodic loop.",
+        "boot": "This step represents the ESP-IDF reset path entering the generated application shim. main/entry.c defines app_main as the firmware entry function."
+      }
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "mermaid": "sequenceDiagram\n  participant Boot as ESP-IDF boot\n  participant Entry as main/entry.c\n  participant App as firmware/app/app.c\n  participant Log as ESP-IDF logger\n\n  Boot->>Entry: Invoke app_main\n  Entry->>App: Call app_start\n  App->>Log: ESP_LOGI TAG firmware started",
+      "participants": [
+        "Boot",
+        "Entry",
+        "App",
+        "Log"
+      ],
+      "generated_from": [
+        "main/entry.c",
+        "firmware/configs/app_config.h"
+      ],
+      "grounding": 0.25,
+      "authored_by_model": true
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [],
+  "read_only": false,
+  "graph_version": 3,
+  "generation": {
+    "mode": "static",
+    "triggered_by": "mount",
+    "analyzed_at_ms": 1790237044625,
+    "input_files": [
+      "CMakeLists.txt",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.c",
+      "firmware/drivers/mpu6050/mpu_6000_mpu_6050/mpu6050.h",
+      "firmware/interfaces/dht22_port.h",
+      "firmware/osal/osal.h",
+      "firmware/services/dht22_service.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "main/entry.c",
+      "sdkconfig",
+      "sdkconfig.defaults"
+    ]
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": []
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "validated_at_ms": 1790237044625
+  }
+}

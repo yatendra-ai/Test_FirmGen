@@ -1,0 +1,88 @@
+sequenceDiagram
+    autonumber
+    participant fg_proto as Task fg_proto
+    participant fg_telemetry as Task fg_telemetry
+    participant dht22_task as Task dht22_task
+    participant mpu6050_task as Task mpu6050_task
+    participant network_task as Task network_task
+    participant diagnostics_task as Task diagnostics_task
+    participant boot as Boot / app_main
+    boot->>fg_proto: creates
+    boot->>fg_telemetry: creates
+    boot->>dht22_task: creates
+    boot->>mpu6050_task: creates
+    boot->>network_task: creates
+    boot->>diagnostics_task: creates
+    loop task cycle
+        fg_proto->>boot: Loop forever
+        fg_proto->>boot: vTaskDelay(pdMS_TO_TICKS(FGP_INTERVAL_MS))
+        fg_proto->>boot: auto_sample_wifi()
+        fg_proto->>boot: esp_timer_get_time()
+        fg_proto->>boot: ob_reset()
+        fg_proto->>boot: ob_printf(#quot;{\#quot;p\#quot;:\#quot;proto_monitor\#quot;,\#quot;v\#quot;:3,…
+        fg_proto->>boot: Loop while (ring_pop(&e))
+        fg_proto->>boot: (s_line_len #gt; FGP_LINE_BUF - 512u && e.…
+        alt (s_line_len #gt; FGP_LINE_BUF - 512u && e.…
+            fg_proto->>boot: (s_line_len #gt; FGP_LINE_BUF - 256u)
+        else no
+            fg_proto-->>fg_proto: (s_line_len #gt; FGP_LINE_BUF - 256u)
+        end
+        alt (s_line_len #gt; FGP_LINE_BUF - 256u)
+            fg_proto->>boot: emit_entry(&e)
+        else no
+            fg_proto-->>fg_proto: emit_entry(&e)
+        end
+        fg_proto->>boot: ob_printf(#quot;]}\n#quot;)
+        fg_proto->>boot: fwrite(s_line)
+        fg_proto->>boot: fflush(stdout)
+    end
+    loop task cycle
+        fg_telemetry->>boot: sample_tasks(NULL)
+        fg_telemetry->>boot: emit_boot_event()
+        fg_telemetry->>boot: Loop forever
+        fg_telemetry->>boot: uxTaskGetStackHighWaterMark(NULL)
+        fg_telemetry->>boot: core_sample(&core)
+        fg_telemetry->>boot: psram_sample(&psram)
+        fg_telemetry->>boot: health_sample(&health)
+        fg_telemetry->>boot: emit_json(&core)
+        fg_telemetry->>boot: vTaskDelay(pdMS_TO_TICKS(FG_INTERVAL_MS))
+    end
+    dht22_task->>boot: dht22_service_start()
+    mpu6050_task->>boot: mpu6050_service_start()
+    network_task->>boot: (!g_initialized)
+    alt (!g_initialized)
+        network_task->>boot: xEventGroupCreate()
+    else no
+        network_task-->>network_task: vTaskDelete(NULL)
+    end
+    network_task->>boot: xQueueCreate(APP_MQTT_QUEUE_DEPTH)
+    network_task->>boot: ((g_network_events != NULL) && (g_messa…
+    alt ((g_network_events != NULL) && (g_messa…
+        network_task->>boot: network_task_loop()
+    else no
+        network_task-->>network_task: vTaskDelete(NULL)
+    end
+    network_task->>boot: vTaskDelete(NULL)
+    loop task cycle
+        diagnostics_task->>boot: esp_task_wdt_add(NULL)
+        diagnostics_task->>boot: ESP_LOGI(TAG)
+        diagnostics_task->>boot: diagnostics_reset_name(esp_reset_reason())
+        diagnostics_task->>boot: esp_reset_reason()
+        diagnostics_task->>boot: Loop forever
+        diagnostics_task->>boot: (xQueueReceive(g_command_queue, &comman…
+        alt (xQueueReceive(g_command_queue, &comman…
+            diagnostics_task->>boot: (command == '?')
+        else no
+            diagnostics_task-->>diagnostics_task: esp_task_wdt_reset()
+        end
+        alt (command == '?')
+            diagnostics_task->>boot: ESP_LOGI(TAG)
+        else no
+            diagnostics_task-->>diagnostics_task: ESP_LOGW(TAG)
+        end
+        diagnostics_task->>boot: dht22_service_sample()
+        diagnostics_task->>boot: mpu6050_service_state()
+        diagnostics_task->>boot: network_service_publish_failures()
+        diagnostics_task->>boot: esp_task_wdt_reset()
+        diagnostics_task->>boot: esp_task_wdt_reset()
+    end

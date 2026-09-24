@@ -1,0 +1,1599 @@
+{
+  "job_id": "c7bed342-9359-4a70-9b89-b92e291114fc",
+  "document_id": "687fce11-97f3-4194-b33a-04044c30e1c9",
+  "saved_at": "2026-09-24T07:58:12.090Z",
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "ESP32-C3 Platform & Power",
+      "criteria": [
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "inspection",
+          "criterion": "The BOM and physical board markings identify the installed MCU board as an ESP32-C3 development board.",
+          "observable": "BOM entry and board silkscreen or manufacturer marking",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The BOM and assembled hardware are available for inspection."
+          ],
+          "procedure": [
+            "Inspect the MCU development board listed in the BOM.",
+            "Inspect the manufacturer marking or silkscreen on the assembled board.",
+            "Compare both with the required ESP32-C3 development-board identity."
+          ],
+          "expected": "The BOM and physical board identify an ESP32-C3 development board, specifically the configured esp32-c3-devkitm-1 target where the board model is recorded.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-004",
+          "verifiability": "hardware",
+          "criterion": "When powered through its micro-USB input from a 12 V automotive adapter, the device input supply measures 5 V and the device reaches its normal operating state.",
+          "observable": "Voltage measured at the micro-USB/device power input and the device's normal operation indication",
+          "observable_kind": "signal",
+          "preconditions": [
+            "A 12 V automotive adapter is available.",
+            "A micro-USB power connection from the adapter to the device is available.",
+            "The device's normal operating indication or functional behavior is defined by the firmware."
+          ],
+          "procedure": [
+            "Connect the device's micro-USB input to the 12 V automotive adapter.",
+            "Power the device from the adapter.",
+            "Measure the voltage at the device's 5 V input rail or micro-USB supply input.",
+            "Observe the device's defined normal operation indication or functional behavior."
+          ],
+          "expected": "The measured device input is 5 V, and the device operates in its defined normal operating state.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "DHT22 Climate Sensing",
+      "criteria": [
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "target",
+          "criterion": "The timestamp difference between consecutive successfully acquired temperature samples during normal operation is nominally 2000 ms, allowing only the scheduler jitter defined by the firmware test environment.",
+          "observable": "Temperature-sample acquisition timestamps from firmware instrumentation or telemetry",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "DHT22 is connected and powered according to the pin mapping.",
+            "Firmware is operating normally without an induced sensor fault."
+          ],
+          "procedure": [
+            "Enable temperature-sample timestamp instrumentation or subscribe to temperature telemetry.",
+            "Run the firmware through at least three consecutive sampling cycles.",
+            "Record the timestamps of consecutive new temperature samples and calculate their intervals."
+          ],
+          "expected": "Each consecutive temperature-sample interval is 2000 ms plus or minus the permitted scheduler jitter.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "target",
+          "criterion": "The timestamp difference between consecutive successfully acquired humidity samples during normal operation is nominally 2000 ms, allowing only the scheduler jitter defined by the firmware test environment.",
+          "observable": "Humidity-sample acquisition timestamps from firmware instrumentation or telemetry",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "DHT22 is connected and powered according to the pin mapping.",
+            "Firmware is operating normally without an induced sensor fault."
+          ],
+          "procedure": [
+            "Enable humidity-sample timestamp instrumentation or subscribe to humidity telemetry.",
+            "Run the firmware through at least three consecutive sampling cycles.",
+            "Record the timestamps of consecutive new humidity samples and calculate their intervals."
+          ],
+          "expected": "Each consecutive humidity-sample interval is 2000 ms plus or minus the permitted scheduler jitter.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-016",
+          "verifiability": "host",
+          "criterion": "When a DHT22 frame has an invalid checksum, the sampling logic performs exactly one retry before completing the sample cycle.",
+          "observable": "Injected DHT22 frame-read calls and the number and ordering of checksum validation attempts",
+          "observable_kind": "state",
+          "preconditions": [
+            "The DHT22 acquisition logic is built for the host with its GPIO/read interface replaced by a test double.",
+            "The test double returns a checksum-invalid frame on the first read and a second frame for the retry."
+          ],
+          "procedure": [
+            "Configure the fake DHT22 interface to provide a checksum-invalid frame on the first read.",
+            "Invoke one sampling cycle.",
+            "Record the checksum validation attempts and the number of frame reads before the cycle completes."
+          ],
+          "expected": "Two checksum validation attempts occur: the initial attempt followed by exactly one retry within the same sampling cycle.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-016",
+          "verifiability": "host",
+          "criterion": "When both the initial DHT22 frame and its single retry have invalid checksums, the published temperature and humidity remain equal to the last valid values for that cycle.",
+          "observable": "Published temperature and humidity fields before and after a sampling cycle with two checksum-invalid frames",
+          "observable_kind": "state",
+          "preconditions": [
+            "The DHT22 acquisition logic is built for the host with its GPIO/read interface replaced by a test double.",
+            "Previously published temperature and humidity values are initialized to known valid values.",
+            "The test double returns checksum-invalid frames for both the initial read and the retry."
+          ],
+          "procedure": [
+            "Publish and record known valid temperature and humidity values.",
+            "Configure the fake DHT22 interface to return two checksum-invalid frames.",
+            "Invoke one sampling cycle and inspect the published values."
+          ],
+          "expected": "The published temperature and humidity after the failed cycle are unchanged from the previously published values.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-016",
+          "verifiability": "host",
+          "criterion": "When both DHT22 checksum validation attempts fail, the sampling logic records an error event for the failed sample.",
+          "observable": "Recorded DHT22 error event in the firmware event sink or test-double logger",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The DHT22 acquisition logic is built for the host with its event sink replaced by a test double.",
+            "The test double returns checksum-invalid frames for both the initial read and the retry."
+          ],
+          "procedure": [
+            "Configure the fake DHT22 interface to return two checksum-invalid frames.",
+            "Invoke one sampling cycle.",
+            "Inspect the captured event records."
+          ],
+          "expected": "At least one error event identifying the failed DHT22 sample or checksum failure is recorded during that cycle.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-016",
+          "verifiability": "host",
+          "criterion": "When both DHT22 checksum validation attempts fail, the DHT22 failure counter increases by one and the sampling cycle returns to its periodic loop without publishing new sensor values.",
+          "observable": "DHT22 failure-counter value and sampling-loop completion state after a double checksum failure",
+          "observable_kind": "state",
+          "preconditions": [
+            "The DHT22 acquisition logic is built for the host with its GPIO/read interface replaced by a test double.",
+            "The failure counter has a known value before the test.",
+            "The test double returns checksum-invalid frames for both the initial read and the retry."
+          ],
+          "procedure": [
+            "Record the initial DHT22 failure-counter value and published sensor values.",
+            "Configure the fake DHT22 interface to return two checksum-invalid frames.",
+            "Invoke one sampling cycle.",
+            "Inspect the counter, published values, and cycle-completion result."
+          ],
+          "expected": "The failure counter is initial value plus one, the published values are unchanged, and the sampling cycle completes so the periodic loop can proceed.",
+          "source": "derived",
+          "rationale": "The failure behavior field explicitly requires incrementing the DHT22 failure counter, while the postcondition requires that a bad read not block the periodic loop; this criterion checks both observable consequences without inventing a new timing threshold.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-006",
+          "verifiability": "inspection",
+          "criterion": "The inspected schematic or board wiring identifies the DHT22 data-output net as ESP32-C3 GPIO2.",
+          "observable": "Schematic net label, PCB connection, or board wiring from DHT22 OUT to GPIO2",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The final schematic or assembled board documentation is available for inspection."
+          ],
+          "procedure": [
+            "Inspect the DHT22 OUT connection in the schematic or board documentation.",
+            "Trace the connection to the ESP32-C3 pin assignment.",
+            "Confirm the assigned GPIO number."
+          ],
+          "expected": "DHT22 OUT is electrically connected to ESP32-C3 GPIO2.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-007",
+          "verifiability": "inspection",
+          "criterion": "The inspected schematic or board wiring identifies the DHT22 VCC pin as connected to the 3.3 V rail.",
+          "observable": "Schematic power net label or board power connection from DHT22 VCC to 3.3 V",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The final schematic or assembled board documentation is available for inspection."
+          ],
+          "procedure": [
+            "Inspect the DHT22 VCC connection in the schematic or board documentation.",
+            "Trace the connection to its power-rail label.",
+            "Confirm the rail voltage designation."
+          ],
+          "expected": "DHT22 VCC is connected to the 3.3 V rail.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-008",
+          "verifiability": "inspection",
+          "criterion": "The inspected schematic or board wiring identifies the DHT22 GND pin as connected to system ground.",
+          "observable": "Schematic ground net label or board ground connection from DHT22 GND",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The final schematic or assembled board documentation is available for inspection."
+          ],
+          "procedure": [
+            "Inspect the DHT22 GND connection in the schematic or board documentation.",
+            "Trace the connection to the system-ground net.",
+            "Confirm that it terminates on system ground."
+          ],
+          "expected": "DHT22 GND is connected to system ground.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "inspection",
+          "criterion": "The BOM and hardware inspection identify the installed climate sensor as a DHT22 with temperature and humidity outputs.",
+          "observable": "BOM part number and installed sensor marking or part identification",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The final BOM and the assembled hardware are available for inspection."
+          ],
+          "procedure": [
+            "Locate the climate-sensor entry in the BOM.",
+            "Inspect the installed sensor marking or traceable part identification.",
+            "Compare both identifications with the DHT22 device specification."
+          ],
+          "expected": "The BOM and installed hardware identify a DHT22 sensor that provides both temperature and humidity measurements.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "MPU6050 Motion Sensing & I2C Driver",
+      "criteria": [
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "The published acceleration state contains finite numeric X, Y, and Z channel values when the MPU6050 is connected.",
+          "observable": "Published acceleration X, Y, and Z fields",
+          "observable_kind": "state",
+          "preconditions": [
+            "MPU6050 is connected and powered per the pin mapping.",
+            "The I2C bus is initialized.",
+            "The firmware is running with IMU acquisition enabled."
+          ],
+          "procedure": [
+            "Start the firmware with the MPU6050 connected.",
+            "Capture one published acceleration sample.",
+            "Check that the X, Y, and Z fields are present and finite numeric values."
+          ],
+          "expected": "All three acceleration fields contain finite numeric values.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "At least one published acceleration channel changes when the connected MPU6050 is moved through a detectable motion.",
+          "observable": "Successive published X, Y, and Z acceleration samples",
+          "observable_kind": "state",
+          "preconditions": [
+            "The first FR-004 criterion passes.",
+            "The MPU6050 is mounted so that motion affects at least one sensor axis.",
+            "The device is initially stationary."
+          ],
+          "procedure": [
+            "Record successive acceleration samples while the device is stationary.",
+            "Move or rotate the device along one sensor axis.",
+            "Record successive samples during the motion.",
+            "Compare the moving samples with the stationary samples."
+          ],
+          "expected": "At least one of the X, Y, or Z channel values differs between the stationary and motion intervals.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "unverifiable",
+          "criterion": "The stationary upright output cannot be judged because the acceptance statement does not define a numeric tolerance for “near” 1 g or 0 g.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": "A numeric pass/fail tolerance is missing for vertical_g near 1 g and lateral_g/longitudinal_g near 0 g.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "unverifiable",
+          "criterion": "The axis-isolation mapping cannot be judged because the acceptance statement does not define how much the corresponding component must change or how small the non-corresponding components must remain.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": "Numeric or otherwise observable isolation thresholds are missing for the three mapped output components.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "Startup accepts the MPU6050 only when its WHO_AM_I register reads the MPU6050 identity value 0x68.",
+          "observable": "I2C WHO_AM_I register read result and startup initialization state",
+          "observable_kind": "state",
+          "preconditions": [
+            "The I2C bus is initialized.",
+            "The MPU6050 is powered and connected."
+          ],
+          "procedure": [
+            "Boot or restart the firmware.",
+            "Capture the WHO_AM_I register transaction during initialization.",
+            "Capture whether IMU initialization enters the configured-ready state."
+          ],
+          "expected": "WHO_AM_I reads 0x68 and the IMU enters the configured-ready state.",
+          "source": "derived",
+          "rationale": "The requirement calls for identity verification, and 0x68 is the standard MPU6050 WHO_AM_I value; the criterion makes the expected identity explicit for a test.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "Startup reads back each MPU6050 full-scale-range and filtering configuration register and obtains the same value that it wrote.",
+          "observable": "I2C configuration register write and subsequent readback values",
+          "observable_kind": "state",
+          "preconditions": [
+            "The MPU6050 identity check passes.",
+            "The I2C bus is initialized and operational."
+          ],
+          "procedure": [
+            "Boot or restart the firmware.",
+            "Capture the full-scale-range and filtering register writes.",
+            "Capture the corresponding readback transactions.",
+            "Compare each readback value with its preceding write value."
+          ],
+          "expected": "Every required range and filtering register readback exactly matches the value written during initialization.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "When the identity check fails, the firmware does not publish an IMU sample for that initialization cycle and emits an IMU initialization error.",
+          "observable": "Published IMU-data state for the failed cycle and diagnostic log output",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The I2C device response is forced or arranged to return an identity value other than the expected MPU6050 value.",
+            "The firmware is attempting IMU initialization."
+          ],
+          "procedure": [
+            "Start or restart the firmware with the identity response invalid.",
+            "Observe the initialization-cycle output.",
+            "Capture the diagnostic log."
+          ],
+          "expected": "No IMU data is published for the failed cycle, and the log contains an IMU initialization error.",
+          "source": "derived",
+          "rationale": "This directly operationalizes the requirement’s stated failure behavior: suppress data for the failed cycle and report initialization failure.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "After an identity-check failure, the firmware makes another initialization attempt on a later retry period.",
+          "observable": "Timestamped I2C identity-register transactions after the initial failure",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The identity check fails on the first attempt.",
+            "The firmware remains powered and running long enough for a retry period."
+          ],
+          "procedure": [
+            "Start the firmware with the identity response invalid.",
+            "Record the first identity-register transaction and its failure.",
+            "Continue observing I2C traffic across the next initialization period.",
+            "Count subsequent identity-register transactions."
+          ],
+          "expected": "At least one additional identity-register transaction occurs after the initial failed attempt.",
+          "source": "derived",
+          "rationale": "The requirement explicitly requires periodic initialization retries, but supplies no retry interval; the criterion checks the required repeat behavior without inventing a timing bound.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "unverifiable",
+          "criterion": "The stationary-upright conversion check cannot be judged because the acceptance statement does not define a numeric tolerance for “near” 1 g or 0 g.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": "A numeric pass/fail tolerance is missing for vertical_g near 1 g and the other axes near 0 g.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-009",
+          "verifiability": "inspection",
+          "criterion": "The hardware connectivity artifact shows the MPU6050 SCL net terminating at ESP32-C3 GPIO8.",
+          "observable": "Schematic, PCB netlist, or board wiring",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The schematic, PCB netlist, or assembled-board wiring documentation is available."
+          ],
+          "procedure": [
+            "Inspect the MPU6050 SCL connection in the schematic or board documentation.",
+            "Trace the net to the ESP32-C3 pin assignment.",
+            "Confirm the assigned GPIO number."
+          ],
+          "expected": "The SCL net is connected to ESP32-C3 GPIO8.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-010",
+          "verifiability": "inspection",
+          "criterion": "The hardware connectivity artifact shows the MPU6050 SDA net terminating at ESP32-C3 GPIO9.",
+          "observable": "Schematic, PCB netlist, or board wiring",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The schematic, PCB netlist, or assembled-board wiring documentation is available."
+          ],
+          "procedure": [
+            "Inspect the MPU6050 SDA connection in the schematic or board documentation.",
+            "Trace the net to the ESP32-C3 pin assignment.",
+            "Confirm the assigned GPIO number."
+          ],
+          "expected": "The SDA net is connected to ESP32-C3 GPIO9.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-011",
+          "verifiability": "inspection",
+          "criterion": "The hardware connectivity artifact shows the MPU6050 VCC pin connected to the 3.3 V rail.",
+          "observable": "Schematic, PCB netlist, or board wiring",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The schematic, PCB netlist, or assembled-board wiring documentation is available."
+          ],
+          "procedure": [
+            "Inspect the MPU6050 VCC connection.",
+            "Trace it to the named power rail.",
+            "Verify the rail voltage designation."
+          ],
+          "expected": "VCC is connected to the 3.3 V rail.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-012",
+          "verifiability": "inspection",
+          "criterion": "The hardware connectivity artifact shows the MPU6050 GND pin connected to system ground.",
+          "observable": "Schematic, PCB netlist, or board wiring",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The schematic, PCB netlist, or assembled-board wiring documentation is available."
+          ],
+          "procedure": [
+            "Inspect the MPU6050 GND connection.",
+            "Trace it to the system ground net.",
+            "Confirm that the net is the board’s ground reference."
+          ],
+          "expected": "GND is connected to system ground.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "inspection",
+          "criterion": "The BOM and hardware identification records list the inertial sensor as an MPU6050 3-axis accelerometer.",
+          "observable": "BOM part number and physical-board component marking",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The BOM and, where available, the assembled-board component markings are available."
+          ],
+          "procedure": [
+            "Inspect the BOM sensor part number and description.",
+            "Inspect the fitted sensor marking or purchasing record.",
+            "Compare the identified part with MPU6050."
+          ],
+          "expected": "The selected and fitted inertial sensor is identified as MPU6050, a 3-axis accelerometer.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "WiFi & MQTT Communication",
+      "criteria": [
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "A subscriber receives MQTT telemetry containing temperature, humidity, and three-axis acceleration values acquired from the installed sensors.",
+          "observable": "MQTT telemetry payloads received by a broker subscriber and the corresponding sensor readings",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Target hardware is installed with functioning climate and acceleration sensors.",
+            "WiFi and MQTT broker connectivity are available.",
+            "An MQTT subscriber is connected to the telemetry topic."
+          ],
+          "procedure": [
+            "Power the device and allow it to connect to WiFi and MQTT.",
+            "Collect multiple telemetry messages from the subscriber.",
+            "Compare the payload fields with live sensor readings."
+          ],
+          "expected": "Received MQTT messages contain numeric temperature, humidity, lateral acceleration, longitudinal acceleration, and vertical acceleration data.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "After a power cycle, the device associates with the configured WiFi network without receiving provisioning input.",
+          "observable": "WiFi association status and associated SSID after reboot",
+          "observable_kind": "state",
+          "preconditions": [
+            "Configured SSID and password are available in the device.",
+            "The configured access point is powered and in range."
+          ],
+          "procedure": [
+            "Power-cycle the device.",
+            "Wait for the startup connection procedure to complete.",
+            "Read the device WiFi association status and SSID."
+          ],
+          "expected": "The device is associated with the configured SSID without user interaction.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "hardware",
+          "criterion": "After an induced WiFi disconnection and subsequent access-point recovery, the device re-associates without manual intervention.",
+          "observable": "WiFi association status after disconnection and recovery",
+          "observable_kind": "state",
+          "preconditions": [
+            "The device is initially associated with the access point.",
+            "The access point can be made unavailable and then available again."
+          ],
+          "procedure": [
+            "Force the WiFi connection to drop by disabling or taking the access point out of range.",
+            "Restore the access point or radio conditions.",
+            "Observe the device until the reconnection procedure completes."
+          ],
+          "expected": "The device returns to an active WiFi association without a reboot or user action.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "hardware",
+          "criterion": "Each periodic MQTT telemetry payload contains both climate and motion fields and consecutive payloads are emitted at 2000 ms intervals within the allowed scheduling jitter.",
+          "observable": "Payload contents and receive timestamps for consecutive telemetry MQTT messages",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "WiFi is connected.",
+            "The MQTT broker is reachable.",
+            "A subscriber is connected to the telemetry topic."
+          ],
+          "procedure": [
+            "Collect at least three consecutive telemetry messages.",
+            "Parse each JSON payload.",
+            "Subtract the broker receive timestamp of each message from the preceding message timestamp."
+          ],
+          "expected": "Every payload contains climate and motion data, and each inter-message interval is 2000 ms plus or minus the allowed scheduling jitter.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-014",
+          "verifiability": "hardware",
+          "criterion": "Credentials configured once remain available after a power cycle and allow association to the same WiFi SSID without re-entry.",
+          "observable": "Post-reboot WiFi association status and SSID",
+          "observable_kind": "state",
+          "preconditions": [
+            "The device has been configured once with a valid SSID and password.",
+            "The configured access point is available after reboot."
+          ],
+          "procedure": [
+            "Configure and save the SSID and password.",
+            "Power-cycle the device without entering credentials again.",
+            "Observe the WiFi association result and associated SSID."
+          ],
+          "expected": "After reboot, the device associates with the previously configured SSID without credential re-entry.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-014",
+          "verifiability": "hardware",
+          "criterion": "When stored WiFi credentials are missing or corrupted, startup logs an error and enters a finite retry or configuration path rather than looping indefinitely.",
+          "observable": "Startup UART log and device state after invalidating stored credentials",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Stored WiFi credentials can be removed or corrupted.",
+            "The device can be observed over UART."
+          ],
+          "procedure": [
+            "Remove or corrupt the stored WiFi credentials.",
+            "Power-cycle the device.",
+            "Observe startup logs and the device state for a bounded observation period."
+          ],
+          "expected": "An error is logged and the device enters the configuration/retry flow; it does not remain in an unobservable infinite loop.",
+          "source": "derived",
+          "rationale": "The failure behavior explicitly requires an error log and avoidance of an indefinite loop, so both the log and resulting control-flow state must be observable.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-015",
+          "verifiability": "hardware",
+          "criterion": "After the MQTT broker is stopped and then restored, the device reconnects without rebooting and resumes periodic telemetry and triggered alert publication.",
+          "observable": "MQTT connection state, telemetry receive timestamps, and alert messages after broker recovery",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device has an established MQTT connection.",
+            "The device is publishing telemetry.",
+            "A subscriber is connected to the telemetry and alert topics.",
+            "An alert-generating sensor condition can be induced."
+          ],
+          "procedure": [
+            "Stop the MQTT broker service.",
+            "Restore the broker service without rebooting the device.",
+            "Observe the device's MQTT connection and telemetry publications.",
+            "Induce an alert condition and observe the alert topic."
+          ],
+          "expected": "The device reconnects after broker recovery, telemetry resumes at the 2000 ms schedule, and a subsequently triggered alert is received.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-015",
+          "verifiability": "hardware",
+          "criterion": "While repeated MQTT reconnect attempts fail, sensor acquisition continues and each connection failure is recorded according to the implemented backoff policy.",
+          "observable": "Sensor sample timestamps and connection-failure UART logs during broker outage",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device is acquiring sensors.",
+            "The MQTT broker is unreachable.",
+            "The device log output is available."
+          ],
+          "procedure": [
+            "Keep the broker unavailable through multiple reconnect attempts.",
+            "Record sensor acquisition events and connection-failure logs.",
+            "Compare reconnect attempt timing with the configured backoff policy."
+          ],
+          "expected": "Sensor acquisition continues, connection failures are logged, and reconnect attempts follow the configured backoff policy without stopping acquisition.",
+          "source": "derived",
+          "rationale": "The failure behavior explicitly separates MQTT recovery from sensor acquisition and requires logging per backoff policy; these are observable during a prolonged broker outage.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "The device configuration and runtime association both identify the WiFi network as SSID \"GopalaSutharsan\".",
+          "observable": "Configured SSID and runtime associated SSID",
+          "observable_kind": "state",
+          "preconditions": [
+            "An access point broadcasting SSID \"GopalaSutharsan\" is available."
+          ],
+          "procedure": [
+            "Inspect the active WiFi configuration.",
+            "Start or reboot the device.",
+            "Read the associated SSID after connection."
+          ],
+          "expected": "The configured and associated SSID are exactly \"GopalaSutharsan\".",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "hardware",
+          "criterion": "The device successfully authenticates to SSID \"GopalaSutharsan\" using password \"123987456\".",
+          "observable": "WiFi authentication and association status",
+          "observable_kind": "state",
+          "preconditions": [
+            "An access point with SSID \"GopalaSutharsan\" is available and uses password \"123987456\"."
+          ],
+          "procedure": [
+            "Configure the device with the specified SSID and password.",
+            "Start or reboot the device.",
+            "Observe WiFi authentication and association."
+          ],
+          "expected": "Authentication succeeds and the device reaches an associated WiFi state on \"GopalaSutharsan\".",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "hardware",
+          "criterion": "Every received periodic telemetry JSON object contains all five specified keys and each associated value is numeric.",
+          "observable": "Parsed JSON keys and value types in received telemetry payloads",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Periodic MQTT publishing is active.",
+            "A subscriber is connected to the telemetry topic."
+          ],
+          "procedure": [
+            "Capture multiple periodic telemetry payloads.",
+            "Parse each payload as JSON.",
+            "Check for temp_c, humidity_percent, lateral_g, longitudinal_g, and vertical_g and inspect their value types."
+          ],
+          "expected": "Each payload contains all five keys, and every listed value is numeric.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "hardware",
+          "criterion": "A threshold-exceeding sensor event produces an MQTT message on topic \"vehicle/cabin/alert\".",
+          "observable": "Message received on MQTT topic vehicle/cabin/alert",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Alert thresholds are configured.",
+            "The device is connected to MQTT.",
+            "A threshold-exceeding condition can be induced."
+          ],
+          "procedure": [
+            "Subscribe to vehicle/cabin/alert.",
+            "Induce a threshold exceedance.",
+            "Observe the MQTT topic and received message."
+          ],
+          "expected": "At least one alert message is received on exactly vehicle/cabin/alert after the threshold event.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-005",
+          "verifiability": "hardware",
+          "criterion": "For each induced metric threshold event, the alert JSON contains all five measurement fields and its trigger field identifies the exceeded metric.",
+          "observable": "Parsed alert JSON payloads received for separate threshold events",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Alert thresholds are configured.",
+            "The device is connected to MQTT.",
+            "Each monitored metric can be exceeded independently."
+          ],
+          "procedure": [
+            "Induce a temperature threshold event and capture the alert.",
+            "Repeat independently for humidity and each acceleration axis.",
+            "Parse every alert JSON payload and compare trigger with the induced metric."
+          ],
+          "expected": "Every alert contains temp_c, humidity_percent, lateral_g, longitudinal_g, vertical_g, and trigger; trigger equals the metric whose threshold was exceeded.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-013",
+          "verifiability": "hardware",
+          "criterion": "Changing the configured MQTT broker hostname/IP and TCP port takes effect without reflashing and directs both telemetry and alert messages to the new endpoint.",
+          "observable": "Broker connection endpoint and telemetry/alert messages received by the replacement broker",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device has IP connectivity to both the original and test broker endpoints.",
+            "The replacement broker is reachable on its configured TCP port.",
+            "The device supports changing its broker configuration without reflashing."
+          ],
+          "procedure": [
+            "Configure a test broker hostname or IP and TCP port.",
+            "Apply the configuration without reflashing the firmware.",
+            "Restart or reinitialize the communication service as required by the configuration interface.",
+            "Subscribe to the telemetry and alert topics on the test broker and induce an alert."
+          ],
+          "expected": "The device connects to the configured test endpoint and publishes periodic telemetry and triggered alerts there, without a firmware reflash.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-013",
+          "verifiability": "hardware",
+          "criterion": "When the configured MQTT endpoint is unreachable, retry activity and connection errors are logged while sensor and alert processing continues without a communication-induced block.",
+          "observable": "Connection-error logs, sensor sample events, and alert evaluation events during endpoint outage",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device is acquiring sensors and evaluating alerts.",
+            "The configured MQTT endpoint is unreachable.",
+            "UART or equivalent device logs are available."
+          ],
+          "procedure": [
+            "Make the configured broker unreachable.",
+            "Observe the device through multiple reconnect attempts.",
+            "Record sensor acquisition and alert evaluation events and the connection logs."
+          ],
+          "expected": "Connection errors are logged, retries follow the configured backoff policy, and sensor acquisition and alert evaluation continue while MQTT is unavailable.",
+          "source": "derived",
+          "rationale": "The failure behavior requires non-blocking retries, logging, and continuation of other tasks; those effects are observable during an unreachable-broker test.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-014",
+          "verifiability": "hardware",
+          "criterion": "Periodic telemetry messages are received on topic \"vehicle/cabin/telemetry\" with 2000 ms inter-arrival times within the allowed scheduling jitter.",
+          "observable": "MQTT topic names and receive timestamps for consecutive telemetry messages",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The MQTT broker is reachable.",
+            "A subscriber is connected to vehicle/cabin/telemetry."
+          ],
+          "procedure": [
+            "Capture at least three consecutive MQTT messages and their receive timestamps.",
+            "Verify each message topic.",
+            "Calculate consecutive inter-arrival intervals."
+          ],
+          "expected": "Every captured message is on vehicle/cabin/telemetry and each interval is 2000 ms plus or minus the allowed scheduling jitter.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-001",
+          "verifiability": "hardware",
+          "criterion": "When MQTT publishing is stalled, each publish attempt terminates at its finite timeout, sampling continues at 2000 ms cadence, and a timeout or abort event is logged.",
+          "observable": "Publish timeout logs, sensor sample timestamps, and device reset status during impaired network operation",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Periodic publishing is enabled.",
+            "The network can be impaired so MQTT publishes stall.",
+            "Sensor sampling and device logs can be observed."
+          ],
+          "procedure": [
+            "Impair network throughput so MQTT publishes cannot complete.",
+            "Record publish attempts, timeout/abort logs, and sensor sample timestamps.",
+            "Restore network connectivity and continue observing periodic operation."
+          ],
+          "expected": "Each stalled publish is aborted at the finite timeout, a timeout or abort is logged, sensor samples remain 2000 ms apart within the permitted scheduling tolerance, and the device does not reset.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-001",
+          "verifiability": "hardware",
+          "criterion": "After network recovery, the device publishes current periodic telemetry without first processing a backlog that delays normal sampling.",
+          "observable": "Post-recovery telemetry timestamps, payload freshness, and sensor sample timestamps",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device has experienced stalled MQTT publishes.",
+            "The network and broker are restored.",
+            "Periodic sampling remains enabled."
+          ],
+          "procedure": [
+            "Restore the network after a prolonged publish stall.",
+            "Capture the first several telemetry payloads and sensor sample events.",
+            "Compare post-recovery publication timing and payload values with current sensor values."
+          ],
+          "expected": "Telemetry resumes on the normal schedule using current samples, with no accumulated backlog causing a prolonged publication or sampling delay.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-003",
+          "verifiability": "hardware",
+          "criterion": "With invalid WiFi credentials, association attempts have finite completion times and increasing retry intervals while sensor acquisition and alert evaluation continue without a watchdog reset.",
+          "observable": "WiFi retry timestamps, sensor sample events, alert evaluation events, and reset cause",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Invalid WiFi credentials are configured.",
+            "The access point is unavailable to the device or rejects the credentials.",
+            "Sensor acquisition, alert evaluation, and device logs are observable."
+          ],
+          "procedure": [
+            "Start the device with the invalid credentials.",
+            "Record multiple WiFi retry timestamps and sensor/alert events.",
+            "Inspect the reset cause after the observation period."
+          ],
+          "expected": "Each association attempt completes or times out, each successive retry interval is longer than the preceding interval, sensor acquisition and alert evaluation continue, and no watchdog reset occurs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-003",
+          "verifiability": "hardware",
+          "criterion": "When WiFi remains unavailable, the device continues offline operation and logs WiFi connection failures.",
+          "observable": "Offline sensor/alert events and WiFi failure logs",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "WiFi remains unavailable for the test duration.",
+            "Sensor acquisition and alert evaluation are enabled.",
+            "Device logs are available."
+          ],
+          "procedure": [
+            "Keep the access point unavailable.",
+            "Observe sensor acquisition and alert evaluation over multiple cycles.",
+            "Collect WiFi connection-failure logs."
+          ],
+          "expected": "Offline sensor acquisition and alert evaluation continue, and WiFi failures are logged.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "hardware",
+          "criterion": "During a prolonged broker outage, the MQTT queue remains bounded, the device remains responsive without an out-of-memory reset, and reconnection publishes current telemetry without flushing an unbounded backlog.",
+          "observable": "Queue occupancy or queue-overflow logs, reset cause, responsiveness, and post-reconnection MQTT traffic",
+          "observable_kind": "state",
+          "preconditions": [
+            "Periodic telemetry is enabled.",
+            "The MQTT broker can be kept unreachable for longer than the queue retention period.",
+            "Queue state or overflow logging and reset status are observable."
+          ],
+          "procedure": [
+            "Disconnect or stop the broker for an extended period.",
+            "Observe queue occupancy or overflow events, sensor/device responsiveness, and reset cause.",
+            "Restore the broker and capture the first telemetry messages."
+          ],
+          "expected": "Queue occupancy never exceeds its configured bound, the device remains responsive with no out-of-memory reset, and post-reconnection traffic contains current telemetry without an unbounded backlog flush.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "hardware",
+          "criterion": "When the bounded MQTT queue reaches capacity, the oldest unsent telemetry is discarded in favor of newer telemetry and an overflow event is logged.",
+          "observable": "Queue contents or overflow log and timestamps or sequence identifiers in retained telemetry",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The MQTT broker is unreachable.",
+            "More telemetry messages are generated than the queue capacity.",
+            "Telemetry messages have timestamps or sequence identifiers that allow ordering."
+          ],
+          "procedure": [
+            "Keep the broker unavailable until queue capacity is reached and exceeded.",
+            "Record queue overflow events and the timestamps or sequence identifiers of queued messages.",
+            "Restore the broker and inspect the order of messages published from the queue."
+          ],
+          "expected": "An overflow event is logged; the retained set contains newer telemetry rather than the oldest entries, and the queue never contains more than its configured capacity.",
+          "source": "derived",
+          "rationale": "The stated failure behavior defines the required full-queue policy, while the acceptance text requires bounded operation; queue ordering and overflow logging directly verify both.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-5",
+      "name": "Alert Threshold Configuration & Evaluation",
+      "criteria": [
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "host",
+          "criterion": "After the runtime configuration method sets the temperature threshold to a value different from its previous value, the stored threshold equals the new value and temperature evaluation uses that value for alert decisions.",
+          "observable": "Temperature-threshold state and the result of the temperature alert-evaluation function after applying a test temperature",
+          "observable_kind": "state",
+          "preconditions": [
+            "The portable configuration and alert-evaluation logic is available to the host test harness.",
+            "An initial temperature threshold V_old is configured.",
+            "A distinct replacement threshold V_new is selected."
+          ],
+          "procedure": [
+            "Read and record the current temperature threshold V_old.",
+            "Set the temperature threshold to V_new through the available runtime configuration method.",
+            "Read the configured threshold and evaluate a temperature value selected to be below one threshold and above the other.",
+            "Record the threshold state and evaluation result."
+          ],
+          "expected": "The configured threshold equals V_new, and the evaluation result matches comparison with V_new rather than V_old.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "host",
+          "criterion": "After the runtime configuration method sets the humidity threshold to a value different from its previous value, the stored threshold equals the new value and humidity evaluation uses that value for alert decisions.",
+          "observable": "Humidity-threshold state and the result of the humidity alert-evaluation function after applying a test humidity value",
+          "observable_kind": "state",
+          "preconditions": [
+            "The portable configuration and alert-evaluation logic is available to the host test harness.",
+            "An initial humidity threshold V_old is configured.",
+            "A distinct replacement threshold V_new is selected."
+          ],
+          "procedure": [
+            "Read and record the current humidity threshold V_old.",
+            "Set the humidity threshold to V_new through the available runtime configuration method.",
+            "Read the configured threshold and evaluate a humidity value selected to be below one threshold and above the other.",
+            "Record the threshold state and evaluation result."
+          ],
+          "expected": "The configured threshold equals V_new, and the evaluation result matches comparison with V_new rather than V_old.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "host",
+          "criterion": "After the runtime configuration method sets the G-force threshold to a different value in g, the stored threshold equals the new value and G-force evaluation uses that value for alert decisions.",
+          "observable": "G-force threshold state in g and the result of the G-force alert-evaluation function after applying a test acceleration",
+          "observable_kind": "state",
+          "preconditions": [
+            "The portable configuration and alert-evaluation logic is available to the host test harness.",
+            "An initial G-force threshold V_old g is configured.",
+            "A distinct replacement threshold V_new g is selected."
+          ],
+          "procedure": [
+            "Read and record the current G-force threshold V_old.",
+            "Set the G-force threshold to V_new g through the available runtime configuration method.",
+            "Read the configured threshold and evaluate a G-force value selected to be below one threshold and above the other.",
+            "Record the threshold state and evaluation result."
+          ],
+          "expected": "The configured threshold equals V_new g, and the evaluation result matches comparison with V_new rather than V_old.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-013",
+          "verifiability": "hardware",
+          "criterion": "When a live sensor value first exceeds a configured threshold, an alert message is published on the alert MQTT topic before the next scheduled 2000 ms periodic publication.",
+          "observable": "Timestamped MQTT publication on the alert topic and the timestamp of the next periodic publication",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "WiFi is connected.",
+            "The MQTT broker is reachable and subscribed to the alert topic.",
+            "Configured thresholds are active.",
+            "The periodic publication schedule and its next deadline are observable.",
+            "The sensor value can be set or stimulated to exceed a threshold."
+          ],
+          "procedure": [
+            "Connect the device to WiFi and the MQTT broker and subscribe to the alert topic.",
+            "Configure a threshold just below the current or injected sensor value.",
+            "Start a measurement cycle and record the threshold-exceedance time and next periodic-publication deadline.",
+            "Capture MQTT messages and their timestamps until the alert or periodic deadline occurs.",
+            "Compare the alert publication timestamp with the next periodic-publication timestamp."
+          ],
+          "expected": "An alert message is emitted asynchronously on the alert topic, and its publication timestamp is earlier than the next periodic publication deadline, which is 2000 ms after the preceding regular publication.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "hardware",
+          "criterion": "If power is interrupted during a threshold-record write, the thresholds recovered after reboot equal either the complete previously committed record or the complete newly committed record, never a partially written or invalid combination.",
+          "observable": "Recovered threshold values after power interruption and reboot",
+          "observable_kind": "state",
+          "preconditions": [
+            "A configuration mechanism exists to change thresholds.",
+            "A known complete old threshold record is committed.",
+            "A distinct complete new threshold record is ready to be committed.",
+            "The device can be power-interrupted during the non-volatile write."
+          ],
+          "procedure": [
+            "Commit and record the old threshold record.",
+            "Start committing the new threshold record.",
+            "Interrupt device power at multiple points during the write, including at least one mid-write point.",
+            "Restore power and reboot the device.",
+            "Read all recovered threshold values."
+          ],
+          "expected": "For every interruption point, the recovered record is exactly the old complete record or exactly the new complete record; no field is corrupted, missing, or mixed between records.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "target",
+          "criterion": "After a threshold update is successfully committed, the updated threshold values are restored after reset and remain unchanged through a subsequent power cycle.",
+          "observable": "Threshold values reported after reset and after a full power cycle",
+          "observable_kind": "state",
+          "preconditions": [
+            "A configuration mechanism exists to change thresholds.",
+            "The device has writable non-volatile storage.",
+            "A complete threshold record with values distinct from the previous record can be committed."
+          ],
+          "procedure": [
+            "Set and successfully commit a complete threshold record.",
+            "Read and record the committed values.",
+            "Reset the device and read the active thresholds.",
+            "Power-cycle the device and read the active thresholds again."
+          ],
+          "expected": "The values after reset and after the power cycle exactly equal the most recently committed values for every configured threshold.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "host",
+          "criterion": "When the non-volatile storage write reports a persistence failure, the configuration logic retains the last known-good threshold values and emits an error log.",
+          "observable": "Threshold state and error log produced after an injected non-volatile write failure",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The configuration and persistence logic supports an injected storage-write failure.",
+            "A known-good threshold record is active.",
+            "The host test harness can capture firmware log output."
+          ],
+          "procedure": [
+            "Record the active known-good threshold values.",
+            "Inject a storage-write failure.",
+            "Attempt to commit a changed threshold record.",
+            "Read the active threshold values and capture the resulting log output."
+          ],
+          "expected": "All active thresholds remain equal to the last known-good values, and the log contains an error entry identifying the persistence failure.",
+          "source": "derived",
+          "rationale": "The requirement explicitly defines failure behavior separately from its stated acceptance criterion; an injected storage failure makes the required fallback values and error reporting observable without requiring physical power interruption.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-6",
+      "name": "Diagnostics, Security & Fault Recovery",
+      "criteria": [
+        {
+          "requirement_id": "SF-001",
+          "verifiability": "hardware",
+          "criterion": "After a deliberate firmware hang causes watchdog expiration, the device reboots without user input and resumes periodic MQTT telemetry and alert publishing.",
+          "observable": "Device reset indication followed by MQTT telemetry and alert messages after the induced hang",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Device is powered in the target environment.",
+            "WiFi and MQTT services are available.",
+            "A controlled firmware hang can be induced."
+          ],
+          "procedure": [
+            "Induce the controlled firmware hang.",
+            "Wait for watchdog expiration and automatic reboot.",
+            "Observe the device reset indication.",
+            "Monitor MQTT traffic after reboot."
+          ],
+          "expected": "The device reboots automatically, re-associates with WiFi, and resumes both periodic telemetry and alert publishing without user input.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-001",
+          "verifiability": "hardware",
+          "criterion": "After a deliberate brown-out reset, the device reboots without user input and resumes periodic MQTT telemetry and alert publishing.",
+          "observable": "Brown-out reset followed by MQTT telemetry and alert messages",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Device is powered in the target environment.",
+            "WiFi and MQTT services are available.",
+            "The supply voltage can be briefly reduced enough to trigger the configured brown-out detector."
+          ],
+          "procedure": [
+            "Briefly dip the supply voltage to trigger brown-out reset.",
+            "Observe the reset and boot sequence.",
+            "Monitor WiFi association and MQTT traffic after reboot."
+          ],
+          "expected": "The device reboots automatically, re-associates with WiFi, and resumes both periodic telemetry and alert publishing without user input.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-001",
+          "verifiability": "unverifiable",
+          "criterion": "When resets repeat, the firmware limits the reboot rate and records a persistent fault indication.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "derived",
+          "rationale": "The failure behavior specifies rate limiting and a persistent fault indication, but supplies neither a maximum reboot rate or time window nor a defined persistent indication that can be asserted.",
+          "blocked_reason": "No numeric reboot-rate limit, time window, or defined persistent fault indication is specified.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-001",
+          "verifiability": "inspection",
+          "criterion": "The boot status is emitted as exactly one serial-console line containing the firmware version, configured SSID without its password, MQTT broker host and port, and pass/fail results for DHT22 and MPU6050 initialization.",
+          "observable": "Serial console output from one power cycle",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device is connected to a serial console over USB.",
+            "The device is configured with an SSID, MQTT broker endpoint, and sensor configuration."
+          ],
+          "procedure": [
+            "Connect the serial console.",
+            "Power-cycle the device.",
+            "Capture the boot output.",
+            "Count the status lines and inspect the fields in the status line."
+          ],
+          "expected": "Exactly one status line contains the firmware version, SSID with no password, broker host:port, and separate DHT22 and MPU6050 initialization pass/fail results.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-001",
+          "verifiability": "target",
+          "criterion": "Loss of the serial console does not prevent the firmware from continuing its normal operation.",
+          "observable": "Device operation and telemetry while no serial console is attached",
+          "observable_kind": "state",
+          "preconditions": [
+            "The device is configured for normal operation.",
+            "WiFi and MQTT services are available.",
+            "No serial console is connected."
+          ],
+          "procedure": [
+            "Boot the device with the serial console disconnected.",
+            "Allow normal application operation to proceed.",
+            "Observe the normal operation or telemetry output through the available operational interface."
+          ],
+          "expected": "The device continues normal operation without waiting indefinitely for or failing because of the unavailable console.",
+          "source": "derived",
+          "rationale": "This check is derived from DIAG-001's failure behavior; it asserts that diagnostic output is non-blocking rather than merely checking that output exists.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-002",
+          "verifiability": "hardware",
+          "criterion": "The DHT22 failure counter increases for each induced DHT22 checksum failure reported through the serial-console query.",
+          "observable": "DHT22 failure-counter value before and after inducing a known number of checksum failures",
+          "observable_kind": "state",
+          "preconditions": [
+            "The console interaction method is available.",
+            "The initial DHT22 failure-counter value can be queried.",
+            "The DHT22 input can be controlled to produce checksum failures."
+          ],
+          "procedure": [
+            "Query and record the DHT22 failure counter.",
+            "Induce a known number N of DHT22 checksum failures.",
+            "Query the counters again."
+          ],
+          "expected": "The final DHT22 failure counter equals the initial value plus N.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-002",
+          "verifiability": "hardware",
+          "criterion": "The IMU failure counter increases for each induced IMU read failure after the IMU is disconnected.",
+          "observable": "IMU failure-counter value before and after a known number of failed IMU reads",
+          "observable_kind": "state",
+          "preconditions": [
+            "The console interaction method is available.",
+            "The initial IMU failure-counter value can be queried.",
+            "The IMU can be disconnected while the firmware is running."
+          ],
+          "procedure": [
+            "Query and record the IMU failure counter.",
+            "Disconnect the IMU and allow a known number N of read attempts.",
+            "Query the counters again."
+          ],
+          "expected": "The final IMU failure counter equals the initial value plus the number of induced failed read attempts.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-002",
+          "verifiability": "hardware",
+          "criterion": "The MQTT publish-failure counter increases for each induced failed publish and is returned by the serial-console query.",
+          "observable": "MQTT publish-failure-counter value before and after blocking a known number of publishes",
+          "observable_kind": "state",
+          "preconditions": [
+            "The console interaction method is available.",
+            "The initial MQTT publish-failure counter can be queried.",
+            "MQTT publishes can be blocked or made to fail."
+          ],
+          "procedure": [
+            "Query and record the MQTT publish-failure counter.",
+            "Block MQTT publishes and cause a known number N of publish attempts to fail.",
+            "Query the counters again."
+          ],
+          "expected": "The final MQTT publish-failure counter equals the initial value plus N, and the query response includes that counter.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-002",
+          "verifiability": "hardware",
+          "criterion": "A serial-console counter query returns the current sensor and MQTT failure counters while the device continues operating.",
+          "observable": "Serial query response and ongoing device operation after the query",
+          "observable_kind": "state",
+          "preconditions": [
+            "The device is running normally.",
+            "The console interaction method is available.",
+            "The device has active operation to observe, such as sensor processing or telemetry."
+          ],
+          "procedure": [
+            "Issue the counter query over the serial console.",
+            "Record the returned counter values.",
+            "Observe the device after the query."
+          ],
+          "expected": "The query returns the counters and the device remains operational without requiring a stop or restart.",
+          "source": "derived",
+          "rationale": "This is derived from the postcondition that operators can retrieve counters without stopping the device; the observable is the query response together with continued operation.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SEC-001",
+          "verifiability": "inspection",
+          "criterion": "Captured MQTT telemetry and error payloads contain no configured WiFi or MQTT credentials.",
+          "observable": "Captured MQTT payload contents during normal and error conditions",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device is configured with known WiFi and MQTT credentials.",
+            "MQTT telemetry and error conditions can be captured."
+          ],
+          "procedure": [
+            "Capture MQTT payloads during normal operation.",
+            "Capture MQTT payloads while inducing relevant error conditions.",
+            "Search all captured payloads for the configured WiFi and MQTT credential values."
+          ],
+          "expected": "No WiFi password, MQTT username, MQTT password, or equivalent configured credential value appears in any captured MQTT payload.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SEC-001",
+          "verifiability": "inspection",
+          "criterion": "Serial boot, status, and error output contains no configured WiFi or MQTT credentials and replaces any sensitive status field with a redaction marker.",
+          "observable": "Captured serial-console output during boot, normal operation, and error conditions",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device is configured with known WiFi and MQTT credentials.",
+            "Serial output can be captured during boot, normal operation, and induced error conditions."
+          ],
+          "procedure": [
+            "Capture serial output during boot.",
+            "Capture status output during normal operation and after inducing error conditions.",
+            "Search the output for configured credential values and inspect sensitive fields."
+          ],
+          "expected": "No configured WiFi or MQTT credential value appears in console output; sensitive fields are represented by redaction markers rather than secret values.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SEC-001",
+          "verifiability": "inspection",
+          "criterion": "An attempted credential print is replaced by redacted output and produces a security warning.",
+          "observable": "The redacted console line and associated security-warning log entry",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "A controlled code path exists that attempts to print a configured credential.",
+            "The device console is available."
+          ],
+          "procedure": [
+            "Trigger the controlled credential-print attempt.",
+            "Capture the resulting console output.",
+            "Inspect the output for the sensitive-field representation and warning."
+          ],
+          "expected": "The credential value is absent, the sensitive field contains a redaction marker, and a security warning is logged.",
+          "source": "derived",
+          "rationale": "This is derived from SEC-001's failure behavior; it checks the specified safe response when code attempts to expose a credential.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    }
+  ]
+}

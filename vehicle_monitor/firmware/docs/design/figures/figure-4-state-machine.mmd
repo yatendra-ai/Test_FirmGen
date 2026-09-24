@@ -1,0 +1,31 @@
+flowchart LR
+    state_entry(("diagnostics_task entry<br/>start of cycle"))
+    state_f1("Task diagnostics_task<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f2("esp_task_wdt_add#40;NULL#41;<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f3("ESP_LOGI#40;TAG#41;<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f4("diagnostics_reset_name#40;esp_reset_reason#40;#41;#41;<br/>firmware/platforms/esp32/diagnostics…")
+    state_f5("esp_reset_reason#40;#41;<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f6("Loop forever<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f7{"#40;xQueueReceive#40;g_command_queue, &comman… — firmware/platforms/esp32/diagnostics_s…"}
+    state_f8{"#40;command == '?'#41; — firmware/platforms/esp32/diagnostics_service_es…"}
+    state_f9("ESP_LOGI#40;TAG#41;<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f10("dht22_service_sample#40;#41;<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f11("mpu6050_service_state#40;#41;<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_f12("network_service_publish_failures#40;#41;<br/>firmware/platforms/esp32/diagnostics_service…")
+    state_f13(("ESP_LOGW#40;TAG#41;<br/>firmware/platforms/esp32/diagnostics_service_es…"))
+    state_f14("esp_task_wdt_reset#40;#41;<br/>firmware/platforms/esp32/diagnostics_service_es…")
+    state_entry --> state_f1
+    state_f1 --> state_f2
+    state_f2 --> state_f3
+    state_f3 --> state_f4
+    state_f4 --> state_f5
+    state_f5 --> state_f6
+    state_f6 --> state_f7
+    state_f7 -->|yes| state_f8
+    state_f8 -->|yes| state_f9
+    state_f9 --> state_f10
+    state_f10 --> state_f11
+    state_f11 --> state_f12
+    state_f12 -->|no| state_f13
+    state_f13 --> state_f14
+    state_f14 -.->|next cycle| state_entry

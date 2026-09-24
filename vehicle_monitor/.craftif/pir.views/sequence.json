@@ -1,0 +1,10 @@
+{
+  "schema_version": "3.0.0",
+  "view": "sequence",
+  "revision": "86a23f881097aa36b54fdf893f3e81f7",
+  "graph_version": 9,
+  "generated_at_ms": 1790241933123,
+  "mermaid": "sequenceDiagram\n  participant Boot as app_main\n  participant App as app_start\n  participant DHT as dht22_task\n  participant IMU as mpu6050_task\n  participant Net as network_service_task\n  participant WiFi as WiFi station\n  participant MQTT as MQTT broker transport\n  participant Diag as diagnostics_task\n  participant UART as Console UART\n  Boot->>Boot: firmgen_telemetry_start\n  Boot->>Boot: firmgen_proto_monitor_start\n  Boot->>App: app_start\n  App->>DHT: osal_task_create\n  App->>IMU: osal_task_create\n  App->>Net: osal_task_create\n  App->>Diag: diagnostics_service_start\n  DHT->>DHT: gpio_config on GPIO 2\n  DHT->>DHT: Read and decode DHT22 frame\n  IMU->>IMU: Configure I2C GPIO 9 and GPIO 8\n  IMU->>IMU: Probe address 0x68 and read acceleration\n  Net->>Net: Initialize NVS and load thresholds\n  Net->>WiFi: esp_wifi_start\n  WiFi-->>Net: IP_EVENT_STA_GOT_IP\n  Net->>MQTT: esp_mqtt_client_start\n  loop DHT22 every 2000 ms\n    DHT->>DHT: Sample climate data\n  end\n  loop MPU6050 every 100 ms\n    IMU->>IMU: Read motion state\n  end\n  loop Network service runtime\n    Net->>Net: Read climate and motion snapshots\n    alt Both samples are valid\n      Net->>MQTT: Publish vehicle/cabin/telemetry\n      Net->>Net: Evaluate configured thresholds\n      alt Threshold is crossed\n        Net->>MQTT: Publish vehicle/cabin/alert\n      end\n    end\n    alt WiFi retry bit is set\n      Net->>WiFi: esp_wifi_connect\n    end\n  end\n  loop Diagnostics command polling\n    Diag->>Diag: xQueueReceive for 250 ms\n    alt Command is question mark\n      Diag->>UART: ESP_LOGI HEALTH counters\n    else Unknown command\n      Diag->>UART: ESP_LOGW unknown diagnostics command\n    end\n  end\n  loop Firmgen emitters every 500 ms\n    Boot->>UART: RTOS and protocol JSON telemetry\n  end",
+  "title": "Sequence Diagram",
+  "authored_by_model": true
+}

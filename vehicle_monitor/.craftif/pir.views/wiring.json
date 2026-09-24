@@ -1,0 +1,855 @@
+{
+  "schema_version": "3.0.0",
+  "view": "wiring",
+  "revision": "86a23f881097aa36b54fdf893f3e81f7",
+  "graph_version": 9,
+  "generated_at_ms": 1790241933122,
+  "graph": {
+    "schema_version": 1,
+    "id": "pir_vehicle_monitor",
+    "name": "vehicle_monitor topology",
+    "description": "Resolved DHT22 GPIO configuration and connected sensor GPIO paths to their runtime tasks.",
+    "board_id": "ESP32-C3-DevKitM-1",
+    "nodes": [
+      {
+        "id": "boot",
+        "node_type": "system_init",
+        "label": "Boot / app_main",
+        "description": "Bootstraps firmware startup and initializes core subsystems.",
+        "ports": [
+          {
+            "id": "boot_boot_out_0",
+            "name": "boot_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "target": "esp32c3"
+        },
+        "execution": {},
+        "visual": {
+          "x": 0.0,
+          "y": 589.0,
+          "layer": 0
+        }
+      },
+      {
+        "id": "dht22_data_gpio",
+        "node_type": "gpio_input",
+        "label": "DHT22 DATA GPIO (GPIO 2, APP_DHT22_DATA_GPIO)",
+        "description": "Reads GPIO 2 as an input signal.",
+        "ports": [
+          {
+            "id": "dht22_data_gpio_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "dht22_data_gpio_gpio_out_1",
+            "name": "gpio_out",
+            "direction": "output",
+            "datatype": "gpio_level",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "pin": 2
+        },
+        "hardware": {
+          "gpio": 2,
+          "bus": "gpio",
+          "pin_label": "DHT22 DATA GPIO (GPIO 2, APP_DHT22_DATA_GPIO)"
+        },
+        "execution": {},
+        "visual": {
+          "x": 0.0,
+          "y": 25.0,
+          "layer": 0
+        }
+      },
+      {
+        "id": "mpu6050_scl_gpio",
+        "node_type": "gpio_input",
+        "label": "MPU6050 SCL GPIO (GPIO 8, APP_MPU6050_SCL_GPIO)",
+        "description": "Reads GPIO 8 as an input signal.",
+        "ports": [
+          {
+            "id": "mpu6050_scl_gpio_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mpu6050_scl_gpio_gpio_out_1",
+            "name": "gpio_out",
+            "direction": "output",
+            "datatype": "gpio_level",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "pin": 8
+        },
+        "hardware": {
+          "gpio": 8,
+          "bus": "gpio",
+          "pin_label": "MPU6050 SCL GPIO (GPIO 8, APP_MPU6050_SCL_GPIO)"
+        },
+        "execution": {},
+        "visual": {
+          "x": 0.0,
+          "y": 213.0,
+          "layer": 0
+        }
+      },
+      {
+        "id": "mpu6050_sda_gpio",
+        "node_type": "gpio_input",
+        "label": "MPU6050 SDA GPIO (GPIO 9, APP_MPU6050_SDA_GPIO)",
+        "description": "Reads GPIO 9 as an input signal.",
+        "ports": [
+          {
+            "id": "mpu6050_sda_gpio_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mpu6050_sda_gpio_gpio_out_1",
+            "name": "gpio_out",
+            "direction": "output",
+            "datatype": "gpio_level",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "pin": 9
+        },
+        "hardware": {
+          "gpio": 9,
+          "bus": "gpio",
+          "pin_label": "MPU6050 SDA GPIO (GPIO 9, APP_MPU6050_SDA_GPIO)"
+        },
+        "execution": {},
+        "visual": {
+          "x": 0.0,
+          "y": 401.0,
+          "layer": 0
+        }
+      },
+      {
+        "id": "fg_proto",
+        "node_type": "rtos_task",
+        "label": "Task fg_proto",
+        "description": "Executes RTOS loop logic for fg_proto.",
+        "ports": [
+          {
+            "id": "fg_proto_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "fg_proto_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "fg_proto_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "fg_proto_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "fg_proto",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 140.0,
+          "y": 598.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "fg_telemetry",
+        "node_type": "rtos_task",
+        "label": "Task fg_telemetry",
+        "description": "Executes RTOS loop logic for fg_telemetry.",
+        "ports": [
+          {
+            "id": "fg_telemetry_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "fg_telemetry_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "fg_telemetry_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "fg_telemetry_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "fg_telemetry",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 188.0,
+          "y": 7.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "dht22_task",
+        "node_type": "rtos_task",
+        "label": "Task dht22_task",
+        "description": "Executes RTOS loop logic for dht22_task.",
+        "ports": [
+          {
+            "id": "dht22_task_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "dht22_task_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "dht22_task_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "dht22_task_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "dht22_task",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 140.0,
+          "y": 0.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "mpu6050_task",
+        "node_type": "rtos_task",
+        "label": "Task mpu6050_task",
+        "description": "Executes RTOS loop logic for mpu6050_task.",
+        "ports": [
+          {
+            "id": "mpu6050_task_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mpu6050_task_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mpu6050_task_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mpu6050_task_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "mpu6050_task",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 188.0,
+          "y": 401.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "network_task",
+        "node_type": "rtos_task",
+        "label": "Task network_task",
+        "description": "Executes RTOS loop logic for network_task.",
+        "ports": [
+          {
+            "id": "network_task_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "network_task_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "network_task_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "network_task_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "network_task",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 236.0,
+          "y": 15.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "diagnostics_task",
+        "node_type": "rtos_task",
+        "label": "Task diagnostics_task",
+        "description": "Executes RTOS loop logic for diagnostics_task.",
+        "ports": [
+          {
+            "id": "diagnostics_task_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "diagnostics_task_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "diagnostics_task_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "diagnostics_task_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "diagnostics_task",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 140.0,
+          "y": 204.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "wifi",
+        "node_type": "wifi_manager",
+        "label": "WiFi",
+        "description": "Manages Wi-Fi connectivity for SSID `GopalaSutharsan`.",
+        "ports": [
+          {
+            "id": "wifi_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": true,
+            "multiplicity": "one"
+          },
+          {
+            "id": "wifi_network_out_1",
+            "name": "network_out",
+            "direction": "output",
+            "datatype": "network",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "mode": "station",
+          "ssid": "GopalaSutharsan",
+          "password": "123987456"
+        },
+        "execution": {},
+        "visual": {
+          "x": 236.0,
+          "y": 599.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "mqtt",
+        "node_type": "mqtt_client",
+        "label": "MQTT",
+        "description": "Handles MQTT broker communication and message routing.",
+        "ports": [
+          {
+            "id": "mqtt_network_in_0",
+            "name": "network_in",
+            "direction": "input",
+            "datatype": "network",
+            "required": true,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mqtt_data_in_1",
+            "name": "data_in",
+            "direction": "input",
+            "datatype": "payload",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mqtt_publish_out_2",
+            "name": "publish_out",
+            "direction": "output",
+            "datatype": "mqtt_message",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "broker_url": "mqtt://broker.hivemq.com:1883",
+          "qos": 0
+        },
+        "execution": {},
+        "visual": {
+          "x": 188.0,
+          "y": 605.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "i2c_device",
+        "node_type": "i2c_device",
+        "label": "I2C Device",
+        "description": "Represents an I2C peripheral with mapped bus pins.",
+        "ports": [
+          {
+            "id": "i2c_device_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "i2c_device_data_in_1",
+            "name": "data_in",
+            "direction": "input",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "i2c_device_data_out_2",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "address": "0x68",
+          "clock_hz": 100000
+        },
+        "execution": {},
+        "visual": {
+          "x": 188.0,
+          "y": 211.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "uart_device",
+        "node_type": "uart_device",
+        "label": "UART Device",
+        "description": "Represents a UART peripheral with mapped serial pins.",
+        "ports": [
+          {
+            "id": "uart_device_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "uart_device_data_in_1",
+            "name": "data_in",
+            "direction": "input",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "uart_device_data_out_2",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "port": 1,
+          "baud_rate": 115200
+        },
+        "execution": {},
+        "visual": {
+          "x": 236.0,
+          "y": 409.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "mpu6050_i2c",
+        "node_type": "i2c_device",
+        "label": "MPU6050 I2C Device",
+        "description": "Represents an I2C peripheral with mapped bus pins.",
+        "ports": [
+          {
+            "id": "mpu6050_i2c_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mpu6050_i2c_data_in_1",
+            "name": "data_in",
+            "direction": "input",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mpu6050_i2c_data_out_2",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "address": "0x68U",
+          "clock_hz": 100000
+        },
+        "execution": {},
+        "visual": {
+          "x": 376.0,
+          "y": 306.0,
+          "layer": 2
+        }
+      },
+      {
+        "id": "storage_manager",
+        "node_type": "storage_manager",
+        "label": "Storage Manager",
+        "description": "Persists runtime state and configuration data.",
+        "ports": [
+          {
+            "id": "storage_manager_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "storage_manager_data_in_1",
+            "name": "data_in",
+            "direction": "input",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "storage_manager_data_out_2",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "backend": "nvs",
+          "namespace": "app"
+        },
+        "execution": {},
+        "visual": {
+          "x": 236.0,
+          "y": 219.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "event_handler",
+        "node_type": "event_handler",
+        "label": "Event Handler",
+        "description": "Queues and dispatches asynchronous firmware events.",
+        "ports": [
+          {
+            "id": "event_handler_event_in_0",
+            "name": "event_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "event_handler_event_out_1",
+            "name": "event_out",
+            "direction": "output",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "event_handler_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "event_id": -1
+        },
+        "execution": {},
+        "visual": {
+          "x": 140.0,
+          "y": 408.0,
+          "layer": 1
+        }
+      }
+    ],
+    "connections": [
+      [
+        "boot_boot_out_0",
+        "fg_proto_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "fg_telemetry_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "dht22_task_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "mpu6050_task_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "network_task_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "diagnostics_task_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "wifi_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "mqtt_network_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "i2c_device_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "uart_device_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "mpu6050_i2c_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "storage_manager_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "event_handler_event_in_0"
+      ],
+      [
+        "dht22_data_gpio_gpio_out_1",
+        "dht22_task_exec_in_0"
+      ],
+      [
+        "mpu6050_scl_gpio_gpio_out_1",
+        "mpu6050_i2c_exec_in_0"
+      ],
+      [
+        "mpu6050_sda_gpio_gpio_out_1",
+        "mpu6050_i2c_exec_in_0"
+      ],
+      [
+        "mpu6050_task_data_out_3",
+        "mpu6050_i2c_exec_in_0"
+      ]
+    ],
+    "layout": {
+      "orientation": "",
+      "node_width": 0.0,
+      "layer_gap": 0.0,
+      "node_gap": 0.0
+    }
+  },
+  "title": "Wiring Topology",
+  "authored_by_model": false
+}
