@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirement traceability</title>
+<style>
+:root {
+  --ink: #14171a; --dim: #5b6570; --line: #dfe3e8; --bg: #ffffff; --panel: #f6f7f9;
+  --ok: #157347; --warn: #9a5b00; --bad: #a5262b; --accent: #1f4e79;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #e6e9ec; --dim: #98a3ae; --line: #2c333a; --bg: #14171a; --panel: #1c2126;
+          --ok: #4ec27f; --warn: #e0a75a; --bad: #f08a8f; --accent: #8ab4e8; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 2.5rem 1.5rem 5rem; background: var(--bg); color: var(--ink);
+  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1180px; margin: 0 auto; }
+h1 { font-size: 1.7rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
+h2 { font-size: 1.15rem; margin: 2.5rem 0 .3rem; padding-top: 1.2rem;
+  border-top: 1px solid var(--line); }
+h3 { font-size: .95rem; margin: 1.6rem 0 .4rem; }
+p { margin: .5rem 0; }
+.sub { color: var(--dim); font-size: .875rem; }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  padding: .9rem 1.1rem; margin: 1.2rem 0; }
+.lead p:first-child { margin-top: 0; } .lead p:last-child { margin-bottom: 0; }
+.void { border-color: var(--bad); }
+.void strong { color: var(--bad); }
+.meta { color: var(--dim); font-size: .85rem; margin: .2rem 0 .8rem; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .84rem; }
+th, td { text-align: left; vertical-align: top; padding: .45rem .6rem;
+  border-bottom: 1px solid var(--line); }
+th { color: var(--dim); font-weight: 600; font-size: .74rem; text-transform: uppercase;
+  letter-spacing: .04em; white-space: nowrap; }
+td code { font-size: .82em; }
+code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+.none { color: var(--dim); }
+.pill { display: inline-block; padding: .1rem .45rem; border-radius: 999px;
+  font-size: .72rem; font-weight: 600; white-space: nowrap; border: 1px solid currentColor; }
+.s-verified { color: var(--ok); } .s-tests { color: var(--accent); }
+.s-impl { color: var(--warn); } .s-none { color: var(--bad); }
+.flag { color: var(--bad); font-size: .72rem; display: block; margin-top: .2rem; }
+ul { margin: .4rem 0; padding-left: 1.2rem; } li { margin: .18rem 0; }
+</style>
+</head><body><main>
+<h1>Requirement traceability</h1>
+<p class="sub">Generated 2026-09-24T00:44:27.793587400+00:00 · specification frozen 2026-09-24T00:38:51.026Z</p>
+<div class="lead"><p>46 of 46 requirements have code recorded against them — 0 with tests passing, 0 with tests written but not passing, 46 implemented with no test at all. 0 have nothing recorded.</p>
+</div>
+<div class="lead"><p><strong>Host unit tests.</strong> No host unit-test results have been imported for this project. Host tests run on a separate machine; nothing here rests on host test evidence.</p></div>
+<p class="sub">Derived from what the agent recorded with <code>requirement_trace</code> and from the frozen specification. An em dash means nothing was recorded, which is not the same as nothing being needed.</p>
+<h2>Target Hardware &amp; Build Configuration</h2>
+<p class="meta">gate: reviewed · tasks: 4/4 done · recorded in: 305bfa04-5f10-49ba-ac62-2eb3829f110a</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>HW-001</code></td><td>The firmware shall interface with the X-NUCLEO-IHM16M1 motor driver based on the STSPIN830.</td><td>hardware / instrument</td><td>With the X-NUCLEO-IHM16M1 attached, the firmware changes the STSPIN830 drive-enable signal between enabled and disabled states. (expected: The driver-enable signal is in the enabled state after the enable command and in the disabled state after the disable command.)<br>With the X-NUCLEO-IHM16M1 attached, the firmware produces PWM on the driver input associated with TIM1. (expected: A periodic PWM waveform is present at the configured driver input while drive is enabled.)</td><td><code>firmware/drivers/x_nucleo_ihm16m1/include/x_nucleo_ihm16m1.h<br>firmware/drivers/x_nucleo_ihm16m1/src/x_nucleo_ihm16m1.c<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>motor_board_prepare<br>x_nucleo_ihm16m1_init</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-002</code></td><td>The firmware shall be capable of rotating the GBM2804H-100T three-phase gimbal motor.</td><td>hardware / instrument</td><td>When commanded to start with the GBM2804H-100T connected and powered, the motor exhibits observable rotation. (expected: The rotor exhibits observable movement or rotation after the start command.)</td><td><code>firmware/README.md<br>firmware/configs/app_config.h</code></td><td><code>motor_board_prepare</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-003</code></td><td>The firmware shall assume the motor has 7 pole pairs.</td><td>inspection</td><td>The firmware's motor pole-pair configuration used by motor calculations or reporting is set to 7. (expected: The configured motor pole-pair value is exactly 7 pairs.)</td><td><code>firmware/app/app.c<br>firmware/configs/app_config.h</code></td><td><code>app_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-004</code></td><td>The system shall be powered by a 12 V DC supply during this test.</td><td>hardware / instrument</td><td>The motor-driver supply measured at the test setup is 12 V DC. (expected: The measured supply is 12 V DC.)</td><td><code>firmware/README.md<br>firmware/configs/app_config.h</code></td><td><code>app_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-005</code></td><td>The motor drive outputs shall be the U, V, W three-phase outputs.</td><td>inspection</td><td>The three motor phase connections use the hardware output terminals labeled U, V, and W. (expected: The three motor phase connections terminate at U, V, and W, with no motor phase connected to another output.)</td><td><code>firmware/README.md<br>firmware/configs/app_config.h</code></td><td><code>motor_board_prepare</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>NFR-005</code></td><td>The firmware shall build successfully, be flashable to the NUCLEO-G431RB target board, and execute on that board without modification.</td><td>inspection<br>hardware / instrument</td><td>A clean firmware build completes for the NUCLEO-G431RB without compiler, linker, or build errors. (expected: The clean build exits successfully with no build errors and produces a firmware image for the NUCLEO-G431RB.)<br>The generated firmware image flashes to the NUCLEO-G431RB and the board executes it without changing the image or source after the build. (expected: Programming completes successfully, the flashed image is unchanged from the clean-build artifact, and the NUCLEO-G431RB powers up and executes that image without source or binary modification.)</td><td><code>CMakeLists.txt<br>STM32G431RBTX_FLASH.ld<br>firmware/app/app.c<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>app_start<br>main<br>motor_board_prepare</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>HW-001</code> — <span class="sub">Fresh image flashed successfully. The ST-LINK monitor captured no UART bytes, and the user reported LD2 dark or erratic. Debug attachment found the target still running and did not hit HardFault; enable/PWM signal levels were not instrumented, so this criterion remains unverified.</span></li>
+<li><code>HW-002</code> — <span class="sub">No motor rotation observation was obtained; monitor was silent after reset, so mechanical rotation remains unverified.</span></li>
+<li><code>HW-004</code> — <span class="sub">No bench-supply measurement was captured; the 12 V DC condition remains unverified.</span></li>
+<li><code>NFR-005</code> — <span class="sub">Clean CMake/Ninja build and ST-LINK flash both succeeded without modifying the generated artifact. The board was detected as NUCLEO-G431RB / STM32G43x with 128 KB flash and 3.29 V. Runtime monitor was silent and no application marker was captured, so execute-path success is not verified.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>HW-003</code> — <span class="sub">APP_MOTOR_POLE_PAIRS is exactly 7U and is used in the startup status format.</span></li>
+<li><code>HW-005</code> — <span class="sub">Source inspection records U/V/W terminal labels and PA8/PA9/PA10 routes; physical phase-terminal wiring was not inspected.</span></li>
+</ul>
+<h2>Motor Driver &amp; PWM Generation</h2>
+<p class="meta">gate: reviewed · tasks: 4/4 done · recorded in: 305bfa04-5f10-49ba-ac62-2eb3829f110a</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>IF-001</code></td><td>The firmware shall configure TIM1 to generate three-phase PWM.</td><td>hardware / instrument</td><td>With the firmware initialized, TIM1 produces three simultaneous PWM signals on the U, V, and W driver-input connections with a common synchronized time base. (expected: Three active PWM waveforms are present simultaneously on U, V, and W, and their carrier timing is synchronized.)</td><td><code>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>configure_timer<br>pwm_enable</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-002</code></td><td>The firmware shall use the factory-default X-NUCLEO-IHM16M1 three-input configuration.</td><td>inspection</td><td>The driver configuration selects the factory three-PWM-input mode and contains no configuration that selects an alternate commutation mode. (expected: The factory three-PWM-input mode is selected, and no alternate commutation mode is configured.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>motor_board_prepare</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-001</code></td><td>The firmware shall generate a rotating three-phase electrical field using open-loop sinusoidal PWM.</td><td>hardware / instrument</td><td>When PWM is enabled without an active fault, the U, V, and W PWM duty cycles form three sinusoidal modulation signals separated by 120 electrical degrees. (expected: The three modulation envelopes are phase-shifted by 120 electrical degrees, within the measurement resolution.)<br>The phase sequence of the three PWM modulation envelopes advances at the commanded electrical frequency. (expected: The measured electrical frequency equals the commanded electrical frequency within the measurement resolution.)</td><td><code>firmware/app/app.c<br>firmware/modules/motor_waveform/motor_waveform.c<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>app_process<br>motor_board_apply_pwm<br>motor_waveform_step</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-003</code></td><td>STBY shall be controlled to enable and disable the motor driver.</td><td>hardware / instrument</td><td>Driving STBY to its standby level places the STSPIN830 in standby, and driving it to its enable level places the driver in the enabled state. (expected: The standby-level command results in the datasheet-defined standby/disabled state, and the enable-level command results in the datasheet-defined enabled state.)</td><td><code>firmware/drivers/x_nucleo_ihm16m1/src/x_nucleo_ihm16m1.c<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>motor_board_set_enabled<br>x_nucleo_ihm16m1_set_standby</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-001</code></td><td>The PWM switching frequency shall be 20 kHz.</td><td>hardware / instrument</td><td>The measured TIM1 PWM carrier frequency is 20 kHz. (expected: The carrier frequency is 20 kHz within the measurement resolution.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>configure_timer</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-002</code></td><td>The initial PWM amplitude shall be 10%.</td><td>on-target test</td><td>At entry to the startup ramp, the commanded PWM duty-cycle amplitude is 10%. (expected: The initial commanded PWM amplitude is 10%.)</td><td><code>firmware/configs/app_config.h<br>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>motor_waveform_initialize<br>motor_waveform_step</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-003</code></td><td>The PWM amplitude shall not exceed 20% during this test.</td><td>hardware / instrument</td><td>The effective PWM duty cycle on every output remains at or below 20% when a duty command greater than 20% is applied. (expected: No measured output duty cycle exceeds 20%.)</td><td><code>firmware/configs/app_config.h<br>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>motor_waveform_initialize<br>motor_waveform_step</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-004</code></td><td>The initial electrical frequency shall be 1 Hz.</td><td>hardware / instrument</td><td>At entry to the startup ramp, the generated electrical frequency is 1 Hz. (expected: The initial electrical frequency is 1 Hz within the measurement resolution.)</td><td><code>firmware/configs/app_config.h<br>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>motor_waveform_initialize<br>motor_waveform_step</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-005</code></td><td>The electrical-frequency ramp target shall be 10 Hz.</td><td>hardware / instrument</td><td>During the startup ramp, the generated electrical frequency reaches 10 Hz and does not exceed 10 Hz without an explicit reconfiguration command. (expected: The measured frequency reaches 10 Hz, never exceeds 10 Hz while unreconfigured, and remains at the target until explicitly reconfigured.)</td><td><code>firmware/configs/app_config.h<br>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>motor_waveform_initialize<br>motor_waveform_step</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-012</code></td><td>The firmware shall support clockwise and counter-clockwise rotation; issuing &quot;DIR CW&quot; or &quot;DIR CCW&quot; shall reverse the generated phase sequence and rotation direction accordingly.</td><td>hardware / instrument</td><td>After issuing DIR CW and then DIR CCW, the measured phase order changes to match the most recently commanded direction. (expected: The phase order after `DIR CW` matches the CW sequence, and the phase order after `DIR CCW` is the reversed CCW sequence and remains the sequence associated with the last command.)<br>The motor's observed rotation direction reverses when the command changes from DIR CW to DIR CCW. (expected: The motor rotates in the CW direction after `DIR CW` and in the opposite, CCW direction after `DIR CCW`.)</td><td><code>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>motor_waveform_set_direction<br>motor_waveform_step</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>IF-001</code> — <span class="sub">Category 2 review image built and flashed successfully. No oscilloscope or logic-analyzer capture was available; simultaneous U/V/W PWM remains unverified.</span></li>
+<li><code>FR-001</code> — <span class="sub">The waveform update path is wired from main through app_process, but no instrument capture was available to verify 120-degree separation or electrical frequency.</span></li>
+<li><code>IF-003</code> — <span class="sub">ST-LINK flash succeeded, but STBY level and STSPIN830 enabled state were not measured.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>IF-002</code> — <span class="sub">Source inspection confirms X_NUCLEO_IHM16M1_THREE_PWM_INPUTS and no alternate commutation mode.</span></li>
+<li><code>PERF-001</code> — <span class="sub">APP_MOTOR_PWM_FREQUENCY_HZ is 20000U; timer configuration is sourced from the 170 MHz clock and center-aligned period 4249. Measurement remains outstanding.</span></li>
+<li><code>PERF-002</code>, <code>PERF-003</code> — <span class="sub">Initial amplitude is 0.10 and clamp maximum is 0.20.</span></li>
+<li><code>PERF-004</code>, <code>PERF-005</code> — <span class="sub">Initial and target electrical-frequency values are 1 Hz and 10 Hz; no hardware frequency capture was obtained.</span></li>
+<li><code>FR-012</code> — <span class="sub">The waveform supports opposite phase progression signs, but no UART command ingress exists and motor_waveform_set_direction is not reachable. Runtime direction reversal is not claimed.</span></li>
+</ul>
+<h2>Motor Startup, Lifecycle &amp; Fault Safety</h2>
+<p class="meta">gate: reviewed · tasks: 4/4 done · recorded in: 305bfa04-5f10-49ba-ac62-2eb3829f110a</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-002</code></td><td>The startup sequence shall start with a low PWM amplitude.</td><td>hardware / instrument<br>host test</td><td>At the first sample of the startup ramp, the commanded PWM duty is 10%. (expected: 10% duty at startup-ramp entry)<br>Every PWM duty command generated during the startup ramp is no greater than the configured maximum amplitude. (expected: Each duty value is less than or equal to the configured maximum amplitude)</td><td><code>firmware/configs/app_config.h<br>firmware/modules/motor_waveform/motor_waveform.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>motor_lifecycle_process<br>motor_lifecycle_start<br>motor_waveform_initialize</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-003</code></td><td>The startup sequence shall gradually ramp the electrical frequency from its initial value toward the target.</td><td>hardware / instrument</td><td>The measured electrical frequency samples collected during startup are monotonically non-decreasing from the configured initial frequency toward the 10 Hz ramp target. (expected: Frequency never decreases and reaches the configured 10 Hz target)</td><td><code>firmware/configs/app_config.h<br>firmware/modules/motor_waveform/motor_waveform.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>motor_lifecycle_process<br>motor_lifecycle_start<br>motor_waveform_initialize</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-005</code></td><td>MOTOR START shall not be blocked because ADC measurements, motor electrical parameters, characterization, FOC, observer, current sensing, or closed-loop control are unavailable.</td><td>hardware / instrument</td><td>With ADC measurement, motor-parameter, characterization, FOC, observer, current-sensing, and closed-loop-control features disabled or absent, a MOTOR START command produces the first startup-ramp PWM command. (expected: Startup-ramp state is entered and PWM startup output begins)</td><td><code>firmware/app/app.c<br>firmware/interfaces/motor_board_if.h<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>app_process<br>app_start<br>motor_board_read_fault<br>motor_board_shutdown</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-006</code></td><td>MOTOR START shall depend only on successful PWM/GPIO initialization and the absence of an active STSPIN830 hardware fault.</td><td>hardware / instrument</td><td>When PWM/GPIO initialization succeeds and EN/FAULT is inactive, MOTOR START is accepted and the startup ramp begins. (expected: MOTOR START is accepted and the state changes to startup ramp)<br>When PWM/GPIO initialization fails or EN/FAULT is active, MOTOR START does not enable PWM or enter the startup ramp. (expected: PWM remains disabled and the startup-ramp state is not entered)</td><td><code>firmware/app/app.c<br>firmware/interfaces/motor_board_if.h<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>app_process<br>app_start<br>motor_board_read_fault<br>motor_board_shutdown</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-007</code></td><td>On reset or power-up, the firmware shall hold the motor driver in standby (disabled) via STBY until TIM1/GPIO are fully configured and PWM outputs are in a defined inactive state; only then may the driver be enabled.</td><td>hardware / instrument</td><td>After reset or power-up, STBY remains at the configured disable level until TIM1/GPIO configuration is complete and PWM outputs are at their defined inactive levels. (expected: STBY remains at the configured disable level until configuration completion, and all three PWM inputs are at their defined inactive levels before STBY is enabled)<br>After STBY is enabled, the motor remains stopped until a valid MOTOR START command is received. (expected: No motor drive or motion occurs before MOTOR START; startup PWM begins only after the valid command)</td><td><code>firmware/app/app.c<br>firmware/interfaces/motor_board_if.h<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>app_process<br>app_start<br>motor_board_read_fault<br>motor_board_shutdown</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-018</code></td><td>When PWM is disabled (by MOTOR STOP or driver fault), the three driver input pins shall be driven to the documented inactive level for the factory three-input configuration, ensuring no residual drive is applied to the motor phases.</td><td>hardware / instrument</td><td>After MOTOR STOP or while EN/FAULT is active, all three driver-input pins remain at the documented inactive levels and show no PWM switching. (expected: All three inputs are continuously at their documented inactive levels with no switching after either event)<br>Following MOTOR STOP, STATUS reports Stopped and following an EN/FAULT event, STATUS reports the applicable fault state. (expected: MOTOR STOP produces STATUS=Stopped, and an asserted EN/FAULT produces STATUS indicating the active driver fault)<br>When the inactive driver-input level cannot be driven, STBY is asserted to the configured disable level. (expected: STBY is at the configured disable level and the driver is forced into standby)</td><td><code>firmware/app/app.c<br>firmware/interfaces/motor_board_if.h<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>app_process<br>app_start<br>motor_board_read_fault<br>motor_board_shutdown</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-008</code></td><td>After boot/reset and before any command is issued, PWM shall remain disabled and the motor shall remain stopped.</td><td>hardware / instrument</td><td>Immediately after initialization and before any command, the three driver-input pins show no PWM activity and the motor remains stopped. (expected: No PWM transitions are present and the motor does not move)</td><td><code>firmware/app/app.c<br>firmware/interfaces/motor_board_if.h<br>firmware/platforms/stm32/stm32_motor_board.c</code></td><td><code>app_process<br>app_start<br>motor_board_read_fault<br>motor_board_shutdown</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-009</code></td><td>Upon receiving the UART command &quot;MOTOR START&quot;, the firmware shall initiate the defined open-loop startup ramp.</td><td>hardware / instrument</td><td>A UART MOTOR START command begins the open-loop startup ramp with the configured initial amplitude and configured initial frequency. (expected: The startup-ramp state begins; first amplitude equals the configured initial amplitude and first frequency equals the configured initial frequency)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/stm32_motor_board.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>dispatch_command<br>motor_board_shutdown<br>motor_lifecycle_fault<br>motor_lifecycle_start<br>motor_lifecycle_stop</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-010</code></td><td>Upon receiving the UART command &quot;MOTOR STOP&quot;, the firmware shall immediately disable PWM (within one control cycle) and stop the motor.</td><td>hardware / instrument</td><td>While PWM is enabled or the startup ramp is active, receiving MOTOR STOP disables all PWM outputs within one control cycle. (expected: All PWM outputs are disabled no later than one control cycle after MOTOR STOP reception)<br>After MOTOR STOP, the motor is no longer driven. (expected: No phase-drive waveform remains and the motor is not driven)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/stm32_motor_board.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>dispatch_command<br>motor_board_shutdown<br>motor_lifecycle_fault<br>motor_lifecycle_start<br>motor_lifecycle_stop</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-011</code></td><td>An active STSPIN830 EN/FAULT condition shall immediately disable PWM (within one control cycle).</td><td>hardware / instrument</td><td>When EN/FAULT is asserted while PWM is enabled, all PWM outputs are disabled within one control cycle. (expected: All PWM outputs are disabled no later than one control cycle after EN/FAULT assertion)<br>PWM remains disabled after an EN/FAULT event until the fault clears and a new MOTOR START command is received. (expected: PWM remains disabled after fault clearing alone and resumes only after the subsequent MOTOR START command)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/stm32_motor_board.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>dispatch_command<br>motor_board_shutdown<br>motor_lifecycle_fault<br>motor_lifecycle_start<br>motor_lifecycle_stop</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>FR-002</code>, <code>FR-003</code> — <span class="sub">Current command-enabled image built and flashed successfully. Reachability analysis confirms motor_lifecycle_start is now wired through the command dispatcher. No usable UART response or oscilloscope capture was obtained, so startup duty and measured frequency ramp remain unverified on hardware.</span></li>
+<li><code>FR-005</code>, <code>FR-006</code>, <code>FR-007</code>, <code>IF-018</code>, <code>FR-008</code> — <span class="sub">Current source treats fault-read failure as a fault-safe shutdown, calls centralized shutdown at initialization, and does not automatically start. Build and flash succeeded; monitor was silent and no phase/STBY instrument capture was available.</span></li>
+<li><code>FR-009</code>, <code>FR-010</code>, <code>FR-011</code> — <span class="sub">Current command dispatcher and lifecycle start/stop/fault paths are wired in source; the fresh deployment produced no UART bytes, so MOTOR START, MOTOR STOP, and injected EN/FAULT timing were not exercised on hardware.</span></li>
+</ul>
+<h2>UART Command &amp; Status Interface</h2>
+<p class="meta">gate: reviewed · tasks: 5/5 done · recorded in: 305bfa04-5f10-49ba-ac62-2eb3829f110a</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>IF-004</code></td><td>Upon receiving the UART command &quot;DIR CW&quot;, the firmware shall set the rotation direction to clockwise.</td><td>hardware / instrument</td><td>After transmitting `DIR CW`, the observed motor phase sequence is clockwise and the reported direction is CW. (expected: The phase sequence corresponds to clockwise rotation and STATUS reports `CW`.)</td><td><code>firmware/app/app.c<br>firmware/modules/command_parser/command_parser.c<br>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>command_parser_parse<br>dispatch_command<br>motor_waveform_set_direction</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-005</code></td><td>Upon receiving the UART command &quot;DIR CCW&quot;, the firmware shall set the rotation direction to counter-clockwise.</td><td>hardware / instrument</td><td>After transmitting `DIR CCW`, the observed motor phase sequence is counter-clockwise and the reported direction is CCW. (expected: The phase sequence corresponds to counter-clockwise rotation and STATUS reports `CCW`.)</td><td><code>firmware/app/app.c<br>firmware/modules/command_parser/command_parser.c<br>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>command_parser_parse<br>dispatch_command<br>motor_waveform_set_direction</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-006</code></td><td>Upon receiving the UART command &quot;FREQ &lt;Hz&gt;&quot;, the firmware shall set the electrical frequency to the specified value.</td><td>hardware / instrument</td><td>After transmitting `FREQ x`, the measured electrical frequency is x Hz by the next control update. (expected: Measured electrical frequency equals x Hz within the test instrument's stated measurement tolerance by the next control update.)</td><td><code>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/modules/command_parser/command_parser.c</code></td><td><code>command_parser_parse<br>dispatch_command</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-007</code></td><td>Upon receiving the UART command &quot;DUTY &lt;%&gt;&quot;, the firmware shall set the PWM amplitude to the specified value within the configured safe limit.</td><td>hardware / instrument</td><td>The effective PWM duty after a `DUTY x` command equals x percent for x at or below 20 and is no greater than 20 percent for x above 20. (expected: The first measurement is 10% within the measurement tolerance; the second measurement is less than or equal to 20%.)</td><td><code>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/modules/command_parser/command_parser.c</code></td><td><code>command_parser_parse<br>dispatch_command</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-008</code></td><td>The STATUS response shall include the current motor state.</td><td>hardware / instrument</td><td>A `STATUS` response contains a field whose value unambiguously identifies the current motor state. (expected: The response contains a motor-state field with an unambiguous state value such as `Stopped`, `Running`, or `Ramping`.)</td><td><code>firmware/app/app.c<br>firmware/interfaces/uart_if.h<br>firmware/platforms/stm32/uart_stm32.c</code></td><td><code>report_status<br>uart_if_read_byte<br>uart_if_write</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-009</code></td><td>The STATUS response shall include the current rotation direction.</td><td>hardware / instrument</td><td>A `STATUS` response contains a direction field whose value is either CW or CCW and matches the configured direction. (expected: The response contains `CW` or `CCW` matching the configured direction.)</td><td><code>firmware/app/app.c<br>firmware/interfaces/uart_if.h<br>firmware/platforms/stm32/uart_stm32.c</code></td><td><code>report_status<br>uart_if_read_byte<br>uart_if_write</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-010</code></td><td>The STATUS response shall include the current electrical frequency.</td><td>hardware / instrument</td><td>A `STATUS` response contains a numeric electrical-frequency field in Hz matching the internal frequency setpoint or measurement. (expected: The response contains a numeric Hz value equal to the current internal setpoint or measurement within the defined measurement tolerance.)</td><td><code>firmware/app/app.c<br>firmware/interfaces/uart_if.h<br>firmware/platforms/stm32/uart_stm32.c</code></td><td><code>report_status<br>uart_if_read_byte<br>uart_if_write</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-011</code></td><td>The STATUS response shall include the current PWM duty.</td><td>hardware / instrument</td><td>A `STATUS` response contains a numeric PWM-duty field in percent matching the effective duty within measurement tolerance. (expected: The reported percentage matches the measured effective PWM duty within the test's stated measurement tolerance.)</td><td><code>firmware/app/app.c<br>firmware/interfaces/uart_if.h<br>firmware/platforms/stm32/uart_stm32.c</code></td><td><code>report_status<br>uart_if_read_byte<br>uart_if_write</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-012</code></td><td>The STATUS response shall include the driver fault status.</td><td>hardware / instrument</td><td>A `STATUS` response contains a driver-fault field that reflects whether the STSPIN830 EN/FAULT condition is active. (expected: The fault field indicates inactive in the first case and active in the second case.)</td><td><code>firmware/app/app.c<br>firmware/interfaces/uart_if.h<br>firmware/platforms/stm32/uart_stm32.c</code></td><td><code>report_status<br>uart_if_read_byte<br>uart_if_write</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-013</code></td><td>The firmware shall accept UART commands to set rotation direction using &quot;DIR CW&quot; and &quot;DIR CCW&quot;.</td><td>hardware / instrument</td><td>Transmitting `DIR CW` and then `DIR CCW` updates the internal direction state to CW and then CCW, with each value appearing in the subsequent STATUS response. (expected: The first STATUS reports `CW` and the second STATUS reports `CCW`.)</td><td><code>firmware/app/app.c<br>firmware/modules/command_parser/command_parser.c<br>firmware/modules/motor_waveform/motor_waveform.c</code></td><td><code>command_parser_parse<br>dispatch_command<br>motor_waveform_set_direction</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-014</code></td><td>The firmware shall specify and use a fixed UART configuration (port, baud rate, data bits, parity, stop bits, and command delimiter) for the command interface so that the listed commands can be reliably exchanged.</td><td>inspection<br>hardware / instrument</td><td>The firmware configuration and interface documentation each specify the UART port, baud rate, data bits, parity, stop bits, and command delimiter, and the values agree. (expected: All six settings are explicitly specified in both places and are identical.)<br>Using the documented UART settings, a host transmitting `STATUS` receives a correctly formatted response containing the STATUS fields. (expected: A complete, correctly formatted STATUS response is received using the configured UART connection.)<br>A command sent with deliberately incorrect UART settings does not produce a valid command action or a partial motor/configuration change. (expected: No valid action is acknowledged and every motor/configuration field in STATUS remains equal to its baseline value.)</td><td><code>firmware/README.md<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/uart_stm32.c</code></td><td><code>uart_if_initialize</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-015</code></td><td>The firmware shall reject any unknown UART command with an explicit error response and shall not change motor state or configuration as a result of an unrecognized command.</td><td>hardware / instrument</td><td>An unrecognized command such as `FOO` produces an explicit error response and leaves all motor and configuration fields unchanged. (expected: The command response explicitly identifies an error, and every compared STATUS field is identical before and after `FOO`.)</td><td><code>firmware/app/app.c<br>firmware/modules/command_parser/command_parser.c</code></td><td><code>command_parser_parse<br>dispatch_command</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-016</code></td><td>The firmware shall validate the FREQ command argument and reject non-numeric, missing, or negative values with an error response; the electrical-frequency setpoint shall remain unchanged on rejection.</td><td>hardware / instrument</td><td>Each invalid command `FREQ abc` and `FREQ -1` produces an error response and leaves the reported electrical-frequency value unchanged. (expected: Both commands produce explicit error responses, and the frequency remains equal to the initial value after each command.)<br>A `FREQ` command with a missing argument produces an error response and does not alter the electrical-frequency setpoint. (expected: The response is an explicit error and the reported frequency equals the pre-command value.)</td><td><code>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/modules/command_parser/command_parser.c</code></td><td><code>command_parser_parse<br>dispatch_command</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-017</code></td><td>The firmware shall validate the DUTY command argument and reject non-numeric, missing, or negative values with an error response; the PWM duty setting shall remain unchanged on rejection.</td><td>hardware / instrument</td><td>Each invalid command `DUTY abc` and `DUTY -5` produces an error response and leaves the reported PWM-duty value unchanged. (expected: Both commands produce explicit error responses, and the duty remains equal to the initial value after each command.)<br>A `DUTY` command with a missing argument produces an error response and does not alter the PWM-duty setting. (expected: The response is an explicit error and the reported duty equals the pre-command value.)</td><td><code>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/modules/command_parser/command_parser.c</code></td><td><code>command_parser_parse<br>dispatch_command</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-019</code></td><td>Upon receiving the UART command &quot;STATUS&quot;, the firmware shall return a response within a reasonable time containing the current motor state, rotation direction, electrical frequency (Hz), PWM duty (%), and driver fault status.</td><td>hardware / instrument<br>not verifiable</td><td>A `STATUS` command returns one response containing the motor state, rotation direction, electrical frequency in Hz, PWM duty in percent, and driver-fault status. (expected: The response contains all five fields: motor state, direction, numeric electrical frequency in Hz, numeric PWM duty in percent, and driver-fault status.)<br>The STATUS response is returned within a reasonable time after the request.</td><td><code>firmware/app/app.c<br>firmware/interfaces/uart_if.h<br>firmware/platforms/stm32/uart_stm32.c</code></td><td><code>report_status<br>uart_if_read_byte<br>uart_if_write</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>IF-004</code>, <code>IF-005</code>, <code>IF-013</code> — <span class="sub">Fresh USART2 deploy produced startup markers, confirming the VCP path. DIR commands were not injected during the available monitor session; phase order and physical reversal remain unverified.</span></li>
+<li><code>IF-006</code>, <code>IF-007</code>, <code>IF-016</code>, <code>IF-017</code> — <span class="sub">USART2 startup markers were captured, but FREQ/DUTY valid and invalid command responses were not injected or observed.</span></li>
+<li><code>IF-008</code>, <code>IF-009</code>, <code>IF-010</code>, <code>IF-011</code>, <code>IF-012</code>, <code>IF-019</code> — <span class="sub">Captured output: uart init ok, main uart probe, uart init ok, app start. No STATUS request was injected, so field contents and response timing remain unverified.</span></li>
+<li><code>IF-015</code> — <span class="sub">UART transmit path is active, but FOO and malformed-command responses were not injected during the review capture.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>IF-014</code> — <span class="sub">USART2 PA2/PA3, 115200 8N1, no flow control, and CR/LF are consistent in configuration, implementation, and documentation.</span></li>
+</ul>
+<h2>Open-Loop Demonstration Scope &amp; Validation</h2>
+<p class="meta">gate: not decided · tasks: 3/3 done · recorded in: 305bfa04-5f10-49ba-ac62-2eb3829f110a</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-004</code></td><td>MOTOR START shall produce visible motor movement or rotation.</td><td>hardware / instrument</td><td>After issuing the MOTOR START command with the driver enabled and fault-free, the motor shaft exhibits visible movement or rotation within the test's defined reasonable-time limit. (expected: Visible shaft movement or rotation occurs before the reasonable-time limit expires.)</td><td><code>firmware/README.md<br>firmware/app/app.c<br>firmware/platforms/stm32/stm32_motor_board.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>dispatch_command<br>motor_board_apply_pwm<br>motor_board_set_enabled<br>motor_lifecycle_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>NFR-001</code></td><td>The firmware shall demonstrate basic rotation to verify the MCU board, motor-driver board, PWM outputs, and motor connections.</td><td>hardware / instrument</td><td>A correctly assembled and powered target produces observable motor rotation during the demonstration, with the rotation driven by the configured PWM outputs. (expected: The motor rotates while PWM is being generated, and the demonstration completes with observable rotation.)</td><td><code>firmware/README.md<br>firmware/app/app.c<br>firmware/platforms/stm32/stm32_motor_board.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>dispatch_command<br>motor_board_apply_pwm<br>motor_board_set_enabled<br>motor_lifecycle_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>NFR-002</code></td><td>Electrical frequency shall be used solely to create a rotating field and not as a closed-loop RPM setpoint.</td><td>inspection</td><td>The waveform-generation implementation applies the configured electrical frequency directly to the rotating-field waveform and contains no feedback path that adjusts that frequency from measured or commanded mechanical RPM. (expected: Electrical frequency is used as a direct waveform-generation input for the rotating field; no RPM feedback or closed-loop speed adjustment is present.)</td><td><code>firmware/README.md<br>firmware/app/app.c<br>firmware/modules/motor_waveform/motor_waveform.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>motor_lifecycle_process<br>motor_waveform_step<br>report_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>NFR-003</code></td><td>The firmware shall not measure or guarantee actual mechanical RPM.</td><td>inspection</td><td>The firmware source and UART status interface contain no mechanical-RPM measurement, RPM estimate, or claim that the motor is operating at a guaranteed mechanical RPM. (expected: No RPM sensor or estimator is implemented, STATUS reports no mechanical RPM, and documentation makes no mechanical-RPM guarantee.)</td><td><code>firmware/README.md<br>firmware/app/app.c<br>firmware/modules/motor_waveform/motor_waveform.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>motor_lifecycle_process<br>motor_waveform_step<br>report_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>NFR-004</code></td><td>The firmware shall not implement the following features: Sensorless FOC; Motor resistance, inductance or flux characterization; Rotor observer; Clarke/Park and inverse transforms; Current PI or speed PI controller; Closed-loop RPM control; Phase-current ADC control; VBUS ADC control; ADC-triggered DMA; Current-offset calibration; Oscilloscope integration; Automatic motor-parameter identification.</td><td>inspection</td><td>Code and configuration inspection finds no implementation or operational dependency on sensorless FOC, rotor observation, Clarke/Park or inverse transforms, current PI control, speed PI control, or closed-loop RPM control. (expected: None of the listed algorithms or control loops is implemented, invoked, or required by the demonstration path.)<br>Code and configuration inspection finds no motor-parameter characterization or automatic identification for resistance, inductance, flux, or other motor parameters. (expected: No listed characterization or automatic motor-parameter-identification routine is present or required for operation.)<br>Code and configuration inspection finds no phase-current ADC control, VBUS ADC control, ADC-triggered DMA, or current-offset calibration required by the demonstration. (expected: None of the listed ADC, DMA, or current-offset-calibration features is implemented or required for demonstration operation.)<br>Code and project inspection finds no oscilloscope integration and no external motor-parameter-identification dependency in the demonstration firmware. (expected: No oscilloscope integration is present, and the demonstration has no dependency on automatic motor-parameter identification or an external identification tool.)</td><td><code>CMakeLists.txt<br>firmware/modules/motor_waveform/motor_waveform.c<br>firmware/platforms/stm32/stm32_motor_board.c<br>firmware/services/motor_lifecycle/motor_lifecycle.c</code></td><td><code>motor_board_apply_pwm<br>motor_lifecycle_process<br>motor_waveform_step</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>FR-004</code>, <code>NFR-001</code> — <span class="sub">Fresh USART2 deployment reached app start and produced startup markers. No MOTOR START command was injected and no motor shaft or PWM instrument observation was captured; visible rotation remains unverified.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>NFR-002</code>, <code>NFR-003</code> — <span class="sub">Inspection: electrical frequency directly advances waveform angle; no mechanical RPM measurement, estimate, or RPM STATUS field exists.</span></li>
+<li><code>NFR-004</code> — <span class="sub">Inspection found no excluded FOC, observer, transform, PI, characterization, ADC/DMA control, calibration, oscilloscope, or identification implementation or dependency.</span></li>
+</ul>
+<h2>Gaps</h2>
+<p class="sub">Listed rather than omitted. A matrix showing only what was built cannot be told apart from one showing full coverage.</p>
+<h3>Board checks owed (7)</h3>
+<p class="sub">The worklist for whoever has the hardware, and the counterpart of the host-test list below. A `hardware` or `target` criterion with nothing observed: no host test and no reading of the code will ever close it.</p>
+<ul>
+<li><code>PERF-001</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-002</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-003</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-004</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-005</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>FR-012</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>IF-014</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+</ul>
+<h3>Host tests you could write (1)</h3>
+<p class="sub">A `host` acceptance criterion and no test cited. The only requirements a unit test can cover — see the next block for the rest. These run on a separate machine: `test_handover export` writes the package it needs.</p>
+<ul>
+<li><code>FR-002</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+</ul>
+<h3>NOT unit-testable (45) — do not write host tests for these</h3>
+<p class="sub">No `host` criterion, so no unit test can cover them however it is written. Listed explicitly because the untested count otherwise reads as a backlog of unit tests owed, and closing one of these with a host test means inventing an assertion that passes without checking the thing.</p>
+<ul>
+<li><code>HW-001</code> — checked by hardware / instrument <span class="sub">· Target Hardware &amp; Build Configuration</span></li>
+<li><code>HW-002</code> — checked by hardware / instrument <span class="sub">· Target Hardware &amp; Build Configuration</span></li>
+<li><code>HW-003</code> — checked by inspection <span class="sub">· Target Hardware &amp; Build Configuration</span></li>
+<li><code>HW-004</code> — checked by hardware / instrument <span class="sub">· Target Hardware &amp; Build Configuration</span></li>
+<li><code>HW-005</code> — checked by inspection <span class="sub">· Target Hardware &amp; Build Configuration</span></li>
+<li><code>NFR-005</code> — checked by inspection, hardware / instrument <span class="sub">· Target Hardware &amp; Build Configuration</span></li>
+<li><code>IF-001</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>IF-002</code> — checked by inspection <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>FR-001</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>IF-003</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>PERF-001</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>PERF-002</code> — checked by on-target test <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>PERF-003</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>PERF-004</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>PERF-005</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>FR-012</code> — checked by hardware / instrument <span class="sub">· Motor Driver &amp; PWM Generation</span></li>
+<li><code>FR-003</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>FR-005</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>FR-006</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>FR-007</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>IF-018</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>FR-008</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>FR-009</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>FR-010</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>FR-011</code> — checked by hardware / instrument <span class="sub">· Motor Startup, Lifecycle &amp; Fault Safety</span></li>
+<li><code>IF-004</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-005</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-006</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-007</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-008</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-009</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-010</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-011</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-012</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-013</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-014</code> — checked by inspection, hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-015</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-016</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-017</code> — checked by hardware / instrument <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>IF-019</code> — checked by hardware / instrument, not verifiable <span class="sub">· UART Command &amp; Status Interface</span></li>
+<li><code>FR-004</code> — checked by hardware / instrument <span class="sub">· Open-Loop Demonstration Scope &amp; Validation</span></li>
+<li><code>NFR-001</code> — checked by hardware / instrument <span class="sub">· Open-Loop Demonstration Scope &amp; Validation</span></li>
+<li><code>NFR-002</code> — checked by inspection <span class="sub">· Open-Loop Demonstration Scope &amp; Validation</span></li>
+<li><code>NFR-003</code> — checked by inspection <span class="sub">· Open-Loop Demonstration Scope &amp; Validation</span></li>
+<li><code>NFR-004</code> — checked by inspection <span class="sub">· Open-Loop Demonstration Scope &amp; Validation</span></li>
+</ul>
+<h3>Implemented, never tested (46)</h3>
+<p class="sub">Code exists and no test is recorded against it.</p>
+<ul>
+<li><code>HW-001</code> <span class="sub">(Target Hardware &amp; Build Configuration)</span></li>
+<li><code>HW-002</code> <span class="sub">(Target Hardware &amp; Build Configuration)</span></li>
+<li><code>HW-003</code> <span class="sub">(Target Hardware &amp; Build Configuration)</span></li>
+<li><code>HW-004</code> <span class="sub">(Target Hardware &amp; Build Configuration)</span></li>
+<li><code>HW-005</code> <span class="sub">(Target Hardware &amp; Build Configuration)</span></li>
+<li><code>NFR-005</code> <span class="sub">(Target Hardware &amp; Build Configuration)</span></li>
+<li><code>IF-001</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>IF-002</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>FR-001</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>IF-003</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-001</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-002</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-003</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-004</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>PERF-005</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>FR-012</code> <span class="sub">(Motor Driver &amp; PWM Generation)</span></li>
+<li><code>FR-002</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-003</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-005</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-006</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-007</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>IF-018</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-008</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-009</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-010</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>FR-011</code> <span class="sub">(Motor Startup, Lifecycle &amp; Fault Safety)</span></li>
+<li><code>IF-004</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-005</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-006</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-007</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-008</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-009</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-010</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-011</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-012</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-013</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-014</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-015</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-016</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-017</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>IF-019</code> <span class="sub">(UART Command &amp; Status Interface)</span></li>
+<li><code>FR-004</code> <span class="sub">(Open-Loop Demonstration Scope &amp; Validation)</span></li>
+<li><code>NFR-001</code> <span class="sub">(Open-Loop Demonstration Scope &amp; Validation)</span></li>
+<li><code>NFR-002</code> <span class="sub">(Open-Loop Demonstration Scope &amp; Validation)</span></li>
+<li><code>NFR-003</code> <span class="sub">(Open-Loop Demonstration Scope &amp; Validation)</span></li>
+<li><code>NFR-004</code> <span class="sub">(Open-Loop Demonstration Scope &amp; Validation)</span></li>
+</ul>
+<h3>No observable exists (1)</h3>
+<p class="sub">These need a human decision — either the requirement is restated as something checkable, or it is accepted as unverifiable on the record. Inventing a test for one of these produces a test that passes and proves nothing.</p>
+<ul>
+<li><code>IF-019</code> — The STATUS response is returned within a reasonable time after the request. <span class="sub">· The requirement does not define a maximum response time or other measurable bound for 'reasonable time'.</span></li>
+</ul>
+</main></body></html>

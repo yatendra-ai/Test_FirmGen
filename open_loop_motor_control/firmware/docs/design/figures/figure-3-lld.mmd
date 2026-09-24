@@ -1,0 +1,32 @@
+flowchart TD
+  subgraph BareMetalLoop
+    boot["Start board and application<br/>Core/Src/main.c: HAL_Init, uart_if_initialize, …"]
+    init["Prepare motor board and initialize command state<br/>firmware/app/app.c: app_st…"]
+    poll["Read and assemble incoming UART command lines<br/>firmware/app/app.c: process_u…"]
+    parse{"Complete line and valid command — firmware/app/app.c: process_uart"}
+    dispatch["Dispatch command and send response<br/>firmware/app/app.c: dispatch_command"]
+    tick{"Elapsed time at least 1 ms — firmware/app/app.c: app_process"}
+    faultcheck{"Fault read failed or fault active — firmware/app/app.c: app_process"}
+    lifecycle_step["Advance lifecycle and generate U, V, W duties<br/>firmware/services/motor_lifec…"]
+    pwm["Apply three-phase PWM duties<br/>firmware/platforms/stm32/stm32_motor_board.c: …"]
+    shutdown["Force zero duty, stop PWM, and enter standby<br/>firmware/platforms/stm32/stm32…"]
+    led_toggle["Toggle status LED<br/>Core/Src/main.c: HAL_GPIO_TogglePin"]
+    delay["Wait before the next main-loop iteration<br/>Core/Src/main.c: HAL_Delay, APP_LE…"]
+  end
+
+  boot -->  init
+  init -->  poll
+  poll -->  parse
+  parse -->|yes| dispatch
+  parse -->|no or incomplete| tick
+  dispatch -->  tick
+  tick -->|yes| faultcheck
+  tick -->|no| led_toggle
+  faultcheck -->|yes| shutdown
+  faultcheck -->|no| lifecycle_step
+  lifecycle_step -->|true| pwm
+  lifecycle_step -->|false| shutdown
+  pwm -->  led_toggle
+  shutdown -->  led_toggle
+  led_toggle -->  delay
+  delay -->|200 ms| poll

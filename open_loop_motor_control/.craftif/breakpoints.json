@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "updated_at_ms": 1790209389762,
+  "project_root": "C:\\Users\\YatendraBhargava\\Downloads\\23-9-26\\open_loop\\open_loop_motor_control",
+  "hal_version": "HAL1",
+  "elf": "C:\\Users\\YatendraBhargava\\Downloads\\23-9-26\\open_loop\\open_loop_motor_control\\build\\open_loop_motor_control.elf",
+  "added": 1,
+  "armed": 0,
+  "passed": 0,
+  "files": [
+    {
+      "file": "C:/Users/YatendraBhargava/Downloads/23-9-26/open_loop/open_loop_motor_control/Core/Src/stm32g4xx_it.c",
+      "name": "stm32g4xx_it.c",
+      "breakpoints": [
+        {
+          "id": 1,
+          "intent": "hardfault",
+          "function": "HardFault_Handler",
+          "line": 56,
+          "source": "application",
+          "armed": false,
+          "hit_count": 0,
+          "priority": "critical",
+          "reason": "fault catch",
+          "note": "startup/application symbol, not part of the HAL API armed at 0x0800188e"
+        }
+      ],
+      "count": 1,
+      "hit_count": 0
+    }
+  ],
+  "last_run": {
+    "stopped": false,
+    "reason": "running",
+    "function": null,
+    "file": null,
+    "line": null,
+    "error": null
+  },
+  "phase": "complete"
+}

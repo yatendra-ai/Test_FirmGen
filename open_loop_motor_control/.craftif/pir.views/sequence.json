@@ -1,0 +1,10 @@
+{
+  "schema_version": "3.0.0",
+  "view": "sequence",
+  "revision": "34158563458a6f901eeb72f486e1c577",
+  "graph_version": 9,
+  "generated_at_ms": 1790210777740,
+  "mermaid": "sequenceDiagram\n  participant Boot as main.c boot\n  participant App as app_process\n  participant UART as USART2 UART\n  participant Parser as command parser\n  participant Lifecycle as motor lifecycle\n  participant Board as motor board adapter\n  participant TIM1 as TIM1 PWM\n  participant Motor as STSPIN830 motor driver\n  participant LED as PA5 status LED\n  participant Console as UART console\n\n  Boot->>UART: uart_if_initialize\n  UART-->>Console: uart init ok\n  Boot->>Console: main uart probe\n  Boot->>App: app_start\n  App->>Board: motor_board_prepare\n  Board->>TIM1: configure PWM channels 1, 2, and 3\n  Board->>Motor: x_nucleo_ihm16m1_init\n  App->>Board: motor_board_shutdown\n  Board->>Motor: set standby and zero PWM\n  App->>Console: app start and firmware started\n\n  loop main while loop with 200 ms LED delay\n    App->>UART: uart_if_read_byte\n    alt complete valid command\n      App->>Parser: command_parser_parse\n      Parser-->>App: command kind and parameters\n      App->>Lifecycle: update direction, frequency, duty, start, or stop\n      App->>UART: uart_if_write response\n    else invalid or incomplete input\n      App-->>App: retain line state or send invalid response\n    end\n\n    opt elapsed time reaches 1 ms\n      App->>Board: motor_board_read_fault\n      Board->>Motor: x_nucleo_ihm16m1_read_fault\n      alt fault active or read failure\n        App->>Lifecycle: motor_lifecycle_fault\n        App->>Board: motor_board_shutdown\n        Board->>TIM1: stop PWM and clear duties\n        Board->>Motor: enter standby\n      else no fault\n        App->>Lifecycle: motor_lifecycle_process\n        Lifecycle-->>App: U, V, and W duty outputs\n        App->>Board: motor_board_apply_pwm\n        Board->>Motor: x_nucleo_ihm16m1_drive_motor\n        Motor->>TIM1: update channels 1, 2, and 3\n      end\n    end\n    Boot->>LED: HAL_GPIO_TogglePin PA5\n  end",
+  "title": "Sequence Diagram",
+  "authored_by_model": true
+}

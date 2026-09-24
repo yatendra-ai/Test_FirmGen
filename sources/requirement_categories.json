@@ -1,0 +1,161 @@
+{
+  "job_id": "d927cd6a-b325-4050-8456-63003c8cd054",
+  "document_id": "02576897-8513-4cb7-aafa-15deda0f19ea",
+  "frozen_at": "2026-09-23T18:12:50.817Z",
+  "requirement_count": 46,
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Target Hardware & Build Configuration",
+      "description": "Defines the target board, motor, driver hardware, power supply, phase outputs, and build/deployment target.",
+      "requirements": [
+        "The firmware shall interface with the X-NUCLEO-IHM16M1 motor driver based on the STSPIN830.",
+        "The firmware shall be capable of rotating the GBM2804H-100T three-phase gimbal motor.",
+        "The firmware shall assume the motor has 7 pole pairs.",
+        "The system shall be powered by a 12 V DC supply during this test.",
+        "The motor drive outputs shall be the U, V, W three-phase outputs.",
+        "The firmware shall build successfully, be flashable to the NUCLEO-G431RB target board, and execute on that board without modification."
+      ],
+      "requirement_ids": [
+        "HW-001",
+        "HW-002",
+        "HW-003",
+        "HW-004",
+        "HW-005",
+        "NFR-005"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-2",
+      "name": "Motor Driver & PWM Generation",
+      "description": "Implements TIM1 three-phase PWM, the STSPIN830 three-input interface, open-loop sinusoidal field generation, and configured electrical drive parameters.",
+      "requirements": [
+        "The firmware shall configure TIM1 to generate three-phase PWM.",
+        "The firmware shall use the factory-default X-NUCLEO-IHM16M1 three-input configuration.",
+        "The firmware shall generate a rotating three-phase electrical field using open-loop sinusoidal PWM.",
+        "STBY shall be controlled to enable and disable the motor driver.",
+        "The PWM switching frequency shall be 20 kHz.",
+        "The initial PWM amplitude shall be 10%.",
+        "The PWM amplitude shall not exceed 20% during this test.",
+        "The initial electrical frequency shall be 1 Hz.",
+        "The electrical-frequency ramp target shall be 10 Hz.",
+        "The firmware shall support clockwise and counter-clockwise rotation; issuing \"DIR CW\" or \"DIR CCW\" shall reverse the generated phase sequence and rotation direction accordingly."
+      ],
+      "requirement_ids": [
+        "IF-001",
+        "IF-002",
+        "FR-001",
+        "IF-003",
+        "PERF-001",
+        "PERF-002",
+        "PERF-003",
+        "PERF-004",
+        "PERF-005",
+        "FR-012"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-3",
+      "name": "Motor Startup, Lifecycle & Fault Safety",
+      "description": "Owns motor initialization, startup ramping, start/stop state transitions, PWM shutdown behavior, and STSPIN830 fault handling.",
+      "requirements": [
+        "The startup sequence shall start with a low PWM amplitude.",
+        "The startup sequence shall gradually ramp the electrical frequency from its initial value toward the target.",
+        "MOTOR START shall not be blocked because ADC measurements, motor electrical parameters, characterization, FOC, observer, current sensing, or closed-loop control are unavailable.",
+        "MOTOR START shall depend only on successful PWM/GPIO initialization and the absence of an active STSPIN830 hardware fault.",
+        "On reset or power-up, the firmware shall hold the motor driver in standby (disabled) via STBY until TIM1/GPIO are fully configured and PWM outputs are in a defined inactive state; only then may the driver be enabled.",
+        "When PWM is disabled (by MOTOR STOP or driver fault), the three driver input pins shall be driven to the documented inactive level for the factory three-input configuration, ensuring no residual drive is applied to the motor phases.",
+        "After boot/reset and before any command is issued, PWM shall remain disabled and the motor shall remain stopped.",
+        "Upon receiving the UART command \"MOTOR START\", the firmware shall initiate the defined open-loop startup ramp.",
+        "Upon receiving the UART command \"MOTOR STOP\", the firmware shall immediately disable PWM (within one control cycle) and stop the motor.",
+        "An active STSPIN830 EN/FAULT condition shall immediately disable PWM (within one control cycle)."
+      ],
+      "requirement_ids": [
+        "FR-002",
+        "FR-003",
+        "FR-005",
+        "FR-006",
+        "FR-007",
+        "IF-018",
+        "FR-008",
+        "FR-009",
+        "FR-010",
+        "FR-011"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-4",
+      "name": "UART Command & Status Interface",
+      "description": "Provides the fixed UART protocol, command parsing and validation, direction/frequency/duty controls, error handling, and status responses.",
+      "requirements": [
+        "Upon receiving the UART command \"DIR CW\", the firmware shall set the rotation direction to clockwise.",
+        "Upon receiving the UART command \"DIR CCW\", the firmware shall set the rotation direction to counter-clockwise.",
+        "Upon receiving the UART command \"FREQ <Hz>\", the firmware shall set the electrical frequency to the specified value.",
+        "Upon receiving the UART command \"DUTY <%>\", the firmware shall set the PWM amplitude to the specified value within the configured safe limit.",
+        "The STATUS response shall include the current motor state.",
+        "The STATUS response shall include the current rotation direction.",
+        "The STATUS response shall include the current electrical frequency.",
+        "The STATUS response shall include the current PWM duty.",
+        "The STATUS response shall include the driver fault status.",
+        "The firmware shall accept UART commands to set rotation direction using \"DIR CW\" and \"DIR CCW\".",
+        "The firmware shall specify and use a fixed UART configuration (port, baud rate, data bits, parity, stop bits, and command delimiter) for the command interface so that the listed commands can be reliably exchanged.",
+        "The firmware shall reject any unknown UART command with an explicit error response and shall not change motor state or configuration as a result of an unrecognized command.",
+        "The firmware shall validate the FREQ command argument and reject non-numeric, missing, or negative values with an error response; the electrical-frequency setpoint shall remain unchanged on rejection.",
+        "The firmware shall validate the DUTY command argument and reject non-numeric, missing, or negative values with an error response; the PWM duty setting shall remain unchanged on rejection.",
+        "Upon receiving the UART command \"STATUS\", the firmware shall return a response within a reasonable time containing the current motor state, rotation direction, electrical frequency (Hz), PWM duty (%), and driver fault status."
+      ],
+      "requirement_ids": [
+        "IF-004",
+        "IF-005",
+        "IF-006",
+        "IF-007",
+        "IF-008",
+        "IF-009",
+        "IF-010",
+        "IF-011",
+        "IF-012",
+        "IF-013",
+        "IF-014",
+        "IF-015",
+        "IF-016",
+        "IF-017",
+        "IF-019"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-5",
+      "name": "Open-Loop Demonstration Scope & Validation",
+      "description": "Captures the basic-rotation demonstration objective and the explicit limitations and exclusions of the open-loop firmware.",
+      "requirements": [
+        "MOTOR START shall produce visible motor movement or rotation.",
+        "The firmware shall demonstrate basic rotation to verify the MCU board, motor-driver board, PWM outputs, and motor connections.",
+        "Electrical frequency shall be used solely to create a rotating field and not as a closed-loop RPM setpoint.",
+        "The firmware shall not measure or guarantee actual mechanical RPM.",
+        "The firmware shall not implement the following features: Sensorless FOC; Motor resistance, inductance or flux characterization; Rotor observer; Clarke/Park and inverse transforms; Current PI or speed PI controller; Closed-loop RPM control; Phase-current ADC control; VBUS ADC control; ADC-triggered DMA; Current-offset calibration; Oscilloscope integration; Automatic motor-parameter identification."
+      ],
+      "requirement_ids": [
+        "FR-004",
+        "NFR-001",
+        "NFR-002",
+        "NFR-003",
+        "NFR-004"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    }
+  ],
+  "file_checksum": "894bef8b1cc907d1ff953d3aadd335f6b2b7f16fb76768205112f98e345e0e45"
+}

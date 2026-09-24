@@ -1,0 +1,52 @@
+sequenceDiagram
+  participant Boot as main.c boot
+  participant App as app_process
+  participant UART as USART2 UART
+  participant Parser as command parser
+  participant Lifecycle as motor lifecycle
+  participant Board as motor board adapter
+  participant TIM1 as TIM1 PWM
+  participant Motor as STSPIN830 motor driver
+  participant LED as PA5 status LED
+  participant Console as UART console
+
+  Boot->>UART: uart_if_initialize
+  UART-->>Console: uart init ok
+  Boot->>Console: main uart probe
+  Boot->>App: app_start
+  App->>Board: motor_board_prepare
+  Board->>TIM1: configure PWM channels 1, 2, and 3
+  Board->>Motor: x_nucleo_ihm16m1_init
+  App->>Board: motor_board_shutdown
+  Board->>Motor: set standby and zero PWM
+  App->>Console: app start and firmware started
+
+  loop main while loop with 200 ms LED delay
+    App->>UART: uart_if_read_byte
+    alt complete valid command
+      App->>Parser: command_parser_parse
+      Parser-->>App: command kind and parameters
+      App->>Lifecycle: update direction, frequency, duty, start, or stop
+      App->>UART: uart_if_write response
+    else invalid or incomplete input
+      App-->>App: retain line state or send invalid response
+    end
+
+    opt elapsed time reaches 1 ms
+      App->>Board: motor_board_read_fault
+      Board->>Motor: x_nucleo_ihm16m1_read_fault
+      alt fault active or read failure
+        App->>Lifecycle: motor_lifecycle_fault
+        App->>Board: motor_board_shutdown
+        Board->>TIM1: stop PWM and clear duties
+        Board->>Motor: enter standby
+      else no fault
+        App->>Lifecycle: motor_lifecycle_process
+        Lifecycle-->>App: U, V, and W duty outputs
+        App->>Board: motor_board_apply_pwm
+        Board->>Motor: x_nucleo_ihm16m1_drive_motor
+        Motor->>TIM1: update channels 1, 2, and 3
+      end
+    end
+    Boot->>LED: HAL_GPIO_TogglePin PA5
+  end

@@ -1,0 +1,1564 @@
+{
+  "job_id": "d927cd6a-b325-4050-8456-63003c8cd054",
+  "document_id": "02576897-8513-4cb7-aafa-15deda0f19ea",
+  "saved_at": "2026-09-23T18:14:14.868Z",
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Target Hardware & Build Configuration",
+      "criteria": [
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "hardware",
+          "criterion": "With the X-NUCLEO-IHM16M1 attached, the firmware changes the STSPIN830 drive-enable signal between enabled and disabled states.",
+          "observable": "STSPIN830 drive-enable GPIO level while firmware is commanded to enable and disable drive",
+          "observable_kind": "signal",
+          "preconditions": [
+            "X-NUCLEO-IHM16M1 is connected to the NUCLEO-G431RB.",
+            "The firmware is running on the NUCLEO-G431RB.",
+            "The driver enable input is accessible for measurement."
+          ],
+          "procedure": [
+            "Power the connected NUCLEO-G431RB and X-NUCLEO-IHM16M1.",
+            "Command the firmware to enable drive and measure the driver-enable GPIO.",
+            "Command the firmware to disable drive and measure the driver-enable GPIO."
+          ],
+          "expected": "The driver-enable signal is in the enabled state after the enable command and in the disabled state after the disable command.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "hardware",
+          "criterion": "With the X-NUCLEO-IHM16M1 attached, the firmware produces PWM on the driver input associated with TIM1.",
+          "observable": "PWM waveform at the X-NUCLEO-IHM16M1 driver input",
+          "observable_kind": "signal",
+          "preconditions": [
+            "X-NUCLEO-IHM16M1 is connected to the NUCLEO-G431RB.",
+            "The firmware is running and drive is enabled.",
+            "A suitable oscilloscope or logic analyzer is connected to the driver input."
+          ],
+          "procedure": [
+            "Enable motor drive in the firmware.",
+            "Probe the configured TIM1 PWM output at the X-NUCLEO-IHM16M1 input.",
+            "Record the observed waveform while the firmware is commanded to produce drive."
+          ],
+          "expected": "A periodic PWM waveform is present at the configured driver input while drive is enabled.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "hardware",
+          "criterion": "When commanded to start with the GBM2804H-100T connected and powered, the motor exhibits observable rotation.",
+          "observable": "Mechanical movement or rotation of the GBM2804H-100T rotor",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor is correctly connected to the U, V, and W outputs.",
+            "The motor driver is powered.",
+            "The firmware is running on the NUCLEO-G431RB."
+          ],
+          "procedure": [
+            "Issue the firmware's motor-start command.",
+            "Observe the GBM2804H-100T rotor during the commanded run interval.",
+            "Record whether the rotor moves or rotates."
+          ],
+          "expected": "The rotor exhibits observable movement or rotation after the start command.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "inspection",
+          "criterion": "The firmware's motor pole-pair configuration used by motor calculations or reporting is set to 7.",
+          "observable": "Motor pole-pair configuration constant or configuration value in the source/configuration and its compiled use",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware source and build configuration are available for inspection."
+          ],
+          "procedure": [
+            "Locate the motor pole-pair configuration used by the firmware.",
+            "Verify its configured value and any generated or compiled configuration that supplies it."
+          ],
+          "expected": "The configured motor pole-pair value is exactly 7 pairs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-004",
+          "verifiability": "hardware",
+          "criterion": "The motor-driver supply measured at the test setup is 12 V DC.",
+          "observable": "Bench-supply output voltage measured with a voltmeter at the motor-driver supply input",
+          "observable_kind": "signal",
+          "preconditions": [
+            "A bench supply is available.",
+            "The motor driver is connected to the bench supply."
+          ],
+          "procedure": [
+            "Set the bench supply for the test.",
+            "Measure the DC voltage at the motor-driver supply input with a voltmeter before or during the motor test.",
+            "Record the measured voltage and polarity."
+          ],
+          "expected": "The measured supply is 12 V DC.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-005",
+          "verifiability": "inspection",
+          "criterion": "The three motor phase connections use the hardware output terminals labeled U, V, and W.",
+          "observable": "Physical wiring from the motor phases to the driver-board U, V, and W terminals",
+          "observable_kind": "state",
+          "preconditions": [
+            "The motor is connected to the motor-driver board."
+          ],
+          "procedure": [
+            "Inspect the motor-driver output terminal labels.",
+            "Trace each motor phase connection to its terminal.",
+            "Record the terminal labels used."
+          ],
+          "expected": "The three motor phase connections terminate at U, V, and W, with no motor phase connected to another output.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-005",
+          "verifiability": "inspection",
+          "criterion": "A clean firmware build completes for the NUCLEO-G431RB without compiler, linker, or build errors.",
+          "observable": "Build command exit status, build log, and generated firmware image",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The required toolchain is installed.",
+            "The project is configured for the NUCLEO-G431RB target."
+          ],
+          "procedure": [
+            "Run the documented clean-build command.",
+            "Inspect the build exit status and log.",
+            "Confirm that the firmware image is generated."
+          ],
+          "expected": "The clean build exits successfully with no build errors and produces a firmware image for the NUCLEO-G431RB.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-005",
+          "verifiability": "hardware",
+          "criterion": "The generated firmware image flashes to the NUCLEO-G431RB and the board executes it without changing the image or source after the build.",
+          "observable": "Programmer output and target-board startup/run indication after flashing",
+          "observable_kind": "state",
+          "preconditions": [
+            "A clean firmware image has been built.",
+            "A programmer and NUCLEO-G431RB are available and powered.",
+            "No source or firmware-image changes are made after the clean build."
+          ],
+          "procedure": [
+            "Flash the generated firmware image to the NUCLEO-G431RB using the programmer.",
+            "Inspect the programmer result.",
+            "Power-cycle or reset the board and observe its startup/run indication or other firmware-defined execution indication."
+          ],
+          "expected": "Programming completes successfully, the flashed image is unchanged from the clean-build artifact, and the NUCLEO-G431RB powers up and executes that image without source or binary modification.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "Motor Driver & PWM Generation",
+      "criteria": [
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "With the firmware initialized, TIM1 produces three simultaneous PWM signals on the U, V, and W driver-input connections with a common synchronized time base.",
+          "observable": "Oscilloscope traces on the STSPIN830 U, V, and W inputs",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Board is powered.",
+            "Firmware is initialized.",
+            "The U, V, and W signals are connected to the corresponding STSPIN830 inputs."
+          ],
+          "procedure": [
+            "Power the NUCLEO-G431RB and connected driver board.",
+            "Initialize the firmware.",
+            "Probe the U, V, and W inputs with a three-channel oscilloscope.",
+            "Compare the carrier timing and presence of PWM on all three channels."
+          ],
+          "expected": "Three active PWM waveforms are present simultaneously on U, V, and W, and their carrier timing is synchronized.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "inspection",
+          "criterion": "The driver configuration selects the factory three-PWM-input mode and contains no configuration that selects an alternate commutation mode.",
+          "observable": "Driver-mode configuration code, GPIO configuration, and project configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Driver board is at factory defaults.",
+            "The firmware source and configuration are available for review."
+          ],
+          "procedure": [
+            "Inspect the STSPIN830 mode-selection configuration.",
+            "Verify that the three PWM inputs are assigned to the driver interface.",
+            "Search the configuration and initialization code for alternate commutation-mode selection."
+          ],
+          "expected": "The factory three-PWM-input mode is selected, and no alternate commutation mode is configured.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "When PWM is enabled without an active fault, the U, V, and W PWM duty cycles form three sinusoidal modulation signals separated by 120 electrical degrees.",
+          "observable": "Time-aligned oscilloscope traces or captured duty-cycle envelope for U, V, and W",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled.",
+            "No active driver or firmware fault is present.",
+            "A commanded electrical frequency is set."
+          ],
+          "procedure": [
+            "Enable PWM with no active fault.",
+            "Capture the U, V, and W driver-input waveforms over multiple electrical cycles.",
+            "Determine the phase of each channel's sinusoidal duty-cycle envelope relative to the others."
+          ],
+          "expected": "The three modulation envelopes are phase-shifted by 120 electrical degrees, within the measurement resolution.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "The phase sequence of the three PWM modulation envelopes advances at the commanded electrical frequency.",
+          "observable": "Measured period or frequency of the repeating U-V-W modulation sequence",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled.",
+            "No active driver or firmware fault is present.",
+            "A commanded electrical frequency is known."
+          ],
+          "procedure": [
+            "Set a known commanded electrical frequency.",
+            "Capture the U, V, and W driver-input waveforms.",
+            "Measure the repetition frequency of the phase sequence."
+          ],
+          "expected": "The measured electrical frequency equals the commanded electrical frequency within the measurement resolution.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "hardware",
+          "criterion": "Driving STBY to its standby level places the STSPIN830 in standby, and driving it to its enable level places the driver in the enabled state.",
+          "observable": "STBY GPIO level and STSPIN830 driver state or output-enable behavior",
+          "observable_kind": "state",
+          "preconditions": [
+            "The board and driver are powered.",
+            "The firmware exposes or executes STBY control.",
+            "The STSPIN830 datasheet-defined STBY polarity is used."
+          ],
+          "procedure": [
+            "Command STBY to the standby level and observe the driver state or disabled outputs.",
+            "Command STBY to the enable level and observe the driver state or enabled outputs.",
+            "Record the STBY level and corresponding driver state after each command."
+          ],
+          "expected": "The standby-level command results in the datasheet-defined standby/disabled state, and the enable-level command results in the datasheet-defined enabled state.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-001",
+          "verifiability": "hardware",
+          "criterion": "The measured TIM1 PWM carrier frequency is 20 kHz.",
+          "observable": "PWM carrier period or frequency on a TIM1 output",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled.",
+            "An oscilloscope or frequency counter is connected to a TIM1 PWM output."
+          ],
+          "procedure": [
+            "Enable PWM.",
+            "Measure the carrier frequency over multiple PWM periods.",
+            "Compare the measurement with 20 kHz."
+          ],
+          "expected": "The carrier frequency is 20 kHz within the measurement resolution.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-002",
+          "verifiability": "target",
+          "criterion": "At entry to the startup ramp, the commanded PWM duty-cycle amplitude is 10%.",
+          "observable": "Startup-ramp amplitude command or TIM1 compare values at ramp entry",
+          "observable_kind": "state",
+          "preconditions": [
+            "The firmware is initialized.",
+            "The startup ramp is about to begin.",
+            "The PWM timer state or amplitude command is observable."
+          ],
+          "procedure": [
+            "Trigger the startup ramp.",
+            "Capture the first amplitude command or corresponding TIM1 compare value at ramp entry.",
+            "Convert the compare value to duty-cycle percentage using the configured PWM period."
+          ],
+          "expected": "The initial commanded PWM amplitude is 10%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-003",
+          "verifiability": "hardware",
+          "criterion": "The effective PWM duty cycle on every output remains at or below 20% when a duty command greater than 20% is applied.",
+          "observable": "Measured high-time duty cycle on the TIM1 U, V, and W outputs",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled.",
+            "A duty command greater than 20% can be issued.",
+            "The three PWM outputs are accessible to a measurement instrument."
+          ],
+          "procedure": [
+            "Enable PWM.",
+            "Issue a duty command greater than 20%.",
+            "Measure the effective duty cycle on U, V, and W.",
+            "Repeat for any output whose command can be independently varied."
+          ],
+          "expected": "No measured output duty cycle exceeds 20%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-004",
+          "verifiability": "hardware",
+          "criterion": "At entry to the startup ramp, the generated electrical frequency is 1 Hz.",
+          "observable": "Measured period or frequency of the three-phase modulation sequence at ramp entry",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The startup ramp is about to begin.",
+            "PWM generation is active or begins with the ramp.",
+            "The U, V, and W waveforms are measurable."
+          ],
+          "procedure": [
+            "Trigger the startup ramp.",
+            "Capture the phase sequence beginning at ramp entry.",
+            "Measure its electrical frequency."
+          ],
+          "expected": "The initial electrical frequency is 1 Hz within the measurement resolution.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-005",
+          "verifiability": "hardware",
+          "criterion": "During the startup ramp, the generated electrical frequency reaches 10 Hz and does not exceed 10 Hz without an explicit reconfiguration command.",
+          "observable": "Time history of the measured electrical frequency and the command/reconfiguration log",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The startup ramp is in progress or its target is set.",
+            "No explicit frequency reconfiguration command is issued during the limiting portion of the test.",
+            "The three-phase waveforms are measurable."
+          ],
+          "procedure": [
+            "Start the startup ramp with a target of 10 Hz.",
+            "Measure the electrical frequency throughout the ramp and after it reaches its target.",
+            "Verify that no explicit frequency reconfiguration command was issued.",
+            "Check the maximum measured frequency and whether 10 Hz was reached."
+          ],
+          "expected": "The measured frequency reaches 10 Hz, never exceeds 10 Hz while unreconfigured, and remains at the target until explicitly reconfigured.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "hardware",
+          "criterion": "After issuing DIR CW and then DIR CCW, the measured phase order changes to match the most recently commanded direction.",
+          "observable": "U-V-W phase order before and after each direction command",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is rotating or about to start.",
+            "PWM is enabled or will be enabled by the start command.",
+            "The direction commands can be sent over UART."
+          ],
+          "procedure": [
+            "Issue `DIR CW` and capture the U, V, and W phase sequence.",
+            "Issue `DIR CCW` and capture the phase sequence again.",
+            "Compare each measured phase order with the corresponding last direction command."
+          ],
+          "expected": "The phase order after `DIR CW` matches the CW sequence, and the phase order after `DIR CCW` is the reversed CCW sequence and remains the sequence associated with the last command.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "hardware",
+          "criterion": "The motor's observed rotation direction reverses when the command changes from DIR CW to DIR CCW.",
+          "observable": "Motor shaft rotation direction before and after the direction command",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is connected to the driver.",
+            "PWM is enabled and the motor is rotating or about to start.",
+            "The motor and driver are operated within the permitted test conditions."
+          ],
+          "procedure": [
+            "Issue `DIR CW` and observe the motor shaft direction.",
+            "Issue `DIR CCW` and observe the motor shaft direction after the command takes effect.",
+            "Compare the two observed directions."
+          ],
+          "expected": "The motor rotates in the CW direction after `DIR CW` and in the opposite, CCW direction after `DIR CCW`.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "Motor Startup, Lifecycle & Fault Safety",
+      "criteria": [
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "hardware",
+          "criterion": "At the first sample of the startup ramp, the commanded PWM duty is 10%.",
+          "observable": "TIM1 commanded duty cycle at startup-ramp entry",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Startup ramp has just begun",
+            "PWM/GPIO initialization has succeeded",
+            "No active STSPIN830 fault"
+          ],
+          "procedure": [
+            "Initialize the motor-control hardware.",
+            "Issue MOTOR START.",
+            "Capture the first PWM duty command produced by the startup-ramp handler."
+          ],
+          "expected": "10% duty at startup-ramp entry",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "host",
+          "criterion": "Every PWM duty command generated during the startup ramp is no greater than the configured maximum amplitude.",
+          "observable": "PWM duty values emitted by the startup-ramp control function",
+          "observable_kind": "return_value",
+          "preconditions": [
+            "Startup-ramp function is exercised with a configured initial amplitude of 10%",
+            "A maximum amplitude is configured"
+          ],
+          "procedure": [
+            "Call the portable startup-ramp function through successive time steps.",
+            "Record each generated PWM duty command.",
+            "Compare each value with the configured maximum amplitude."
+          ],
+          "expected": "Each duty value is less than or equal to the configured maximum amplitude",
+          "source": "derived",
+          "rationale": "This check is derived from the postcondition requiring the amplitude not to exceed the maximum limit; the limit is already a configuration parameter rather than an invented numeric threshold.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "The measured electrical frequency samples collected during startup are monotonically non-decreasing from the configured initial frequency toward the 10 Hz ramp target.",
+          "observable": "Measured electrical frequency over the startup-ramp interval",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Startup ramp is in progress",
+            "Frequency measurement is connected to the motor-control output"
+          ],
+          "procedure": [
+            "Start the motor and record electrical-frequency samples throughout the startup ramp.",
+            "Verify that each sample is greater than or equal to the preceding sample.",
+            "Verify that the samples begin at the configured initial frequency and approach the configured target."
+          ],
+          "expected": "Frequency never decreases and reaches the configured 10 Hz target",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "hardware",
+          "criterion": "With ADC measurement, motor-parameter, characterization, FOC, observer, current-sensing, and closed-loop-control features disabled or absent, a MOTOR START command produces the first startup-ramp PWM command.",
+          "observable": "UART response and TIM1 PWM output after MOTOR START",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM/GPIO initialization has succeeded",
+            "No active STSPIN830 fault",
+            "All listed out-of-scope features are disabled or absent",
+            "UART is operational"
+          ],
+          "procedure": [
+            "Boot the firmware with the listed features disabled or absent.",
+            "Send MOTOR START over UART.",
+            "Observe the startup-ramp state or first PWM output."
+          ],
+          "expected": "Startup-ramp state is entered and PWM startup output begins",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "hardware",
+          "criterion": "When PWM/GPIO initialization succeeds and EN/FAULT is inactive, MOTOR START is accepted and the startup ramp begins.",
+          "observable": "UART command result and startup-ramp state/PWM output",
+          "observable_kind": "state",
+          "preconditions": [
+            "System is booted",
+            "PWM/GPIO initialization has reported success",
+            "STSPIN830 EN/FAULT is inactive"
+          ],
+          "procedure": [
+            "Apply the successful initialization result and inactive EN/FAULT input.",
+            "Send MOTOR START over UART.",
+            "Observe the command result and motor-control state."
+          ],
+          "expected": "MOTOR START is accepted and the state changes to startup ramp",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "hardware",
+          "criterion": "When PWM/GPIO initialization fails or EN/FAULT is active, MOTOR START does not enable PWM or enter the startup ramp.",
+          "observable": "TIM1 PWM outputs and motor-control state after MOTOR START",
+          "observable_kind": "signal",
+          "preconditions": [
+            "System is booted",
+            "At least one start prerequisite is false: PWM/GPIO initialization failure or active EN/FAULT"
+          ],
+          "procedure": [
+            "Set the selected prerequisite to its failing condition.",
+            "Send MOTOR START over UART.",
+            "Observe the PWM outputs and motor-control state."
+          ],
+          "expected": "PWM remains disabled and the startup-ramp state is not entered",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "After reset or power-up, STBY remains at the configured disable level until TIM1/GPIO configuration is complete and PWM outputs are at their defined inactive levels.",
+          "observable": "STSPIN830 STBY level, TIM1/GPIO configuration-complete event, and three PWM input pins",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The NUCLEO-G431RB is cold-booted or reset",
+            "Oscilloscope or logic analyzer is connected to STBY and all three driver inputs"
+          ],
+          "procedure": [
+            "Reset or power-cycle the board.",
+            "Record STBY and the three driver-input pins during initialization.",
+            "Correlate the first transition of STBY to the TIM1/GPIO configuration-complete event."
+          ],
+          "expected": "STBY remains at the configured disable level until configuration completion, and all three PWM inputs are at their defined inactive levels before STBY is enabled",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "After STBY is enabled, the motor remains stopped until a valid MOTOR START command is received.",
+          "observable": "Driver-input waveforms and motor shaft motion before and after command",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Initialization has completed",
+            "STBY is enabled",
+            "No UART command has yet been issued"
+          ],
+          "procedure": [
+            "Observe the driver inputs and motor before issuing a command.",
+            "Send a valid MOTOR START command.",
+            "Continue observing the inputs and motor."
+          ],
+          "expected": "No motor drive or motion occurs before MOTOR START; startup PWM begins only after the valid command",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-018",
+          "verifiability": "hardware",
+          "criterion": "After MOTOR STOP or while EN/FAULT is active, all three driver-input pins remain at the documented inactive levels and show no PWM switching.",
+          "observable": "Oscilloscope traces of the three STSPIN830 input pins and EN/FAULT",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled or the startup ramp is in progress",
+            "The factory three-input STSPIN830 configuration and documented inactive levels are known"
+          ],
+          "procedure": [
+            "Capture the three driver-input pins while PWM is active.",
+            "Issue MOTOR STOP, then repeat with EN/FAULT asserted.",
+            "Measure the pin levels and switching activity after each event."
+          ],
+          "expected": "All three inputs are continuously at their documented inactive levels with no switching after either event",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-018",
+          "verifiability": "hardware",
+          "criterion": "Following MOTOR STOP, STATUS reports Stopped and following an EN/FAULT event, STATUS reports the applicable fault state.",
+          "observable": "UART STATUS response",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The motor was enabled or in startup ramp",
+            "UART is operational"
+          ],
+          "procedure": [
+            "Issue MOTOR STOP and request STATUS.",
+            "Assert EN/FAULT and request STATUS.",
+            "Compare each response with the corresponding event."
+          ],
+          "expected": "MOTOR STOP produces STATUS=Stopped, and an asserted EN/FAULT produces STATUS indicating the active driver fault",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-018",
+          "verifiability": "hardware",
+          "criterion": "When the inactive driver-input level cannot be driven, STBY is asserted to the configured disable level.",
+          "observable": "STBY level during an injected inactive-level drive failure",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM disable is requested",
+            "A test fault prevents at least one driver input from reaching its configured inactive level"
+          ],
+          "procedure": [
+            "Inject the driver-output failure.",
+            "Issue MOTOR STOP or assert EN/FAULT.",
+            "Observe STBY and the driver-input pins."
+          ],
+          "expected": "STBY is at the configured disable level and the driver is forced into standby",
+          "source": "derived",
+          "rationale": "This check is derived from the stated failure behavior; it verifies the specified safety fallback when the primary inactive-level action cannot be completed.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "hardware",
+          "criterion": "Immediately after initialization and before any command, the three driver-input pins show no PWM activity and the motor remains stopped.",
+          "observable": "Driver-input waveforms and motor motion before the first command",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The board has just completed reset/initialization",
+            "No UART or other motor command has been issued"
+          ],
+          "procedure": [
+            "Complete reset and initialization.",
+            "Observe all three driver-input pins and the motor before sending any command."
+          ],
+          "expected": "No PWM transitions are present and the motor does not move",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "hardware",
+          "criterion": "A UART MOTOR START command begins the open-loop startup ramp with the configured initial amplitude and configured initial frequency.",
+          "observable": "UART command handling result, initial PWM duty, and initial electrical-frequency command",
+          "observable_kind": "signal",
+          "preconditions": [
+            "UART is operational",
+            "PWM/GPIO initialization has succeeded",
+            "No active STSPIN830 fault"
+          ],
+          "procedure": [
+            "Send the exact UART command MOTOR START.",
+            "Capture the first amplitude and frequency commands produced by the startup sequence.",
+            "Compare them with the configured initial values."
+          ],
+          "expected": "The startup-ramp state begins; first amplitude equals the configured initial amplitude and first frequency equals the configured initial frequency",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "While PWM is enabled or the startup ramp is active, receiving MOTOR STOP disables all PWM outputs within one control cycle.",
+          "observable": "Timestamped UART MOTOR STOP reception and PWM output transition",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled or startup ramp is in progress",
+            "The motor is being driven",
+            "A control-cycle period is measurable"
+          ],
+          "procedure": [
+            "Start the motor or wait until the ramp is active.",
+            "Send MOTOR STOP and timestamp command reception.",
+            "Measure the interval until all three PWM outputs reach their disabled/inactive state."
+          ],
+          "expected": "All PWM outputs are disabled no later than one control cycle after MOTOR STOP reception",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "After MOTOR STOP, the motor is no longer driven.",
+          "observable": "Motor phase drive waveform and motor motion after stop",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The motor is enabled or in startup ramp",
+            "MOTOR STOP has been received"
+          ],
+          "procedure": [
+            "Issue MOTOR STOP.",
+            "Observe the phase-drive waveforms and motor motion after the PWM-disable transition."
+          ],
+          "expected": "No phase-drive waveform remains and the motor is not driven",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "hardware",
+          "criterion": "When EN/FAULT is asserted while PWM is enabled, all PWM outputs are disabled within one control cycle.",
+          "observable": "Timestamped EN/FAULT transition and PWM output transition",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is currently enabled",
+            "A control-cycle period is measurable",
+            "The STSPIN830 EN/FAULT signal can be asserted"
+          ],
+          "procedure": [
+            "Run the motor with PWM enabled.",
+            "Assert EN/FAULT and timestamp the transition.",
+            "Measure the interval until all three PWM outputs reach their disabled/inactive state."
+          ],
+          "expected": "All PWM outputs are disabled no later than one control cycle after EN/FAULT assertion",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "hardware",
+          "criterion": "PWM remains disabled after an EN/FAULT event until the fault clears and a new MOTOR START command is received.",
+          "observable": "PWM output state across fault assertion, fault clearing, and subsequent command",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled",
+            "EN/FAULT can be asserted and cleared",
+            "UART is operational"
+          ],
+          "procedure": [
+            "Assert EN/FAULT and verify PWM is disabled.",
+            "Clear EN/FAULT without issuing a command and observe PWM.",
+            "Issue MOTOR START and observe PWM again."
+          ],
+          "expected": "PWM remains disabled after fault clearing alone and resumes only after the subsequent MOTOR START command",
+          "source": "derived",
+          "rationale": "This check is derived from the requirement's failure behavior, which explicitly requires the disabled state to persist until both fault clearance and a re-commanded start occur.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "UART Command & Status Interface",
+      "criteria": [
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "hardware",
+          "criterion": "After transmitting `DIR CW`, the observed motor phase sequence is clockwise and the reported direction is CW.",
+          "observable": "Motor phase outputs and direction field in STATUS",
+          "observable_kind": "signal",
+          "preconditions": [
+            "System is initialized",
+            "UART is operational",
+            "Motor drive and phase outputs are connected"
+          ],
+          "procedure": [
+            "Transmit the command `DIR CW` using the configured UART settings.",
+            "Capture the generated phase sequence over at least one electrical cycle.",
+            "Request `STATUS` and record the direction field."
+          ],
+          "expected": "The phase sequence corresponds to clockwise rotation and STATUS reports `CW`.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-005",
+          "verifiability": "hardware",
+          "criterion": "After transmitting `DIR CCW`, the observed motor phase sequence is counter-clockwise and the reported direction is CCW.",
+          "observable": "Motor phase outputs and direction field in STATUS",
+          "observable_kind": "signal",
+          "preconditions": [
+            "System is initialized",
+            "UART is operational",
+            "Motor drive and phase outputs are connected"
+          ],
+          "procedure": [
+            "Transmit the command `DIR CCW` using the configured UART settings.",
+            "Capture the generated phase sequence over at least one electrical cycle.",
+            "Request `STATUS` and record the direction field."
+          ],
+          "expected": "The phase sequence corresponds to counter-clockwise rotation and STATUS reports `CCW`.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-006",
+          "verifiability": "hardware",
+          "criterion": "After transmitting `FREQ x`, the measured electrical frequency is x Hz by the next control update.",
+          "observable": "Measured electrical frequency from the phase/PWM output",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled or ready to enable",
+            "UART is operational",
+            "A frequency value x is selected"
+          ],
+          "procedure": [
+            "Transmit `FREQ x`.",
+            "Observe the phase or timer output after the next control update.",
+            "Measure its electrical frequency."
+          ],
+          "expected": "Measured electrical frequency equals x Hz within the test instrument's stated measurement tolerance by the next control update.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-007",
+          "verifiability": "hardware",
+          "criterion": "The effective PWM duty after a `DUTY x` command equals x percent for x at or below 20 and is no greater than 20 percent for x above 20.",
+          "observable": "TIM1 PWM output duty cycle",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is enabled or ready to enable",
+            "UART is operational"
+          ],
+          "procedure": [
+            "Transmit `DUTY 10` and measure the effective PWM duty.",
+            "Transmit `DUTY 25` and measure the effective PWM duty."
+          ],
+          "expected": "The first measurement is 10% within the measurement tolerance; the second measurement is less than or equal to 20%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-008",
+          "verifiability": "hardware",
+          "criterion": "A `STATUS` response contains a field whose value unambiguously identifies the current motor state.",
+          "observable": "STATUS UART response motor-state field",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "STATUS is requested",
+            "UART is operational"
+          ],
+          "procedure": [
+            "Put the motor in a known state.",
+            "Transmit `STATUS`.",
+            "Parse the response fields."
+          ],
+          "expected": "The response contains a motor-state field with an unambiguous state value such as `Stopped`, `Running`, or `Ramping`.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-009",
+          "verifiability": "hardware",
+          "criterion": "A `STATUS` response contains a direction field whose value is either CW or CCW and matches the configured direction.",
+          "observable": "STATUS UART response direction field",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "STATUS is requested",
+            "UART is operational",
+            "The direction has been set to a known value"
+          ],
+          "procedure": [
+            "Set the direction to CW or CCW.",
+            "Transmit `STATUS`.",
+            "Parse the direction field."
+          ],
+          "expected": "The response contains `CW` or `CCW` matching the configured direction.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-010",
+          "verifiability": "hardware",
+          "criterion": "A `STATUS` response contains a numeric electrical-frequency field in Hz matching the internal frequency setpoint or measurement.",
+          "observable": "STATUS UART response frequency field",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "STATUS is requested",
+            "UART is operational",
+            "A known electrical frequency is configured"
+          ],
+          "procedure": [
+            "Set a known frequency.",
+            "Transmit `STATUS`.",
+            "Parse the numeric frequency field and compare it with the internal setpoint or measured frequency."
+          ],
+          "expected": "The response contains a numeric Hz value equal to the current internal setpoint or measurement within the defined measurement tolerance.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-011",
+          "verifiability": "hardware",
+          "criterion": "A `STATUS` response contains a numeric PWM-duty field in percent matching the effective duty within measurement tolerance.",
+          "observable": "STATUS UART response duty field and measured PWM duty",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "STATUS is requested",
+            "UART is operational",
+            "PWM is active"
+          ],
+          "procedure": [
+            "Set a known duty value within the safe limit.",
+            "Measure the effective PWM duty.",
+            "Transmit `STATUS`.",
+            "Parse the numeric duty field."
+          ],
+          "expected": "The reported percentage matches the measured effective PWM duty within the test's stated measurement tolerance.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-012",
+          "verifiability": "hardware",
+          "criterion": "A `STATUS` response contains a driver-fault field that reflects whether the STSPIN830 EN/FAULT condition is active.",
+          "observable": "STATUS UART response fault field and injected/read driver fault condition",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "STATUS is requested",
+            "UART is operational",
+            "The driver fault input can be observed or controlled"
+          ],
+          "procedure": [
+            "Run `STATUS` with the driver fault inactive and record the fault field.",
+            "Activate or inject the driver fault condition.",
+            "Run `STATUS` again."
+          ],
+          "expected": "The fault field indicates inactive in the first case and active in the second case.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-013",
+          "verifiability": "hardware",
+          "criterion": "Transmitting `DIR CW` and then `DIR CCW` updates the internal direction state to CW and then CCW, with each value appearing in the subsequent STATUS response.",
+          "observable": "Direction field in two successive STATUS responses",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "UART is operational",
+            "System is initialized"
+          ],
+          "procedure": [
+            "Transmit `DIR CW` and request `STATUS`.",
+            "Transmit `DIR CCW` and request `STATUS`.",
+            "Compare the direction fields with the commands."
+          ],
+          "expected": "The first STATUS reports `CW` and the second STATUS reports `CCW`.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-014",
+          "verifiability": "inspection",
+          "criterion": "The firmware configuration and interface documentation each specify the UART port, baud rate, data bits, parity, stop bits, and command delimiter, and the values agree.",
+          "observable": "UART configuration source/configuration and interface documentation",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Firmware source/configuration and the interface documentation are available"
+          ],
+          "procedure": [
+            "Inspect the UART initialization configuration.",
+            "Inspect the documented command-interface settings.",
+            "Compare all six settings."
+          ],
+          "expected": "All six settings are explicitly specified in both places and are identical.",
+          "source": "derived",
+          "rationale": "The requirement requires a fixed, specified configuration, while the stated runtime acceptance criterion alone does not establish that every required setting is documented or fixed.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-014",
+          "verifiability": "hardware",
+          "criterion": "Using the documented UART settings, a host transmitting `STATUS` receives a correctly formatted response containing the STATUS fields.",
+          "observable": "UART response bytes received by the host",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Target is powered and running the firmware",
+            "The host uses the documented UART settings"
+          ],
+          "procedure": [
+            "Connect the host using the documented port and serial settings.",
+            "Transmit `STATUS` followed by the documented delimiter.",
+            "Capture and parse the response."
+          ],
+          "expected": "A complete, correctly formatted STATUS response is received using the configured UART connection.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-014",
+          "verifiability": "hardware",
+          "criterion": "A command sent with deliberately incorrect UART settings does not produce a valid command action or a partial motor/configuration change.",
+          "observable": "Pre/post STATUS values after a command sent with incorrect serial settings",
+          "observable_kind": "state",
+          "preconditions": [
+            "Target is powered and initialized",
+            "A known baseline STATUS is available",
+            "The host can transmit using at least one incorrect UART setting"
+          ],
+          "procedure": [
+            "Record STATUS before the negative test.",
+            "Transmit a state-changing command using an incorrect UART configuration.",
+            "Request STATUS using the documented configuration."
+          ],
+          "expected": "No valid action is acknowledged and every motor/configuration field in STATUS remains equal to its baseline value.",
+          "source": "derived",
+          "rationale": "This checks the stated failure behavior by observing both command recognition and state preservation after communication with mismatched settings.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-015",
+          "verifiability": "hardware",
+          "criterion": "An unrecognized command such as `FOO` produces an explicit error response and leaves all motor and configuration fields unchanged.",
+          "observable": "UART error response and before/after STATUS responses",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "UART link is established",
+            "System is initialized"
+          ],
+          "procedure": [
+            "Request STATUS and save all reported motor/configuration fields.",
+            "Transmit `FOO`.",
+            "Capture the response.",
+            "Request STATUS again."
+          ],
+          "expected": "The command response explicitly identifies an error, and every compared STATUS field is identical before and after `FOO`.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-016",
+          "verifiability": "hardware",
+          "criterion": "Each invalid command `FREQ abc` and `FREQ -1` produces an error response and leaves the reported electrical-frequency value unchanged.",
+          "observable": "UART error responses and before/after STATUS frequency field",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "System is initialized",
+            "UART is operational",
+            "A known frequency setpoint is active"
+          ],
+          "procedure": [
+            "Request STATUS and record the frequency.",
+            "Transmit `FREQ abc` and capture the response.",
+            "Request STATUS and compare the frequency.",
+            "Transmit `FREQ -1` and capture the response.",
+            "Request STATUS and compare the frequency again."
+          ],
+          "expected": "Both commands produce explicit error responses, and the frequency remains equal to the initial value after each command.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-016",
+          "verifiability": "hardware",
+          "criterion": "A `FREQ` command with a missing argument produces an error response and does not alter the electrical-frequency setpoint.",
+          "observable": "UART error response and before/after STATUS frequency field",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "System is initialized",
+            "UART is operational",
+            "A known frequency setpoint is active"
+          ],
+          "procedure": [
+            "Record the frequency from STATUS.",
+            "Transmit `FREQ` with the documented command delimiter and no argument.",
+            "Capture the response and request STATUS."
+          ],
+          "expected": "The response is an explicit error and the reported frequency equals the pre-command value.",
+          "source": "derived",
+          "rationale": "The requirement explicitly includes missing arguments, but its stated acceptance examples cover only non-numeric and negative values; this adds the missing-argument assertion.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-017",
+          "verifiability": "hardware",
+          "criterion": "Each invalid command `DUTY abc` and `DUTY -5` produces an error response and leaves the reported PWM-duty value unchanged.",
+          "observable": "UART error responses and before/after STATUS duty field",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "System is initialized",
+            "UART is operational",
+            "A known PWM duty is active"
+          ],
+          "procedure": [
+            "Request STATUS and record the duty.",
+            "Transmit `DUTY abc` and capture the response.",
+            "Request STATUS and compare the duty.",
+            "Transmit `DUTY -5` and capture the response.",
+            "Request STATUS and compare the duty again."
+          ],
+          "expected": "Both commands produce explicit error responses, and the duty remains equal to the initial value after each command.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-017",
+          "verifiability": "hardware",
+          "criterion": "A `DUTY` command with a missing argument produces an error response and does not alter the PWM-duty setting.",
+          "observable": "UART error response and before/after STATUS duty field",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "System is initialized",
+            "UART is operational",
+            "A known PWM duty is active"
+          ],
+          "procedure": [
+            "Record the duty from STATUS.",
+            "Transmit `DUTY` with the documented command delimiter and no argument.",
+            "Capture the response and request STATUS."
+          ],
+          "expected": "The response is an explicit error and the reported duty equals the pre-command value.",
+          "source": "derived",
+          "rationale": "The requirement explicitly includes missing arguments, but its stated acceptance examples cover only non-numeric and negative values; this adds the missing-argument assertion.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-019",
+          "verifiability": "hardware",
+          "criterion": "A `STATUS` command returns one response containing the motor state, rotation direction, electrical frequency in Hz, PWM duty in percent, and driver-fault status.",
+          "observable": "Complete STATUS UART response",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "UART is operational",
+            "The target is initialized"
+          ],
+          "procedure": [
+            "Transmit `STATUS` using the configured delimiter.",
+            "Capture the response.",
+            "Parse the response for all required fields."
+          ],
+          "expected": "The response contains all five fields: motor state, direction, numeric electrical frequency in Hz, numeric PWM duty in percent, and driver-fault status.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-019",
+          "verifiability": "unverifiable",
+          "criterion": "The STATUS response is returned within a reasonable time after the request.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [
+            "UART is operational",
+            "STATUS is requested"
+          ],
+          "procedure": [],
+          "expected": "",
+          "source": "derived",
+          "rationale": "No rationale supplied by the generator -- this criterion is an unexplained inference; review it before relying on it.",
+          "blocked_reason": "The requirement does not define a maximum response time or other measurable bound for 'reasonable time'.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-5",
+      "name": "Open-Loop Demonstration Scope & Validation",
+      "criteria": [
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "After issuing the MOTOR START command with the driver enabled and fault-free, the motor shaft exhibits visible movement or rotation within the test's defined reasonable-time limit.",
+          "observable": "Motor shaft movement or rotation",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Motor is connected and powered.",
+            "Driver is enabled.",
+            "No active motor-driver fault is present.",
+            "The target is running the firmware and accepting MOTOR START over UART."
+          ],
+          "procedure": [
+            "Connect and power the motor and target hardware.",
+            "Confirm that the driver is enabled and no fault is active.",
+            "Issue MOTOR START over UART.",
+            "Observe the motor shaft during the defined reasonable-time limit."
+          ],
+          "expected": "Visible shaft movement or rotation occurs before the reasonable-time limit expires.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-001",
+          "verifiability": "hardware",
+          "criterion": "A correctly assembled and powered target produces observable motor rotation during the demonstration, with the rotation driven by the configured PWM outputs.",
+          "observable": "Motor shaft rotation and TIM1/PWM output during the demonstration",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The NUCLEO-G431RB, motor-driver board, motor, wiring, and power supplies are correctly assembled.",
+            "Target hardware is powered.",
+            "The demonstration firmware is running."
+          ],
+          "procedure": [
+            "Power the assembled target hardware.",
+            "Start the open-loop demonstration through the documented UART interaction.",
+            "Observe the motor shaft while the demonstration is active.",
+            "Verify that the configured PWM output is active during the observed rotation."
+          ],
+          "expected": "The motor rotates while PWM is being generated, and the demonstration completes with observable rotation.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "inspection",
+          "criterion": "The waveform-generation implementation applies the configured electrical frequency directly to the rotating-field waveform and contains no feedback path that adjusts that frequency from measured or commanded mechanical RPM.",
+          "observable": "Waveform-generation code, frequency configuration, and control/data-flow documentation",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware source and design documentation are available for review."
+          ],
+          "procedure": [
+            "Trace the configured electrical-frequency value into the PWM or waveform-generation logic.",
+            "Inspect the waveform-generation inputs and control path for RPM feedback or a speed-control loop.",
+            "Review the design documentation for the stated role of electrical frequency."
+          ],
+          "expected": "Electrical frequency is used as a direct waveform-generation input for the rotating field; no RPM feedback or closed-loop speed adjustment is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-003",
+          "verifiability": "inspection",
+          "criterion": "The firmware source and UART status interface contain no mechanical-RPM measurement, RPM estimate, or claim that the motor is operating at a guaranteed mechanical RPM.",
+          "observable": "RPM-related source code, telemetry fields, UART STATUS output, and documentation",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware source, UART command/status implementation, and related documentation are available for review."
+          ],
+          "procedure": [
+            "Search the source and interface definitions for RPM sensing, estimation, or mechanical-speed fields.",
+            "Inspect the STATUS command implementation and its emitted fields and text.",
+            "Review user-facing documentation for mechanical-RPM guarantees."
+          ],
+          "expected": "No RPM sensor or estimator is implemented, STATUS reports no mechanical RPM, and documentation makes no mechanical-RPM guarantee.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "inspection",
+          "criterion": "Code and configuration inspection finds no implementation or operational dependency on sensorless FOC, rotor observation, Clarke/Park or inverse transforms, current PI control, speed PI control, or closed-loop RPM control.",
+          "observable": "Firmware source tree, build configuration, and control-flow call graph",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and build configuration are available for review."
+          ],
+          "procedure": [
+            "Inspect the motor-control modules and their call graph.",
+            "Search for implementations or invocations of sensorless FOC, rotor observers, Clarke/Park transforms, inverse transforms, current PI, speed PI, and closed-loop RPM control.",
+            "Trace the demonstration startup path to confirm that operation does not depend on any of these features."
+          ],
+          "expected": "None of the listed algorithms or control loops is implemented, invoked, or required by the demonstration path.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "inspection",
+          "criterion": "Code and configuration inspection finds no motor-parameter characterization or automatic identification for resistance, inductance, flux, or other motor parameters.",
+          "observable": "Motor-parameter, calibration, and startup-identification source modules and configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and build configuration are available for review."
+          ],
+          "procedure": [
+            "Search the source tree for resistance, inductance, flux, motor characterization, parameter identification, and automatic identification routines.",
+            "Inspect startup and demonstration initialization for calls to such routines.",
+            "Review configuration files for required motor-characterization data."
+          ],
+          "expected": "No listed characterization or automatic motor-parameter-identification routine is present or required for operation.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "inspection",
+          "criterion": "Code and configuration inspection finds no phase-current ADC control, VBUS ADC control, ADC-triggered DMA, or current-offset calibration required by the demonstration.",
+          "observable": "ADC, DMA, current-sensing, VBUS-sensing, and calibration source modules and configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and build configuration are available for review."
+          ],
+          "procedure": [
+            "Search the source and peripheral configuration for phase-current ADC channels, VBUS ADC channels, ADC-triggered DMA, and current-offset calibration.",
+            "Inspect the PWM and motor-startup call paths for dependencies on those facilities.",
+            "Review the demonstration configuration for required ADC or calibration setup."
+          ],
+          "expected": "None of the listed ADC, DMA, or current-offset-calibration features is implemented or required for demonstration operation.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "inspection",
+          "criterion": "Code and project inspection finds no oscilloscope integration and no external motor-parameter-identification dependency in the demonstration firmware.",
+          "observable": "Project source tree, build dependencies, interface definitions, and demonstration call graph",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source, project configuration, and dependency list are available for review."
+          ],
+          "procedure": [
+            "Inspect source and project dependencies for oscilloscope-control or oscilloscope-data interfaces.",
+            "Inspect the demonstration call graph for external motor-parameter-identification steps or required tools.",
+            "Review the run instructions for any such prerequisite."
+          ],
+          "expected": "No oscilloscope integration is present, and the demonstration has no dependency on automatic motor-parameter identification or an external identification tool.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    }
+  ]
+}

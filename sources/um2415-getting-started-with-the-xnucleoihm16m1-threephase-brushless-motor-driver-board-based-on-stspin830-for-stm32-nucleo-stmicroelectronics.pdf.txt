@@ -1,0 +1,1437 @@
+Extracted text from um2415-getting-started-with-the-xnucleoihm16m1-threephase-brushless-motor-driver-board-based-on-stspin830-for-stm32-nucleo-stmicroelectronics.pdf (application/pdf). Auto-generated sidecar for AI search — edit the source document, not this file.
+
+Introduction
+The X-NUCLEO-IHM16M1 motor driver expansion board is based on the STSPIN830 monolithic driver for three-phase 
+brushless motors.
+It represents an affordable, easy-to-use solution for driving brushless motors in your STM32 Nucleo project, implementing single 
+and three-shunt current sensing.
+The STSPIN830 embeds a PWM current limiter with adjustable threshold together with a full set of protections.
+The X-NUCLEO-IHM16M1 expansion board is compatible with the Arduino and ST morpho connectors, so it can be plugged to 
+an STM32 Nucleo development board and stacked with additional STM32 Nucleo expansion boards.
+Figure 1. X-NUCLEO-IHM16M1 expansion board
+Getting started with the X-NUCLEO-IHM16M1 three-phase brushless motor 
+driver board based on STSPIN830 for STM32 Nucleo
+UM2415
+User manual
+UM2415 - Rev 4 - March 2024
+For further information contact your local STMicroelectronics sales office.
+www.st.com
+
+1 Hardware and software requirements
+To use the STM32 Nucleo development boards with the X-NUCLEO-IHM16M1 expansion board, the following 
+software and hardware are required:
+• a Windows PC (7, 8 or 10)
+• an X-NUCLEO-IHM16M1 expansion board
+• an STM32 Nucleo development board
+• a type A USB to mini-B USB cable to connect the STM32 Nucleo board to the PC
+• the STM32 Motor Control SDK (X-CUBE-MCSDK)
+• an IDE chosen among IAR Embedded Workbench for ARM (IAR-EWARM), Keil microcontroller 
+development kit (MDK-ARM-STR) and integrated development environment for STM32 (STM32CubeIDE)
+• a power supply with output voltage between 7 and 45 V
+• a three-phase brushless motor with compatible voltage and current for the power supply and the 
+STSPIN830 driver
+UM2415
+Hardware and software requirements
+UM2415 - Rev 4 page 2/22
+
+2 Safety precautions
+Danger:
+ Some of the components mounted on the board could reach hazardous 
+temperature during operation.
+While using the board:
+• Do not touch the components
+• Do not cover the board
+• Do not put the board in contact with flammable materials or with materials releasing smoke when heated
+• After operation, allow the board to cool down before touching it
+UM2415
+Safety precautions
+UM2415 - Rev 4 page 3/22
+
+3 Getting started
+To start your project with the board:
+Step 1. Check the jumper positions and the mounting options according to the desired operation mode (see 
+Section 4.1: Operation mode and sensing topology selection) and STM32 Nucleo development board 
+(see STM32 Nucleo development board compatibility)
+Step 2. Connect the X-NUCLEO-IHM16M1 with the STM32 Nucleo development board through ST morpho 
+connectors (CN7, CN10)
+Step 3. Connect the brushless motor to 3-4-5 outputs of CN1 using the provided screw terminal
+Step 4. Connect the STM32 Nucleo development board to the PC using a USB cable and download the 
+corresponding pre-compiled code
+Step 5. Supply the board through one of the supply connectors:
+– inputs 2 (VIN) and 1 (ground) of CN1 using the provided screw terminal
+– J4 jack input (2.1 mm or 2.5 mm, tip positive)
+Step 6. Develop your application using the STM32 Motor Control SDK (X-CUBE-MCSDK)
+UM2415
+Getting started
+UM2415 - Rev 4 page 4/22
+
+4 Hardware description and configuration
+The figure below shows the X-NUCLEO-IHM16M1 main component positions.
+Figure 2. X-NUCLEOIHM16M1 component positions
+The table below lists the signals mapped on the ST morpho connectors.
+Table 1. X-NUCLEO-IHM16M1 ST morpho connector pinouts
+Connector Pin Signal Remarks
+CN7
+12 VDD (pull-up voltage)
+3.3 V in STM32 Nucleo dev. boards.
+Through R44
+17 Hall-effect sensor 1 R43
+18 5 V
+20 Ground
+22 Ground
+28 Motor supply voltage sensing R33
+30 Current feedback phase U R29
+32 Current reference (DAC) R39 (NP by default)
+34
+Current feedback phase W R36
+STM32F303RE embedded PGA input U R75 (NP by default)
+35 Speed reference signal
+36 BEMF feedback phase W
+37 BEMF feedback phase V
+38 BEMF feedback phase V
+CN10
+1 BEMF divider GPIO
+2 Hall-effect sensor 3 R87
+UM2415
+Hardware description and configuration
+UM2415 - Rev 4 page 5/22
+
+Connector Pin Signal Remarks
+CN10
+4 Hall-effect sensor 1 R81
+6 Motor supply voltage sensing R31
+11 ENU driving signal R79 (NP by default)
+13 ENV driving signal R78 (NP by default)
+14 EN/FAULT signal R35
+15
+Current feedback phase W R34
+ENU driving signal R69 (NP by default)
+ENW driving signal R74 (NP by default)
+16 EN/FAULT signal R37
+18
+Current feedback phase V R41
+STM32F303RE embedded PGA input W R77 (NP by default)
+PCB temperature sensing (NTC) R83 (NP by default)
+19 Hall-effect sensor 2 R85
+21 INV driving signal
+23 INU driving signal
+24 Current feedback phase V R42
+25 Hall-effect sensor 3 R84
+26 ENW driving signal R61
+27 Current reference (PWM) R40
+28
+ENV driving signal R73
+Motor supply voltage sensing R88 (NP by default)
+29 Active low standby
+30
+STM32F303RE embedded PGA input V R76 (NP by default)
+ENU driving signal R80
+31 Hall-effect sensor 2 R86
+33 INW driving signal
+34 PCB temperature sensing (NTC) R82
+UM2415
+Hardware description and configuration
+UM2415 - Rev 4 page 6/22
+
+4.1 Operation mode and sensing topology selection
+The X-NUCLEO-IHM16M1 expansion board supports 6-step and field oriented control (FOC) algorithms.
+According to the algorithm, the board hardware configuration must be changed as follows:
+Table 2. X-NUCLEO-IHM16M1 expansion board configuration based on the algorithm used
+6-step(1) FOC (3-shunt)(2) FOC (single shunt)
+Single 
+shunt
+Current 
+sensing
+Current 
+limiter 
+enabled 
+(3)
+Adjustable 
+current 
+limiter 
+threshold (3)
+Three-
+shunt
+Current 
+sensing
+Current 
+limiter 
+disabled
+Fixed 
+current 
+limiter 
+threshold
+Single 
+shunt
+Current 
+sensing
+Current 
+limiter 
+enabled 
+(3)
+Adjustable 
+current 
+limiter 
+threshold (3)
+Close 
+JP4 
+and 
+JP7, 
+solder 
+bridge 
+at the 
+bottom
+Open J5 
+and J6 
+jumpers
+J2 closed 
+to 1-2 
+position
+J3 closed to 
+2-3 position
+Open 
+JP4 
+and 
+JP7, 
+solder 
+bridge 
+at the 
+bottom
+Close J5 
+and J6 
+jumpers
+J2 closed 
+to 2-3 
+position
+J3 closed 
+to 1-2 
+position
+Close 
+JP4 
+and 
+JP7, 
+solder 
+bridge 
+at the 
+bottom
+Close J5 
+and J6 
+jumpers
+J2 closed 
+to 1-2 
+position
+J3 closed to 
+2-3 position
+ 
+1. Voltage or current mode.
+2. Default configuration
+3. Optional.
+ 
+4.2 Current sensing
+The X-NUCLEO-IHM16M1 expansion board mounts three shunt resistors to sense the current in each motor 
+phase.
+For each shunt resistor, the TSV994 operational amplifier performs signal conditioning before sending the sensed 
+value to the ADC inputs of the STM32.
+Table 3. TSV994 operational amplifier configuration
+Opamp Sensed current Gain Out offset J5 J6 Remarks
+1 None (grounded) 1 0 V Unused
+2 Phase V(1)
+1.53 1.56 V Closed Closed FOC
+3 0 V Open Open 6STEP
+3 Phase W(1) 1.53 1.56 V FOC
+4 Phase U(1) 1.53 1.56 V FOC
+ 
+1. In single shunt topology, all the operational amplifiers sense the same current.
+ 
+4.2.1 Sense resistor value and maximum current range in FOC mode
+The sensed current range in FOC mode could be limited by the value of the shunt resistor.
+The mounted resistor of 330 mΩ allows an up to 1 A reading without distortion.
+For better performance at 1.5 A, you should reduce the shunt resistor value to 100 mΩ. The op-amp gain has to 
+be tuned accordingly.
+ Related links 
+For further details, refer to the AN5386, STSPIN830: measuring negative voltages on sense resistors.
+4.3 STSPIN830 current limiter
+The STSPIN830 implements a PWM current limiter.
+In single shunt topology, the device monitors the motor current through the SNS pin connected to the sensing 
+resistor.
+UM2415
+Hardware description and configuration
+UM2415 - Rev 4 page 7/22
+
+When the SNS pin (VSNS) voltage exceeds the reference voltage threshold (VREF) the current limiter is triggered, 
+the OFF time is started and all the power outputs are disabled (high impedance) until the OFF time expires.
+J2 jumper selects the SNS input connection: when closed in 2-3 position (default), it shorts the pin to ground 
+disabling the current limiter feature; when closed in 1-2 position, it connects the pin to the shunts.
+It is possible to set the VREF value in two ways:
+• J3 closed in 1-2 position: fixed to 0.497 V corresponding to about 4.5 A in single shunt topology 
+(equivalent resistance 0.11 Ω)
+• J3 closed in 2-3 position: adjustable through MCU up to 0.497 V corresponding to about 4.5 A in single 
+shunt topology (equivalent resistance 0.11 Ω).
+The MCU can set the reference voltage through:
+1. PWM signal (default)
+2. DAC output, if available (not connected by default)
+R16 resistor sets the OFF time duration according to the graph shown below (default value is about 18 µs).
+Figure 3. OFF time vs. ROFF value
+4.4 STSPIN830 logic inputs and fault signaling
+The STSPIN830 offers two methods for driving the power stage selectable through the MODE pin.
+When the MODE pin is low, the ENx and INx inputs control the power outputs according to Table 4. ENx and INx 
+inputs truth table (MODE = L) (the board default configuration).
+When MODE pin is high, the INxH and INxL inputs control the power outputs according to Table 5. INxL and INxH 
+inputs truth table (MODE = H). This configuration is set by removing R12 resistor; it is also recommended to 
+replace R11 with a 0 R resistor.
+When the EN\FAULT input is forced low, the power stage is immediately disabled (all MOSFETs are turned off) in 
+both modes and the D1 LED turns red.
+Table 4. ENx and INx inputs truth table (MODE = L)
+X: Don’t care; High Z: High impedance
+EN\FAULT ENx INx OUTx ‘x’ half-bridge condition
+0 X X High Z Disabled
+UM2415
+Hardware description and configuration
+UM2415 - Rev 4 page 8/22
+
+EN\FAULT ENx INx OUTx ‘x’ half-bridge condition
+1 0 X High Z Disabled
+1 1 0 GND LS on
+1 1 1 VS HS on
+Table 5. INxL and INxH inputs truth table (MODE = H)
+X: Don’t care; High Z: High impedance
+EN\FAULT INxH INxL OUTx ‘x’ half-bridge condition
+0 X X High Z Disabled
+1 0 0 High Z Disabled
+1 0 1 GND LS on
+1 1 0 VS HS on
+1 1 1 High Z Disabled (interlocking)
+The EN/FAULT signal is forwarded to the TIM1 BKIN input to implement failure protection.
+4.5 Hall effect sensors and encoder connector
+The X-NUCLEO-IHM16M1 expansion board provides an interface between the digital Hall effect sensors or 
+encoder mounted on the motor and the STM32 Nucleo development board through J1 connector.
+The connector provides:
+• Pull-up resistors (R20, R21, R22) for open-drain and open-collector interfacing.
+Note: It is recommended to remove the pull-up resistors in case of push-pull outputs.
+• Protection from overvoltage on the MCU input pin through the D2, D3 and D4 Zener diodes.
+Table 5.
+Table 6. J1 connector pinout
+Pin Encoder Hall effect sensor
+1 A+ Hall 1
+2 B+ Hall 2
+3 Z Hall 3
+4
+5 V supply from
+Nucleo development board
+5 V supply from
+Nucleo development board
+5 Ground Ground
+4.6 Speed trimmer
+The R17 trimmer provides an analog signal to the MCU that can be used by the firmware to set the speed control 
+loop.
+The voltage range is from 0 to 3.3 V (VDD) and increases rotating the knob in clockwise direction.
+UM2415
+Hardware description and configuration
+UM2415 - Rev 4 page 9/22
+
+5 X-NUCLEO-IHM16M1 schematic diagrams
+Figure 4. X-NUCLEO-IHM16M1 circuit schematic (1 of 5)
+39K
+5
+39K
+C1
+19 INU/INUH
+20
+0R
++
+39K
+SENSEV
+14
+STBY
+39K
+17
+D1
+INV
+VDD
+OUTW 12
+1
+R7ENW 61300311121
+2
+SENSEW
+R9
+EN_FAULT
+MODE18
+ENV
+OUTU
+NC 8
++C2
+R5
+23 INW/INWH
+OUTW
+M5
+R11
+3
+10
+C5
+RED
+NP OUTU
+21 INV/INVH
+22
+VDD
+VREF
+P-MOS
+INU
+24 ENW/INWL
+STSPIN830
+13
+4.7NF
+NP
+OUTV 11
+1K
+SENSEU
+7
+INW
+R4ENV/INVL
+39K
+1
+TOFF
+SENSEV
+U1
+C4
+2.2NF
+R30
+C6
+330R
+R32
+NP
+VS 9
+GND15
+33µF 50V
+R2
+12K
+C3
+VDD
+G
+R8
+39K
+330NF
+R6
+VDD
+33µF 50VNP
+R10
+SENSEU
+VREF
+2 TOFF
+EPAD25
+SNS 4
+ENU/INUL
+STBY16
+R1
+S
+2
+VS
+Jumper M5 connected 
+between J2 pin 2&3
+VS
+39K
+EN_FAULT
+10NF
+1
+ENU
+J2
+6 GND
+GND3
+39K
+R12
+OUTV
+Q1
+NX3008PBKW
+D
+3
+SENSEW
+R3
+VS
+UM2415 - Rev 4page 10/22
+UM2415
+X-NUCLEO-IHM16M1 schematic diagrams 
+
+Figure 5. X-NUCLEO-IHM16M1 circuit schematic (2 of 5)
+A+/H1
+B+/H2
+Z+/H3
++5V
+GND
+Roff
+VDD
+SPEED
+VREF
+VDD
+VDD
+VDD
+5V
+5V
+VS
+VS VDD
+VDD
+VREF
+CURRENT_REF
+TOFF
+SPEED
+H1
+H2
+H3
+VBUS NTC
+TP5
+1
+330R
+R17
+10K
+1 3
+2
+R22
+3K
+NTC R38
+X7R
+R21
+3K
+R13
+3.9K
+JP3
+1
+CLOSE
+2
+R28
+4.7K
+NP
+C12
+10PF
+D3
+3V
+1
+61300511121
+1
+2
+3
+4
+5
+R18
+10K
+R14
+180K
+1%
+C9
+220NF
+16V
+X7R
+R26
+4.7K
+NP
+C22
+220NF
+16V
+X7R
+R16
+12K
+TP2
+1
+S1751-46R
+J3
+13
+2
+61300311121
+D2
+3V
+22K
+C21
+100NF
+50V
+X7R
+R24 330R
+D4
+3V
+R20
+3K
+TP3
+1
+S1751-46R
+M6
+TP1
+1
+R25 330R
+C11
+10PF
+C7
+220NF
+16V
+X7R
+Jumper M6 connected 
+between J3 pin 1&2
+S1751-46R
+R23
+10PF
+R27
+4.7K
+NP
+S1751-46R
+C10
+C8
+NCP18WB473J03RB
+220NF
+16V
+MMSZ3V0T1G
+TP4
+GND GND VS
+J1
+S1751-46R
+R15
+MMSZ3V0T1G
+R19
+MMSZ3V0T1G
+12K
+1%
+UM2415 - Rev 4page 11/22
+UM2415
+X-NUCLEO-IHM16M1 schematic diagrams 
+
+Figure 6. X-NUCLEO-IHM16M1 circuit schematic (3 of 5)
+OP303_W
+8
+7
+6
+5
+4
+3
+2
+1
+ESQ-119-24-G-D
+25
+R88
+R83
+R440R
+2
+4
+6
+8
+10
+5V
+27
+C10_34
+27
+INV
+C7_32
+X7R
+C10_24
+C10_11
+BEMF3
+C10_18 F303
+F302
+BKIN2 (F302, F303)
+CURRENT_REF
+R45
+GU_4xx
+R75 NP
+C10_14
+STBY
+23
+C10_15
+M2
+CN5 NP
+24
+26
+R69
+0R17
+38
+R33
+R84
+VDD
+29
+C7_34
+0R
+ENV
+26
+28
+30
+BEMF1
+PB14
+NP
+R40
+H3
+1
+2
+3
+4
+5
+6
+7
+8
+C10_16
+12
+24
+OPTICAL_TARGET
+R35
+C10_18
+C10_26
+0R
+INW
+STBY
+REF
+INU
+INV
+VDD
+5V
+GND
+GND
+bemf1
+bemf3
+bemf2
+SPD
+18
+CN9 NP
+C10_19
+ESQ-119-24-G-D
+BEMF2
+C10_30
+31
+0RC10_26
+SSQ-108-01-F-S
+H1
+13
+C10_15
+C10_2
+R77
+C10_4
+ENU
+0R
+0R
+28
+30
+33
+35
+22
+33
+C10_19
+C10_14
+VBUS
+C10_28
+0R
+19
+EN_FAULT
+C10_30
+C10_13
+R87
+C10_27
+INW
+R85
+SSQ-110-01-F-S
+OPTICAL_TARGET
+CN10
+1
+3
+5
+7
+9
+11
+R81
+R43
+CN6 NP
+35
+37
+20
+C7_17
+PA8 - INU
+PA9 - INV
+PA10 - INW
+PC1 - ADC
+PC3 - ADC
+PC2
+PB5
+PC9 - GPIO
+<CURRENT_REF>
+C10_16
+0R
+C7_28
+31 32
+34
+14
+R78
+21
+36
+C10_6
+R79
+R31
+16
+0R
+SSQ-106-01-F-S
+1
+3
+5
+7
+9
+R36 0R
+NP
+37
+C7_34
+C7_30
+34
+C10_28
+C7_28
+18
+R80
+C10_31
+CN7
+Curr_fdbk2
+13
+36
+0R
+0R
+INU
+M1
+19
+21
+29
+10
+R82
+12
+38
+2
+4
+6
+8
+10
+R29
+R86
+NTC
+CN8
+22
+C10_31
+R42
+C10_25
+0RR73
+14
+16
+32
+20
+R39 NP
+C10_2
+C7_17
+OP303_V
+C10_18
+R41
+15
+R61
+C10_11
+17
+23
+Curr_fdbk1
+Curr_fdbk3
+C10_6
+OPTICAL_TARGET
+C13
+220NF
+16V
+R76
+SSQ-108-01-F-S
+NP
+R34 0R
+R37
+C10_15
+11
+C10_34
+OP303_U
+ENW
+1
+2
+3
+4
+5
+6SPEED
+C10_30
+C10_28
+C10_25
+C7_32
+PB0 - PhW Sense
+F303PA7 - PhW Sense
+PB10 - H3
+PA15 - H1
+F030PC6 - H1
+F302
+F302
+F302
+PB0
+PB3 - H2
+PB13
+PB11
+PB13
+PB14
+PB15
+PA7
+M4
+R74
+NP
+C10_4
+15
+25
+VDD
+C10_18
+PB13
+PB14
+PB15
+F303 (Embedded OPAMP ONLY)
+PB1 - PhV Sense
+PC7 - H2 F030
+PWM
+DAC
+F030
+PB11 - PhV Sense
+PA4 - DAC
+PB4 - PWM
+PC8 - H3
+PC4
+PA6
+PA1 - PhU Sense
+PC5
+PA0
+PA11 - BKIN2
+F302
+PB12 - BKIN
+STM32F303 Embedded OPAMP
+C10_13
+H2
+IO_BEMF
+C7_30
+C10_27
+M3
+C7_34
+C10_24
+C10_15
+9
+8
+7
+6
+5
+4
+3
+2
+1
+PC0 - ADC
+0R
+0R
+NP
+NP
+NP
+NP
+0R
+0R
+0R
+0R
+0R
+NP
+UM2415 - Rev 4page 12/22
+UM2415
+X-NUCLEO-IHM16M1 schematic diagrams 
+
+Figure 7. X-NUCLEO-IHM16M1 circuit schematic (4 of 5)
+CN3
+D6
+1
+S1751-46R
+D9
+D12
+OUT V
+CN1YELLOW
+R49
+10K
+BEMF3
+OUTU
+1/4W
+1
+BEMF2
+691311500105
+BAT30KFILM
+BAT30KFILM
+BAT30KFILM
+VS
+VDD
+IO_BEMF
+S1751-46R
+R53
+VS
+YELLOW
+TP8
+10K 1/4W
+2.2K
+R46
+3
+BAT30KFILM
+R50
+10K
+2
+VS
+GND
+OUT W
+OUT U
+D11
+805-1699
+D8
+S1751-46R
+1
+691351500002
+R47
+1
+1
+J4
+RS
+FC681465P
+1/4W
+10K 1/4W
+YELLOW
+1/4W
+TP6
+691351500003
+BAT30KFILM
+R54
+OUTW
+1
+3
+2
+OUTV
+2.2K
+D7
+10K 1/4W
+R48
+3
+R51
+10K
+D10
+BEMF1
+D13
+2.2K
+1
+D5
+4
+CN2
+TP7
+2BAT30KFILM
+R52
+2
+5
+UM2415 - Rev 4page 13/22
+UM2415
+X-NUCLEO-IHM16M1 schematic diagrams 
+
+Figure 8. X-NUCLEO-IHM16M1 circuit schematic (5 of 5)
+OUT
+2.2K
+R65
+Jumper M8 connected 
+between J6 pin 1&2
+IN+
+VDD
+J5
+M8
+680R
+5 IN+
+C14
+Jumper M7 connected 
+between J5 pin 1&2
+12
+VDD
+IN-6
+2
+2.2K
+R70
+0.33R
+1/2W
+1206
+680R
+GND
+8
+U2B
+OP303_V
+SENSEU
+680PF
+R60
+11
+OPEN
+TSV994R62
+Vcc 4
+1
+2
+11
+OP303_W
+R56
+2.2K
+1
+2.2K
+OUT
+R63
+0.33R
+1/2W
+2.2K
+R72
+VDD
+2.2K
+SENSEV
+1
+GND11
+R58
+U2C
+C19
+3 IN+
+10NF
+Curr_fdbk3
+2.2K
+7
+1206
+680R
+J6
+OUT
+VDD
+TSV994
+Vcc 4
+Curr_fdbk2
+GND11
+2.2K
+R66
+M7
+R57
+0.33R
+1/2W
+TSV994
+2.2K
+R64C17
+U2A
+Vcc 4
+NP
+C16
+61300211121
+R67
+VDD
+Curr_fdbk113
+14
+1
+IN+10
+OPEN
+GND
+2.2K
+R71
+2 IN-
+R55
+JP7
+U2D
+TSV994
+4Vcc
+C20
+C15
+SENSEW
+1206
+1
+2
+OP303_U
+61300211121
+JP4
+OUT
+IN-
+2
+680PF
+R59
+680PF
+R68
+VDD
+VDD
+C18
+NP
+9 IN-
+NP
+UM2415 - Rev 4page 14/22
+UM2415
+X-NUCLEO-IHM16M1 schematic diagrams 
+
+6 Bill of materials
+Table 7. X-NUCLEO-IHM16M1 bill of materials
+Item Q.ty Ref. Part/Value Description Manufacturer Order code
+1 1 CN1 Pluggable 
+terminal block Wurth Elektronik 691311500105
+2 1 CN2 Pluggable 
+terminal block Wurth Elektronik 691351500002
+3 1 CN3 Pluggable 
+terminal block Wurth Elektronik 691351500003
+4 1 CN5 NP
+10 position 
+receptacle 
+connector
+Samtec SSQ-110-01-F-S
+5 2 CN6, CN9 NP
+8 position 
+receptacle 
+connector
+Samtec SSQ-108-01-F-S
+6 2 CN7, CN10 Board-to-board 
+connectors Samtec ESQ-119-24-G-D
+7 1 CN8 NP
+6 position 
+receptacle 
+connector
+Samtec SSQ-106-01-F-S
+8 1 C1
+33 µF, 50 V, 
+±20%, 
+D6.3_H7.7
+Aluminium 
+electrolytic 
+capacitor
+Wurth Elektronik 865080645010
+9 1 C2 NP, 50 V, ±20%, 
+D6.3_H11_P2.5
+Aluminium 
+electrolytic 
+capacitor
+Wurth Elektronik 860080673003
+10 1 C3 330 NF, 50 V, 
+±10%, 805
+Ceramic 
+capacitor Any 330NF_50V_X7R_0805
+11 2 C4, C16 10 NF, 50 V, 
+±15%, 603
+Ceramic 
+capacitors Any 10NF_50V_X7R_0603
+12 1 C5 2.2 NF, 50 V, 
+±15%, 603
+Ceramic 
+capacitor Any 2.2NF_50V_X7R_0603
+13 1 C6 NP, 50 V, ±15%, 
+603
+Ceramic 
+capacitor Any 4.7NF_50V_X7R_0603
+14 5 C7, C8, C9, 
+C13, C22
+220 NF, 16 V, 
+±10%, 603
+Ceramic 
+capacitors Any 220NF_16V_X7R_0603
+15 3 C10, C11, C12 10 PF, 50 V, 
+±10%, 603
+Ceramic 
+capacitors Any 10PF_50V_COG_0603
+16 3 C14, C17, C19 680 PF, 50 V, 
+±15%, 603
+Ceramic 
+capacitors Any 680PF_50V_X7R_0603
+17 3 C15, C18, C20 NP 603 Ceramic 
+capacitors Any C_NP_0603
+18 1 C21 100 NF, 50 V, 
+±15%, 603
+Ceramic 
+capacitor Any 100NF_50V_X7R_0603
+19 1 D1 RED, 805 LED Wurth Elektronik 150080RS75000
+20 3 D2, D3, D4 3 V, SOD123 Zener diodes OnSemiconducto
+rs MMSZ3V0T1G
+21 6 D5, D6, D7, 
+D11, D12, D13 SOD523 Small signal 
+Schotky diodes ST BAT30KFILM
+22 3 D8, D9, D10 YELLOW, 805 LED Wurth Elektronik 150080YS75000
+23 1 JP3 CLOSE, 603 Resistors Any SMALL TIN-DROP CLOSE
+UM2415
+Bill of materials
+UM2415 - Rev 4 page 15/22
+
+Item Q.ty Ref. Part/Value Description Manufacturer Order code
+24 2 JP4, JP7 OPEN Resistor Any SOLDER_BRIDGE
+25 1 J1
+5 position 
+connector 
+header
+Wurth Elektronik 61300511121
+26 2 J2, J3
+CON_HEADER_
+1X3_L7.62_W2.
+54_P2.54
+3 position 
+connector 
+header
+Wurth Elektronik 61300311121
+27 1 J4 FC681465P Jack connector RS FC681465P
+28 2 J5, J6
+CON_HEADER_
+1X2_L5.08_W2.
+54_P2.54
+2 pin THT 
+header Wurth Elektronik 61300211121
+29 3 M1, M2, M3 OPTICAL_TARG
+ET
+OPTICAL_TARG
+ET Any OPTICAL_TARGET
+30 1 M4 GU_4xx PCB Any PCB GU -rev4 2 layers
+31 4 M5, M6, M7, M8 CLOSED 
+JUMPER
+2 position shunt 
+connector Wurth Elektronik 60900213421
+32 1 Q1 P-MOS, SOT323 P-channel 
+MOSFET NXP NX3008PBKW
+33 1 R1 12 K, 1/10 W, 
+±5%, 603 Resistor Any 12K_5%_0603
+34 1 R2 1 K, 1/10 W, 
+±5%, 603 Resistor Any 1K_5%_0603
+35 8
+R3, R5, R6, R7, 
+R8, R9, R10, 
+R11
+39 K, 1/10 W, 
+±5%, 603 Resistors Any 39K_5%_0603
+36 4 R4, R23, R24, 
+R25
+330 R, 1/10 W, 
+±5%, 603 Resistors Any 330R_5%_0603
+37 23
+R12, R29, R31, 
+R33, R34, R35, 
+R36, R37, R40, 
+R41, R42, R43, 
+R44, R45, R61, 
+R73, R80, R81, 
+R82, R84, R85, 
+R86, R87
+0 R, 1/10 W, 
+±5%, 603 Resistors Any 0R_5%_0603
+38 1 R13 3.9 K, 1/10 W, 
+±5%, 603 Resistor Any 3.9K_5%_0603
+39 1 R14 180 K, 1/10 W, 
+±1%, 603 Resistor Any 180K_1%_0603
+40 1 R15 22 K, 1/10 W, 
+±5%, 603 Resistor Any 22K_5%_0603
+41 1 R16 12 K, 1/8 W, 
+±5%, 805 Resistor Any 12K_5%_0805
+42 1 R17
+10 K, 1/2 W, 
+±10%, 
+L9.5_W4.9_H9.5
+Resistor Bourns 3386P-1-103TLF
+43 1 R18 10 K, 1/10 W, 
+±5%, 603 Resistor Any 10K_5%_0603
+44 1 R19 12 K, 1/10 W, 
+±1%, 603 Resistor Any 12K_1%_0603
+45 3 R20, R21, R22 3 K, 1/10 W, 
+±5%, 603 Resistors Any 3K_5%_0603
+UM2415
+Bill of materials
+UM2415 - Rev 4 page 16/22
+
+Item Q.ty Ref. Part/Value Description Manufacturer Order code
+46 3 R26, R27, R28 NP, 1/10 W, 
+±1%, 603 Resistors Any 4.7K_1%_0603
+47 11
+R30, R32, R39, 
+R69, R74, R75, 
+R76, R77, R78, 
+R79, R83
+NP, 603 Resistors Any R_NP_0603
+48 1 R38 47 K, 1/10 W, 
+±5%, 603 Thermistor Murata NCP18WB473J03RB
+49 6 R46, R47, R48, 
+R49, R50, R51
+10 K, 1/4 W, 
+±5%, 603 Resistors Any 10K_5%_0603_1/4W
+50 13
+R52, R53, R54, 
+R55, R58, R59, 
+R60, R64, R65, 
+R66, R67, R71, 
+R72
+2.2 K, 1/10 W, 
+±5%, 603 Resistors Any 2.2K_5%_0603
+51 3 R56, R62, R68 680 R, 1/10 W, 
+±5%, 603 Resistors Any 680R_5%_0603
+52 3 R57, R63, R70 0.33 R, 1/2 W, 
+±1%, 1206 Resistors Any 0R33_1%_1206_0.5W
+53 1 R88 NP, 1/10 W, 
+±5%, 603 Resistor Any 0R_5%_0603
+54 8
+TP1, TP2, TP3, 
+TP4, TP5, TP6, 
+TP7, TP8
+S1751-46R Test terminals Harwin S1751-46R
+55 1 U1 QFN24_L4_W4_
+P0.5
+Three-phase 
+brushless 
+monolithic motor 
+driver
+ST STSPIN830
+56 1 U2 TSSOP14
+Wide bandwidth 
+rail-to-rail input/
+output 5 V 
+CMOS quad Op-
+Amps
+ST TSV994IPT
+UM2415
+Bill of materials
+UM2415 - Rev 4 page 17/22
+
+Revision history
+Table 8. Document revision history
+Date Revision Changes
+17-May-2018 1 Initial release.
+01-Sep-2020 2 Added Section 4.2.1 Sense resistor value and maximum current range in FOC mode.
+20-Jul-2021 3
+Updated Getting started and Hardare and softare requirements.
+Added references to X-CUBE-MCSDK-Y.
+21-Feb-2024 4 Updated Section 1: Hardware and software requirements and Section 3: Getting started. Removed 
+Using the STM32F303RE embedded PGA and STM32 Nucleo development board compatibility.
+UM2415
+UM2415 - Rev 4 page 18/22
+
+Contents
+1 Hardware and software requirements .............................................. 2
+2 Safety precautions................................................................. 3
+3 Getting started .................................................................... 4
+4 Hardware description and configuration ........................................... 5
+4.1 Operation mode and sensing topology selection..................................... 7
+4.2 Current sensing ................................................................ 7
+4.2.1 Sense resistor value and maximum current range in FOC mode .................... 7
+4.3 STSPIN830 current limiter...................................................... 7
+4.4 STSPIN830 logic inputs and fault signaling ......................................... 8
+4.5 Hall effect sensors and encoder connector ......................................... 9
+4.6 Speed trimmer ................................................................. 9
+5 X-NUCLEO-IHM16M1 schematic diagrams......................................... 10
+6 Bill of materials................................................................... 15
+Revision history ....................................................................... 18
+UM2415
+Contents
+UM2415 - Rev 4 page 19/22
+
+List of tables
+Table 1.  X-NUCLEO-IHM16M1 ST morpho connector pinouts ........................................... 5
+Table 2.  X-NUCLEO-IHM16M1 expansion board configuration based on the algorithm used ...................... 7
+Table 3.  TSV994 operational amplifier configuration .................................................. 7
+Table 4.  ENx and INx inputs truth table (MODE = L) .................................................. 8
+Table 5.  INxL and INxH inputs truth table (MODE = H) ................................................ 9
+Table 6.  J1 connector pinout .................................................................. 9
+Table 7.  X-NUCLEO-IHM16M1 bill of materials .................................................... 15
+Table 8.  Document revision history ............................................................. 18
+UM2415
+List of tables
+UM2415 - Rev 4 page 20/22
+
+List of figures
+Figure 1.  X-NUCLEO-IHM16M1 expansion board................................................... 1
+Figure 2.  X-NUCLEOIHM16M1 component positions ................................................ 5
+Figure 3.  OFF time vs. ROFF value ............................................................. 8
+Figure 4.  X-NUCLEO-IHM16M1 circuit schematic (1 of 5) ............................................ 10
+Figure 5.  X-NUCLEO-IHM16M1 circuit schematic (2 of 5) ............................................ 11
+Figure 6.  X-NUCLEO-IHM16M1 circuit schematic (3 of 5) ............................................ 12
+Figure 7.  X-NUCLEO-IHM16M1 circuit schematic (4 of 5) ............................................ 13
+Figure 8.  X-NUCLEO-IHM16M1 circuit schematic (5 of 5) ............................................ 14
+UM2415
+List of figures
+UM2415 - Rev 4 page 21/22
+
+IMPORTANT NOTICE – READ CAREFULLY
+STMicroelectronics NV and its subsidiaries (“ST”) reserve the right to make changes, corrections, enhancements, modifications, and improvements to ST 
+products and/or to this document at any time without notice. Purchasers should obtain the latest relevant information on ST products before placing orders. ST 
+products are sold pursuant to ST’s terms and conditions of sale in place at the time of order acknowledgment.
+Purchasers are solely responsible for the choice, selection, and use of ST products and ST assumes no liability for application assistance or the design of 
+purchasers’ products.
+No license, express or implied, to any intellectual property right is granted by ST herein.
+Resale of ST products with provisions different from the information set forth herein shall void any warranty granted by ST for such product.
+ST and the ST logo are trademarks of ST. For additional information about ST trademarks, refer to www.st.com/trademarks. All other product or service names 
+are the property of their respective owners.
+Information in this document supersedes and replaces information previously supplied in any prior versions of this document.
+© 2024 STMicroelectronics – All rights reserved
+UM2415
+UM2415 - Rev 4 page 22/22

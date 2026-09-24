@@ -1,0 +1,21 @@
+flowchart LR
+    boot(["Boot / app_main"])
+    gpio_output_pa5["PA5<br/>pin=PA5"]
+    gpio_output_pc9["PC9<br/>pin=PC9"]
+    gpio_output_pa8["PA8<br/>pin=PA8"]
+    gpio_output_pa9["PA9<br/>pin=PA9"]
+    gpio_output_pa10["PA10<br/>pin=PA10"]
+    gpio_input_pb12["PB12<br/>pin=PB12"]
+    pwm_output_tim1["TIM1"]
+    uart_device_usart2["USART2"]
+    boot -->|initializes| pwm_output_tim1
+    boot -->|initializes| uart_device_usart2
+    boot -->|initializes| gpio_output_pa5
+    boot -->|initializes| gpio_output_pc9
+    boot -->|initializes| gpio_output_pa8
+    boot -->|initializes| gpio_output_pa9
+    boot -->|initializes| gpio_output_pa10
+    boot -->|initializes| gpio_input_pb12
+    pwm_output_tim1 -->|drives| gpio_output_pa8
+    pwm_output_tim1 -->|drives| gpio_output_pa9
+    pwm_output_tim1 -->|drives| gpio_output_pa10

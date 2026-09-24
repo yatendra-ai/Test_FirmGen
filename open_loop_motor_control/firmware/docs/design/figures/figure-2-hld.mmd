@@ -1,0 +1,44 @@
+flowchart TD
+  subgraph Runtime
+    main["Boot and bare-metal loop<br/>Core/Src/main.c: HAL_Init, app_start, app_process"]
+    app["Motor command application<br/>firmware/app/app.c: app_start, app_process"]
+    lifecycle["Motor lifecycle control<br/>firmware/services/motor_lifecycle/motor_lifecycle.c"]
+    waveform["Three-phase waveform generation<br/>firmware/modules/motor_waveform/motor_wavef…"]
+    board["STM32 motor-board adapter<br/>firmware/platforms/stm32/stm32_motor_board.c"]
+  end
+  subgraph MotorHardware
+    tim1["PWM timer<br/>TIM1, 20 kHz"]
+    phase_u["Motor phase U output<br/>PA8, TIM1 channel 1"]
+    phase_v["Motor phase V output<br/>PA9, TIM1 channel 2"]
+    phase_w["Motor phase W output<br/>PA10, TIM1 channel 3"]
+    standby["Driver standby control<br/>PC9"]
+    fault["Enable and fault input<br/>PB12"]
+    driver["X-NUCLEO-IHM16M1 STSPIN830 driver<br/>x_nucleo_ihm16m1_drive_motor"]
+  end
+  subgraph SerialInterface
+    usart2["Command UART<br/>USART2, TX PA2, RX PA3"]
+    console["Console and UART logging<br/>HAL_UART_Transmit, printf"]
+  end
+  led["Status LED<br/>PA5"]
+
+  main -->|app_start and app_process| app
+  main -->|HAL_GPIO_TogglePin| led
+  app -->|motor_lifecycle_process| lifecycle
+  lifecycle -->|motor_waveform_step| waveform
+  app -->|motor_board_* interface| board
+  app -->|uart_if_read_byte and uart_if_write| usart2
+  app -->|LOGI and LOGE| console
+  main -->|uart_if_initialize and probe| usart2
+  usart2 -->|USART2 serial data| console
+  board -->|HAL_TIM_PWM_Start and compare updates| tim1
+  tim1 -->|TIM1 CH1 PWM| phase_u
+  tim1 -->|TIM1 CH2 PWM| phase_v
+  tim1 -->|TIM1 CH3 PWM| phase_w
+  board -->|x_nucleo_ihm16m1_set_standby| standby
+  fault -->|HAL_GPIO_ReadPin| board
+  board -->|x_nucleo_ihm16m1 driver callbacks| driver
+  driver -->|three PWM inputs| phase_u
+  driver -->|three PWM inputs| phase_v
+  driver -->|three PWM inputs| phase_w
+  driver -->|STBY GPIO| standby
+  driver -->|EN/FAULT GPIO| fault

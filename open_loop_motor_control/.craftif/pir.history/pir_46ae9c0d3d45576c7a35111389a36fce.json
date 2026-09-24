@@ -1,0 +1,363 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_open_loop_motor_control",
+  "revision": "46ae9c0d3d45576c7a35111389a36fce",
+  "provenance": {
+    "project_path": "C:/Users/YatendraBhargava/Downloads/23-9-26/open_loop/open_loop_motor_control",
+    "chat_id": "305bfa04-5f10-49ba-ac62-2eb3829f110a",
+    "revision": "46ae9c0d3d45576c7a35111389a36fce",
+    "generated_at_ms": 1790187680261,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "CMakeLists.txt",
+      "Core/Inc/main.h",
+      "Core/Inc/stm32g4xx_hal_conf.h",
+      "Core/Inc/stm32g4xx_it.h",
+      "Core/Inc/stm32g4xx_nucleo_conf.h",
+      "Core/Src/main.c",
+      "Core/Src/stm32g4xx_hal_msp.c",
+      "Core/Src/stm32g4xx_it.c",
+      "Core/Src/system_stm32g4xx.c",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h"
+    ],
+    "file_hashes": {
+      "Core/Src/stm32g4xx_hal_msp.c": "3f78c94c9052bed8232b519f6aafc66a",
+      "Core/Inc/stm32g4xx_hal_conf.h": "4160be8a5a503da02e825462e8d96369",
+      "Core/Src/system_stm32g4xx.c": "2f1a41b4752e2b5c56e4af094b97a4b3",
+      "firmware/utils/logger/logger.c": "a0aa546944c77a82f438514b1f38d8cc",
+      "Core/Src/stm32g4xx_it.c": "cd8ace8676ab95db9a2bb16bdc48f32a",
+      "firmware/app/app.c": "3206f3f5a8ec12ab95c15dd2995372e1",
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "CMakeLists.txt": "b00fb2fef241905e060d6ddb45d4c813",
+      "Core/Inc/main.h": "42e7c5411bf0f6c97159270371ff9e50",
+      "Core/Src/main.c": "51dae8e8c23d49147f8ed9b1b16b2cc5",
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "firmware/app/app.h": "ebc6cfe87fb8e2ab299633dd7a067f3b",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c": "a8580016d4c7c466926fb19855d5d6fd",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h": "81d6f2362cc320fbdf6c9e6a937894b9",
+      "firmware/configs/app_config.h": "8f79622ec2900fe1f5b360fda2e72ec8",
+      "firmware/bsp/board.h": "b8be0e565ff5d1465b002cf5e9013283",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "Core/Inc/stm32g4xx_nucleo_conf.h": "ff84cde17dec523deeddd2c1b31f0fed",
+      "firmware/utils/logger/logger.h": "642efceba068f0cfa4a70d8ce56bbd82",
+      "firmware/osal/osal.h": "f2f2c13784f7a100461b180f4028062b",
+      "Core/Inc/stm32g4xx_it.h": "3a39a95aa4de8889a628bb562ef97668"
+    },
+    "board_id": "NUCLEO-G431RB",
+    "target_chip": null,
+    "config_hash": null,
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "pending"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "stm32"
+      },
+      "source_refs": [
+        {
+          "file": "Core/Src/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "46ae9c0d3d45576c7a35111389a36fce"
+      },
+      "ownership": {
+        "primary_files": [
+          "Core/Src/main.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [],
+  "layers": {
+    "physical": [],
+    "runtime": [],
+    "network": [],
+    "system": [
+      "boot"
+    ]
+  },
+  "partitions": [],
+  "components": [],
+  "modules": [
+    {
+      "id": "Core_Inc",
+      "label": "Core/Inc",
+      "path": "Core/Inc",
+      "kind": "module",
+      "files": [
+        "Core/Inc/main.h",
+        "Core/Inc/stm32g4xx_hal_conf.h",
+        "Core/Inc/stm32g4xx_it.h",
+        "Core/Inc/stm32g4xx_nucleo_conf.h"
+      ]
+    },
+    {
+      "id": "Core_Src",
+      "label": "Core/Src",
+      "path": "Core/Src",
+      "kind": "module",
+      "files": [
+        "Core/Src/main.c",
+        "Core/Src/stm32g4xx_hal_msp.c",
+        "Core/Src/stm32g4xx_it.c",
+        "Core/Src/system_stm32g4xx.c"
+      ]
+    },
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "drivers_x_nucleo_ihm16m1_x_nucleo_ihm16m1",
+      "label": "drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1",
+      "path": "drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1",
+      "kind": "driver",
+      "files": [
+        "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+        "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "Core_Src",
+      "to": "Core_Inc",
+      "via": "include",
+      "file": "Core/Src/main.c",
+      "line": 20,
+      "symbol": "main.h"
+    },
+    {
+      "from": "Core_Src",
+      "to": "app",
+      "via": "include",
+      "file": "Core/Src/main.c",
+      "line": 21,
+      "symbol": "app.h"
+    },
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 2,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 3,
+      "symbol": "logger.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 18,
+      "symbol": "app_config.h"
+    }
+  ],
+  "task_flows": [],
+  "summary": {
+    "headline": "No additional topology inferred from the provided application glue",
+    "node_count": 0,
+    "edge_count": 0,
+    "warnings": []
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph Boot_Path\n    main_entry[\"Application entry<br/>Core/Src/main.c: main\"]\n    app_start[\"Start firmware application<br/>firmware/app/app.c: app_start\"]\n  end\n  subgraph Motor_Preparation\n    motor_prepare[\"Prepare motor board<br/>stm32_motor_board_prepare API call\"]\n    motor_config[\"Motor board configuration<br/>firmware/configs/app_config.h\"]\n  end\n  subgraph Diagnostics\n    logger[\"Format firmware logs<br/>firmware/utils/logger/logger.h\"]\n    printf_sink[\"Standard output sink<br/>logger macros use printf\"]\n  end\n  main_entry -->|app_start#40;#41;| app_start\n  app_start -->|stm32_motor_board_prepare#40;#41;| motor_prepare\n  app_start -->|APP_MOTOR_* values| motor_config\n  app_start -->|LOGI and LOGE| logger\n  logger -->|printf| printf_sink",
+      "authored_by_model": true,
+      "node_notes": {
+        "motor_config": "This configuration header declares the NUCLEO-G431RB motor-board pin facts, including phase pins PA8, PA9, PA10, standby PC9, and enable or fault PB12, plus motor metadata. The supplied application uses its motor metadata in the configuration log, while no source shown performs direct I/O on those pins.",
+        "main_entry": "This is the STM32 application entry point in Core/Src/main.c, where HAL initialization and clock setup precede the call to app_start. It matters because the firmware hands control to the vendor-agnostic application rather than implementing runtime behavior in the empty while loop.",
+        "app_start": "The application startup function in firmware/app/app.c requests motor-board preparation and emits startup diagnostics. It is the only application runtime entry evidenced in the supplied firmware sources.",
+        "motor_prepare": "The app calls stm32_motor_board_prepare before reporting motor readiness, but its implementation and header are not present in the supplied files. The node records that required integration point without inventing a HAL, PWM, or GPIO implementation.",
+        "printf_sink": "The logger macros expand to printf, making standard output the only evidenced diagnostic sink. No UART peripheral, VCP routing, or other transport implementation is provided in the supplied files.",
+        "logger": "The logger header defines LOGI and LOGE as printf-backed macros, and app.c uses those macros for startup, motor metadata, success, and failure messages. This is the software path connecting application diagnostics to standard output."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "mermaid": "flowchart TD\n  subgraph Bare_Metal_Application\n    boot_to_app[\"Enter firmware application<br/>Core/Src/main.c: 54\"]\n    prepare_board[\"Request motor board preparation<br/>firmware/app/app.c: 8\"]\n    startup_log[\"Log firmware startup<br/>firmware/app/app.c: 10\"]\n    motor_info_log[\"Log motor configuration<br/>firmware/app/app.c: 11\"]\n    status_check{\"Motor board preparation succeeded — firmware/app/app.c:12\"}\n    success_log[\"Log safe standby configured<br/>firmware/app/app.c:13\"]\n    failure_log[\"Log board preparation failure<br/>firmware/app/app.c:15\"]\n  end\n  boot_to_app -->  prepare_board\n  prepare_board -->  startup_log\n  startup_log -->  motor_info_log\n  motor_info_log -->  status_check\n  status_check -->|yes| success_log\n  status_check -->|no| failure_log",
+      "authored_by_model": true,
+      "node_notes": {
+        "startup_log": "The first LOGI call reports firmware started immediately after board preparation returns. It provides the initial runtime diagnostic through the printf-backed logger macros.",
+        "failure_log": "The failure branch logs the returned preparation error code with LOGE. No recovery or retry path is present in the supplied app_start implementation.",
+        "success_log": "The success branch logs that STSPIN830 safe standby was configured. The source does not show subsequent PWM generation or a motor-control loop after this message.",
+        "prepare_board": "app_start synchronously calls stm32_motor_board_prepare and stores its returned status in firmware/app/app.c. This is the only motor-control action performed by the shown application, and the called implementation is absent from the supplied source listing.",
+        "motor_info_log": "The next LOGI call reports the motor name, pole-pair count, supply voltage, and U/V/W phase labels from app_config.h. These values describe the configured open-loop motor target but do not drive hardware in the shown code.",
+        "boot_to_app": "Core/Src/main.c calls app_start after HAL_Init and SystemClock_Config. The later empty while loop is not application behavior, so the runtime flow begins at this handoff.",
+        "status_check": "The returned stm32_motor_board_status_t is compared with STM32_MOTOR_BOARD_OK in app.c. This real branch selects either a safe-standby confirmation or an error diagnostic."
+      }
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "mermaid": "sequenceDiagram\n  participant Boot as \"main.c\"\n  participant App as \"app_start\"\n  participant Board as \"motor board preparation API\"\n  participant Output as \"printf output\"\n\n  Boot->>App: Call app_start\n  App->>Board: Call stm32_motor_board_prepare\n  App->>Output: Log firmware started\n  App->>Output: Log motor type, pole pairs, supply, and phases\n  alt preparation succeeds\n    App->>Output: Log STSPIN830 safe standby configured\n  else preparation fails\n    App->>Output: Log STSPIN830 board preparation failure\n  end",
+      "participants": [
+        "Boot",
+        "App",
+        "Board",
+        "Output"
+      ],
+      "generated_from": [
+        "Core/Src/main.c"
+      ],
+      "grounding": 0.25,
+      "authored_by_model": true
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [
+    {
+      "kind": "sparse_extraction",
+      "message": "app_main found but no GPIO/tasks extracted; app_start implementation is not present in the provided snippets.",
+      "file": "Core/Src/main.c"
+    }
+  ],
+  "read_only": false,
+  "graph_version": 3,
+  "generation": {
+    "mode": "hybrid_refine",
+    "model": "local_openai_proxy/gpt-5.6-luna",
+    "triggered_by": "mount",
+    "analyzed_at_ms": 1790187689920,
+    "input_files": [
+      "CMakeLists.txt",
+      "Core/Inc/main.h",
+      "Core/Inc/stm32g4xx_hal_conf.h",
+      "Core/Inc/stm32g4xx_it.h",
+      "Core/Inc/stm32g4xx_nucleo_conf.h",
+      "Core/Src/main.c",
+      "Core/Src/stm32g4xx_hal_msp.c",
+      "Core/Src/stm32g4xx_it.c",
+      "Core/Src/system_stm32g4xx.c",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h"
+    ],
+    "token_usage": {
+      "prompt_tokens": 5202,
+      "completion_tokens": 399
+    }
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": []
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "validated_at_ms": 1790187689920
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "3.0.0",
+  "view": "lld",
+  "revision": "34158563458a6f901eeb72f486e1c577",
+  "graph_version": 9,
+  "generated_at_ms": 1790210777740,
+  "mermaid": "flowchart TD\n  subgraph BareMetalLoop\n    boot[\"Start board and application<br/>Core/Src/main.c: HAL_Init, uart_if_initialize, …\"]\n    init[\"Prepare motor board and initialize command state<br/>firmware/app/app.c: app_st…\"]\n    poll[\"Read and assemble incoming UART command lines<br/>firmware/app/app.c: process_u…\"]\n    parse{\"Complete line and valid command — firmware/app/app.c: process_uart\"}\n    dispatch[\"Dispatch command and send response<br/>firmware/app/app.c: dispatch_command\"]\n    tick{\"Elapsed time at least 1 ms — firmware/app/app.c: app_process\"}\n    faultcheck{\"Fault read failed or fault active — firmware/app/app.c: app_process\"}\n    lifecycle_step[\"Advance lifecycle and generate U, V, W duties<br/>firmware/services/motor_lifec…\"]\n    pwm[\"Apply three-phase PWM duties<br/>firmware/platforms/stm32/stm32_motor_board.c: …\"]\n    shutdown[\"Force zero duty, stop PWM, and enter standby<br/>firmware/platforms/stm32/stm32…\"]\n    led_toggle[\"Toggle status LED<br/>Core/Src/main.c: HAL_GPIO_TogglePin\"]\n    delay[\"Wait before the next main-loop iteration<br/>Core/Src/main.c: HAL_Delay, APP_LE…\"]\n  end\n\n  boot -->  init\n  init -->  poll\n  poll -->  parse\n  parse -->|yes| dispatch\n  parse -->|no or incomplete| tick\n  dispatch -->  tick\n  tick -->|yes| faultcheck\n  tick -->|no| led_toggle\n  faultcheck -->|yes| shutdown\n  faultcheck -->|no| lifecycle_step\n  lifecycle_step -->|true| pwm\n  lifecycle_step -->|false| shutdown\n  pwm -->  led_toggle\n  shutdown -->  led_toggle\n  led_toggle -->  delay\n  delay -->|200 ms| poll",
+  "title": "Low-Level Design (Firmware Workflow)",
+  "node_notes": {
+    "dispatch": "dispatch_command handles STATUS, direction, frequency, duty, start, and stop commands and writes acknowledgements or errors. firmware/app/app.c also performs the start fault check before enabling the motor.",
+    "shutdown": "Shutdown forces all three duties to zero, stops TIM1 PWM, and places the driver in standby. These operations are implemented by motor_board_shutdown in firmware/platforms/stm32/stm32_motor_board.c.",
+    "led_toggle": "The status LED is toggled once per main-loop iteration independently of the 1 ms motor-control gate. Core/Src/main.c calls HAL_GPIO_TogglePin on the configured PA5 LED.",
+    "delay": "The main loop waits with HAL_Delay using APP_LED_PERIOD_MS, configured as 200 ms. After the delay, execution returns to UART polling and the next application iteration.",
+    "boot": "This step represents the actual reset-to-application path rather than Cube clock boilerplate. Core/Src/main.c performs HAL initialization and UART setup before entering app_start and the bare-metal loop.",
+    "lifecycle_step": "This step ramps frequency, advances the electrical angle, generates three phase duties, and changes the lifecycle to running when processing succeeds. motor_lifecycle_process in firmware/services/motor_lifecycle/motor_lifecycle.c returns false when the lifecycle is not starting or running.",
+    "parse": "A completed CR/LF line is accepted only when command_transport_line_push reports completion and command_parser_parse succeeds. The branch is implemented in process_uart in firmware/app/app.c and uses the command parser in firmware/modules/command_parser/command_parser.c.",
+    "faultcheck": "The application reads the motor driver fault input before producing a new waveform. firmware/app/app.c treats either a failed motor_board_read_fault call or an active fault as a fault path.",
+    "init": "app_start prepares the motor board, initializes UART command transport and motor lifecycle state, then shuts the motor down initially. The evidence is firmware/app/app.c, including motor_board_prepare, command_transport_line_initialize, motor_lifecycle_initialize, and motor_board_shutdown.",
+    "tick": "The motor control update is gated by APP_MOTOR_CONTROL_PERIOD_MS, which is 1 ms. app_process computes elapsed time from osal_uptime_ms and enters the control path only when the interval has elapsed.",
+    "pwm": "The generated duty_u, duty_v, and duty_w values are passed to the motor board adapter. firmware/platforms/stm32/stm32_motor_board.c forwards them to x_nucleo_ihm16m1_drive_motor, which updates TIM1 channel compares through the PWM callback.",
+    "poll": "process_uart drains bytes supplied by the USART2 interrupt-backed receive queue and pushes them into the command-line buffer. firmware/app/app.c calls uart_if_read_byte and command_transport_line_push for each available byte."
+  },
+  "authored_by_model": true
+}
