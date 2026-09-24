@@ -1,0 +1,33 @@
+flowchart TD
+  subgraph app_task["app_start execution"]
+    boot["Start motor application<br/>firmware/app/app.c:47"]
+    init_control["Initialize sine state and motor sequence<br/>firmware/app/app.c:54-55"]
+    init_safety["Initialize watchdog and safety state<br/>firmware/app/app.c:56"]
+    init_motor["Initialize GPIO, TIM1 PWM, and driver<br/>firmware/app/app.c:66"]
+    boot_wait["Refresh watchdog, delay, and advance boot sequence<br/>firmware/app/app.c:71-74"]
+    boot_done{"Boot delay complete — firmware/app/app.c:70"}
+    precheck["Read and latch motor fault<br/>firmware/app/app.c:79"]
+    precheck_ok{"Fault check passed — firmware/app/app.c:81"}
+    enable["Enable three PWM channels and motor phases<br/>firmware/app/app.c:87"]
+    running{"Motor sequence still active — firmware/app/app.c:94"}
+    profile["Select ramp, hold, or shutdown sine profile<br/>firmware/app/app.c:95"]
+    drive["Generate three duties and drive motor<br/>firmware/app/app.c:96"]
+    runtime_ok{"Fault and drive status are valid — firmware/app/app.c:96"}
+    update["Advance sine phase by 10 ms<br/>firmware/app/app.c:102"]
+    refresh["Refresh watchdog and wait 10 ms<br/>firmware/app/app.c:103-104"]
+    step["Advance motor sequence by 10 ms<br/>firmware/app/app.c:105"]
+    disable_fault["Disable PWM and latch safety fault<br/>firmware/app/app.c:97-99"]
+    disable_done["Disable motor after sequence completion<br/>firmware/app/app.c:109"]
+    complete["Log rotation completion<br/>firmware/app/app.c:110"]
+  end
+
+  boot -->  init_control -->  init_safety -->  init_motor -->  boot_done
+  boot_done -->|no#59; 10 ms| boot_wait
+  boot_wait -->  boot_done
+  boot_done -->|yes| precheck -->  precheck_ok
+  precheck_ok -->|no| disable_fault
+  precheck_ok -->|yes| enable -->  running
+  running -->|yes| profile -->  drive -->  runtime_ok
+  runtime_ok -->|no| disable_fault
+  runtime_ok -->|yes| update -->  refresh -->  step -->  running
+  running -->|no| disable_done -->  complete

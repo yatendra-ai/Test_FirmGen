@@ -1,0 +1,574 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_motor_demo",
+  "revision": "b34cad63cb4cbf197c4de95554d71589",
+  "provenance": {
+    "project_path": "C:\\Users\\YatendraBhargava\\Downloads\\23-9-26\\auto\\motor_demo",
+    "chat_id": "dae6d731-2131-4826-a713-9f4207a449a4",
+    "revision": "b34cad63cb4cbf197c4de95554d71589",
+    "generated_at_ms": 1790220837915,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "CMakeLists.txt",
+      "Core/Inc/main.h",
+      "Core/Inc/stm32g4xx_hal_conf.h",
+      "Core/Inc/stm32g4xx_it.h",
+      "Core/Inc/stm32g4xx_nucleo_conf.h",
+      "Core/Src/main.c",
+      "Core/Src/stm32g4xx_hal_msp.c",
+      "Core/Src/stm32g4xx_it.c",
+      "Core/Src/system_stm32g4xx.c",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h",
+      "firmware/osal/osal.h",
+      "firmware/platforms/stm32/motor_platform.c",
+      "firmware/platforms/stm32/motor_platform.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h"
+    ],
+    "file_hashes": {
+      "Core/Src/stm32g4xx_hal_msp.c": "da01f021c66f4c3b197a4bb6480c5b61",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "firmware/platforms/stm32/motor_platform.c": "780949b63f98a2720955fa36246f8ac5",
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/utils/logger/logger.c": "a0aa546944c77a82f438514b1f38d8cc",
+      "firmware/utils/logger/logger.h": "642efceba068f0cfa4a70d8ce56bbd82",
+      "Core/Inc/stm32g4xx_it.h": "3a39a95aa4de8889a628bb562ef97668",
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "firmware/configs/app_config.h": "a4052d3c73d19397c5d3f63f8dc8d4ec",
+      "Core/Src/main.c": "51dae8e8c23d49147f8ed9b1b16b2cc5",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c": "a8580016d4c7c466926fb19855d5d6fd",
+      "Core/Src/system_stm32g4xx.c": "2f1a41b4752e2b5c56e4af094b97a4b3",
+      "firmware/app/app.c": "1794baceb9ca38ec66b9ed86760e534e",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba",
+      "Core/Inc/stm32g4xx_nucleo_conf.h": "ff84cde17dec523deeddd2c1b31f0fed",
+      "Core/Src/stm32g4xx_it.c": "cd8ace8676ab95db9a2bb16bdc48f32a",
+      "firmware/app/app.h": "ebc6cfe87fb8e2ab299633dd7a067f3b",
+      "CMakeLists.txt": "8bb37d9c26b6685dd8e2f6a1cfc623dd",
+      "Core/Inc/main.h": "42e7c5411bf0f6c97159270371ff9e50",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "firmware/bsp/board.h": "d90f9d521da42ad447f77f03d85316ad",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h": "81d6f2362cc320fbdf6c9e6a937894b9",
+      "firmware/osal/osal.h": "f2f2c13784f7a100461b180f4028062b",
+      "firmware/platforms/stm32/motor_platform.h": "296edf80888c6bb8cd763b9b198fbfeb",
+      "Core/Inc/stm32g4xx_hal_conf.h": "4160be8a5a503da02e825462e8d96369"
+    },
+    "target_chip": null,
+    "config_hash": null,
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "pending"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "stm32"
+      },
+      "source_refs": [
+        {
+          "file": "Core/Src/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "b34cad63cb4cbf197c4de95554d71589"
+      },
+      "ownership": {
+        "primary_files": [
+          "Core/Src/main.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "gpio_output_pc9",
+      "node_type": "gpio_output",
+      "label": "PC9",
+      "properties": {
+        "pin": "PC9"
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/motor_platform.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "b34cad63cb4cbf197c4de95554d71589"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/stm32/motor_platform.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "physical",
+      "ai_summary": "Drives a digital output signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "gpio_output_pc8",
+      "node_type": "gpio_output",
+      "label": "PC8",
+      "properties": {
+        "pin": "PC8"
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/motor_platform.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "b34cad63cb4cbf197c4de95554d71589"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/stm32/motor_platform.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "physical",
+      "ai_summary": "Drives a digital output signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "gpio_input_pb12",
+      "node_type": "gpio_input",
+      "label": "PB12",
+      "properties": {
+        "pin": "PB12"
+      },
+      "source_refs": [
+        {
+          "file": "firmware/platforms/stm32/motor_platform.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "b34cad63cb4cbf197c4de95554d71589"
+      },
+      "ownership": {
+        "primary_files": [
+          "firmware/platforms/stm32/motor_platform.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "physical",
+      "ai_summary": "Reads a digital input signal.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_boot_initializes_pc9",
+      "source_node_id": "boot",
+      "target_node_id": "gpio_output_pc9",
+      "kind": "hardware",
+      "confidence": 0.98,
+      "source_refs": [
+        {
+          "file": "Core/Src/main.c",
+          "line": 59,
+          "symbol": "main",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/app/app.c",
+          "line": 31,
+          "symbol": "app_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/stm32/motor_platform.c",
+          "line": 36,
+          "symbol": "motor_platform_configure_gpio",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_boot_initializes_pc8",
+      "source_node_id": "boot",
+      "target_node_id": "gpio_output_pc8",
+      "kind": "hardware",
+      "confidence": 0.98,
+      "source_refs": [
+        {
+          "file": "Core/Src/main.c",
+          "line": 59,
+          "symbol": "main",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/app/app.c",
+          "line": 31,
+          "symbol": "app_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/stm32/motor_platform.c",
+          "line": 36,
+          "symbol": "motor_platform_configure_gpio",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_boot_initializes_pb12",
+      "source_node_id": "boot",
+      "target_node_id": "gpio_input_pb12",
+      "kind": "hardware",
+      "confidence": 0.98,
+      "source_refs": [
+        {
+          "file": "Core/Src/main.c",
+          "line": 59,
+          "symbol": "main",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/app/app.c",
+          "line": 31,
+          "symbol": "app_start",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "firmware/platforms/stm32/motor_platform.c",
+          "line": 49,
+          "symbol": "motor_platform_configure_gpio",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    }
+  ],
+  "layers": {
+    "physical": [
+      "gpio_output_pc9",
+      "gpio_output_pc8",
+      "gpio_input_pb12"
+    ],
+    "runtime": [],
+    "network": [],
+    "system": [
+      "boot"
+    ]
+  },
+  "partitions": [],
+  "components": [],
+  "modules": [
+    {
+      "id": "Core_Inc",
+      "label": "Core/Inc",
+      "path": "Core/Inc",
+      "kind": "module",
+      "files": [
+        "Core/Inc/main.h",
+        "Core/Inc/stm32g4xx_hal_conf.h",
+        "Core/Inc/stm32g4xx_it.h",
+        "Core/Inc/stm32g4xx_nucleo_conf.h"
+      ]
+    },
+    {
+      "id": "Core_Src",
+      "label": "Core/Src",
+      "path": "Core/Src",
+      "kind": "module",
+      "files": [
+        "Core/Src/main.c",
+        "Core/Src/stm32g4xx_hal_msp.c",
+        "Core/Src/stm32g4xx_it.c",
+        "Core/Src/system_stm32g4xx.c"
+      ]
+    },
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "drivers_x_nucleo_ihm16m1_x_nucleo_ihm16m1",
+      "label": "drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1",
+      "path": "drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1",
+      "kind": "driver",
+      "files": [
+        "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+        "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "platforms_stm32",
+      "label": "platforms/stm32",
+      "path": "platforms/stm32",
+      "kind": "platform",
+      "files": [
+        "firmware/platforms/stm32/motor_platform.c",
+        "firmware/platforms/stm32/motor_platform.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "Core_Src",
+      "to": "Core_Inc",
+      "via": "include",
+      "file": "Core/Src/main.c",
+      "line": 20,
+      "symbol": "main.h"
+    },
+    {
+      "from": "Core_Src",
+      "to": "app",
+      "via": "include",
+      "file": "Core/Src/main.c",
+      "line": 21,
+      "symbol": "app.h"
+    },
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 5,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "platforms_stm32",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 7,
+      "symbol": "motor_platform.h"
+    },
+    {
+      "from": "app",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 6,
+      "symbol": "logger.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 18,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "platforms_stm32",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/platforms/stm32/motor_platform.c",
+      "line": 5,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "platforms_stm32",
+      "to": "drivers_x_nucleo_ihm16m1_x_nucleo_ihm16m1",
+      "via": "include",
+      "file": "firmware/platforms/stm32/motor_platform.h",
+      "line": 7,
+      "symbol": "x_nucleo_ihm16m1.h"
+    }
+  ],
+  "task_flows": [],
+  "summary": {
+    "headline": "4 nodes, 0 connections — valid",
+    "node_count": 4,
+    "edge_count": 0,
+    "warnings": []
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph Motor_Wiring\n    pwm[\"Three-phase PWM outputs<br/>TIM1 CH1 PA8, CH2 PA9, CH3 PA10\"]\n    stby[\"Standby control<br/>PC9\"]\n    mode[\"PWM mode select<br/>PC8\"]\n    fault[\"Enable or fault input<br/>PB12\"]\n    driver[\"Motor driver<br/>X-NUCLEO-IHM16M1 / STSPIN830\"]\n    motor[\"Three-phase motor<br/>GBM2804H-100T\"]\n    pwm -->|U, V, W PWM| driver\n    stby -->|STBY| driver\n    mode -->|MODE low| driver\n    driver -->|EN or FAULT feedback| fault\n    driver -->|three-phase drive| motor\n  end\n  subgraph Firmware_Control\n    app[\"Motor control application<br/>firmware/app/app.c: app_start\"]\n    platform[\"STM32 motor platform<br/>firmware/platforms/stm32/motor_platform.c\"]\n    library[\"Portable motor driver library<br/>x_nucleo_ihm16m1_init and drive APIs\"]\n    boot[\"Application entry<br/>Core/Src/main.c: app_start\"]\n    boot -->|app_start| app\n    app -->|motor_platform_init, enable, drive, read_fault| platform\n    platform -->|x_nucleo_ihm16m1 callbacks| library\n    library -->|PWM and GPIO callback operations| platform\n    platform -->|HAL_TIM_PWM and HAL_GPIO APIs| pwm\n    platform -->|HAL_GPIO_WritePin| stby\n    platform -->|HAL_GPIO_WritePin| mode\n    platform -->|HAL_GPIO_ReadPin| fault\n  end",
+      "authored_by_model": true,
+      "node_notes": {
+        "pwm": "This box represents the three PWM outputs generated by TIM1 for motor phases U, V, and W. The pin bindings PA8, PA9, and PA10 and the TIM1 configuration are defined in firmware/configs/app_config.h and used through HAL_TIM_PWM_Init and HAL_TIM_PWM_Start in firmware/platforms/stm32/motor_platform.c.",
+        "driver": "This box is the physical X-NUCLEO-IHM16M1 or STSPIN830 interface controlled by the portable driver library. The driver exposes PWM, standby, mode, and fault callbacks through x_nucleo_ihm16m1_io_t and is initialized by x_nucleo_ihm16m1_init.",
+        "library": "This portable library validates the motor configuration and forwards drive, enable, mode, standby, and fault operations to the supplied callbacks. Its implementation is firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c, including x_nucleo_ihm16m1_drive_motor and x_nucleo_ihm16m1_read_fault.",
+        "stby": "This is the motor driver's standby control signal on PC9. motor_platform_configure_gpio configures it as an output and motor_platform_enable drives it high when disabled and low when enabled in firmware/platforms/stm32/motor_platform.c.",
+        "app": "app_start performs the complete motor scenario: initialization, a three-second startup wait, fault checking, enabling, and repeated six-state duty-table rotation. The behavior is implemented in firmware/app/app.c using motor_platform_init, motor_platform_read_fault, motor_platform_enable, and motor_platform_drive.",
+        "mode": "This signal selects the driver's three-input PWM mode and is held low on PC8. The binding and the HAL_GPIO_WritePin operation are defined by APP_MOTOR_MODE_PORT and APP_MOTOR_MODE_PIN in app_config.h and motor_platform.c.",
+        "platform": "The STM32 platform adapter owns GPIO setup, TIM1 PWM setup, and the callbacks passed to the portable motor driver. firmware/platforms/stm32/motor_platform.c provides the HAL GPIO and timer operations for every hardware edge shown here.",
+        "boot": "The Cube main entry initializes HAL and the clock before calling app_start. Core/Src/main.c is the evidence for the boot-to-application edge; its empty while loop is not the application runtime.",
+        "motor": "The configured load is the GBM2804H-100T three-phase motor. app_config.h names this motor and app_motor_step supplies its U, V, and W duty values through the driver.",
+        "fault": "PB12 is the active-low enable or fault input read by the platform layer. motor_platform_gpio_read converts HAL_GPIO_ReadPin PB12 being reset into the driver fault boolean, as implemented in motor_platform.c."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "generation_error": "Model diagram rejected: template string \"Initialization\" is forbidden",
+      "authored_by_model": false
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "generated_from": [
+        "Core/Src/main.c",
+        "firmware/platforms/stm32/motor_platform.c"
+      ],
+      "generation_error": "Model diagram rejected: template string \"Initialization\" is forbidden",
+      "authored_by_model": false
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [],
+  "read_only": false,
+  "graph_version": 3,
+  "generation": {
+    "mode": "static",
+    "triggered_by": "mount",
+    "analyzed_at_ms": 1790220837915,
+    "input_files": [
+      "CMakeLists.txt",
+      "Core/Inc/main.h",
+      "Core/Inc/stm32g4xx_hal_conf.h",
+      "Core/Inc/stm32g4xx_it.h",
+      "Core/Inc/stm32g4xx_nucleo_conf.h",
+      "Core/Src/main.c",
+      "Core/Src/stm32g4xx_hal_msp.c",
+      "Core/Src/stm32g4xx_it.c",
+      "Core/Src/system_stm32g4xx.c",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.c",
+      "firmware/drivers/x_nucleo_ihm16m1/x_nucleo_ihm16m1/x_nucleo_ihm16m1.h",
+      "firmware/osal/osal.h",
+      "firmware/platforms/stm32/motor_platform.c",
+      "firmware/platforms/stm32/motor_platform.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h"
+    ]
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": []
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "validated_at_ms": 1790220837916
+  }
+}

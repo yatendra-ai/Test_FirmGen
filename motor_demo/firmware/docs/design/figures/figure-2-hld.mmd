@@ -1,0 +1,41 @@
+flowchart TD
+  main_entry["Application entry<br/>Core/Src/main.c: HAL_Init#59; app_start"]
+  app_start["Motor application orchestration<br/>firmware/app/app.c: app_start"]
+  motor_platform["STM32 motor platform<br/>firmware/platforms/stm32/motor_platform.c"]
+  safety_platform["Safety and watchdog control<br/>firmware/platforms/stm32/safety_platform.c"]
+  motor_sequence["Motor timing state machine<br/>firmware/modules/motor_sequence/motor_sequence.c"]
+  sine_control["Three-phase sine controller<br/>firmware/modules/sine_control/sine_control.c"]
+  ihm16m1_driver["STSPIN830 board driver<br/>x_nucleo_ihm16m1_drive_motor"]
+  tim1_pwm["TIM1 three-channel PWM<br/>PA8, PA9, PA10#59; 20 kHz"]
+  motor_stby["Motor standby output<br/>PC9#59; APP_MOTOR_STBY_PIN"]
+  motor_mode["Motor mode output<br/>PC8#59; APP_MOTOR_MODE_PIN"]
+  motor_enable_u["U enable output<br/>PB13#59; APP_MOTOR_EN_U_PIN"]
+  motor_enable_v["V enable output<br/>PB14#59; APP_MOTOR_EN_V_PIN"]
+  motor_enable_w["W enable output<br/>PB15#59; APP_MOTOR_EN_W_PIN"]
+  motor_fault["Active-low fault input<br/>PB12#59; APP_MOTOR_EN_FAULT_PIN"]
+  user_led["Status LED output<br/>PA5#59; APP_LED_GPIO_PIN"]
+  usart2["Debug UART<br/>USART2 TX PA2, RX PA3"]
+  uart_log["Console / UART logging<br/>printf via HAL_UART_Transmit"]
+
+  main_entry -->|app_start#35;40#35;41| app_start
+  app_start -->|motor_platform_led_on#35;40#35;41| motor_platform
+  app_start -->|safety_platform_init#35;40#35;41 and checks| safety_platform
+  app_start -->|motor_sequence_init and step| motor_sequence
+  app_start -->|sine_control_init, profile, update| sine_control
+  app_start -->|motor_platform_init, enable, drive| motor_platform
+  app_start -->|LOGI / LOGE| uart_log
+  motor_platform -->|HAL_GPIO_WritePin| user_led
+  motor_platform -->|HAL_TIM_PWM_Init / HAL_TIM_PWM_Start| tim1_pwm
+  motor_platform -->|HAL_GPIO_WritePin| motor_stby
+  motor_platform -->|HAL_GPIO_WritePin| motor_mode
+  motor_platform -->|HAL_GPIO_WritePin| motor_enable_u
+  motor_platform -->|HAL_GPIO_WritePin| motor_enable_v
+  motor_platform -->|HAL_GPIO_WritePin| motor_enable_w
+  safety_platform -->|motor_platform_read_fault| motor_fault
+  motor_platform -->|HAL_GPIO_ReadPin| motor_fault
+  motor_platform -->|x_nucleo_ihm16m1_init / drive_motor| ihm16m1_driver
+  ihm16m1_driver -->|PWM callbacks U/V/W| tim1_pwm
+  ihm16m1_driver -->|GPIO callbacks STBY| motor_stby
+  ihm16m1_driver -->|GPIO callback EN_FAULT| motor_fault
+  motor_platform -->|HAL_UART_Init / _write| usart2
+  usart2 -->|HAL_UART_Transmit| uart_log

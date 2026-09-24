@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    participant boot as Boot / app_main
+    participant gpio_input_pb12 as PB12
+    participant gpio_output_pa5 as PA5
+    participant gpio_output_pb13 as PB13
+    participant gpio_output_pb14 as PB14
+    participant gpio_output_pb15 as PB15
+    participant gpio_output_pc8 as PC8
+    participant gpio_output_pc9 as PC9
+    participant uart_device_usart2 as USART2
+    boot->>gpio_input_pb12: configure pin=PB12
+    gpio_input_pb12-->boot: ready or error
+    boot->>gpio_output_pa5: configure pin=PA5
+    gpio_output_pa5-->boot: ready or error
+    boot->>gpio_output_pb13: configure pin=PB13
+    gpio_output_pb13-->boot: ready or error
+    boot->>gpio_output_pb14: configure pin=PB14
+    gpio_output_pb14-->boot: ready or error
+    boot->>gpio_output_pb15: configure pin=PB15
+    gpio_output_pb15-->boot: ready or error
+    boot->>gpio_output_pc8: configure pin=PC8
+    gpio_output_pc8-->boot: ready or error
+    boot->>gpio_output_pc9: configure pin=PC9
+    gpio_output_pc9-->boot: ready or error
+    boot->>uart_device_usart2: configure uart_device
+    uart_device_usart2-->boot: ready or error

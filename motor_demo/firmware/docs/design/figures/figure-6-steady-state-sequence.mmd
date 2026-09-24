@@ -1,0 +1,54 @@
+sequenceDiagram
+  participant Boot as Core main
+  participant App as app_start
+  participant Safety as safety_platform
+  participant Sequence as motor_sequence
+  participant Motor as motor_platform
+  participant Driver as X-NUCLEO-IHM16M1 driver
+  participant PWM as TIM1 PWM and motor pins
+  participant UART as USART2 console
+
+  Boot->>App: app_start()
+  App->>Motor: motor_platform_led_on()
+  Motor->>PWM: Set PA5 high
+  App->>Sequence: motor_sequence_init()
+  App->>Safety: safety_platform_init()
+  App->>Motor: motor_platform_init()
+  Motor->>PWM: Configure PA8, PA9, PA10 and TIM1
+  Motor->>Driver: x_nucleo_ihm16m1_init()
+  App->>UART: LOGI target and driver information
+  loop Every 10 ms during boot delay
+    App->>Safety: safety_platform_watchdog_refresh()
+    App->>Motor: motor_platform_delay_ms(10)
+    App->>Sequence: motor_sequence_step(10)
+  end
+  App->>Safety: safety_platform_check_fault()
+  Safety->>Motor: motor_platform_read_fault()
+  Motor->>PWM: Read PB12 fault input
+  alt Pre-enable fault or status error
+    App->>Safety: safety_platform_disable()
+    Safety->>Motor: motor_platform_enable(false)
+    App->>UART: LOGE motor driver fault
+  else Pre-enable check passes
+    App->>Motor: motor_platform_enable(true)
+    Motor->>PWM: Start TIM1 channels and enable PB13, PB14, PB15
+    loop Every 10 ms while motor sequence is active
+      App->>Safety: safety_platform_check_fault()
+      App->>App: Set frequency and amplitude profile
+      App->>Driver: x_nucleo_ihm16m1_drive_motor(duty_u, duty_v, duty_w)
+      Driver->>Motor: PWM callbacks
+      Motor->>PWM: Update TIM1 compare values
+      alt Fault or drive error
+        App->>Safety: safety_platform_disable()
+        Safety->>Motor: motor_platform_enable(false)
+        App->>UART: LOGE sinusoidal control stopped
+      else Drive is valid
+        App->>App: sine_control_update(10)
+        App->>Safety: safety_platform_watchdog_refresh()
+        App->>Motor: motor_platform_delay_ms(10)
+        App->>Sequence: motor_sequence_step(10)
+      end
+    end
+    App->>Safety: safety_platform_disable()
+    App->>UART: LOGI rotation complete
+  end

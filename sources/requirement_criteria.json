@@ -1,0 +1,1859 @@
+{
+  "job_id": "147df32a-7f32-46c3-a71d-59f63cdb0eb1",
+  "document_id": "dea764c8-9ba6-4673-a481-72c0779c854b",
+  "saved_at": "2026-09-24T03:10:04.089Z",
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Target Hardware & Demonstration Build",
+      "criteria": [
+        {
+          "requirement_id": "NFR-001",
+          "verifiability": "hardware",
+          "criterion": "After power-cycling the assembled target, the GBM2804H-100T shaft begins rotating without a button press, command, or other manual intervention.",
+          "observable": "Motor shaft motion after power-up",
+          "observable_kind": "signal",
+          "preconditions": [
+            "NUCLEO-G431RB is flashed with the delivered firmware.",
+            "X-NUCLEO-IHM16M1 is connected to the NUCLEO-G431RB.",
+            "GBM2804H-100T is connected to the driver outputs.",
+            "The board and motor are powered according to the target-hardware setup."
+          ],
+          "procedure": [
+            "Power off the assembled board and motor setup.",
+            "Power on the setup.",
+            "Observe the motor shaft without sending commands or pressing controls."
+          ],
+          "expected": "The motor begins the rotation demonstration automatically after power-up.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-003",
+          "verifiability": "inspection",
+          "criterion": "The project build completes and produces the firmware image without build errors.",
+          "observable": "Build-tool result and generated firmware image",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The documented build environment is configured.",
+            "The project source and configuration are present."
+          ],
+          "procedure": [
+            "Run the documented project build command.",
+            "Inspect the build exit status and generated firmware artifact."
+          ],
+          "expected": "The build exits successfully with no errors and produces a flashable firmware image.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-003",
+          "verifiability": "hardware",
+          "criterion": "The generated firmware image programs the NUCLEO-G431RB successfully and executes after a target reset.",
+          "observable": "Programming-tool result and target execution after reset",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "A successful firmware image is available.",
+            "A NUCLEO-G431RB is connected to the standard programming interface.",
+            "The target hardware is powered."
+          ],
+          "procedure": [
+            "Program the generated firmware image onto the NUCLEO-G431RB using the documented standard tool.",
+            "Reset or power-cycle the board.",
+            "Observe the target's post-reset execution, including the automatic demonstration behavior."
+          ],
+          "expected": "The programming tool reports successful programming, and the target executes the firmware after reset.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "hardware",
+          "criterion": "The demonstrated firmware execution occurs on a NUCLEO-G431RB board.",
+          "observable": "Board identity marking and firmware execution on the connected target",
+          "observable_kind": "state",
+          "preconditions": [
+            "A board labeled NUCLEO-G431RB is available.",
+            "The delivered firmware is programmed onto that board."
+          ],
+          "procedure": [
+            "Verify the board marking identifies it as NUCLEO-G431RB.",
+            "Reset or power-cycle the board.",
+            "Observe that the programmed firmware executes on that board."
+          ],
+          "expected": "The board is identified as NUCLEO-G431RB and the firmware runs on it after reset.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "inspection",
+          "criterion": "The hardware assembly and firmware configuration identify the X-NUCLEO-IHM16M1/STSPIN830 as the motor driver and use its PWM, GPIO, and EN/FAULT interfaces with settings matching the driver's documented default configuration.",
+          "observable": "Assembled-board identification, firmware pin assignments, and driver-initialization configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The X-NUCLEO-IHM16M1 is stacked on the NUCLEO-G431RB.",
+            "The STSPIN830 documentation and default configuration are available for comparison.",
+            "The firmware source and hardware configuration are available for inspection."
+          ],
+          "procedure": [
+            "Inspect the assembled driver-board marking.",
+            "Inspect the firmware's PWM, GPIO, and EN/FAULT assignments.",
+            "Compare the STSPIN830 initialization settings with the documented default configuration."
+          ],
+          "expected": "The board is an X-NUCLEO-IHM16M1, the firmware uses the STSPIN830 PWM/GPIO/EN/FAULT interfaces, and all inspected settings match the documented defaults.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "inspection",
+          "criterion": "The motor connected to the U/V/W outputs is identified as GBM2804H-100T and its motor specification states seven pole pairs.",
+          "observable": "Motor label and motor specification",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The motor is connected to the driver's U/V/W outputs.",
+            "The motor specification or datasheet is available."
+          ],
+          "procedure": [
+            "Read the label on the connected motor.",
+            "Inspect the applicable motor specification for the pole-pair count."
+          ],
+          "expected": "The motor label is GBM2804H-100T and the specified pole-pair count is 7 pairs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-004",
+          "verifiability": "inspection",
+          "criterion": "The DC voltage measured at the motor-driver input during the test is 12 V.",
+          "observable": "Voltage-meter reading at the X-NUCLEO-IHM16M1 driver input",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The power supply is connected to the driver according to the manufacturer's recommendations.",
+            "The assembled setup is powered for the test.",
+            "A suitable DC voltage meter is available."
+          ],
+          "procedure": [
+            "Power the assembled setup.",
+            "Measure the voltage directly at the driver input terminals during the test.",
+            "Record the meter reading and polarity."
+          ],
+          "expected": "The measured input is 12 V DC.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-004",
+          "verifiability": "unverifiable",
+          "criterion": "The firmware does not attempt to start the motor sequence when the supply is outside the permitted specification.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "derived",
+          "rationale": "The failure behavior requires an inhibited start, but the requirement does not define the permitted voltage range or provide a named supply-voltage measurement/status interface that can be driven and observed.",
+          "blocked_reason": "No allowable supply-voltage range and no observable voltage-validity or motor-start interface are specified, so an out-of-range failure check cannot be made concrete.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "PWM Timer & Motor-Driver Interface",
+      "criteria": [
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "When TIM1 is enabled, three PWM waveforms are simultaneously observable on the U, V, and W output pins with 120° phase separation between adjacent phases.",
+          "observable": "Oscilloscope traces on the U, V, and W pins",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Board is powered.",
+            "TIM1 clock and GPIO clocks are available.",
+            "The motor sequence has reached the PWM-enable step."
+          ],
+          "procedure": [
+            "Start the firmware and allow the motor sequence to enable PWM.",
+            "Probe the U, V, and W output pins with a three-channel oscilloscope.",
+            "Measure the phase separation between the three periodic waveforms."
+          ],
+          "expected": "Three active PWM waveforms are present, with each phase separated from the next by 120° electrical phase.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "host",
+          "criterion": "A failed TIM1 initialization leaves the motor-sequence controller in its non-running state and prevents any motor-start command from being issued.",
+          "observable": "Motor-sequence state and motor-start command recorded by a fake driver",
+          "observable_kind": "state",
+          "preconditions": [
+            "The application flow is tested with the TIM1 initialization callback configured to return failure."
+          ],
+          "procedure": [
+            "Inject a TIM1 initialization failure.",
+            "Run the startup sequence.",
+            "Inspect the motor-sequence state and the fake driver's motor-start command log."
+          ],
+          "expected": "The sequence remains stopped or aborted, and the motor-start command log is empty.",
+          "source": "derived",
+          "rationale": "This checks the stated failure behavior using the portable startup/state-machine logic while replacing the hardware initialization with a failing test double.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "inspection",
+          "criterion": "The driver interface configuration selects the X-NUCLEO-IHM16M1 factory-default three-PWM-input mode and contains no firmware or hardware configuration that selects an alternate input mode.",
+          "observable": "Driver-board jumper/settings inspection and firmware GPIO/PWM configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The assembled driver board uses the factory-default jumper and configuration settings."
+          ],
+          "procedure": [
+            "Inspect the X-NUCLEO-IHM16M1 jumper and mode-selection settings.",
+            "Inspect the firmware configuration and initialization code for driver input-mode changes.",
+            "Compare the resulting configuration with the STSPIN830 three-PWM-input mode definition."
+          ],
+          "expected": "The board remains in factory-default three-PWM-input mode, and no alternate-mode selection or reconfiguration is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "hardware",
+          "criterion": "During the motor run window, three distinct GPIO signals are present at the STSPIN830 U, V, and W input pins.",
+          "observable": "Oscilloscope traces at the three STSPIN830 input pins",
+          "observable_kind": "signal",
+          "preconditions": [
+            "TIM1 is configured.",
+            "The U, V, and W GPIO mappings are configured.",
+            "The motor sequence is in its run window.",
+            "An oscilloscope is connected to the three driver inputs."
+          ],
+          "procedure": [
+            "Start the motor sequence.",
+            "Probe the STSPIN830 U, V, and W input pins.",
+            "Confirm that each pin has its own PWM waveform during the run window."
+          ],
+          "expected": "All three U, V, and W inputs show observable PWM activity, and the signals originate from three distinct GPIO outputs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-001",
+          "verifiability": "hardware",
+          "criterion": "The PWM carrier measured on each of the U, V, and W outputs has a nominal frequency of 20 kHz.",
+          "observable": "Measured PWM period or frequency on the U, V, and W output pins",
+          "observable_kind": "signal",
+          "preconditions": [
+            "TIM1 is configured.",
+            "PWM is enabled.",
+            "An oscilloscope or frequency counter is connected to each phase output."
+          ],
+          "procedure": [
+            "Enable PWM without changing the configured timer clock.",
+            "Measure the carrier frequency on U, V, and W.",
+            "Record the measured frequency for each output."
+          ],
+          "expected": "Each phase measures 20 kHz nominally.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-001",
+          "verifiability": "unverifiable",
+          "criterion": "The PWM-frequency pass/fail band around 20 kHz cannot be asserted until the required measurement tolerance is specified.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "derived",
+          "rationale": "The stated acceptance criterion requires 20 kHz plus or minus a tolerance, but neither the tolerance value nor a referenced test-plan limit is provided.",
+          "blocked_reason": "No numeric PWM frequency tolerance is specified, so a measured value cannot be classified as passing or failing against the requirement.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "Before the motor-driver EN signal rises, the U, V, and W outputs remain configured but show no PWM switching activity.",
+          "observable": "Time-correlated oscilloscope traces for EN, U, V, and W",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The boot delay has elapsed.",
+            "No EN or FAULT condition is active before startup.",
+            "The oscilloscope is triggering on the EN rising edge."
+          ],
+          "procedure": [
+            "Start the firmware and capture the interval before the EN rising edge at approximately t=3 s.",
+            "Inspect the U, V, and W traces before the EN edge.",
+            "Verify that GPIO and PWM initialization has completed while the PWM outputs remain disabled."
+          ],
+          "expected": "Before EN rises, U, V, and W remain at their idle levels with no switching transitions.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "Immediately after EN rises and PWM is enabled, the first active PWM duty cycle on U, V, and W is 10%.",
+          "observable": "First active PWM pulse widths and periods on U, V, and W after the EN rising edge",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The boot delay has elapsed.",
+            "No EN or FAULT condition is active before startup.",
+            "The oscilloscope captures EN and all three PWM outputs."
+          ],
+          "procedure": [
+            "Trigger an oscilloscope capture on the EN rising edge.",
+            "Identify the first active PWM cycle after PWM enable.",
+            "Measure the high-time-to-period ratio on U, V, and W."
+          ],
+          "expected": "The first active duty cycle is 10% on each of U, V, and W.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "The first active PWM duty cycle is followed by the startup duty-cycle ramp in the defined motor sequence without an EN assertion occurring before PWM/GPIO initialization completes.",
+          "observable": "Time-correlated EN, PWM output, and initialization-completion traces or firmware event markers",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The boot delay has elapsed.",
+            "The startup sequence and its duty-cycle timing points are defined.",
+            "No EN or FAULT condition is active before startup."
+          ],
+          "procedure": [
+            "Capture the startup sequence from before EN assertion through the ramp interval.",
+            "Compare the observed duty-cycle changes and event ordering with the defined sequence timing points."
+          ],
+          "expected": "EN rises only after PWM/GPIO initialization completion, and subsequent duty-cycle changes match every specified startup-sequence timing and value.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "host",
+          "criterion": "If the test injects an EN assertion before PWM/GPIO configuration completes, the startup controller deasserts EN, keeps PWM disabled, and aborts the sequence.",
+          "observable": "Fake EN output, PWM-enable state, and motor-sequence state",
+          "observable_kind": "state",
+          "preconditions": [
+            "The startup controller is tested with a fake EN output and fake PWM/GPIO initialization callbacks.",
+            "The EN assertion is injected before the configuration-complete callback."
+          ],
+          "procedure": [
+            "Begin the startup sequence.",
+            "Inject an early EN assertion before configuration completion.",
+            "Allow the safety/error handler to run.",
+            "Inspect the fake EN output, PWM-enable state, and sequence state."
+          ],
+          "expected": "EN is low, PWM remains disabled, and the sequence is in the aborted or stopped state.",
+          "source": "derived",
+          "rationale": "This directly exercises the specified early-enable failure behavior in the portable startup state machine without requiring an oscilloscope.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "unverifiable",
+          "criterion": "The complete startup ramp cannot be checked for exact duty-cycle values or timing until the referenced sequence ramp points are specified.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "derived",
+          "rationale": "The requirement specifies the initial 10% duty cycle but refers to an otherwise undefined ramp sequence; no subsequent duty-cycle values, durations, or slope are provided.",
+          "blocked_reason": "The startup ramp lacks explicit duty-cycle and timing values, so exact conformance cannot be asserted beyond the initial 10% check.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "Open-Loop Sinusoidal Motor Control",
+      "criteria": [
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "The oscilloscope capture shall show three sinusoidal-modulated PWM phase waveforms on U, V, and W with 120° phase separation during the run window.",
+          "observable": "Oscilloscope traces for PWM outputs U, V, and W",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Driver enabled",
+            "Sequence is in the run window",
+            "Oscilloscope probes are connected to U, V, and W"
+          ],
+          "procedure": [
+            "Start the automatic sequence with the driver enabled.",
+            "Capture synchronized U, V, and W waveforms during the run window.",
+            "Measure the relative electrical phase of each phase waveform."
+          ],
+          "expected": "Three sinusoidal-modulated PWM waveforms with 120° separation between adjacent phases.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "The measured three-phase electrical angle shall progress continuously in one rotating direction during the run window.",
+          "observable": "Time-ordered oscilloscope capture of U/V/W phase progression",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Driver enabled",
+            "Sequence is in the run window"
+          ],
+          "procedure": [
+            "Capture multiple consecutive electrical cycles from U, V, and W.",
+            "Compare the phase angle ordering across successive cycles."
+          ],
+          "expected": "The phase angle advances from cycle to cycle in a consistent rotating direction rather than remaining stationary or reversing.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "If rotating-field generation fails during the run, all motor PWM outputs shall be disabled and the sequence shall be aborted.",
+          "observable": "PWM output levels and sequence state after injected rotating-field failure",
+          "observable_kind": "state",
+          "preconditions": [
+            "Driver enabled",
+            "A rotating-field generation failure can be injected or detected"
+          ],
+          "procedure": [
+            "Start the sequence.",
+            "Inject or simulate failure of rotating-field generation.",
+            "Observe the PWM outputs and sequence state."
+          ],
+          "expected": "PWM outputs are disabled and the sequence is in an aborted state.",
+          "source": "derived",
+          "rationale": "Derived from the requirement's explicit failure behavior; the observable consequences are PWM disablement and sequence abortion.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "PWM duty shall increase monotonically from the initial amplitude to the maximum amplitude during the startup ramp, with no consecutive control-update change greater than 5 percentage points.",
+          "observable": "Timestamped PWM duty measurements at each control update from t=3 s through t=8 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Driver enabled at t=3 s",
+            "Startup ramp window is active",
+            "PWM duty can be measured at consecutive control updates"
+          ],
+          "procedure": [
+            "Start the sequence and record PWM duty at every control update from t=3 s to t=8 s.",
+            "Compare each duty value with the preceding value.",
+            "Check the largest consecutive change."
+          ],
+          "expected": "Each duty value is greater than or equal to the preceding value, and every consecutive increase is ≤5 percentage points.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "PWM amplitude shall reach 20% by the end of the startup ramp at t=8 s.",
+          "observable": "PWM duty measurement at t=8 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Driver enabled at t=3 s",
+            "Startup ramp window is active"
+          ],
+          "procedure": [
+            "Run the sequence from t=3 s through t=8 s.",
+            "Measure PWM duty at t=8 s."
+          ],
+          "expected": "PWM duty is 20% at or before t=8 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "If the PWM amplitude ramp cannot be achieved, PWM shall be disabled and the driver shall enter standby.",
+          "observable": "PWM output state and driver state after injected ramp failure",
+          "observable_kind": "state",
+          "preconditions": [
+            "Driver enabled",
+            "Startup amplitude ramp is active",
+            "A ramp failure can be injected or detected"
+          ],
+          "procedure": [
+            "Start the startup amplitude ramp.",
+            "Inject or simulate an inability to achieve the requested ramp.",
+            "Observe PWM outputs and the driver state."
+          ],
+          "expected": "PWM is disabled and the driver is in standby.",
+          "source": "derived",
+          "rationale": "Derived from the requirement's explicit failure behavior.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "Measured electrical frequency shall increase monotonically from 1 Hz at t=3 s to 10 Hz by t=8 s.",
+          "observable": "Timestamped electrical-frequency measurements from t=3 s through t=8 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Boot delay elapsed",
+            "Driver enabled at t=3 s",
+            "No active EN or FAULT condition"
+          ],
+          "procedure": [
+            "Start frequency measurement at t=3 s.",
+            "Record frequency through t=8 s.",
+            "Check the initial value, final value, and ordering of all samples."
+          ],
+          "expected": "Frequency is 1 Hz at t=3 s, is nondecreasing at all sampled times, and reaches 10 Hz no later than t=8 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "If the electrical-frequency ramp cannot be achieved, PWM shall be disabled and the driver shall enter standby.",
+          "observable": "PWM output state and driver state after injected frequency-ramp failure",
+          "observable_kind": "state",
+          "preconditions": [
+            "Frequency startup ramp is active",
+            "A frequency-ramp failure can be injected or detected"
+          ],
+          "procedure": [
+            "Start the frequency ramp.",
+            "Inject or simulate inability to achieve the requested frequency ramp.",
+            "Observe PWM outputs and the driver state."
+          ],
+          "expected": "PWM is disabled and the driver is in standby.",
+          "source": "derived",
+          "rationale": "Derived from the requirement's explicit failure behavior.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "hardware",
+          "criterion": "Measured PWM duty shall increase monotonically from 10% at t=3 s to 20% by t=8 s.",
+          "observable": "Timestamped PWM duty measurements from t=3 s through t=8 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Boot delay elapsed",
+            "Driver enabled at t=3 s"
+          ],
+          "procedure": [
+            "Measure PWM duty at t=3 s and at successive points through t=8 s.",
+            "Check monotonic ordering and endpoint values."
+          ],
+          "expected": "Duty is 10% at t=3 s, never decreases during the interval, and reaches 20% no later than t=8 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "hardware",
+          "criterion": "If the PWM amplitude ramp cannot be achieved, PWM shall be disabled and the driver shall enter standby.",
+          "observable": "PWM output state and driver state after injected amplitude-ramp failure",
+          "observable_kind": "state",
+          "preconditions": [
+            "Amplitude startup ramp is active",
+            "An amplitude-ramp failure can be injected or detected"
+          ],
+          "procedure": [
+            "Start the amplitude ramp.",
+            "Inject or simulate inability to achieve the requested amplitude ramp.",
+            "Observe PWM outputs and the driver state."
+          ],
+          "expected": "PWM is disabled and the driver is in standby.",
+          "source": "derived",
+          "rationale": "Derived from the requirement's explicit failure behavior.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "Measured electrical frequency shall remain nominally 10 Hz for the entire hold window from t=8 s through t=18 s.",
+          "observable": "Electrical-frequency measurements throughout t=8–18 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Startup ramp completed",
+            "Electrical frequency has reached 10 Hz"
+          ],
+          "procedure": [
+            "Measure electrical frequency repeatedly from t=8 s through t=18 s.",
+            "Compare each measurement with the 10 Hz setpoint."
+          ],
+          "expected": "10 Hz throughout the hold window; the allowable measurement tolerance must be supplied by the requirements or test configuration.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "If the held electrical frequency deviates from its required value, the sequence shall enter the shutdown ramp at t=18 s.",
+          "observable": "Sequence state and frequency-ramp command at t=18 s after an induced deviation",
+          "observable_kind": "state",
+          "preconditions": [
+            "Hold window is active",
+            "A frequency deviation can be induced or detected"
+          ],
+          "procedure": [
+            "Induce or simulate a frequency deviation during t=8–18 s.",
+            "Allow the sequence to reach t=18 s.",
+            "Observe the sequence state and commanded frequency."
+          ],
+          "expected": "The shutdown-ramp state is entered at t=18 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "hardware",
+          "criterion": "Measured PWM duty shall not exceed 20% at any sampled time from t=8 s through t=18 s.",
+          "observable": "Timestamped PWM duty measurements throughout the hold window",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Startup ramp completed",
+            "Hold window is active"
+          ],
+          "procedure": [
+            "Measure PWM duty continuously or at a sampling rate sufficient to capture control updates from t=8 s through t=18 s.",
+            "Find the maximum measured duty."
+          ],
+          "expected": "Maximum PWM duty is ≤20%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "hardware",
+          "criterion": "If PWM duty exceeds 20% during the hold window, the firmware shall immediately start the shutdown ramp.",
+          "observable": "Shutdown-ramp transition following an induced over-amplitude condition",
+          "observable_kind": "state",
+          "preconditions": [
+            "Hold window is active",
+            "An over-amplitude condition can be induced or detected"
+          ],
+          "procedure": [
+            "Induce or simulate PWM duty above 20%.",
+            "Observe the next control-state transition."
+          ],
+          "expected": "The shutdown ramp starts immediately after the over-amplitude condition is detected.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-018",
+          "verifiability": "hardware",
+          "criterion": "Electrical frequency shall be 1 Hz at t=3 s and shall reach 10 Hz by t=8 s while increasing monotonically during the startup ramp.",
+          "observable": "Timestamped electrical-frequency measurements during t=3–8 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Startup ramp window is active"
+          ],
+          "procedure": [
+            "Record electrical frequency at t=3 s and at each control update through t=8 s.",
+            "Check endpoint values and monotonic ordering."
+          ],
+          "expected": "Frequency is 1 Hz at t=3 s, every subsequent value is ≥ the preceding value, and frequency reaches 10 Hz no later than t=8 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-018",
+          "verifiability": "hardware",
+          "criterion": "The electrical-frequency increase between consecutive control updates shall never exceed 1 Hz during t=3–8 s.",
+          "observable": "Electrical-frequency value associated with each consecutive control update",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Startup ramp window is active",
+            "Control-update timing and frequency values are observable"
+          ],
+          "procedure": [
+            "Record the frequency at every consecutive control update during t=3–8 s.",
+            "Subtract each previous value from the next value."
+          ],
+          "expected": "Every positive step is ≤1 Hz; no negative step occurs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-018",
+          "verifiability": "hardware",
+          "criterion": "If the frequency ramp cannot be achieved, PWM shall be disabled and the driver shall return to standby.",
+          "observable": "PWM output state and driver state after injected frequency-ramp failure",
+          "observable_kind": "state",
+          "preconditions": [
+            "Startup frequency ramp is active",
+            "A ramp failure can be injected or detected"
+          ],
+          "procedure": [
+            "Start the startup frequency ramp.",
+            "Inject or simulate inability to meet the ramp criteria.",
+            "Observe PWM outputs and the driver state."
+          ],
+          "expected": "PWM is disabled and the driver is in standby.",
+          "source": "derived",
+          "rationale": "Derived from the requirement's explicit failure behavior.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-004",
+          "verifiability": "hardware",
+          "criterion": "PWM duty measured at the beginning of the startup ramp shall be 10% at t=3 s.",
+          "observable": "PWM duty at t=3 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Driver enabled at t=3 s",
+            "PWM enabled",
+            "Startup ramp begins at t=3 s"
+          ],
+          "procedure": [
+            "Trigger the measurement from the boot-time reference.",
+            "Measure PWM duty at t=3 s when the startup ramp begins."
+          ],
+          "expected": "PWM duty is 10%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-005",
+          "verifiability": "hardware",
+          "criterion": "The maximum measured PWM duty shall be no greater than 20% at every observation time during the automatic sequence.",
+          "observable": "Maximum timestamped PWM duty from sequence start through shutdown",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Sequence is running",
+            "PWM duty is measured at all control updates or continuously"
+          ],
+          "procedure": [
+            "Run the complete automatic sequence.",
+            "Record PWM duty throughout the sequence, including startup, hold, and shutdown.",
+            "Determine the maximum recorded duty."
+          ],
+          "expected": "Maximum PWM duty is ≤20%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-005",
+          "verifiability": "hardware",
+          "criterion": "If PWM duty exceeds 20%, the firmware shall start the shutdown response and disable outputs at t=20 s.",
+          "observable": "Shutdown-ramp transition and PWM output state at t=20 s after an induced over-limit condition",
+          "observable_kind": "state",
+          "preconditions": [
+            "Sequence is running",
+            "An over-limit PWM condition can be induced or detected"
+          ],
+          "procedure": [
+            "Induce or simulate PWM duty above 20%.",
+            "Observe the transition into shutdown.",
+            "Check PWM outputs at t=20 s."
+          ],
+          "expected": "Shutdown begins after the violation and PWM outputs are disabled at t=20 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-008",
+          "verifiability": "hardware",
+          "criterion": "The GBM2804H-100T shall exhibit visible movement or rotation continuously or intermittently during the automatic run window from t=3 s through t=20 s.",
+          "observable": "Direct visual observation or video recording of the motor shaft/rotor",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Sequence started successfully",
+            "Driver enabled",
+            "Motor and mechanical load are installed"
+          ],
+          "procedure": [
+            "Start the automatic sequence.",
+            "Observe or record the motor from t=3 s through t=20 s.",
+            "Determine whether visible shaft or rotor motion occurs during the interval."
+          ],
+          "expected": "Visible motor movement or rotation is observed at least once during t=3–20 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-008",
+          "verifiability": "hardware",
+          "criterion": "Motor motion shall cease at or after t=20 s.",
+          "observable": "Motor shaft/rotor motion and PWM output state after t=20 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Automatic sequence has completed its run window",
+            "Motor is mechanically observable"
+          ],
+          "procedure": [
+            "Run the sequence through t=20 s.",
+            "Observe the motor after t=20 s and verify the output state."
+          ],
+          "expected": "No visible motor movement remains after t=20 s, and motor-driving PWM is disabled.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "Automatic Demonstration Sequencer",
+      "criteria": [
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "hardware",
+          "criterion": "With no UART activity, the first sequence-start output occurs at 3.0 s after boot, within one scheduler tick.",
+          "observable": "PWM activity and driver EN transition measured from reset release",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM and GPIO are initialized.",
+            "EN and FAULT are inactive.",
+            "The board has been reset or power-cycled.",
+            "No UART bytes are transmitted."
+          ],
+          "procedure": [
+            "Reset or power-cycle the board and start a timer at reset release.",
+            "Monitor driver EN and PWM outputs without transmitting UART data.",
+            "Record the timestamp of the first driver-enable or startup-ramp event."
+          ],
+          "expected": "The first sequence-start event occurs at 3.0 s ± one scheduler tick; no UART input is required.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "hardware",
+          "criterion": "Motor motion is sustained throughout the 10 s hold interval after startup completes, and shutdown begins when that interval ends.",
+          "observable": "Motor motion and PWM frequency/amplitude during the hold interval",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The automatic sequence has started successfully.",
+            "The startup ramp has completed at approximately t=8 s.",
+            "The driver and motor are connected."
+          ],
+          "procedure": [
+            "Reset the board and monitor the motor and PWM output from boot.",
+            "Verify startup completes at approximately t=8 s.",
+            "Observe the motor and PWM output through t=18 s."
+          ],
+          "expected": "Motion remains present throughout t=8 s through t=18 s, and the shutdown ramp begins at approximately t=18 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "hardware",
+          "criterion": "Driver EN transitions to its enabled level at approximately 3 s after boot and remains enabled until shutdown.",
+          "observable": "Motor-driver EN GPIO level versus boot-relative time",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The board has been reset or power-cycled.",
+            "Boot delay has not been bypassed.",
+            "No EN or FAULT condition is asserted."
+          ],
+          "procedure": [
+            "Reset the board and start a boot-relative timer.",
+            "Probe the driver EN pin throughout the sequence.",
+            "Record the enable transition and the subsequent transition to standby."
+          ],
+          "expected": "EN becomes enabled at 3.0 s ± one scheduler tick and remains enabled until the shutdown sequence completes.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "Electrical frequency decreases monotonically during the shutdown ramp.",
+          "observable": "Measured electrical frequency from t=18 s to t=20 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The automatic sequence has reached the end of the hold window.",
+            "Frequency measurement equipment is connected to the motor or drive output."
+          ],
+          "procedure": [
+            "Reset the board and measure electrical frequency continuously from boot.",
+            "Capture frequency samples during t=18 s through t=20 s.",
+            "Compare each successive sample with the preceding sample."
+          ],
+          "expected": "Frequency never increases during t=18 s to t=20 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "Electrical frequency reaches 0 Hz no later than 20 s after boot.",
+          "observable": "Measured electrical frequency at t=20 s and thereafter",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The hold window has completed.",
+            "Frequency measurement equipment is connected."
+          ],
+          "procedure": [
+            "Reset the board and measure electrical frequency from boot.",
+            "Check the frequency at t=20 s and after the shutdown ramp."
+          ],
+          "expected": "Measured electrical frequency is 0 Hz by t=20 s and remains 0 Hz after the ramp.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "hardware",
+          "criterion": "PWM duty decreases monotonically during the shutdown ramp.",
+          "observable": "Measured PWM duty cycle from t=18 s to t=20 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The automatic sequence has reached the end of the hold window.",
+            "A PWM measurement instrument is connected."
+          ],
+          "procedure": [
+            "Reset the board and measure PWM duty cycle from boot.",
+            "Capture duty-cycle samples during t=18 s through t=20 s.",
+            "Compare each successive sample with the preceding sample."
+          ],
+          "expected": "PWM duty never increases during t=18 s to t=20 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "hardware",
+          "criterion": "PWM duty reaches 0% no later than 20 s after boot.",
+          "observable": "Measured PWM duty cycle at t=20 s and thereafter",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The hold window has completed.",
+            "A PWM measurement instrument is connected."
+          ],
+          "procedure": [
+            "Reset the board and measure PWM duty cycle from boot.",
+            "Check the duty cycle at t=20 s and after the shutdown ramp."
+          ],
+          "expected": "Measured PWM duty is 0% by t=20 s and remains 0% afterward.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "hardware",
+          "criterion": "No PWM switching activity is present at or after 20 s from boot.",
+          "observable": "PWM output waveform after t=20 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The shutdown ramp has completed.",
+            "A sufficiently long-bandwidth oscilloscope or logic analyzer is connected to the PWM output."
+          ],
+          "procedure": [
+            "Reset the board and monitor the PWM output from boot.",
+            "Inspect the output at t=20 s and for the remainder of the post-run observation period."
+          ],
+          "expected": "The PWM output has no rising or falling switching edges at any time t≥20 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-013",
+          "verifiability": "hardware",
+          "criterion": "Driver EN is deasserted at or after 20 s from boot.",
+          "observable": "Motor-driver EN GPIO level after t=20 s",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The shutdown ramp has completed.",
+            "The EN pin is accessible to a logic analyzer or oscilloscope."
+          ],
+          "procedure": [
+            "Reset the board and monitor EN from boot.",
+            "Check EN at t=20 s and throughout the post-run observation period."
+          ],
+          "expected": "EN is deasserted no later than t=20 s and remains deasserted.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-014",
+          "verifiability": "hardware",
+          "criterion": "After the automatic sequence completes, no PWM switching or motor motion occurs before a subsequent reset or power cycle.",
+          "observable": "PWM waveform and motor motion after sequence completion",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The automatic sequence has completed at t≥20 s.",
+            "The board is not reset or power-cycled during the observation interval.",
+            "The motor and PWM output are observable."
+          ],
+          "procedure": [
+            "Allow the board to complete the automatic sequence.",
+            "Continue monitoring PWM and motor motion without sending a reset or power-cycle command.",
+            "Reset or power-cycle the board only after the post-run observation."
+          ],
+          "expected": "No PWM edges and no motor motion occur for the entire observation interval after t=20 s and before the subsequent reset or power cycle.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-002",
+          "verifiability": "hardware",
+          "criterion": "The elapsed time from reset release to sequence start is 3.0 s within one scheduler tick.",
+          "observable": "Boot-relative timestamp of the first startup-ramp or driver-enable event",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The board has been reset or power-cycled.",
+            "The driver is initially disabled.",
+            "No UART input is provided."
+          ],
+          "procedure": [
+            "Reset or power-cycle the board and start a timer at reset release.",
+            "Monitor the driver EN and PWM outputs.",
+            "Record the timestamp of the first sequence-start event."
+          ],
+          "expected": "Sequence start occurs at 3.0 s ± one scheduler tick after reset release.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-003",
+          "verifiability": "hardware",
+          "criterion": "The startup frequency and amplitude ramps both complete within the interval from t=3 s through t=8 s.",
+          "observable": "Measured frequency and PWM amplitude at the startup-ramp endpoint",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The boot delay has elapsed.",
+            "Frequency and PWM measurement equipment is connected."
+          ],
+          "procedure": [
+            "Reset the board and measure frequency and PWM amplitude from boot.",
+            "Identify the start of the ramp at approximately t=3 s.",
+            "Verify that both ramp outputs have reached their hold-state values by t=8 s."
+          ],
+          "expected": "Both startup ramps are complete no later than t=8.0 s, giving a duration of no more than 5.0 s from t=3 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-006",
+          "verifiability": "hardware",
+          "criterion": "The sequence remains in the hold state from t=8 s through t=18 s.",
+          "observable": "Measured electrical frequency and PWM duty during the hold interval",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The startup ramp has completed.",
+            "Frequency and PWM measurement equipment is connected."
+          ],
+          "procedure": [
+            "Reset the board and measure frequency and PWM duty from boot.",
+            "Check the values continuously or at a sampling rate sufficient to detect departure from the hold state during t=8 s through t=18 s.",
+            "Record the transition into the shutdown ramp."
+          ],
+          "expected": "The hold state lasts 10.0 s from t=8 s to t=18 s, with electrical frequency at 10 Hz and PWM duty no greater than 20%; shutdown begins at t=18 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-007",
+          "verifiability": "hardware",
+          "criterion": "The shutdown ramp lasts 2.0 s from t=18 s to t=20 s and reaches zero frequency and zero PWM amplitude by its end.",
+          "observable": "Measured frequency and PWM duty throughout the shutdown ramp",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The hold window has completed at approximately t=18 s.",
+            "Frequency and PWM measurement equipment is connected."
+          ],
+          "procedure": [
+            "Reset the board and measure frequency and PWM duty from boot.",
+            "Capture the start of the shutdown ramp at t=18 s.",
+            "Verify both values reach zero by t=20 s."
+          ],
+          "expected": "The shutdown ramp starts at t=18.0 s, ends at t=20.0 s, and both electrical frequency and PWM duty are zero at or before t=20.0 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-5",
+      "name": "Fault Handling, Watchdog & Reset Safety",
+      "criteria": [
+        {
+          "requirement_id": "SF-001",
+          "verifiability": "hardware",
+          "criterion": "When EN/FAULT is asserted during any sequence phase, all PWM outputs stop within one control cycle and no later than 10 ms.",
+          "observable": "U, V, and W PWM output waveforms and the EN/FAULT input edge timestamp",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The automatic sequence is active at a known phase.",
+            "The motor-driver PWM outputs are connected to an oscilloscope or logic analyzer.",
+            "EN/FAULT is inactive before the test."
+          ],
+          "procedure": [
+            "Start the automatic sequence and wait until PWM is active.",
+            "Assert EN/FAULT while the sequence is running.",
+            "Measure the time from the EN/FAULT assertion edge to the last PWM transition on each of U, V, and W."
+          ],
+          "expected": "Each PWM output has no transitions after the fault response point, and the response occurs within one control cycle and less than 10 ms after EN/FAULT assertion.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-001",
+          "verifiability": "hardware",
+          "criterion": "After EN/FAULT is asserted, clearing the fault without applying the required reset or power-cycle does not produce any PWM output.",
+          "observable": "U, V, and W PWM output waveforms after EN/FAULT is cleared",
+          "observable_kind": "signal",
+          "preconditions": [
+            "A sequence is running and PWM is active.",
+            "EN/FAULT has been asserted and PWM has stopped.",
+            "The required reset or power-cycle has not been applied."
+          ],
+          "procedure": [
+            "Assert EN/FAULT and confirm that PWM stops.",
+            "Clear EN/FAULT while leaving the MCU powered and not resetting it.",
+            "Observe all PWM outputs for the remainder of the test interval."
+          ],
+          "expected": "No PWM transitions occur after EN/FAULT is cleared until the specified reset or power-cycle sequence is performed.",
+          "source": "derived",
+          "rationale": "The postconditions state that PWM remains disabled until the fault clears and reset/power-cycle rules are satisfied; this checks the safety-relevant persistence of the disabled state without inventing a recovery mechanism.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-002",
+          "verifiability": "target",
+          "criterion": "A deliberate control-task hang during the 8–18 s hold window causes a hardware-watchdog reset.",
+          "observable": "MCU reset-cause register or boot diagnostic identifying the watchdog reset",
+          "observable_kind": "state",
+          "preconditions": [
+            "The automatic sequence has entered the 8–18 s hold window.",
+            "The hardware watchdog is configured and running.",
+            "A test hook can deliberately stop the control task."
+          ],
+          "procedure": [
+            "Start the automatic sequence and enter the hold window.",
+            "Trigger the deliberate control-task hang.",
+            "Wait for the MCU to restart.",
+            "Read the reset-cause register or capture the boot diagnostic."
+          ],
+          "expected": "The MCU restarts and the recorded reset cause identifies a hardware-watchdog reset.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-002",
+          "verifiability": "hardware",
+          "criterion": "After a watchdog-induced reset, PWM remains inactive and the motor driver remains in standby throughout the first 3 seconds of boot.",
+          "observable": "U, V, and W PWM waveforms plus the driver EN/standby signal from the watchdog reset timestamp",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The control task is hung during the automatic sequence.",
+            "A hardware watchdog reset has occurred.",
+            "PWM outputs and the driver EN/standby signal are connected to measurement equipment."
+          ],
+          "procedure": [
+            "Trigger the deliberate control-task hang during the hold window.",
+            "Record the watchdog reset timestamp.",
+            "Observe PWM outputs and driver EN/standby from reset through 3 seconds after reset."
+          ],
+          "expected": "No PWM switching is observed and driver EN remains deasserted/standby asserted continuously from reset through t=3.000 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-003",
+          "verifiability": "hardware",
+          "criterion": "After an active EN/FAULT condition stops the run, clearing EN/FAULT without reset or power-cycle does not re-enable the driver or generate PWM for at least the demo duration.",
+          "observable": "Driver EN/standby signal and U, V, and W PWM output waveforms after fault clearance",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The automatic sequence is running and PWM is active.",
+            "The EN/FAULT input is connected and can be asserted and cleared.",
+            "The system remains powered without reset or power-cycle."
+          ],
+          "procedure": [
+            "Assert EN/FAULT during the run and confirm PWM stops.",
+            "Clear EN/FAULT without resetting or power-cycling the MCU.",
+            "Observe the driver EN/standby signal and all PWM outputs for at least the full demo duration."
+          ],
+          "expected": "For the entire observation interval, driver EN remains deasserted/standby remains asserted and no PWM transitions occur.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-004",
+          "verifiability": "hardware",
+          "criterion": "Following each supported reset source, no PWM switching occurs and the driver EN signal remains deasserted for the first 3 seconds after reset.",
+          "observable": "U, V, and W PWM waveforms and driver EN/standby signal from each reset timestamp",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The board can be subjected individually to power-on, external reset, watchdog timeout, and brown-out reset.",
+            "PWM outputs and driver EN/standby are connected to measurement equipment.",
+            "EN/FAULT is inactive unless the reset test specifically requires otherwise."
+          ],
+          "procedure": [
+            "Apply one reset source and record the reset timestamp.",
+            "Observe U, V, and W and driver EN/standby continuously through t=3.000 s.",
+            "Repeat for power-on, external reset, watchdog timeout, and brown-out."
+          ],
+          "expected": "For every reset source, no PWM transition is observed before t=3.000 s and driver EN remains deasserted/standby asserted throughout that interval.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "SF-004",
+          "verifiability": "hardware",
+          "criterion": "After the 3-second boot delay, the sequence does not perform an enable action while EN/FAULT is active.",
+          "observable": "Driver EN signal and PWM output waveforms after t=3 s with EN/FAULT asserted",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The board has completed a reset and the 3-second boot interval.",
+            "EN/FAULT is active at or after the end of the boot delay.",
+            "PWM outputs and driver EN/standby are connected to measurement equipment."
+          ],
+          "procedure": [
+            "Reset the MCU with EN/FAULT active.",
+            "Maintain EN/FAULT active through and beyond t=3 s.",
+            "Observe driver EN and U, V, and W PWM outputs after the boot delay."
+          ],
+          "expected": "Driver EN remains deasserted/standby remains asserted and no PWM switching starts while EN/FAULT is active.",
+          "source": "derived",
+          "rationale": "The stated acceptance criteria permit enabling after 3 seconds only if no EN/FAULT is active; this check covers the explicit safety condition that prevents the post-delay sequence from enabling during an active fault.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-6",
+      "name": "Control Scope & Architecture Boundaries",
+      "criteria": [
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "inspection",
+          "criterion": "The design and test artifacts contain only MCU I/O, STSPIN830 U/V/W drive, PWM/GPIO, and motor-connectivity verification for the basic rotation demo.",
+          "observable": "Design documents, test artifacts, source tree, and configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The release source tree and associated design/test artifacts are available for review."
+          ],
+          "procedure": [
+            "Review the stated project scope and test plan.",
+            "Search the source tree and configuration for implemented control features beyond MCU I/O, STSPIN830 drive, PWM/GPIO, and motor connectivity.",
+            "Confirm that no additional control feature is included."
+          ],
+          "expected": "All documented and implemented scope is limited to MCU I/O, STSPIN830 U/V/W driving, PWM/GPIO, motor connections, and the basic rotation demo.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "inspection",
+          "criterion": "The firmware source contains no sensorless FOC algorithm or transform and its PWM generation is open-loop sinusoidal.",
+          "observable": "Firmware source and PWM-generation implementation",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source tree is available for review."
+          ],
+          "procedure": [
+            "Search the source and configuration for FOC algorithms, feedback-dependent PWM control, and FOC-related transforms.",
+            "Inspect the PWM-generation path to determine whether its waveform is generated without sensor feedback.",
+            "Confirm that the implementation is open-loop sinusoidal PWM."
+          ],
+          "expected": "No FOC algorithm or transform is present, and PWM is generated as open-loop sinusoidal PWM.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-005",
+          "verifiability": "inspection",
+          "criterion": "The firmware source contains no rotor-observer or rotor-estimator module, call, or configuration entry.",
+          "observable": "Firmware source tree and build configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source tree and build configuration are available."
+          ],
+          "procedure": [
+            "Search for rotor observer, estimator, position-estimation, and equivalent modules or calls.",
+            "Inspect the build configuration for any enabled observer or estimator component."
+          ],
+          "expected": "No rotor-observer or rotor-estimator module, call, or enabled configuration entry is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-006",
+          "verifiability": "inspection",
+          "criterion": "The firmware source contains no Clarke or Park transform implementation or call.",
+          "observable": "Firmware source tree",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source tree is available."
+          ],
+          "procedure": [
+            "Search for Clarke/Park transform names and equivalent αβ or dq coordinate calculations.",
+            "Inspect motor-control and PWM code for αβ or dq transform operations."
+          ],
+          "expected": "No code performing Clarke or Park transforms, including αβ or dq transformations, is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-007",
+          "verifiability": "inspection",
+          "criterion": "The firmware source and configuration contain no phase-current PI controller or speed PI controller.",
+          "observable": "Firmware source tree and control configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and configuration are available."
+          ],
+          "procedure": [
+            "Search for PI/PID controller implementations and instances.",
+            "Inspect control configuration for phase-current or speed controller gains and enable flags."
+          ],
+          "expected": "No PI controller for phase current or speed exists in source or configuration.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-008",
+          "verifiability": "inspection",
+          "criterion": "No ADC channel, conversion result, or ADC-processing path is used to control phase-current PWM or motor operation.",
+          "observable": "ADC configuration and firmware control paths",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete ADC configuration and firmware source are available."
+          ],
+          "procedure": [
+            "Inspect ADC channel configuration and conversion-processing code.",
+            "Trace every ADC result used by motor-control code.",
+            "Confirm that no result represents or controls phase current."
+          ],
+          "expected": "ADC is not used to sense phase currents for control purposes.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-009",
+          "verifiability": "inspection",
+          "criterion": "No ADC channel, conversion result, or ADC-processing path is used to control the motor from measured DC-bus voltage.",
+          "observable": "ADC configuration and firmware control paths",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete ADC configuration and firmware source are available."
+          ],
+          "procedure": [
+            "Inspect ADC channel configuration and conversion-processing code.",
+            "Trace ADC values into PWM, frequency, enable, or protection decisions.",
+            "Confirm that no ADC result represents or controls VBUS."
+          ],
+          "expected": "ADC is not used to sense DC-bus voltage for control purposes.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-010",
+          "verifiability": "inspection",
+          "criterion": "The project configuration and firmware contain no ADC-triggered DMA enablement or request path.",
+          "observable": "ADC, DMA, and trigger configuration plus initialization code",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete project configuration and initialization source are available."
+          ],
+          "procedure": [
+            "Inspect ADC configuration for DMA requests or DMA-trigger settings.",
+            "Inspect DMA channel configuration and initialization for ADC sources or ADC-triggered transfers.",
+            "Confirm that no ADC-triggered DMA path is enabled."
+          ],
+          "expected": "No ADC-triggered DMA configuration or code path is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-011",
+          "verifiability": "inspection",
+          "criterion": "The firmware contains no routine that measures, computes, stores, or applies phase-current offsets.",
+          "observable": "Firmware source tree and persistent/configuration storage definitions",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and configuration are available."
+          ],
+          "procedure": [
+            "Search for current-offset calibration routines, offset variables, calibration commands, and stored calibration data.",
+            "Inspect initialization and motor-start paths for phase-current offset measurement or application."
+          ],
+          "expected": "No phase-current offset measurement, storage, or application routine exists.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-012",
+          "verifiability": "inspection",
+          "criterion": "The firmware source and project configuration contain no oscilloscope capture, streaming, or scope-integration code.",
+          "observable": "Firmware source tree and project configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and project configuration are available."
+          ],
+          "procedure": [
+            "Search for oscilloscope, scope capture, waveform streaming, trigger, and probe-interface code.",
+            "Inspect enabled middleware and configuration for scope integration."
+          ],
+          "expected": "No oscilloscope integration, capture path, or streaming implementation is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-013",
+          "verifiability": "inspection",
+          "criterion": "The firmware contains no speed sensor or estimator input and reports or logs no RPM value.",
+          "observable": "Firmware source, configuration, logging strings, and telemetry definitions",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and configuration are available."
+          ],
+          "procedure": [
+            "Search for speed sensors, rotor-speed estimators, RPM variables, RPM conversion code, and speed logging/reporting.",
+            "Inspect the motor test sequence for any speed measurement or output."
+          ],
+          "expected": "No speed sensor or estimator is used, and no RPM value is reported or logged.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-014",
+          "verifiability": "inspection",
+          "criterion": "The firmware contains no UART command handler that starts, stops, or otherwise controls the automatic motor sequence.",
+          "observable": "UART receive handlers, command tables, and sequence-control call sites",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware source and UART configuration are available."
+          ],
+          "procedure": [
+            "Inspect UART receive and command-dispatch code.",
+            "Trace all UART-controlled calls into motor enable, disable, sequence start, stop, or state transitions."
+          ],
+          "expected": "No UART input path can start, stop, or otherwise control the automatic sequence.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-014",
+          "verifiability": "hardware",
+          "criterion": "With UART disconnected or receiving arbitrary commands, the automatic sequence starts after the boot delay and completes according to its timeline without UART-dependent state changes.",
+          "observable": "Motor-sequence state, PWM enable/output, and driver EN/FAULT behavior on the NUCLEO-G431RB setup",
+          "observable_kind": "state",
+          "preconditions": [
+            "The NUCLEO-G431RB, STSPIN830 board, motor, and required power connections are installed.",
+            "PWM/GPIO initialization succeeds and no STSPIN830 fault is active.",
+            "The UART is either disconnected or connected to a source capable of sending arbitrary bytes."
+          ],
+          "procedure": [
+            "Reset the board with UART disconnected and observe the sequence through its complete timeline.",
+            "Repeat the reset while sending arbitrary UART bytes throughout the boot delay and sequence.",
+            "Compare the start time, stop time, and sequence states between the disconnected and arbitrary-input runs."
+          ],
+          "expected": "Both runs start after the defined boot delay and complete the same timeline; UART input causes no start, stop, or other sequence-state transition.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-015",
+          "verifiability": "inspection",
+          "criterion": "The firmware and test artifacts contain no speed feedback loop, RPM target, or electrical-frequency adjustment based on measured speed.",
+          "observable": "Firmware source, test code, and control configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware, test source, and configuration are available."
+          ],
+          "procedure": [
+            "Search for speed feedback inputs, RPM targets, speed-error calculations, and speed-controller gains.",
+            "Trace electrical-frequency updates and confirm they do not depend on measured speed.",
+            "Inspect test artifacts for speed-regulation or RPM-control procedures."
+          ],
+          "expected": "No closed-loop speed-regulation path, RPM target, or speed-dependent electrical-frequency adjustment is present or enabled.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-016",
+          "verifiability": "inspection",
+          "criterion": "The firmware contains no automatic or manual code path that estimates, identifies, characterizes, or stores motor resistance, inductance, or flux parameters.",
+          "observable": "Firmware source tree, command paths, persistent storage definitions, and test artifacts",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete firmware, configuration, and motor-test artifacts are available."
+          ],
+          "procedure": [
+            "Search for resistance, inductance, flux, parameter-identification, characterization, injection, measurement, and storage routines.",
+            "Inspect manual command paths and automatic startup/sequence paths for motor-parameter estimation.",
+            "Inspect persistent storage definitions for identified motor parameters."
+          ],
+          "expected": "No code path or routine estimates, identifies, characterizes, or stores motor electrical parameters R, L, or flux.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-015",
+          "verifiability": "target",
+          "criterion": "After reset, the automatic sequence enters its running state only when PWM/GPIO initialization has succeeded, the 3 s boot delay has elapsed, and EN/FAULT indicates no active STSPIN830 fault.",
+          "observable": "Automatic-sequence state and PWM/driver-enable state on the MCU",
+          "observable_kind": "state",
+          "preconditions": [
+            "The MCU is reset or powered on.",
+            "The STSPIN830 and motor connections are available.",
+            "The test can control or inject PWM/GPIO initialization status and EN/FAULT status."
+          ],
+          "procedure": [
+            "Reset the MCU with PWM/GPIO initialization successful and EN/FAULT inactive.",
+            "Measure the sequence state before 3 s and at or after 3 s.",
+            "Repeat with each dependency made false in turn: failed initialization, boot delay not elapsed, and active EN/FAULT.",
+            "Record the sequence state and PWM/driver-enable outputs for each case."
+          ],
+          "expected": "The sequence remains stopped before 3 s and starts after 3 s only in the all-true case; it does not start in any case where one dependency is false.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-015",
+          "verifiability": "hardware",
+          "criterion": "When any automatic-sequence dependency is false, PWM remains disabled and the STSPIN830 remains in standby.",
+          "observable": "PWM output pins and STSPIN830 enable/standby signal",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The NUCLEO-G431RB and STSPIN830 are connected.",
+            "At least one of PWM/GPIO initialization, boot-delay completion, or EN/FAULT-clear status is intentionally false."
+          ],
+          "procedure": [
+            "Apply each dependency-failure condition separately.",
+            "Observe the PWM output pins and the STSPIN830 enable/standby signal.",
+            "Confirm that no motor-driving PWM is emitted while the dependency is false."
+          ],
+          "expected": "PWM is disabled and the driver is in standby for every dependency-failure condition.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-016",
+          "verifiability": "target",
+          "criterion": "With ADC measurements, motor-parameter characterization, FOC, observer, current sensing, UART commands, and closed-loop control disabled or absent, the automatic sequence starts and completes according to the defined timeline.",
+          "observable": "Automatic-sequence state transitions and PWM enable/output on the MCU",
+          "observable_kind": "state",
+          "preconditions": [
+            "PWM/GPIO initialization has succeeded.",
+            "The 3 s boot delay has elapsed.",
+            "EN/FAULT indicates no active STSPIN830 fault.",
+            "All listed optional features are disabled or absent."
+          ],
+          "procedure": [
+            "Build and run the firmware with ADC control paths, characterization, FOC, observer, current sensing, UART command handling, and closed-loop control disabled or absent.",
+            "Reset the MCU and wait for the boot delay.",
+            "Observe the sequence state and PWM output through the entire defined automatic-sequence timeline."
+          ],
+          "expected": "The sequence starts after the boot delay and reaches each defined timeline state through completion without requiring any listed feature.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    }
+  ]
+}

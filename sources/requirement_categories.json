@@ -1,0 +1,187 @@
+{
+  "job_id": "147df32a-7f32-46c3-a71d-59f63cdb0eb1",
+  "document_id": "dea764c8-9ba6-4673-a481-72c0779c854b",
+  "frozen_at": "2026-09-24T03:08:47.601Z",
+  "requirement_count": 53,
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Target Hardware & Demonstration Build",
+      "description": "Covers the supported STM32 target, motor-driver board, motor and power setup, plus build, flashing, and demonstration deliverables.",
+      "requirements": [
+        "The delivered firmware shall run on the NUCLEO-G431RB with the X-NUCLEO-IHM16M1 and automatically demonstrate basic rotation of the GBM2804H-100T three-phase gimbal motor after power-up.",
+        "The firmware shall build successfully and be flashable to the target hardware.",
+        "The target MCU board for the firmware shall be the NUCLEO-G431RB.",
+        "The motor driver board used shall be the X-NUCLEO-IHM16M1 (STSPIN830).",
+        "The motor used for the demonstration shall be the GBM2804H-100T with 7 pole pairs.",
+        "The test setup shall provide a 12 V DC supply."
+      ],
+      "requirement_ids": [
+        "NFR-001",
+        "NFR-003",
+        "HW-001",
+        "HW-002",
+        "HW-003",
+        "HW-004"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-2",
+      "name": "PWM Timer & Motor-Driver Interface",
+      "description": "Covers TIM1 three-phase PWM generation, U/V/W output routing, driver input configuration, PWM carrier settings, and safe initialization before driver enable.",
+      "requirements": [
+        "The firmware shall configure TIM1 to generate three-phase PWM.",
+        "The firmware shall use the factory-default X-NUCLEO-IHM16M1 three-input configuration.",
+        "The firmware shall drive the U, V, and W three-phase motor outputs.",
+        "The PWM switching frequency shall be 20 kHz.",
+        "The firmware shall complete TIM1 and PWM GPIO configuration with PWM outputs disabled before asserting the motor driver enable at the start of the sequence."
+      ],
+      "requirement_ids": [
+        "IF-001",
+        "IF-002",
+        "IF-003",
+        "PERF-001",
+        "FR-017"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-3",
+      "name": "Open-Loop Sinusoidal Motor Control",
+      "description": "Covers the open-loop rotating electrical field, frequency and amplitude ramps, PWM amplitude limits, smooth control updates, and visible motor motion.",
+      "requirements": [
+        "The firmware shall generate a rotating three-phase electrical field using open-loop sinusoidal PWM.",
+        "The firmware shall ramp PWM amplitude gradually to avoid an abrupt startup.",
+        "Between 3 s and 8 s from boot, the firmware shall ramp electrical frequency from 1 Hz to 10 Hz.",
+        "Between 3 s and 8 s from boot, the firmware shall ramp PWM amplitude from 10% to 20%.",
+        "Between 8 s and 18 s from boot, the firmware shall hold the electrical frequency at 10 Hz.",
+        "Between 8 s and 18 s from boot, the firmware shall limit PWM amplitude to a maximum of 20%.",
+        "During the 3–8 s startup ramp, the firmware shall ramp electrical frequency smoothly from 1 Hz to 10 Hz with monotonic increase and with steps no greater than 1 Hz between consecutive control updates.",
+        "The initial PWM amplitude at the start of the startup ramp shall be 10%.",
+        "The maximum PWM amplitude during the demo shall be 20%.",
+        "Visible motor movement or rotation shall occur during the automatic run window."
+      ],
+      "requirement_ids": [
+        "FR-001",
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "FR-007",
+        "FR-008",
+        "FR-018",
+        "PERF-004",
+        "PERF-005",
+        "PERF-008"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-4",
+      "name": "Automatic Demonstration Sequencer",
+      "description": "Covers boot delay, driver enable timing, demonstration run duration, hold interval, shutdown ramp, automatic PWM shutdown, standby transition, and post-run stopped state.",
+      "requirements": [
+        "The motor sequence shall start automatically after the configured boot delay without any UART input.",
+        "The firmware shall run the motor for the configured demonstration duration.",
+        "At 3 s from boot, the firmware shall enable the motor driver to begin the automatic sequence.",
+        "Between 18 s and 20 s from boot, the firmware shall ramp electrical frequency down to zero.",
+        "Between 18 s and 20 s from boot, the firmware shall ramp PWM amplitude down to zero.",
+        "After 20 s from boot, the firmware shall disable PWM automatically.",
+        "After 20 s from boot, the firmware shall place the motor driver in standby automatically.",
+        "After the automatic test completes, the motor shall remain stopped until the board is reset or power-cycled.",
+        "The boot delay before starting the sequence shall be 3 seconds.",
+        "The startup ramp duration shall be 5 seconds.",
+        "The hold duration at 10 Hz and up to 20% PWM shall be 10 seconds.",
+        "The shutdown ramp duration shall be 2 seconds."
+      ],
+      "requirement_ids": [
+        "FR-002",
+        "FR-006",
+        "FR-009",
+        "FR-010",
+        "FR-011",
+        "FR-012",
+        "FR-013",
+        "FR-014",
+        "PERF-002",
+        "PERF-003",
+        "PERF-006",
+        "PERF-007"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-5",
+      "name": "Fault Handling, Watchdog & Reset Safety",
+      "description": "Covers immediate response to STSPIN830 faults, watchdog recovery, reset-safe startup behavior, and prevention of automatic restart after faults.",
+      "requirements": [
+        "An active STSPIN830 EN/FAULT condition shall immediately disable PWM at any time.",
+        "The firmware shall enable a hardware watchdog such that, if the control task becomes unresponsive during the automatic sequence, the MCU resets and returns the system to the boot safe state.",
+        "Following detection of an active STSPIN830 EN/FAULT condition, the firmware shall not attempt to re-enable the motor driver or PWM automatically; recovery shall require a reset or power-cycle.",
+        "On any MCU reset event (including initial boot), the firmware shall keep PWM disabled and the motor driver in standby for the first 3 seconds before any enable action may occur."
+      ],
+      "requirement_ids": [
+        "SF-001",
+        "SF-002",
+        "SF-003",
+        "SF-004"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-6",
+      "name": "Control Scope & Architecture Boundaries",
+      "description": "Defines the intentionally minimal open-loop architecture, automatic-sequence dependencies, prohibited sensing and closed-loop features, and the absence of UART-driven operation or motor characterization.",
+      "requirements": [
+        "The project scope shall be limited to verifying the MCU, motor-driver board, PWM outputs, and motor connections.",
+        "The firmware shall not implement sensorless field-oriented control (FOC).",
+        "The firmware shall not implement a rotor observer.",
+        "The firmware shall not implement Clarke or Park transforms.",
+        "The firmware shall not implement current PI or speed PI control.",
+        "The firmware shall not perform phase-current ADC control.",
+        "The firmware shall not perform VBUS ADC control.",
+        "The firmware shall not use ADC-triggered DMA.",
+        "The firmware shall not perform current-offset calibration.",
+        "The firmware shall not include oscilloscope integration.",
+        "The test shall not measure actual motor RPM.",
+        "The firmware shall not implement UART-based motor start/stop, and the automatic motor sequence shall neither require nor respond to any UART input to start or stop.",
+        "The firmware and test shall not implement or perform speed/RPM regulation; no closed-loop speed control shall be present.",
+        "The firmware shall not perform motor-parameter identification or characterization (e.g., resistance, inductance, flux), whether automatic or manual.",
+        "The automatic sequence shall depend only on successful PWM/GPIO initialization, completion of the boot delay, and absence of an active STSPIN830 hardware fault.",
+        "The automatic motor sequence shall not be blocked because ADC measurements, motor electrical parameters, characterization, FOC, observer, current sensing, UART commands, or closed-loop control are unavailable."
+      ],
+      "requirement_ids": [
+        "NFR-002",
+        "NFR-004",
+        "NFR-005",
+        "NFR-006",
+        "NFR-007",
+        "NFR-008",
+        "NFR-009",
+        "NFR-010",
+        "NFR-011",
+        "NFR-012",
+        "NFR-013",
+        "NFR-014",
+        "NFR-015",
+        "NFR-016",
+        "FR-015",
+        "FR-016"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    }
+  ],
+  "file_checksum": "98279e9fbc4dcce5082100fdc04db5d6dfd4e039f92fdef23c7af7875e5e76d8"
+}

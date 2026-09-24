@@ -1,0 +1,31 @@
+{
+  "schema_version": "3.0.0",
+  "view": "lld",
+  "revision": "e70154ca53fb14af9b4b65599f166cde",
+  "graph_version": 14,
+  "generated_at_ms": 1790230243278,
+  "mermaid": "flowchart TD\n  subgraph app_task[\"app_start execution\"]\n    boot[\"Start motor application<br/>firmware/app/app.c:47\"]\n    init_control[\"Initialize sine state and motor sequence<br/>firmware/app/app.c:54-55\"]\n    init_safety[\"Initialize watchdog and safety state<br/>firmware/app/app.c:56\"]\n    init_motor[\"Initialize GPIO, TIM1 PWM, and driver<br/>firmware/app/app.c:66\"]\n    boot_wait[\"Refresh watchdog, delay, and advance boot sequence<br/>firmware/app/app.c:71-74\"]\n    boot_done{\"Boot delay complete — firmware/app/app.c:70\"}\n    precheck[\"Read and latch motor fault<br/>firmware/app/app.c:79\"]\n    precheck_ok{\"Fault check passed — firmware/app/app.c:81\"}\n    enable[\"Enable three PWM channels and motor phases<br/>firmware/app/app.c:87\"]\n    running{\"Motor sequence still active — firmware/app/app.c:94\"}\n    profile[\"Select ramp, hold, or shutdown sine profile<br/>firmware/app/app.c:95\"]\n    drive[\"Generate three duties and drive motor<br/>firmware/app/app.c:96\"]\n    runtime_ok{\"Fault and drive status are valid — firmware/app/app.c:96\"}\n    update[\"Advance sine phase by 10 ms<br/>firmware/app/app.c:102\"]\n    refresh[\"Refresh watchdog and wait 10 ms<br/>firmware/app/app.c:103-104\"]\n    step[\"Advance motor sequence by 10 ms<br/>firmware/app/app.c:105\"]\n    disable_fault[\"Disable PWM and latch safety fault<br/>firmware/app/app.c:97-99\"]\n    disable_done[\"Disable motor after sequence completion<br/>firmware/app/app.c:109\"]\n    complete[\"Log rotation completion<br/>firmware/app/app.c:110\"]\n  end\n\n  boot -->  init_control -->  init_safety -->  init_motor -->  boot_done\n  boot_done -->|no#59; 10 ms| boot_wait\n  boot_wait -->  boot_done\n  boot_done -->|yes| precheck -->  precheck_ok\n  precheck_ok -->|no| disable_fault\n  precheck_ok -->|yes| enable -->  running\n  running -->|yes| profile -->  drive -->  runtime_ok\n  runtime_ok -->|no| disable_fault\n  runtime_ok -->|yes| update -->  refresh -->  step -->  running\n  running -->|no| disable_done -->  complete",
+  "title": "Low-Level Design (Firmware Workflow)",
+  "node_notes": {
+    "profile": "This step maps elapsed sequence time into frequency and amplitude ramps. app_set_profile in app.c selects startup, hold, or shutdown values before sine output generation.",
+    "complete": "This step records successful completion of the automatic sinusoidal rotation. The completion log is emitted at the end of app_start in firmware/app/app.c:110.",
+    "init_motor": "This step configures the motor GPIOs, TIM1 PWM channels, and the portable X-NUCLEO driver. app.c calls motor_platform_init, whose implementation is in firmware/platforms/stm32/motor_platform.c.",
+    "update": "This step advances the sine phase using the configured 10 ms update period. sine_control_update is called by app.c after a successful motor drive.",
+    "boot_wait": "During the initial boot delay, the application services the watchdog, waits for the 10 ms control period, and advances the sequence timer. These operations are the body of the first while loop in app.c.",
+    "drive": "This step computes three sine-derived duty values and passes them to the STSPIN830 driver. app_drive_sine calls sine_control_output and motor_platform_drive in firmware/app/app.c:19-35.",
+    "runtime_ok": "This branch stops the motor when fault status, a latched fault, or the drive result is invalid. The combined condition is the if statement at firmware/app/app.c:96-100.",
+    "step": "This step advances the motor sequence elapsed time and state. motor_sequence_step receives the configured 10 ms period in firmware/app/app.c:105.",
+    "init_control": "The application creates the sine controller state and initializes the motor sequence state. app.c calls sine_control_init and motor_sequence_init before any motor enable operation.",
+    "disable_done": "This normal shutdown path disables the motor after the sequence reaches STOPPED. app.c calls safety_platform_disable after the runtime loop exits.",
+    "precheck_ok": "This branch rejects a non-OK status or a latched fault before enable. The condition is the if statement in firmware/app/app.c:81-85.",
+    "enable": "This step starts TIM1 PWM channels, asserts the three phase enables, and releases standby. app.c calls motor_platform_enable(true), implemented with HAL_TIM_PWM_Start and GPIO writes.",
+    "disable_fault": "This error path latches the safety fault and disables PWM and phase enables. safety_platform_disable calls motor_platform_enable(false), and app.c logs the stopped condition.",
+    "refresh": "This step refreshes the watchdog and delays the application for the control period. app.c calls safety_platform_watchdog_refresh and motor_platform_delay_ms with APP_MOTOR_CONTROL_PERIOD_MS.",
+    "boot": "This step enters the application orchestration after the Cube startup code has called app_start. The call site is Core/Src/main.c and the implementation begins in firmware/app/app.c.",
+    "precheck": "The application reads the driver fault input before enabling the motor. app.c calls safety_platform_check_fault, which reaches PB12 through motor_platform_read_fault.",
+    "running": "This branch controls whether the sequence has reached MOTOR_SEQUENCE_STOPPED. The condition is motor_sequence_is_stopped in the main runtime loop at firmware/app/app.c:94.",
+    "boot_done": "This branch checks whether the sequence has left MOTOR_SEQUENCE_BOOT_DELAY. The loop condition and 10 ms stepping are in firmware/app/app.c:70-74, with state transitions implemented by motor_sequence_step.",
+    "init_safety": "This step starts the independent watchdog and clears the latched fault state. safety_platform.c implements safety_platform_init with HAL_IWDG_Init."
+  },
+  "authored_by_model": true
+}
