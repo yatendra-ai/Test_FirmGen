@@ -1,0 +1,5 @@
+{
+  "linker_script": {
+    "path": "NUCLEO-C5A3ZG/user_modifiable/Device/STM32C5A3ZGT6/stm32c5a3xg_flash.ld"
+  }
+}

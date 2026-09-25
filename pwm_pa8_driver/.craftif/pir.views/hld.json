@@ -1,0 +1,21 @@
+{
+  "schema_version": "3.0.0",
+  "view": "hld",
+  "revision": "c3cb5cc7a88acbd6c60aeb47ef98760d",
+  "graph_version": 3,
+  "generated_at_ms": 1790319469501,
+  "mermaid": "flowchart TD\n  subgraph Application\n    main_entry[\"Application entry and event loop<br/>application/main.c\"]\n    app_start[\"Start application features<br/>firmware/app/app.c:11\"]\n    logger[\"Format application log messages<br/>firmware/utils/logger/logger.h\"]\n  end\n  subgraph Board_IO\n    button_if[\"Receive button events<br/>mx_button.h and ButtonCb\"]\n    status_led[\"Control status LED<br/>mx_led.h and MX_STATUS_LED\"]\n  end\n  subgraph PWM_Output\n    pwm_driver[\"Configure and start PWM<br/>firmware/platforms/stm32/pwm_pa8.c\"]\n    tim1_ch1[\"Generate PWM on TIM1 CH1<br/>mx_tim1_init and LL_TIM_*\"]\n    pa8_output[\"PWM output pin PA8<br/>GPIO_AF1_TIM1\"]\n  end\n  subgraph Console\n    stdio_uart[\"Console USART output<br/>mx_basic_stdio_init and printf\"]\n  end\n  main_entry -->|button_init and button_enableit| button_if\n  button_if -->|BUTTON_EVENT_PRESSED to ButtonCb| main_entry\n  main_entry -->|led_on and led_toggle| status_led\n  main_entry -->|app_start| app_start\n  app_start -->|pwm_pa8_start| pwm_driver\n  pwm_driver -->|LL timer configuration| tim1_ch1\n  tim1_ch1 -->|alternate-function output| pa8_output\n  app_start -->|LOGI or LOGE| logger\n  main_entry -->|printf| stdio_uart\n  logger -->|printf backend| stdio_uart",
+  "title": "High-Level Design",
+  "node_notes": {
+    "logger": "This utility converts application status into printf-backed log messages using LOGI and LOGE. firmware/utils/logger/logger.h defines those macros, and firmware/app/app.c uses them for PWM success and failure reporting.",
+    "tim1_ch1": "This timer channel produces the configured PWM waveform after prescaler, auto-reload, PWM mode, compare, channel, output, and counter setup. The evidence is mx_tim1_init plus the LL_TIM_* calls in firmware/platforms/stm32/pwm_pa8.c.",
+    "main_entry": "This application entry owns button setup, LED actions, the one-time app_start call, and the bare-metal polling loop. The behavior is evidenced by application/main.c, including button callbacks, EventFlag, led_on, led_toggle, and printf.",
+    "stdio_uart": "This sink carries printf output through the configured console USART. application/main.c calls mx_basic_stdio_init and uses printf, while logger.h documents printf as the logging backend; no USART instance or port-qualified TX/RX pins are supplied.",
+    "pwm_driver": "This STM32 platform driver validates the requested frequency, initializes TIM1, configures PA8 for TIM1 alternate function, and enables the timer channel. firmware/platforms/stm32/pwm_pa8.c provides the pwm_pa8_start implementation and the HAL_GPIO_Init call.",
+    "status_led": "This interface represents the status LED operations performed by the application during startup and after a button event. application/main.c calls led_on and led_toggle with MX_STATUS_LED, but the supplied firmware does not provide a port-qualified pin for that LED.",
+    "button_if": "This interface initializes the generated button object and delivers BUTTON_EVENT_PRESSED to ButtonCb. The evidence is application/main.c through mx_button_0_getobject, button_init, button_register_callback, and button_enableit; no physical button pin is emitted because the supplied files do not identify one.",
+    "app_start": "This application module starts the PWM feature once after board and console setup. firmware/app/app.c calls pwm_pa8_start with APP_PWM_FREQUENCY_HZ and reports the result through the logger.",
+    "pa8_output": "This is the physical PWM output binding on PA8 using GPIO_AF1_TIM1. firmware/platforms/stm32/pwm_pa8.c explicitly sets GPIO_PIN_8 on GPIOA in alternate-function push-pull mode."
+  },
+  "authored_by_model": true
+}

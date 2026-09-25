@@ -1,0 +1,24 @@
+{
+  "schema": "firmgen.test_handover.results/1",
+  "host": "test-box-01",
+  "harness": "ceedling 1.0.1",
+  "at": "2026-08-25T09:12:00Z",
+  "sources_compiled": 14,
+  "tests": [
+    {
+      "name": "test_rejects_invalid_sample_before_initialization",
+      "outcome": "pass",
+      "requirement_ids": [
+        "FR-062"
+      ]
+    },
+    {
+      "name": "test_excludes_failed_read",
+      "outcome": "fail",
+      "requirement_ids": [
+        "FR-062"
+      ],
+      "message": "Expected data_quality_fault to be set"
+    }
+  ]
+}

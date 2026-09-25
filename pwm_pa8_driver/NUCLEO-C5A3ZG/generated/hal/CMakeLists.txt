@@ -1,0 +1,12 @@
+#
+# file-format: 1.0.0
+#
+
+
+# Include generated_STMicroelectronics_stm32c5xx_hal_drivers_0_0_1 generators
+include(STM32_HAL_Driver_codegen.cmake)
+
+add_library(generated_STMicroelectronics_tim1_0_0_1 INTERFACE)
+target_sources(generated_STMicroelectronics_tim1_0_0_1 INTERFACE ${CMAKE_CURRENT_LIST_DIR}/mx_tim1.c)
+
+target_link_libraries(generated_STMicroelectronics_tim1_0_0_1 INTERFACE generated_STMicroelectronics_stm32c5xx_hal_drivers_0_0_1)

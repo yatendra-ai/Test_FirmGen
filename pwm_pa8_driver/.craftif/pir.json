@@ -1,0 +1,420 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_pwm_pa8_driver",
+  "revision": "c3cb5cc7a88acbd6c60aeb47ef98760d",
+  "provenance": {
+    "project_path": "C:/Users/sujit/Downloads/FirmGen/new_test/pwm_pa8_driver",
+    "chat_id": "12d24b74-2437-45cf-bd3c-cf3b84961d11",
+    "revision": "c3cb5cc7a88acbd6c60aeb47ef98760d",
+    "generated_at_ms": 1790319413067,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2",
+      "application/main.c",
+      "application/main.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.c",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.h",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.c",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.h"
+    ],
+    "file_hashes": {
+      "firmware/bsp/board.h": "0d2ad35583c79f15ef426e771f0f03ce",
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "application/main.c": "a0a69595d87ce509b4c3f25ad54d9d57",
+      "firmware/utils/logger/logger.h": "642efceba068f0cfa4a70d8ce56bbd82",
+      "firmware/osal/osal.h": "f2f2c13784f7a100461b180f4028062b",
+      "firmware/utils/logger/logger.c": "a0aa546944c77a82f438514b1f38d8cc",
+      "application/main.h": "d99caff8e91a0e1345a489e8916ce23f",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "firmware/app/app.h": "ebc6cfe87fb8e2ab299633dd7a067f3b",
+      "firmware/app/app.c": "3206f3f5a8ec12ab95c15dd2995372e1",
+      "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2": "455c8ec21a4ea7659af7f2906a2f3233",
+      "firmware/configs/app_config.h": "fb193524711242dbd05bfcad87bb8dfd"
+    },
+    "board_id": "NUCLEO-C5A3ZG",
+    "target_chip": null,
+    "config_hash": null,
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "pending"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "stm32"
+      },
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "c3cb5cc7a88acbd6c60aeb47ef98760d"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/main.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "uart_device_usart",
+      "node_type": "uart_device",
+      "label": "USART",
+      "properties": {
+        "port": 1,
+        "baud_rate": 115200
+      },
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "c3cb5cc7a88acbd6c60aeb47ef98760d"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/main.c"
+        ]
+      },
+      "editable_fields": [
+        "baud_rate"
+      ],
+      "layer": "physical",
+      "ai_summary": "Represents a UART peripheral with mapped serial pins.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_boot_uart_device_usart_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "uart_device_usart",
+      "kind": "hardware",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "symbol": "USART",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    }
+  ],
+  "layers": {
+    "physical": [
+      "uart_device_usart"
+    ],
+    "runtime": [],
+    "network": [],
+    "system": [
+      "boot"
+    ]
+  },
+  "partitions": [],
+  "components": [],
+  "modules": [
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "application",
+      "label": "application",
+      "path": "application",
+      "kind": "application",
+      "files": [
+        "application/main.c",
+        "application/main.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 2,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 3,
+      "symbol": "logger.h"
+    },
+    {
+      "from": "application",
+      "to": "app",
+      "via": "include",
+      "file": "application/main.c",
+      "line": 20,
+      "symbol": "app.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 18,
+      "symbol": "app_config.h"
+    }
+  ],
+  "task_flows": [],
+  "summary": {
+    "headline": "Added mapped status LED and user button GPIO topology from application call sites.",
+    "node_count": 0,
+    "edge_count": 0,
+    "warnings": []
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph Application\n    main_entry[\"Application entry and event loop<br/>application/main.c\"]\n    app_start[\"Start application features<br/>firmware/app/app.c:11\"]\n    logger[\"Format application log messages<br/>firmware/utils/logger/logger.h\"]\n  end\n  subgraph Board_IO\n    button_if[\"Receive button events<br/>mx_button.h and ButtonCb\"]\n    status_led[\"Control status LED<br/>mx_led.h and MX_STATUS_LED\"]\n  end\n  subgraph PWM_Output\n    pwm_driver[\"Configure and start PWM<br/>firmware/platforms/stm32/pwm_pa8.c\"]\n    tim1_ch1[\"Generate PWM on TIM1 CH1<br/>mx_tim1_init and LL_TIM_*\"]\n    pa8_output[\"PWM output pin PA8<br/>GPIO_AF1_TIM1\"]\n  end\n  subgraph Console\n    stdio_uart[\"Console USART output<br/>mx_basic_stdio_init and printf\"]\n  end\n  main_entry -->|button_init and button_enableit| button_if\n  button_if -->|BUTTON_EVENT_PRESSED to ButtonCb| main_entry\n  main_entry -->|led_on and led_toggle| status_led\n  main_entry -->|app_start| app_start\n  app_start -->|pwm_pa8_start| pwm_driver\n  pwm_driver -->|LL timer configuration| tim1_ch1\n  tim1_ch1 -->|alternate-function output| pa8_output\n  app_start -->|LOGI or LOGE| logger\n  main_entry -->|printf| stdio_uart\n  logger -->|printf backend| stdio_uart",
+      "authored_by_model": true,
+      "node_notes": {
+        "logger": "This utility converts application status into printf-backed log messages using LOGI and LOGE. firmware/utils/logger/logger.h defines those macros, and firmware/app/app.c uses them for PWM success and failure reporting.",
+        "tim1_ch1": "This timer channel produces the configured PWM waveform after prescaler, auto-reload, PWM mode, compare, channel, output, and counter setup. The evidence is mx_tim1_init plus the LL_TIM_* calls in firmware/platforms/stm32/pwm_pa8.c.",
+        "main_entry": "This application entry owns button setup, LED actions, the one-time app_start call, and the bare-metal polling loop. The behavior is evidenced by application/main.c, including button callbacks, EventFlag, led_on, led_toggle, and printf.",
+        "stdio_uart": "This sink carries printf output through the configured console USART. application/main.c calls mx_basic_stdio_init and uses printf, while logger.h documents printf as the logging backend; no USART instance or port-qualified TX/RX pins are supplied.",
+        "pwm_driver": "This STM32 platform driver validates the requested frequency, initializes TIM1, configures PA8 for TIM1 alternate function, and enables the timer channel. firmware/platforms/stm32/pwm_pa8.c provides the pwm_pa8_start implementation and the HAL_GPIO_Init call.",
+        "status_led": "This interface represents the status LED operations performed by the application during startup and after a button event. application/main.c calls led_on and led_toggle with MX_STATUS_LED, but the supplied firmware does not provide a port-qualified pin for that LED.",
+        "button_if": "This interface initializes the generated button object and delivers BUTTON_EVENT_PRESSED to ButtonCb. The evidence is application/main.c through mx_button_0_getobject, button_init, button_register_callback, and button_enableit; no physical button pin is emitted because the supplied files do not identify one.",
+        "app_start": "This application module starts the PWM feature once after board and console setup. firmware/app/app.c calls pwm_pa8_start with APP_PWM_FREQUENCY_HZ and reports the result through the logger.",
+        "pa8_output": "This is the physical PWM output binding on PA8 using GPIO_AF1_TIM1. firmware/platforms/stm32/pwm_pa8.c explicitly sets GPIO_PIN_8 on GPIOA in alternate-function push-pull mode."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "mermaid": "flowchart TD\n  subgraph Bare_Metal_Main\n    boot[\"Enter application<br/>application/main.c:31\"]\n    system_init[\"Initialize STM32 system<br/>application/main.c:36\"]\n    stdio_init[\"Initialize console stdio<br/>application/main.c:42\"]\n    button_setup[\"Initialize button object<br/>application/main.c:53\"]\n    callback_setup[\"Register and enable button events<br/>application/main.c:59\"]\n    led_initial[\"Turn on the initial status LED<br/>application/main.c:72\"]\n    start_features[\"Start application features<br/>application/main.c:75\"]\n    pwm_start[\"Attempt 1 kHz PA8 PWM startup<br/>firmware/app/app.c:14\"]\n    pwm_result{\"PWM setup succeeds? — firmware/app/app.c:16\"}\n    pwm_success[\"Log PWM started on PA8<br/>firmware/app/app.c:18\"]\n    pwm_failure[\"Log PWM initialization failure<br/>firmware/app/app.c:22\"]\n    poll_event[\"Check EventFlag<br/>application/main.c:79\"]\n    event_result{\"Button event pending? — application/main.c:79\"}\n    clear_event[\"Clear the button event flag<br/>application/main.c:82\"]\n    toggle_led[\"Toggle the status LED<br/>application/main.c:83\"]\n    log_toggle[\"Log the LED transition<br/>application/main.c:84\"]\n  end\n  boot -->  system_init -->  stdio_init -->  button_setup -->  callback_setup -->  led_initial -->  start_features -->  pwm_start -->  pwm_result\n  pwm_result -->|yes| pwm_success\n  pwm_result -->|no| pwm_failure\n  pwm_success -->  poll_event\n  pwm_failure -->  poll_event\n  poll_event -->  event_result\n  event_result -->|yes| clear_event -->  toggle_led -->  log_toggle -->  poll_event\n  event_result -->|no| poll_event",
+      "authored_by_model": true,
+      "node_notes": {
+        "pwm_success": "This records successful timer startup, including the PA8 pin and configured frequency. The message is emitted by LOGI in firmware/app/app.c.",
+        "led_initial": "This establishes the initial visible LED state before the feature startup call. application/main.c invokes led_on with MX_STATUS_LED and prints a confirmation.",
+        "system_init": "This initializes the target system and its peripheral baseline before the application uses the console and board interfaces. application/main.c checks mx_system_init and returns on failure.",
+        "clear_event": "This consumes the pending event before performing the LED action so a single press is not repeatedly handled. application/main.c sets EventFlag back to zero.",
+        "callback_setup": "This connects BUTTON_EVENT_PRESSED to ButtonCb and enables event generation. application/main.c registers the callback, calls button_enableit, and then clears EventFlag before entering runtime.",
+        "pwm_failure": "This records that PWM initialization failed and PA8 remains inactive. The failure path is the LOGE branch in firmware/app/app.c.",
+        "pwm_result": "This branch reflects the boolean result returned by pwm_pa8_start. firmware/app/app.c selects LOGI for true and LOGE for false.",
+        "stdio_init": "This establishes the basic stdio path used by both direct printf calls and LOGI or LOGE. application/main.c invokes mx_basic_stdio_init and aborts startup if it fails.",
+        "event_result": "This branch tests whether ButtonCb has notified the loop by setting EventFlag to 1. The condition is explicit in application/main.c at the if statement inside while 1.",
+        "start_features": "This transfers control to the vendor-agnostic application module after board-facing initialization is complete. The call is app_start in application/main.c.",
+        "poll_event": "This is the continuously executing bare-metal polling point for the volatile EventFlag. application/main.c places the check inside while 1 rather than creating an RTOS task.",
+        "pwm_start": "This requests the configured PWM frequency of 1000 Hz from the platform driver. firmware/app/app.c passes APP_PWM_FREQUENCY_HZ to pwm_pa8_start.",
+        "button_setup": "This obtains and initializes the generated button object selected as BUTTON_0. application/main.c performs mx_button_0_getobject followed by button_init.",
+        "log_toggle": "This reports the completed LED transition over the console logging path. application/main.c emits printf with the text LED toggled.",
+        "toggle_led": "This changes the status LED state in response to one button press event. application/main.c calls led_toggle with MX_STATUS_LED.",
+        "boot": "This step represents entry into the firmware application before application-owned setup begins. The source location is application/main.c at the main function entry, after the Cube system glue is intentionally not modeled as application behavior."
+      }
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "mermaid": "sequenceDiagram\n  participant Boot\n  participant Main as application/main.c\n  participant Console as USART console\n  participant Button as Button interface\n  participant App as firmware/app/app.c\n  participant PWM as pwm_pa8.c\n  participant TIM1 as TIM1 CH1\n  participant LED as Status LED\n\n  Boot->>Main: Enter main\n  Main->>Main: mx_system_init\n  Main->>Console: mx_basic_stdio_init\n  Main->>Button: mx_button_0_getobject\n  Main->>Button: button_init and button_register_callback\n  Main->>Button: button_enableit\n  Main->>Console: printf initialization messages\n  Main->>LED: led_on MX_STATUS_LED\n  Main->>App: app_start\n  App->>PWM: pwm_pa8_start 1000 Hz\n  PWM->>TIM1: mx_tim1_init and LL_TIM configuration\n  TIM1->>PWM: Start TIM1 CH1 output\n  alt PWM setup succeeds\n    App->>Console: LOGI PWM started on PA8\n  else PWM setup fails\n    App->>Console: LOGE PWM initialization failed\n  end\n  loop Main loop polls EventFlag\n    Button-->>Main: ButtonCb sets EventFlag to 1\n    alt EventFlag equals 1\n      Main->>Main: Clear EventFlag\n      Main->>LED: led_toggle MX_STATUS_LED\n      Main->>Console: printf LED toggled\n    else No button event\n      Main->>Main: Continue polling\n    end\n  end",
+      "participants": [
+        "Boot",
+        "Main",
+        "Console",
+        "Button",
+        "App",
+        "PWM",
+        "TIM1",
+        "LED"
+      ],
+      "generated_from": [
+        "application/main.c"
+      ],
+      "grounding": 0.125,
+      "authored_by_model": true
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [
+    {
+      "kind": "board_pin_unused",
+      "message": "LD2 (PG1) is on the board descriptor but no firmware call site drives it",
+      "pin": "PG1",
+      "label": "LD2",
+      "file": "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2"
+    },
+    {
+      "kind": "board_pin_unused",
+      "message": "LD3 (PG2) is on the board descriptor but no firmware call site drives it",
+      "pin": "PG2",
+      "label": "LD3",
+      "file": "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2"
+    },
+    {
+      "kind": "llm_node_rejected",
+      "message": "Rejected refine node status_led_pa5 (gpio_output) because it has no file-backed evidence",
+      "node_id": "status_led_pa5",
+      "node_type": "gpio_output",
+      "strict_evidence": true
+    },
+    {
+      "kind": "llm_node_rejected",
+      "message": "Rejected refine node user_button_pc13 (gpio_input) because it has no file-backed evidence",
+      "node_id": "user_button_pc13",
+      "node_type": "gpio_input",
+      "strict_evidence": true
+    },
+    {
+      "kind": "llm_edge_rejected",
+      "message": "Rejected refine edge edge because source/target nodes are not evidence-backed",
+      "edge_id": "edge",
+      "strict_evidence": true
+    },
+    {
+      "kind": "llm_edge_rejected",
+      "message": "Rejected refine edge edge because source/target nodes are not evidence-backed",
+      "edge_id": "edge",
+      "strict_evidence": true
+    }
+  ],
+  "read_only": false,
+  "graph_version": 3,
+  "generation": {
+    "mode": "hybrid_refine",
+    "model": "local_openai_proxy/gpt-5.6-luna",
+    "triggered_by": "mount",
+    "analyzed_at_ms": 1790319432167,
+    "input_files": [
+      "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2",
+      "application/main.c",
+      "application/main.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.c",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.h",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.c",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.h"
+    ],
+    "token_usage": {
+      "prompt_tokens": 8354,
+      "completion_tokens": 1584
+    }
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": []
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "validated_at_ms": 1790319432167
+  }
+}

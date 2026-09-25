@@ -1,0 +1,105 @@
+{
+  "job_id": "56ed34ba-f270-424a-9f7f-5d47e81efb45",
+  "document_id": "7bd6533a-b095-48b2-8a8b-6a62a1d0087c",
+  "frozen_at": "2026-09-25T06:47:47.101Z",
+  "requirement_count": 24,
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "PWM Timer and PA8 Output Driver",
+      "description": "Covers PWM timer setup, PA8/D7 pin routing, carrier-frequency configuration, output semantics, startup sequencing, and initialization-failure behavior.",
+      "requirements": [
+        "The firmware shall start PWM generation automatically after board initialization.",
+        "The firmware shall output a PWM signal on the Arduino D7 pin (CN9 pin 8 / MCU pin PA8).",
+        "PA8 shall be configured in a supported timer alternate-function PWM output mode.",
+        "The PWM carrier frequency shall remain constant while the duty cycle changes.",
+        "The default PWM carrier frequency shall be 1 kHz.",
+        "The PWM output shall be interpreted as duty-cycle modulation of a 3.3 V MCU logic output on D7, not as a variable 5 V supply rail.",
+        "The D7/PA8 output shall remain in a defined inactive state with no pulses until PWM is fully configured and enabled, and the first active duty cycle shall be 0%.",
+        "If PWM/timer or PA8 configuration fails during initialization, the firmware shall place PA8 in a defined inactive state and shall not toggle the output.",
+        "PWM duty-cycle percentage shall be defined as the proportion of time that D7/PA8 is at logic-high level within each PWM period.",
+        "The firmware shall provide a mechanism to override the default 1 kHz PWM carrier frequency."
+      ],
+      "requirement_ids": [
+        "FR-001",
+        "FR-002",
+        "IF-001",
+        "FR-009",
+        "FR-010",
+        "IF-002",
+        "IF-003",
+        "FR-014",
+        "IF-004",
+        "IF-005"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-2",
+      "name": "PWM Ramp Control Logic",
+      "description": "Covers the continuous linear duty-cycle ramp sequence, timing, endpoints, direction reversal, reset behavior, saturation, and repetition.",
+      "requirements": [
+        "Each PWM ramp cycle shall begin at 0% duty cycle.",
+        "The duty cycle shall ramp monotonically from 0% to 100% over 5.0 seconds.",
+        "The duty cycle shall ramp monotonically from 100% to 0% over the following 5.0 seconds.",
+        "A complete rise-and-fall PWM duty-cycle cycle shall be 10.0 seconds in duration.",
+        "The 10-second PWM duty-cycle ramp cycle shall repeat continuously until reset or power-off.",
+        "After reset, the firmware shall restart the PWM sequence from the defined initial state (0% duty cycle).",
+        "The PWM duty-cycle ramp shall be linear.",
+        "The duty-cycle endpoints shall be 0% and 100%.",
+        "The firmware shall saturate the computed PWM duty cycle to the inclusive range 0% to 100% before applying it to the output.",
+        "At both duty-cycle endpoints (0% and 100%), the firmware shall reverse the ramp direction immediately with no intentional hold time."
+      ],
+      "requirement_ids": [
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-007",
+        "FR-008",
+        "FR-011",
+        "FR-012",
+        "FR-013",
+        "FR-015"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-3",
+      "name": "Nonblocking Waveform Update Execution",
+      "description": "Covers duty-cycle update scheduling and resolution needed to maintain normal firmware execution while producing a smooth PWM ramp.",
+      "requirements": [
+        "The firmware shall avoid blocking delays that prevent normal firmware execution during duty-cycle updates.",
+        "Duty-cycle increment steps shall be sufficiently small to produce a smooth ramp without perceptible jumps or long pauses."
+      ],
+      "requirement_ids": [
+        "PERF-001",
+        "PERF-002"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-4",
+      "name": "External Load and USB Development Interface",
+      "description": "Covers safe interfacing of loads beyond MCU GPIO limits and USB-based board power, programming, and debugging.",
+      "requirements": [
+        "High-power loads shall not be connected directly to the MCU pin; an external driver stage shall be used when controlling loads that exceed GPIO electrical limits.",
+        "A USB connection shall be used for board power, programming, and debugging during development and verification."
+      ],
+      "requirement_ids": [
+        "HW-001",
+        "HW-002"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    }
+  ],
+  "file_checksum": "abeb70704147166885eaab442c83d692555ac671fbfd4609a521bce10148c262"
+}

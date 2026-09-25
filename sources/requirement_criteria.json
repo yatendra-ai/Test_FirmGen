@@ -1,0 +1,781 @@
+{
+  "job_id": "56ed34ba-f270-424a-9f7f-5d47e81efb45",
+  "document_id": "7bd6533a-b095-48b2-8a8b-6a62a1d0087c",
+  "saved_at": "2026-09-25T06:55:04.550Z",
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "PWM Timer and PA8 Output Driver",
+      "criteria": [
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "After power-up or reset, PWM generation is present on Arduino D7/PA8 without any user interaction.",
+          "observable": "Oscilloscope or logic-analyzer waveform on Arduino D7 / PA8 after reset",
+          "observable_kind": "signal",
+          "preconditions": [
+            "NUCLEO-C5A3ZG is powered and connected to the measurement instrument.",
+            "The firmware image under test is programmed onto the board.",
+            "No user input is applied after reset."
+          ],
+          "procedure": [
+            "Power-cycle or reset the board.",
+            "Begin observing Arduino D7 / PA8 before initialization completes.",
+            "Continue observing after board initialization completes."
+          ],
+          "expected": "A periodic PWM waveform is present on D7/PA8 without user interaction.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "hardware",
+          "criterion": "A periodic PWM waveform is measurable at the electrically connected Arduino D7, CN9 pin 8, and MCU PA8 signal.",
+          "observable": "Periodic voltage waveform measured at Arduino D7 / CN9 pin 8",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The board is powered and firmware initialization has completed.",
+            "The measurement instrument is connected to CN9 pin 8 referenced to board ground."
+          ],
+          "procedure": [
+            "Run the firmware.",
+            "Probe CN9 pin 8 / Arduino D7 with an oscilloscope or logic analyzer.",
+            "Record the resulting signal."
+          ],
+          "expected": "A periodic PWM waveform is measurable at D7/CN9 pin 8, corresponding to PA8.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "inspection",
+          "criterion": "The GPIO configuration assigns PA8 to the timer channel alternate function used by the PWM driver.",
+          "observable": "PA8 GPIO alternate-function configuration in source or register initialization",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware source and target configuration are available for review."
+          ],
+          "procedure": [
+            "Inspect the PA8 GPIO initialization.",
+            "Identify the selected alternate-function value and timer channel.",
+            "Compare that assignment with the timer PWM channel used by the driver."
+          ],
+          "expected": "PA8 is configured for the supported timer PWM alternate function, and the selected timer channel is the channel driven by the PWM implementation.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "hardware",
+          "criterion": "The measured PWM frequency is unchanged while the commanded duty cycle is ramped through its supported values.",
+          "observable": "Frequency measurements from D7/PA8 at multiple commanded duty cycles",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is active on D7/PA8.",
+            "The firmware exposes a way to command multiple duty-cycle values.",
+            "The frequency measurement instrument is connected to D7/PA8."
+          ],
+          "procedure": [
+            "Measure the PWM frequency at an initial duty cycle.",
+            "Command successive duty-cycle values across the supported range.",
+            "Measure the frequency at each duty-cycle value."
+          ],
+          "expected": "Every duty-cycle measurement reports the same carrier frequency as the initial measurement; no frequency change is observed during the ramp.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "The startup PWM carrier frequency with the default configuration measures 1000 Hz.",
+          "observable": "Frequency measurement of the startup waveform on D7/PA8",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware is running with its default PWM configuration.",
+            "The board has completed initialization.",
+            "An oscilloscope or logic analyzer is connected to D7/PA8."
+          ],
+          "procedure": [
+            "Reset or power-cycle the board without changing the PWM configuration.",
+            "Wait for PWM startup.",
+            "Measure the period or frequency of the D7/PA8 waveform."
+          ],
+          "expected": "The measured carrier frequency is approximately 1000 Hz.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "inspection",
+          "criterion": "The PA8/D7 output is configured and documented as a 3.3 V logic GPIO signal rather than a variable 5 V supply rail.",
+          "observable": "Schematic, board pinout, GPIO configuration, and interface documentation for PA8/D7",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The board schematic, pinout, firmware GPIO configuration, and test connection information are available."
+          ],
+          "procedure": [
+            "Inspect the PA8/D7 electrical assignment and GPIO configuration.",
+            "Inspect the documented output voltage level and test connection guidance.",
+            "Check that the interface is identified as a logic output and not a supply rail."
+          ],
+          "expected": "The reviewed interface identifies D7/PA8 as a 3.3 V logic output and does not specify it as a variable 5 V supply rail.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "inspection",
+          "criterion": "The external test connection requirements limit loads connected directly to D7/PA8 to the MCU GPIO electrical limits.",
+          "observable": "Test fixture schematic, connection instructions, and stated GPIO voltage/current limits",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The external test fixture and MCU GPIO electrical specifications are available for review."
+          ],
+          "procedure": [
+            "Inspect every direct external connection to D7/PA8 in the test fixture.",
+            "Compare the connected load and voltage/current requirements with the MCU GPIO limits.",
+            "Check that high-power loads are not specified for direct connection."
+          ],
+          "expected": "All direct test loads are within the MCU GPIO electrical limits, and no high-power load is connected directly to D7/PA8.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "hardware",
+          "criterion": "During startup, D7/PA8 remains at one constant inactive logic level with no pulses until PWM is enabled.",
+          "observable": "D7/PA8 logic level and pulse capture from reset through PWM enable",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The board is powered or reset with firmware initialization in progress.",
+            "The oscilloscope or logic analyzer is connected before reset or power-up."
+          ],
+          "procedure": [
+            "Start waveform capture before powering up or resetting the board.",
+            "Observe D7/PA8 throughout GPIO and timer initialization.",
+            "Identify the instant PWM is enabled and inspect the preceding waveform."
+          ],
+          "expected": "D7/PA8 remains at a single inactive logic level and contains no pulses before PWM enable.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "hardware",
+          "criterion": "The first active PWM period after enable has a commanded duty cycle of 0%.",
+          "observable": "High-time of the first PWM period after enable on D7/PA8",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Startup capture includes the PWM-enable transition.",
+            "The firmware's initial commanded duty-cycle value is available to the test."
+          ],
+          "procedure": [
+            "Capture D7/PA8 across the transition from inactive startup to PWM enable.",
+            "Locate the first complete PWM period after enable.",
+            "Measure its high-time."
+          ],
+          "expected": "The first active PWM period has 0% high-time, so the output remains low for the entire period.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-014",
+          "verifiability": "inspection",
+          "criterion": "Every detected PWM/timer or PA8 configuration error routes initialization to an error path that leaves PA8 in the defined inactive state and does not enable PWM.",
+          "observable": "Initialization error branches, GPIO state assignment, timer-enable call sequence, and failure reporting in source",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "A negative-test build or fault-injection configuration that causes PWM/timer or PA8 initialization to fail is available for review."
+          ],
+          "procedure": [
+            "Inspect each failure branch for timer, PWM, and PA8 configuration.",
+            "Trace the PA8 state assignment on the failure path.",
+            "Verify whether any timer/PWM enable operation or output-drive operation follows the failure.",
+            "Inspect the associated failure reporting path."
+          ],
+          "expected": "On every configuration failure path, PA8 is assigned the defined inactive state, PWM is not enabled, and the failure is reported through the available build or test log mechanism.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "hardware",
+          "criterion": "At a commanded 50% duty cycle, the measured D7/PA8 high-time is approximately half of one PWM period.",
+          "observable": "Measured high-time and period of the D7/PA8 waveform",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is active at the configured carrier frequency.",
+            "The firmware can command 50% duty cycle.",
+            "The measurement instrument is connected to D7/PA8."
+          ],
+          "procedure": [
+            "Command 50% duty cycle.",
+            "Capture several complete PWM periods.",
+            "Measure the high-time and total period for a representative period."
+          ],
+          "expected": "The high-time is approximately 50% of the measured PWM period.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "hardware",
+          "criterion": "At a commanded 0% duty cycle, D7/PA8 remains continuously low, and at a commanded 100% duty cycle it remains continuously high.",
+          "observable": "D7/PA8 logic level during commanded 0% and 100% duty-cycle intervals",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM is active and the firmware can command 0% and 100% duty cycle.",
+            "The measurement instrument is connected to D7/PA8."
+          ],
+          "procedure": [
+            "Command 0% duty cycle and observe the output for multiple nominal PWM periods.",
+            "Command 100% duty cycle and observe the output for multiple nominal PWM periods."
+          ],
+          "expected": "The output is continuously low at 0% duty and continuously high at 100% duty, with no transitions during either interval.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-005",
+          "verifiability": "unverifiable",
+          "criterion": "The PWM carrier-frequency override cannot be tested because the requirement does not identify the override mechanism or its supported frequency range.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": "No named configuration/API/interface is provided for selecting the override frequency, and no supported override range or concrete non-default test value is specified.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "PWM Ramp Control Logic",
+      "criteria": [
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "At the start of each 10-second PWM cycle, the measured duty cycle on D7/PA8 is approximately 0%.",
+          "observable": "Measured PWM duty cycle on Arduino D7/PA8 at each detected cycle start",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "The firmware is running continuously."
+          ],
+          "procedure": [
+            "Start duty-cycle capture on D7/PA8.",
+            "Identify the beginning of a PWM cycle.",
+            "Record the measured duty cycle at t = 0 s.",
+            "Repeat for multiple cycle starts."
+          ],
+          "expected": "Approximately 0% at every cycle start.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "The measured duty cycle rises monotonically from approximately 0% to approximately 100% and reaches approximately 100% at about 5.0 seconds.",
+          "observable": "Time-stamped duty-cycle trace on Arduino D7/PA8 during the rising ramp",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to an oscilloscope, logic analyzer, or equivalent duty-cycle measurement instrument.",
+            "A rising ramp has just begun."
+          ],
+          "procedure": [
+            "Capture the duty-cycle waveform from the start of a rising ramp through t = 5.0 s.",
+            "Calculate or inspect duty-cycle values at successive samples.",
+            "Record the time at which the duty cycle reaches approximately 100%."
+          ],
+          "expected": "Duty-cycle samples never decrease during the rising ramp, and the duty cycle reaches approximately 100% at about 5.0 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "hardware",
+          "criterion": "The measured duty cycle falls monotonically from approximately 100% to approximately 0% over about 5.0 seconds and is approximately 0% at about 10.0 seconds from cycle start.",
+          "observable": "Time-stamped duty-cycle trace on Arduino D7/PA8 during the falling ramp",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "A complete rising ramp has reached approximately 100%."
+          ],
+          "procedure": [
+            "Capture the duty-cycle waveform from the beginning of the falling ramp through t = 10.0 s from cycle start.",
+            "Calculate or inspect duty-cycle values at successive samples.",
+            "Record the duty cycle and elapsed time at the end of the falling ramp."
+          ],
+          "expected": "Duty-cycle samples never increase during the falling ramp, the fall lasts about 5.0 s, and the endpoint is approximately 0% at about 10.0 s from cycle start.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "hardware",
+          "criterion": "The measured time from approximately 0% at one cycle start to approximately 0% at the next cycle end is approximately 10.0 seconds.",
+          "observable": "Elapsed time between successive 0% cycle-start/end events on the PWM duty-cycle trace",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "The firmware is running without reset or power interruption."
+          ],
+          "procedure": [
+            "Capture at least two complete PWM cycles.",
+            "Timestamp each approximately 0% cycle-start event and the corresponding approximately 0% cycle-end event.",
+            "Subtract the start timestamp from the end timestamp."
+          ],
+          "expected": "Each complete rise-and-fall cycle measures approximately 10.0 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "The PWM ramp produces multiple consecutive 10-second cycles without terminating before a reset or power-off event.",
+          "observable": "Continuous PWM duty-cycle capture showing successive rise-and-fall cycles",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "The board has stable power and has not been reset."
+          ],
+          "procedure": [
+            "Start a continuous capture.",
+            "Observe at least three consecutive complete rise-and-fall cycles.",
+            "Do not apply reset or power-off during the observation interval.",
+            "Then apply reset or power-off and stop the capture."
+          ],
+          "expected": "At least three consecutive cycles are present with no termination before the reset or power-off event.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "hardware",
+          "criterion": "After a system reset, the PWM output returns to approximately 0% at the reset-start of the sequence and resumes the 10-second ramp.",
+          "observable": "Measured PWM duty cycle and subsequent duty-cycle trace after reset",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "The firmware is running before reset."
+          ],
+          "procedure": [
+            "Apply a system reset to the board.",
+            "Capture the PWM output immediately after reset and for at least one complete cycle.",
+            "Record the initial duty cycle and verify the subsequent rise-and-fall sequence."
+          ],
+          "expected": "The post-reset initial duty cycle is approximately 0%, followed by the defined 10-second ramp sequence.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "hardware",
+          "criterion": "During both ramp directions, sampled duty-cycle values are proportional to elapsed ramp time, including approximately 50% duty at 2.5 seconds into the rising ramp and 7.5 seconds from cycle start.",
+          "observable": "Duty-cycle samples paired with timestamps during one complete cycle",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a time-capable duty-cycle measurement instrument.",
+            "A complete 10-second cycle is captured from its 0% start."
+          ],
+          "procedure": [
+            "Capture duty-cycle values with timestamps from t = 0 s through t = 10 s.",
+            "Compare samples against the linear 0%-to-100%-to-0% trajectory.",
+            "Inspect the values at t = 2.5 s and t = 7.5 s."
+          ],
+          "expected": "The rising and falling samples follow proportional linear progress, with approximately 50% duty at both t = 2.5 s and t = 7.5 s.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "hardware",
+          "criterion": "The measured PWM duty-cycle trace reaches an approximately 0% endpoint at the start and end of each cycle.",
+          "observable": "Minimum duty-cycle values in repeated PWM cycle captures",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "At least one complete cycle is captured."
+          ],
+          "procedure": [
+            "Capture multiple complete PWM cycles.",
+            "Record the minimum duty-cycle value at each cycle start and end."
+          ],
+          "expected": "The start and end endpoints are approximately 0%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "hardware",
+          "criterion": "The measured PWM duty-cycle trace reaches an approximately 100% endpoint at the end of each rising ramp.",
+          "observable": "Maximum duty-cycle values in repeated PWM cycle captures",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "At least one complete cycle is captured."
+          ],
+          "procedure": [
+            "Capture multiple complete PWM cycles.",
+            "Record the maximum duty-cycle value during each rising ramp."
+          ],
+          "expected": "The rising-ramp maximum is approximately 100% in every captured cycle.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-013",
+          "verifiability": "hardware",
+          "criterion": "Across all PWM updates, the measured output duty cycle remains within the inclusive range from 0% to 100%.",
+          "observable": "Minimum and maximum measured duty-cycle values on D7/PA8 over repeated cycles",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to a duty-cycle measurement instrument.",
+            "The firmware runs through multiple cycles, including endpoint transitions."
+          ],
+          "procedure": [
+            "Capture the PWM output over multiple complete cycles.",
+            "Determine the minimum and maximum measured duty-cycle values.",
+            "Compare both values with the inclusive bounds."
+          ],
+          "expected": "Minimum duty cycle is at least 0% and maximum duty cycle is at most 100%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-013",
+          "verifiability": "hardware",
+          "criterion": "An injected duty-cycle command below 0% produces 0% output and an injected command above 100% produces 100% output.",
+          "observable": "Measured PWM duty cycle on D7/PA8 after below-range and above-range command injection",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware exposes or permits a test injection point for duty-cycle commands.",
+            "The PWM output is connected to a duty-cycle measurement instrument."
+          ],
+          "procedure": [
+            "Inject a duty-cycle command below 0%.",
+            "Measure the resulting PWM duty cycle.",
+            "Inject a duty-cycle command above 100%.",
+            "Measure the resulting PWM duty cycle."
+          ],
+          "expected": "The below-range command produces 0% output and the above-range command produces 100% output.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-015",
+          "verifiability": "hardware",
+          "criterion": "After the PWM reaches approximately 100%, the next duty-cycle update is decreasing rather than remaining at a plateau.",
+          "observable": "Consecutive duty-cycle samples around the 100% endpoint",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to an oscilloscope, logic analyzer, or equivalent time-resolved duty-cycle instrument.",
+            "A rising ramp reaches approximately 100%."
+          ],
+          "procedure": [
+            "Capture the duty-cycle trace at sufficient resolution around the 100% endpoint.",
+            "Identify the update that reaches approximately 100%.",
+            "Compare it with the immediately following duty-cycle update."
+          ],
+          "expected": "The immediately following update is lower than the endpoint value, with no intentional plateau beyond the update interval.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-015",
+          "verifiability": "hardware",
+          "criterion": "After the PWM reaches approximately 0%, the next duty-cycle update is increasing rather than remaining at a plateau.",
+          "observable": "Consecutive duty-cycle samples around the 0% endpoint",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The PWM output is connected to an oscilloscope, logic analyzer, or equivalent time-resolved duty-cycle instrument.",
+            "A falling ramp reaches approximately 0%."
+          ],
+          "procedure": [
+            "Capture the duty-cycle trace at sufficient resolution around the 0% endpoint.",
+            "Identify the update that reaches approximately 0%.",
+            "Compare it with the immediately following duty-cycle update."
+          ],
+          "expected": "The immediately following update is higher than the endpoint value, with no intentional plateau beyond the update interval.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "Nonblocking Waveform Update Execution",
+      "criteria": [
+        {
+          "requirement_id": "PERF-001",
+          "verifiability": "inspection",
+          "criterion": "The duty-cycle update path contains no blocking delay call or loop that waits for elapsed time before returning.",
+          "observable": "Source code and call graph for the duty-cycle update routine",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware source and duty-cycle update call path are available for review."
+          ],
+          "procedure": [
+            "Locate the duty-cycle update routine and every function it calls synchronously.",
+            "Inspect the path for blocking delay APIs and polling loops that wait for time or an external event.",
+            "Record any such call or loop found in the update path."
+          ],
+          "expected": "No blocking delay API or time-waiting polling loop is present in the duty-cycle update path.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-001",
+          "verifiability": "inspection",
+          "criterion": "Duty-cycle updates are scheduled by a timer, system tick, interrupt-driven callback, or equivalent mechanism that returns control to normal firmware execution between updates.",
+          "observable": "Source code showing the update scheduler and duty-cycle update callback or state-machine transition",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware source and scheduler configuration are available for review."
+          ],
+          "procedure": [
+            "Identify how duty-cycle updates are triggered.",
+            "Trace one update invocation from the scheduler to the update logic.",
+            "Verify that the scheduler triggers discrete updates without waiting synchronously for the ramp to complete."
+          ],
+          "expected": "The update path is driven by a timer, tick, interrupt callback, or equivalent non-blocking mechanism, and each update returns control before the next scheduled update.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-002",
+          "verifiability": "hardware",
+          "criterion": "The measured PWM duty cycle is approximately 50% at 2.5 s after the ramp starts.",
+          "observable": "Oscilloscope duty-cycle measurement on the PWM output at PA8/Arduino D7, as wired on the target board",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The NUCLEO-C5A3ZG is running the firmware.",
+            "The PWM output is connected to the oscilloscope.",
+            "The ramp start event and time reference are observable or triggerable.",
+            "The project-defined meaning of the PA8 and Arduino D7 connection is known."
+          ],
+          "procedure": [
+            "Connect the oscilloscope to the configured PWM output.",
+            "Trigger the time measurement at ramp start.",
+            "Measure duty cycle at 2.5 s.",
+            "Record the measured duty-cycle percentage."
+          ],
+          "expected": "The measured duty cycle is approximately 50%, subject to the project's measurement tolerance.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-002",
+          "verifiability": "hardware",
+          "criterion": "The measured PWM duty cycle is approximately 50% at 7.5 s after the ramp starts.",
+          "observable": "Oscilloscope duty-cycle measurement on the PWM output at PA8/Arduino D7, as wired on the target board",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The NUCLEO-C5A3ZG is running the firmware.",
+            "The PWM output is connected to the oscilloscope.",
+            "The ramp start event and time reference are observable or triggerable.",
+            "The project-defined meaning of the PA8 and Arduino D7 connection is known."
+          ],
+          "procedure": [
+            "Connect the oscilloscope to the configured PWM output.",
+            "Trigger the time measurement at ramp start.",
+            "Measure duty cycle at 7.5 s.",
+            "Record the measured duty-cycle percentage."
+          ],
+          "expected": "The measured duty cycle is approximately 50%, subject to the project's measurement tolerance.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-002",
+          "verifiability": "unverifiable",
+          "criterion": "The ramp waveform has no unexpected duty-cycle jumps or long pauses.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": "The acceptance statement does not define the maximum allowed duty-cycle step, pause duration, update interval, or what constitutes an unexpected jump, so no reproducible pass/fail threshold can be asserted.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "External Load and USB Development Interface",
+      "criteria": [
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "inspection",
+          "criterion": "The design and test setup show an external driver stage between every load exceeding the applicable MCU GPIO electrical limit and the MCU pin, with no direct high-power-load connection to the pin.",
+          "observable": "Schematic, wiring, and test setup showing the connection path from Arduino D7 or PA8 to each external load",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Testing or usage involves external loads",
+            "The applicable GPIO maximum load limits from the MCU datasheet are available"
+          ],
+          "procedure": [
+            "Review the schematic and physical test setup for each external load.",
+            "Compare each load's electrical requirements with the applicable GPIO limits.",
+            "Verify that every load exceeding those limits is connected through an external driver stage."
+          ],
+          "expected": "For every load exceeding a GPIO limit, an external driver stage is present in the signal path; zero such loads are connected directly to Arduino D7, PA8, or another MCU GPIO.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "hardware",
+          "criterion": "During development and verification, the board receives power through USB and the programming/debug connection is established through USB.",
+          "observable": "USB connection, board power indication, and programming/debug tool connection or session",
+          "observable_kind": "state",
+          "preconditions": [
+            "Development or verification activity is in progress",
+            "A suitable USB cable and host computer are available"
+          ],
+          "procedure": [
+            "Connect the board to the development host using USB.",
+            "Verify that the board powers up from the USB connection.",
+            "Program the board and establish the debug interface using the USB connection."
+          ],
+          "expected": "The board is powered by USB, and both programming and debugging are performed through the USB connection during the test run.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    }
+  ]
+}

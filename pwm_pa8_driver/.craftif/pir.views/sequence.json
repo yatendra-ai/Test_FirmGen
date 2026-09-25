@@ -1,0 +1,10 @@
+{
+  "schema_version": "3.0.0",
+  "view": "sequence",
+  "revision": "c3cb5cc7a88acbd6c60aeb47ef98760d",
+  "graph_version": 3,
+  "generated_at_ms": 1790319469501,
+  "mermaid": "sequenceDiagram\n  participant Boot\n  participant Main as application/main.c\n  participant Console as USART console\n  participant Button as Button interface\n  participant App as firmware/app/app.c\n  participant PWM as pwm_pa8.c\n  participant TIM1 as TIM1 CH1\n  participant LED as Status LED\n\n  Boot->>Main: Enter main\n  Main->>Main: mx_system_init\n  Main->>Console: mx_basic_stdio_init\n  Main->>Button: mx_button_0_getobject\n  Main->>Button: button_init and button_register_callback\n  Main->>Button: button_enableit\n  Main->>Console: printf initialization messages\n  Main->>LED: led_on MX_STATUS_LED\n  Main->>App: app_start\n  App->>PWM: pwm_pa8_start 1000 Hz\n  PWM->>TIM1: mx_tim1_init and LL_TIM configuration\n  TIM1->>PWM: Start TIM1 CH1 output\n  alt PWM setup succeeds\n    App->>Console: LOGI PWM started on PA8\n  else PWM setup fails\n    App->>Console: LOGE PWM initialization failed\n  end\n  loop Main loop polls EventFlag\n    Button-->>Main: ButtonCb sets EventFlag to 1\n    alt EventFlag equals 1\n      Main->>Main: Clear EventFlag\n      Main->>LED: led_toggle MX_STATUS_LED\n      Main->>Console: printf LED toggled\n    else No button event\n      Main->>Main: Continue polling\n    end\n  end",
+  "title": "Sequence Diagram",
+  "authored_by_model": true
+}

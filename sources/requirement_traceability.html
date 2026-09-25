@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirement traceability</title>
+<style>
+:root {
+  --ink: #14171a; --dim: #5b6570; --line: #dfe3e8; --bg: #ffffff; --panel: #f6f7f9;
+  --ok: #157347; --warn: #9a5b00; --bad: #a5262b; --accent: #1f4e79;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #e6e9ec; --dim: #98a3ae; --line: #2c333a; --bg: #14171a; --panel: #1c2126;
+          --ok: #4ec27f; --warn: #e0a75a; --bad: #f08a8f; --accent: #8ab4e8; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 2.5rem 1.5rem 5rem; background: var(--bg); color: var(--ink);
+  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1180px; margin: 0 auto; }
+h1 { font-size: 1.7rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
+h2 { font-size: 1.15rem; margin: 2.5rem 0 .3rem; padding-top: 1.2rem;
+  border-top: 1px solid var(--line); }
+h3 { font-size: .95rem; margin: 1.6rem 0 .4rem; }
+p { margin: .5rem 0; }
+.sub { color: var(--dim); font-size: .875rem; }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  padding: .9rem 1.1rem; margin: 1.2rem 0; }
+.lead p:first-child { margin-top: 0; } .lead p:last-child { margin-bottom: 0; }
+.void { border-color: var(--bad); }
+.void strong { color: var(--bad); }
+.meta { color: var(--dim); font-size: .85rem; margin: .2rem 0 .8rem; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .84rem; }
+th, td { text-align: left; vertical-align: top; padding: .45rem .6rem;
+  border-bottom: 1px solid var(--line); }
+th { color: var(--dim); font-weight: 600; font-size: .74rem; text-transform: uppercase;
+  letter-spacing: .04em; white-space: nowrap; }
+td code { font-size: .82em; }
+code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+.none { color: var(--dim); }
+.pill { display: inline-block; padding: .1rem .45rem; border-radius: 999px;
+  font-size: .72rem; font-weight: 600; white-space: nowrap; border: 1px solid currentColor; }
+.s-verified { color: var(--ok); } .s-tests { color: var(--accent); }
+.s-impl { color: var(--warn); } .s-none { color: var(--bad); }
+.flag { color: var(--bad); font-size: .72rem; display: block; margin-top: .2rem; }
+ul { margin: .4rem 0; padding-left: 1.2rem; } li { margin: .18rem 0; }
+</style>
+</head><body><main>
+<h1>Requirement traceability</h1>
+<p class="sub">Generated 2026-09-25T07:12:24.975545700+00:00 · specification frozen 2026-09-25T06:55:02.634Z</p>
+<div class="lead"><p>24 of 24 requirements have code recorded against them — 0 with tests passing, 0 with tests written but not passing, 24 implemented with no test at all. 0 have nothing recorded.</p>
+</div>
+<div class="lead"><p><strong>Host unit tests.</strong> No host unit-test results have been imported for this project. Host tests run on a separate machine; nothing here rests on host test evidence.</p></div>
+<p class="sub">Derived from what the agent recorded with <code>requirement_trace</code> and from the frozen specification. An em dash means nothing was recorded, which is not the same as nothing being needed.</p>
+<h2>PWM Timer and PA8 Output Driver</h2>
+<p class="meta">gate: deferred · tasks: 5/5 done · recorded in: 12d24b74-2437-45cf-bd3c-cf3b84961d11</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-001</code></td><td>The firmware shall start PWM generation automatically after board initialization.</td><td>hardware / instrument</td><td>After power-up or reset, PWM generation is present on Arduino D7/PA8 without any user interaction. (expected: A periodic PWM waveform is present on D7/PA8 without user interaction.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-002</code></td><td>The firmware shall output a PWM signal on the Arduino D7 pin (CN9 pin 8 / MCU pin PA8).</td><td>hardware / instrument</td><td>A periodic PWM waveform is measurable at the electrically connected Arduino D7, CN9 pin 8, and MCU PA8 signal. (expected: A periodic PWM waveform is measurable at D7/CN9 pin 8, corresponding to PA8.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-001</code></td><td>PA8 shall be configured in a supported timer alternate-function PWM output mode.</td><td>inspection</td><td>The GPIO configuration assigns PA8 to the timer channel alternate function used by the PWM driver. (expected: PA8 is configured for the supported timer PWM alternate function, and the selected timer channel is the channel driven by the PWM implementation.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-009</code></td><td>The PWM carrier frequency shall remain constant while the duty cycle changes.</td><td>hardware / instrument</td><td>The measured PWM frequency is unchanged while the commanded duty cycle is ramped through its supported values. (expected: Every duty-cycle measurement reports the same carrier frequency as the initial measurement; no frequency change is observed during the ramp.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-010</code></td><td>The default PWM carrier frequency shall be 1 kHz.</td><td>hardware / instrument</td><td>The startup PWM carrier frequency with the default configuration measures 1000 Hz. (expected: The measured carrier frequency is approximately 1000 Hz.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-002</code></td><td>The PWM output shall be interpreted as duty-cycle modulation of a 3.3 V MCU logic output on D7, not as a variable 5 V supply rail.</td><td>inspection</td><td>The PA8/D7 output is configured and documented as a 3.3 V logic GPIO signal rather than a variable 5 V supply rail. (expected: The reviewed interface identifies D7/PA8 as a 3.3 V logic output and does not specify it as a variable 5 V supply rail.)<br>The external test connection requirements limit loads connected directly to D7/PA8 to the MCU GPIO electrical limits. (expected: All direct test loads are within the MCU GPIO electrical limits, and no high-power load is connected directly to D7/PA8.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-003</code></td><td>The D7/PA8 output shall remain in a defined inactive state with no pulses until PWM is fully configured and enabled, and the first active duty cycle shall be 0%.</td><td>hardware / instrument</td><td>During startup, D7/PA8 remains at one constant inactive logic level with no pulses until PWM is enabled. (expected: D7/PA8 remains at a single inactive logic level and contains no pulses before PWM enable.)<br>The first active PWM period after enable has a commanded duty cycle of 0%. (expected: The first active PWM period has 0% high-time, so the output remains low for the entire period.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-014</code></td><td>If PWM/timer or PA8 configuration fails during initialization, the firmware shall place PA8 in a defined inactive state and shall not toggle the output.</td><td>inspection</td><td>Every detected PWM/timer or PA8 configuration error routes initialization to an error path that leaves PA8 in the defined inactive state and does not enable PWM. (expected: On every configuration failure path, PA8 is assigned the defined inactive state, PWM is not enabled, and the failure is reported through the available build or test log mechanism.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-004</code></td><td>PWM duty-cycle percentage shall be defined as the proportion of time that D7/PA8 is at logic-high level within each PWM period.</td><td>hardware / instrument</td><td>At a commanded 50% duty cycle, the measured D7/PA8 high-time is approximately half of one PWM period. (expected: The high-time is approximately 50% of the measured PWM period.)<br>At a commanded 0% duty cycle, D7/PA8 remains continuously low, and at a commanded 100% duty cycle it remains continuously high. (expected: The output is continuously low at 0% duty and continuously high at 100% duty, with no transitions during either interval.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-005</code></td><td>The firmware shall provide a mechanism to override the default 1 kHz PWM carrier frequency.</td><td>not verifiable</td><td>The PWM carrier-frequency override cannot be tested because the requirement does not identify the override mechanism or its supported frequency range.</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim1.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim1.h<br>NUCLEO-C5A3ZG/generated/hal/stm32c5xx_hal_conf.h<br>firmware/app/app.c<br>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>b_pwm_pa8_configure_gpio<br>mx_tim1_deinit<br>mx_tim1_init<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>FR-001</code>, <code>FR-002</code>, <code>IF-001</code>, <code>FR-009</code>, <code>FR-010</code>, <code>IF-002</code>, <code>IF-003</code>, <code>FR-014</code>, <code>IF-004</code>, <code>IF-005</code> — <span class="sub">Fresh build flashed successfully before the ramp changes. After reset, the ST-Link VCP monitor printed: 'I app: TIM1 CH1 PWM started on PA8 at 1000 Hz'. This confirms the firmware reached the PWM startup path; the physical PA8 waveform and inactive-state level were not electrically measured.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>FR-001</code>, <code>FR-002</code>, <code>IF-001</code>, <code>FR-009</code>, <code>FR-010</code>, <code>IF-002</code>, <code>IF-003</code>, <code>FR-014</code>, <code>IF-004</code>, <code>IF-005</code> — <span class="sub">Re-recorded after category 3 changed only the app_start scheduling loop; the carrier setup and startup behavior remain represented by the listed symbols. Category gate remains awaiting the user's review/skip choice.</span></li>
+</ul>
+<h2>PWM Ramp Control Logic</h2>
+<p class="meta">gate: deferred · tasks: 3/3 done · recorded in: 12d24b74-2437-45cf-bd3c-cf3b84961d11</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-003</code></td><td>Each PWM ramp cycle shall begin at 0% duty cycle.</td><td>hardware / instrument</td><td>At the start of each 10-second PWM cycle, the measured duty cycle on D7/PA8 is approximately 0%. (expected: Approximately 0% at every cycle start.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-004</code></td><td>The duty cycle shall ramp monotonically from 0% to 100% over 5.0 seconds.</td><td>hardware / instrument</td><td>The measured duty cycle rises monotonically from approximately 0% to approximately 100% and reaches approximately 100% at about 5.0 seconds. (expected: Duty-cycle samples never decrease during the rising ramp, and the duty cycle reaches approximately 100% at about 5.0 s.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-005</code></td><td>The duty cycle shall ramp monotonically from 100% to 0% over the following 5.0 seconds.</td><td>hardware / instrument</td><td>The measured duty cycle falls monotonically from approximately 100% to approximately 0% over about 5.0 seconds and is approximately 0% at about 10.0 seconds from cycle start. (expected: Duty-cycle samples never increase during the falling ramp, the fall lasts about 5.0 s, and the endpoint is approximately 0% at about 10.0 s from cycle start.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-006</code></td><td>A complete rise-and-fall PWM duty-cycle cycle shall be 10.0 seconds in duration.</td><td>hardware / instrument</td><td>The measured time from approximately 0% at one cycle start to approximately 0% at the next cycle end is approximately 10.0 seconds. (expected: Each complete rise-and-fall cycle measures approximately 10.0 s.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-007</code></td><td>The 10-second PWM duty-cycle ramp cycle shall repeat continuously until reset or power-off.</td><td>hardware / instrument</td><td>The PWM ramp produces multiple consecutive 10-second cycles without terminating before a reset or power-off event. (expected: At least three consecutive cycles are present with no termination before the reset or power-off event.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-008</code></td><td>After reset, the firmware shall restart the PWM sequence from the defined initial state (0% duty cycle).</td><td>hardware / instrument</td><td>After a system reset, the PWM output returns to approximately 0% at the reset-start of the sequence and resumes the 10-second ramp. (expected: The post-reset initial duty cycle is approximately 0%, followed by the defined 10-second ramp sequence.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-011</code></td><td>The PWM duty-cycle ramp shall be linear.</td><td>hardware / instrument</td><td>During both ramp directions, sampled duty-cycle values are proportional to elapsed ramp time, including approximately 50% duty at 2.5 seconds into the rising ramp and 7.5 seconds from cycle start. (expected: The rising and falling samples follow proportional linear progress, with approximately 50% duty at both t = 2.5 s and t = 7.5 s.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-012</code></td><td>The duty-cycle endpoints shall be 0% and 100%.</td><td>hardware / instrument</td><td>The measured PWM duty-cycle trace reaches an approximately 0% endpoint at the start and end of each cycle. (expected: The start and end endpoints are approximately 0%.)<br>The measured PWM duty-cycle trace reaches an approximately 100% endpoint at the end of each rising ramp. (expected: The rising-ramp maximum is approximately 100% in every captured cycle.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-013</code></td><td>The firmware shall saturate the computed PWM duty cycle to the inclusive range 0% to 100% before applying it to the output.</td><td>hardware / instrument</td><td>Across all PWM updates, the measured output duty cycle remains within the inclusive range from 0% to 100%. (expected: Minimum duty cycle is at least 0% and maximum duty cycle is at most 100%.)<br>An injected duty-cycle command below 0% produces 0% output and an injected command above 100% produces 100% output. (expected: The below-range command produces 0% output and the above-range command produces 100% output.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-015</code></td><td>At both duty-cycle endpoints (0% and 100%), the firmware shall reverse the ramp direction immediately with no intentional hold time.</td><td>hardware / instrument</td><td>After the PWM reaches approximately 100%, the next duty-cycle update is decreasing rather than remaining at a plateau. (expected: The immediately following update is lower than the endpoint value, with no intentional plateau beyond the update interval.)<br>After the PWM reaches approximately 0%, the next duty-cycle update is increasing rather than remaining at a plateau. (expected: The immediately following update is higher than the endpoint value, with no intentional plateau beyond the update interval.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_delay_ms<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent<br>pwm_ramp_reset</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>FR-003</code>, <code>FR-004</code>, <code>FR-005</code>, <code>FR-006</code>, <code>FR-007</code>, <code>FR-008</code>, <code>FR-011</code>, <code>FR-012</code>, <code>FR-013</code>, <code>FR-015</code> — <span class="sub">Re-recorded after category 3 changed only the scheduling loop in app_start: ramp calculation and PWM update behavior remain represented by the listed symbols. Clean build completed; no category-2 hardware sweep or host test has been performed.</span></li>
+</ul>
+<h2>Nonblocking Waveform Update Execution</h2>
+<p class="meta">gate: deferred · tasks: 2/2 done · recorded in: 12d24b74-2437-45cf-bd3c-cf3b84961d11</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>PERF-001</code></td><td>The firmware shall avoid blocking delays that prevent normal firmware execution during duty-cycle updates.</td><td>inspection</td><td>The duty-cycle update path contains no blocking delay call or loop that waits for elapsed time before returning. (expected: No blocking delay API or time-waiting polling loop is present in the duty-cycle update path.)<br>Duty-cycle updates are scheduled by a timer, system tick, interrupt-driven callback, or equivalent mechanism that returns control to normal firmware execution between updates. (expected: The update path is driven by a timer, tick, interrupt callback, or equivalent non-blocking mechanism, and each update returns control before the next scheduled update.)</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-002</code></td><td>Duty-cycle increment steps shall be sufficiently small to produce a smooth ramp without perceptible jumps or long pauses.</td><td>hardware / instrument<br>not verifiable</td><td>The measured PWM duty cycle is approximately 50% at 2.5 s after the ramp starts. (expected: The measured duty cycle is approximately 50%, subject to the project's measurement tolerance.)<br>The measured PWM duty cycle is approximately 50% at 7.5 s after the ramp starts. (expected: The measured duty cycle is approximately 50%, subject to the project's measurement tolerance.)<br>The ramp waveform has no unexpected duty-cycle jumps or long pauses.</td><td><code>firmware/app/app.c<br>firmware/modules/pwm_ramp.c<br>firmware/modules/pwm_ramp.h<br>firmware/osal/osal.h<br>firmware/platforms/stm32/osal_stm32.c<br>firmware/platforms/stm32/pwm_pa8.c<br>firmware/platforms/stm32/pwm_pa8.h</code></td><td><code>app_start<br>osal_uptime_ms<br>pwm_pa8_set_duty_percent<br>pwm_ramp_duty_percent</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>PERF-001</code>, <code>PERF-002</code> — <span class="sub">Clean build completed. The app uses elapsed millisecond timestamps and updates duty at most once per millisecond without HAL_Delay or a multi-second blocking wait; PWM compare updates are small and monotonic at the timer update cadence. No hardware sweep or host test has been performed.</span></li>
+</ul>
+<h2>External Load and USB Development Interface</h2>
+<p class="meta">gate: deferred · tasks: 2/2 done · recorded in: 12d24b74-2437-45cf-bd3c-cf3b84961d11</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>HW-001</code></td><td>High-power loads shall not be connected directly to the MCU pin; an external driver stage shall be used when controlling loads that exceed GPIO electrical limits.</td><td>inspection</td><td>The design and test setup show an external driver stage between every load exceeding the applicable MCU GPIO electrical limit and the MCU pin, with no direct high-power-load connection to the pin. (expected: For every load exceeding a GPIO limit, an external driver stage is present in the signal path; zero such loads are connected directly to Arduino D7, PA8, or another MCU GPIO.)</td><td><code>NUCLEO-C5A3ZG/cmake/CMakePresets.json<br>application/main.c<br>firmware/app/app.c<br>firmware/docs/overview.md<br>firmware/platforms/stm32/pwm_pa8.c</code></td><td><code>main<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-002</code></td><td>A USB connection shall be used for board power, programming, and debugging during development and verification.</td><td>hardware / instrument</td><td>During development and verification, the board receives power through USB and the programming/debug connection is established through USB. (expected: The board is powered by USB, and both programming and debugging are performed through the USB connection during the test run.)</td><td><code>NUCLEO-C5A3ZG/cmake/CMakePresets.json<br>application/main.c<br>firmware/app/app.c<br>firmware/docs/overview.md<br>firmware/platforms/stm32/pwm_pa8.c</code></td><td><code>main<br>pwm_pa8_set_duty_percent<br>pwm_pa8_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>HW-001</code>, <code>HW-002</code> — <span class="sub">Fresh build flashed successfully over the board's ST-LINK USB connection. The VCP monitor on reset printed the expected startup markers, including 'I app: TIM1 CH1 PWM started on PA8 at 1000 Hz'. USB power/programming/debug path was exercised by the successful flash and monitor capture; no external high-power load was connected or measured.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>HW-001</code>, <code>HW-002</code> — <span class="sub">External driver-stage safety remains a documented design constraint and was not electrically tested with a load.</span></li>
+</ul>
+<h2>Gaps</h2>
+<p class="sub">Listed rather than omitted. A matrix showing only what was built cannot be told apart from one showing full coverage.</p>
+<h3>Board checks owed (11)</h3>
+<p class="sub">The worklist for whoever has the hardware, and the counterpart of the host-test list below. A `hardware` or `target` criterion with nothing observed: no host test and no reading of the code will ever close it.</p>
+<ul>
+<li><code>FR-003</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-004</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-005</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-006</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-007</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-008</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-011</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-012</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-013</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-015</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>PERF-002</code> <span class="sub">(Nonblocking Waveform Update Execution)</span></li>
+</ul>
+<h3>NOT unit-testable (24) — do not write host tests for these</h3>
+<p class="sub">No `host` criterion, so no unit test can cover them however it is written. Listed explicitly because the untested count otherwise reads as a backlog of unit tests owed, and closing one of these with a host test means inventing an assertion that passes without checking the thing.</p>
+<ul>
+<li><code>FR-001</code> — checked by hardware / instrument <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>FR-002</code> — checked by hardware / instrument <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>IF-001</code> — checked by inspection <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>FR-009</code> — checked by hardware / instrument <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>FR-010</code> — checked by hardware / instrument <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>IF-002</code> — checked by inspection <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>IF-003</code> — checked by hardware / instrument <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>FR-014</code> — checked by inspection <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>IF-004</code> — checked by hardware / instrument <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>IF-005</code> — checked by not verifiable <span class="sub">· PWM Timer and PA8 Output Driver</span></li>
+<li><code>FR-003</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-004</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-005</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-006</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-007</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-008</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-011</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-012</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-013</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>FR-015</code> — checked by hardware / instrument <span class="sub">· PWM Ramp Control Logic</span></li>
+<li><code>PERF-001</code> — checked by inspection <span class="sub">· Nonblocking Waveform Update Execution</span></li>
+<li><code>PERF-002</code> — checked by hardware / instrument, not verifiable <span class="sub">· Nonblocking Waveform Update Execution</span></li>
+<li><code>HW-001</code> — checked by inspection <span class="sub">· External Load and USB Development Interface</span></li>
+<li><code>HW-002</code> — checked by hardware / instrument <span class="sub">· External Load and USB Development Interface</span></li>
+</ul>
+<h3>Implemented, never tested (24)</h3>
+<p class="sub">Code exists and no test is recorded against it.</p>
+<ul>
+<li><code>FR-001</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>FR-002</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>IF-001</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>FR-009</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>FR-010</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>IF-002</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>IF-003</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>FR-014</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>IF-004</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>IF-005</code> <span class="sub">(PWM Timer and PA8 Output Driver)</span></li>
+<li><code>FR-003</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-004</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-005</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-006</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-007</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-008</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-011</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-012</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-013</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>FR-015</code> <span class="sub">(PWM Ramp Control Logic)</span></li>
+<li><code>PERF-001</code> <span class="sub">(Nonblocking Waveform Update Execution)</span></li>
+<li><code>PERF-002</code> <span class="sub">(Nonblocking Waveform Update Execution)</span></li>
+<li><code>HW-001</code> <span class="sub">(External Load and USB Development Interface)</span></li>
+<li><code>HW-002</code> <span class="sub">(External Load and USB Development Interface)</span></li>
+</ul>
+<h3>No observable exists (2)</h3>
+<p class="sub">These need a human decision — either the requirement is restated as something checkable, or it is accepted as unverifiable on the record. Inventing a test for one of these produces a test that passes and proves nothing.</p>
+<ul>
+<li><code>IF-005</code> — The PWM carrier-frequency override cannot be tested because the requirement does not identify the override mechanism or its supported frequency range. <span class="sub">· No named configuration/API/interface is provided for selecting the override frequency, and no supported override range or concrete non-default test value is specified.</span></li>
+<li><code>PERF-002</code> — The ramp waveform has no unexpected duty-cycle jumps or long pauses. <span class="sub">· The acceptance statement does not define the maximum allowed duty-cycle step, pause duration, update interval, or what constitutes an unexpected jump, so no reproducible pass/fail threshold can be asserted.</span></li>
+</ul>
+</main></body></html>

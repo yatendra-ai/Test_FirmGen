@@ -1,0 +1,28 @@
+{
+  "schema_version": "3.0.0",
+  "view": "lld",
+  "revision": "c3cb5cc7a88acbd6c60aeb47ef98760d",
+  "graph_version": 3,
+  "generated_at_ms": 1790319469501,
+  "mermaid": "flowchart TD\n  subgraph Bare_Metal_Main\n    boot[\"Enter application<br/>application/main.c:31\"]\n    system_init[\"Initialize STM32 system<br/>application/main.c:36\"]\n    stdio_init[\"Initialize console stdio<br/>application/main.c:42\"]\n    button_setup[\"Initialize button object<br/>application/main.c:53\"]\n    callback_setup[\"Register and enable button events<br/>application/main.c:59\"]\n    led_initial[\"Turn on the initial status LED<br/>application/main.c:72\"]\n    start_features[\"Start application features<br/>application/main.c:75\"]\n    pwm_start[\"Attempt 1 kHz PA8 PWM startup<br/>firmware/app/app.c:14\"]\n    pwm_result{\"PWM setup succeeds? — firmware/app/app.c:16\"}\n    pwm_success[\"Log PWM started on PA8<br/>firmware/app/app.c:18\"]\n    pwm_failure[\"Log PWM initialization failure<br/>firmware/app/app.c:22\"]\n    poll_event[\"Check EventFlag<br/>application/main.c:79\"]\n    event_result{\"Button event pending? — application/main.c:79\"}\n    clear_event[\"Clear the button event flag<br/>application/main.c:82\"]\n    toggle_led[\"Toggle the status LED<br/>application/main.c:83\"]\n    log_toggle[\"Log the LED transition<br/>application/main.c:84\"]\n  end\n  boot -->  system_init -->  stdio_init -->  button_setup -->  callback_setup -->  led_initial -->  start_features -->  pwm_start -->  pwm_result\n  pwm_result -->|yes| pwm_success\n  pwm_result -->|no| pwm_failure\n  pwm_success -->  poll_event\n  pwm_failure -->  poll_event\n  poll_event -->  event_result\n  event_result -->|yes| clear_event -->  toggle_led -->  log_toggle -->  poll_event\n  event_result -->|no| poll_event",
+  "title": "Low-Level Design (Firmware Workflow)",
+  "node_notes": {
+    "pwm_success": "This records successful timer startup, including the PA8 pin and configured frequency. The message is emitted by LOGI in firmware/app/app.c.",
+    "led_initial": "This establishes the initial visible LED state before the feature startup call. application/main.c invokes led_on with MX_STATUS_LED and prints a confirmation.",
+    "system_init": "This initializes the target system and its peripheral baseline before the application uses the console and board interfaces. application/main.c checks mx_system_init and returns on failure.",
+    "clear_event": "This consumes the pending event before performing the LED action so a single press is not repeatedly handled. application/main.c sets EventFlag back to zero.",
+    "callback_setup": "This connects BUTTON_EVENT_PRESSED to ButtonCb and enables event generation. application/main.c registers the callback, calls button_enableit, and then clears EventFlag before entering runtime.",
+    "pwm_failure": "This records that PWM initialization failed and PA8 remains inactive. The failure path is the LOGE branch in firmware/app/app.c.",
+    "pwm_result": "This branch reflects the boolean result returned by pwm_pa8_start. firmware/app/app.c selects LOGI for true and LOGE for false.",
+    "stdio_init": "This establishes the basic stdio path used by both direct printf calls and LOGI or LOGE. application/main.c invokes mx_basic_stdio_init and aborts startup if it fails.",
+    "event_result": "This branch tests whether ButtonCb has notified the loop by setting EventFlag to 1. The condition is explicit in application/main.c at the if statement inside while 1.",
+    "start_features": "This transfers control to the vendor-agnostic application module after board-facing initialization is complete. The call is app_start in application/main.c.",
+    "poll_event": "This is the continuously executing bare-metal polling point for the volatile EventFlag. application/main.c places the check inside while 1 rather than creating an RTOS task.",
+    "pwm_start": "This requests the configured PWM frequency of 1000 Hz from the platform driver. firmware/app/app.c passes APP_PWM_FREQUENCY_HZ to pwm_pa8_start.",
+    "button_setup": "This obtains and initializes the generated button object selected as BUTTON_0. application/main.c performs mx_button_0_getobject followed by button_init.",
+    "log_toggle": "This reports the completed LED transition over the console logging path. application/main.c emits printf with the text LED toggled.",
+    "toggle_led": "This changes the status LED state in response to one button press event. application/main.c calls led_toggle with MX_STATUS_LED.",
+    "boot": "This step represents entry into the firmware application before application-owned setup begins. The source location is application/main.c at the main function entry, after the Cube system glue is intentionally not modeled as application behavior."
+  },
+  "authored_by_model": true
+}
