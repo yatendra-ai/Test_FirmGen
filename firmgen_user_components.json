@@ -1,0 +1,27 @@
+{
+  "linker_script": {
+    "path": "user_modifiable/Device/STM32C5A3ZGT6/stm32c5a3xg_flash.ld"
+  },
+  "drivers": [
+    {
+      "name": "application",
+      "path": "application"
+    },
+    {
+      "name": "config",
+      "path": "config"
+    },
+    {
+      "name": "src",
+      "path": "drivers/src"
+    },
+    {
+      "name": "hal",
+      "path": "generated/hal"
+    },
+    {
+      "name": "STM32C5A3ZGT6",
+      "path": "user_modifiable/Device/STM32C5A3ZGT6"
+    }
+  ]
+}

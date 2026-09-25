@@ -1,0 +1,95 @@
+{
+  "job_id": "ca9a161e-f067-4e5e-8701-19c3666d087e",
+  "document_id": "7ccfb35a-ef8f-40e6-b9ff-b7ec4d55c957",
+  "frozen_at": "2026-09-25T06:11:53.154Z",
+  "requirement_count": 25,
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "PWM Peripheral, Pin & Electrical Interface",
+      "description": "Covers the MCU pin assignment, timer alternate-function setup, carrier generation, output electrical constraints, and safe interfacing to external loads.",
+      "requirements": [
+        "The firmware shall output the PWM signal on Arduino D7 (CN9 pin 8, MCU pin PA8).",
+        "The firmware shall configure PA8 in a timer alternate-function mode that supports PWM output (e.g., TIM1 Channel 1).",
+        "The PWM requirement shall refer to duty cycle on a 3.3 V MCU logic output and shall not imply a variable 5 V supply rail.",
+        "The system shall not drive high‑power loads directly from the MCU pin; an external driver stage shall be used for loads exceeding GPIO electrical limits.",
+        "The PWM carrier frequency shall remain constant while the duty cycle changes and throughout the ramp.",
+        "By default, the PWM frequency shall be 1 kHz unless an application configuration overrides it.",
+        "The firmware shall not reconfigure PA8 or its alternate-function selection while PWM generation is active; the pin shall remain bound to the selected timer channel throughout operation.",
+        "Duty-cycle updates shall not introduce extra PWM edges; during active operation each carrier period shall contain no more than one rising and one falling transition, except at 0% or 100% where the output is static."
+      ],
+      "requirement_ids": [
+        "IF-001",
+        "IF-002",
+        "IF-003",
+        "HW-001",
+        "PERF-001",
+        "PERF-002",
+        "IF-004",
+        "PERF-008"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-2",
+      "name": "PWM Ramp State Machine & Runtime Execution",
+      "description": "Covers PWM startup and reset behavior, endpoint handling, continuous ramp sequencing, duty-cycle validity, and nonblocking runtime execution.",
+      "requirements": [
+        "The firmware shall start PWM generation automatically after board initialization.",
+        "The firmware shall begin each cycle at 0% duty cycle.",
+        "The firmware shall repeat the complete 10‑second up/down PWM duty‑cycle cycle continuously until reset or power‑off.",
+        "After any reset, the firmware shall restart the PWM sequence from the defined initial state.",
+        "During the up‑ramp, the duty cycle shall increase monotonically from 0% to 100%.",
+        "During the down‑ramp, the duty cycle shall decrease monotonically from 100% to 0%.",
+        "The firmware shall hold PA8 low (0% duty) whenever PWM generation is inactive, including during initialization and after any reset, until the PWM timer is configured and the initial 0% state is established.",
+        "The firmware shall clamp computed duty-cycle values to the valid range inclusive of the endpoints so the timer compare value never underflows below 0 or exceeds the auto-reload period, ensuring realizable 0% and 100% duty cycles.",
+        "The firmware shall reverse ramp direction immediately at the duty‑cycle endpoints with no intentional hold time: upon reaching 100% the next update shall decrease duty cycle, and upon reaching 0% the next update shall increase duty cycle.",
+        "The firmware shall avoid blocking delays that prevent normal firmware execution while updating the PWM duty cycle."
+      ],
+      "requirement_ids": [
+        "FR-001",
+        "FR-002",
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-007",
+        "FR-008",
+        "FR-009",
+        "NFR-001"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-3",
+      "name": "PWM Ramp Timing & Profile Configuration",
+      "description": "Covers ramp durations, waveform shape, duty-cycle endpoints, update pacing, and smoothness of the configured PWM profile.",
+      "requirements": [
+        "The up‑ramp duration from 0% to 100% duty cycle shall be 5.0 seconds.",
+        "The down‑ramp duration from 100% to 0% duty cycle shall be 5.0 seconds.",
+        "The complete up‑and‑down PWM duty‑cycle cycle duration shall be 10.0 seconds.",
+        "The PWM duty‑cycle ramp shape shall be linear.",
+        "The PWM duty‑cycle endpoints shall be 0% and 100%.",
+        "The firmware should use sufficiently small duty‑cycle increments to create a smooth ramp.",
+        "Duty-cycle updates during each ramp shall be paced by a single monotonic timebase with a fixed update interval for the duration of the ramp."
+      ],
+      "requirement_ids": [
+        "PERF-003",
+        "PERF-004",
+        "PERF-005",
+        "PERF-006",
+        "PERF-007",
+        "NFR-002",
+        "NFR-003"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    }
+  ],
+  "file_checksum": "b20e5f333bced323f962422020a14d001c93f20426c84ece883bb47c7b403d97"
+}

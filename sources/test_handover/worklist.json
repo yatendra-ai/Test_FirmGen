@@ -1,0 +1,8 @@
+{
+  "schema": "firmgen.test_handover.worklist/1",
+  "layers": {
+    "compilable": [],
+    "needs_mock": []
+  },
+  "requirements": []
+}

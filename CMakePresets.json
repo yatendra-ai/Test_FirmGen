@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {"name":"debug_GCC_NUCLEO-C5A3ZG", "generator":"Ninja", "binaryDir":"${sourceDir}/build/debug", "cacheVariables":{"CMAKE_BUILD_TYPE":"Debug"}},
+    {"name":"release_GCC_NUCLEO-C5A3ZG", "generator":"Ninja", "binaryDir":"${sourceDir}/build/release", "cacheVariables":{"CMAKE_BUILD_TYPE":"release_GCC_NUCLEO-C5A3ZG"}}
+  ],
+  "buildPresets": [
+    {"name":"debug_GCC_NUCLEO-C5A3ZG", "configurePreset":"debug_GCC_NUCLEO-C5A3ZG"},
+    {"name":"release_GCC_NUCLEO-C5A3ZG", "configurePreset":"release_GCC_NUCLEO-C5A3ZG"}
+  ]
+}
