@@ -1,0 +1,897 @@
+{
+  "job_id": "5a074766-471e-4051-9365-a02860f1c3c9",
+  "document_id": "0e349b00-f1e8-46f0-88f8-f32a8fd90cc7",
+  "saved_at": "2026-09-28T08:43:16.569Z",
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Board Integration, LEDs & User Input",
+      "criteria": [
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "inspection",
+          "criterion": "The delivered demo is built and delivered as one firmware application image rather than as separate per-function images.",
+          "observable": "The firmware image and the application entry point in the build output/source tree",
+          "observable_kind": "artifact",
+          "preconditions": [],
+          "procedure": [
+            "Inspect the delivered firmware build output.",
+            "Inspect the application entry point and how the demo functions are included."
+          ],
+          "expected": "One firmware application image contains the integrated demo entry point.",
+          "source": "derived",
+          "rationale": "The acceptance criterion requires delivery as one integrated application; checking the delivered image and entry point makes that claim observable.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "unverifiable",
+          "criterion": "The demo validates every major board function identified by the PRD.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "Not assessable from the supplied information.",
+          "source": "derived",
+          "rationale": "The requirement and acceptance criterion refer to board functions listed in the PRD, but that list and the pass condition for validating each function were not supplied.",
+          "blocked_reason": "The PRD's list of major board functions and a checkable validation outcome for each function are missing.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "inspection",
+          "criterion": "The demo's resource-to-function mapping uses onboard resources wherever possible and identifies each exception.",
+          "observable": "The demo's resource-to-function mapping and its exception list",
+          "observable_kind": "artifact",
+          "preconditions": [],
+          "procedure": [
+            "Inspect the demo's documented or implemented mapping of board functions to resources.",
+            "For each function, check whether an onboard resource is used or an exception is recorded."
+          ],
+          "expected": "Each board function uses an onboard resource where possible; every exception is identified.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "hardware",
+          "criterion": "Each onboard LED responds to commands to turn it on and off after LED initialization.",
+          "observable": "The visible state of each onboard LED after the corresponding control command",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG board."
+          ],
+          "procedure": [
+            "Initialize the onboard LEDs through the firmware.",
+            "Command each onboard LED on and observe it.",
+            "Command each onboard LED off and observe it."
+          ],
+          "expected": "Each commanded LED visibly turns on and then off.",
+          "source": "derived",
+          "rationale": "The stated acceptance criterion says the LEDs are initialized and operate correctly; responding to both on and off commands is a direct observable check of that operation.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "hardware",
+          "criterion": "After boot, the status LED alternates between on and off at least once.",
+          "observable": "The visible status-LED state over time after boot",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG board."
+          ],
+          "procedure": [
+            "Reset or power on the board.",
+            "Observe the status LED after boot."
+          ],
+          "expected": "The status LED changes from on to off or from off to on and then changes back after boot.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "A change between distinct network states produces visibly distinguishable LED indications.",
+          "observable": "The visible onboard LED pattern for each forced network state",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG board.",
+            "The test can cause or observe at least two distinct network states."
+          ],
+          "procedure": [
+            "Record the onboard LED pattern in one network state.",
+            "Cause or wait for a transition to another network state.",
+            "Record the onboard LED pattern again."
+          ],
+          "expected": "The LED patterns for the two distinct network states are visibly distinguishable.",
+          "source": "derived",
+          "rationale": "The acceptance criterion requires LED behavior to visibly indicate network state; distinguishable indications across distinct states provide an observable check without inventing a particular LED-to-state mapping.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "hardware",
+          "criterion": "A change between distinct MQTT states produces visibly distinguishable LED indications.",
+          "observable": "The visible onboard LED pattern for each forced MQTT state",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG board.",
+            "The test can cause or observe at least two distinct MQTT states."
+          ],
+          "procedure": [
+            "Record the onboard LED pattern in one MQTT state.",
+            "Cause or wait for a transition to another MQTT state.",
+            "Record the onboard LED pattern again."
+          ],
+          "expected": "The LED patterns for the two distinct MQTT states are visibly distinguishable.",
+          "source": "derived",
+          "rationale": "The acceptance criterion requires LED behavior to visibly indicate MQTT state; distinguishable indications across distinct states provide an observable check without inventing a particular LED-to-state mapping.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "hardware",
+          "criterion": "A physical press of the onboard USER button produces a detectable press event.",
+          "observable": "The firmware's USER-button press-event count or event trace",
+          "observable_kind": "state",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG board.",
+            "The USER button is released and the event count or trace can be observed."
+          ],
+          "procedure": [
+            "Record the press-event count or trace while the button is released.",
+            "Physically press the onboard USER button.",
+            "Inspect the count or trace."
+          ],
+          "expected": "A press event is recorded after the physical press.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "host",
+          "criterion": "Each detected button-press event changes the application state from its current value to its toggled value.",
+          "observable": "The application-state value before and after the button-press handler is called",
+          "observable_kind": "state",
+          "preconditions": [
+            "The portable application logic can be called with a simulated detected button-press event.",
+            "The initial application-state value is known."
+          ],
+          "procedure": [
+            "Set the application state to a known value.",
+            "Call the firmware's portable button-press handling logic once with a detected press event.",
+            "Read the application state.",
+            "Call the logic again and read the state again."
+          ],
+          "expected": "The state is toggled after each call and returns to its initial value after two calls.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "hardware",
+          "criterion": "One physical USER-button actuation, including its contact transitions, produces exactly one press event and exactly one application-state toggle.",
+          "observable": "The press-event count and application-state value before and after one physical actuation",
+          "observable_kind": "state",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG board.",
+            "The USER button is released and the event count and application state can be observed."
+          ],
+          "procedure": [
+            "Record the press-event count and application-state value.",
+            "Physically actuate the USER button once and release it, allowing the switch's contact transitions to occur naturally.",
+            "Wait for the firmware's button handling to settle.",
+            "Read the event count and application-state value."
+          ],
+          "expected": "The event count increases by exactly one, and the application state is toggled exactly once.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "UART Console & Diagnostics",
+      "criteria": [
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "A serial terminal connected to the NUCLEO-C5A3ZG ST-LINK Virtual COM Port at 115200 baud, 8 data bits, no parity, and 1 stop bit receives firmware UART output.",
+          "observable": "Text received in the serial terminal through the ST-LINK Virtual COM Port",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG.",
+            "The ST-LINK Virtual COM Port is connected to a host."
+          ],
+          "procedure": [
+            "Configure a serial terminal for 115200 baud, 8 data bits, no parity, and 1 stop bit.",
+            "Connect to the ST-LINK Virtual COM Port.",
+            "Observe the received UART output."
+          ],
+          "expected": "Firmware UART output is received and legible with the terminal configured for 115200 baud, 8-N-1.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-001",
+          "verifiability": "hardware",
+          "criterion": "The captured UART log contains identifiable status output for boot, network, HTTP, MQTT, ADC, PWM, and buttons.",
+          "observable": "Captured UART log from the running firmware",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG.",
+            "A host is connected to the board's UART output."
+          ],
+          "procedure": [
+            "Capture UART output while the firmware runs.",
+            "Inspect the captured output for status entries corresponding to boot, network, HTTP, MQTT, ADC, PWM, and buttons."
+          ],
+          "expected": "The captured log contains identifiable status output for all seven listed areas.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-007",
+          "verifiability": "hardware",
+          "criterion": "The UART log contains at least two consolidated board-health status reports emitted at separate times.",
+          "observable": "Timestamped or sequentially captured UART log containing consolidated board-health reports",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG.",
+            "A host is connected to the board's UART output."
+          ],
+          "procedure": [
+            "Capture UART output over time while the firmware runs.",
+            "Identify consolidated board-health reports in the capture.",
+            "Check that at least two reports occur at separate times."
+          ],
+          "expected": "At least two consolidated board-health reports appear in the UART capture at separate times; no specific reporting interval is asserted.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "Ethernet Configuration & Network Validation",
+      "criteria": [
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "hardware",
+          "criterion": "The IPv4 address assigned to the Ethernet interface matches the address offered in a DHCP ACK.",
+          "observable": "Captured DHCP exchange and the Ethernet interface's IPv4 address",
+          "observable_kind": "signal",
+          "preconditions": [
+            "A DHCP service is available on the network.",
+            "The board is connected to that network."
+          ],
+          "procedure": [
+            "Capture network traffic while the board requests network configuration.",
+            "Read the address in the DHCP ACK sent to the board.",
+            "Read the board's Ethernet interface IPv4 address."
+          ],
+          "expected": "The interface IPv4 address matches the address in the DHCP ACK.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-002",
+          "verifiability": "hardware",
+          "criterion": "The UART output contains the acquired IP address.",
+          "observable": "UART output captured after the Ethernet interface acquires an IP address",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "An IP address has been acquired.",
+            "The board's UART output is connected to a capture device."
+          ],
+          "procedure": [
+            "Capture UART output after the IP address is acquired.",
+            "Compare the address shown in the output with the acquired IP address."
+          ],
+          "expected": "The acquired IP address appears in the UART output.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-003",
+          "verifiability": "hardware",
+          "criterion": "The UART output contains the acquired gateway address.",
+          "observable": "UART output captured after the gateway address is acquired",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "A gateway address has been acquired.",
+            "The board's UART output is connected to a capture device."
+          ],
+          "procedure": [
+            "Capture UART output after the gateway address is acquired.",
+            "Compare the address shown in the output with the acquired gateway address."
+          ],
+          "expected": "The acquired gateway address appears in the UART output.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-004",
+          "verifiability": "hardware",
+          "criterion": "The UART output contains the acquired DNS server address.",
+          "observable": "UART output captured after the DNS server address is acquired",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "A DNS server address has been acquired.",
+            "The board's UART output is connected to a capture device."
+          ],
+          "procedure": [
+            "Capture UART output after the DNS server address is acquired.",
+            "Compare the address shown in the output with the acquired DNS server address."
+          ],
+          "expected": "The acquired DNS server address appears in the UART output.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-006",
+          "verifiability": "hardware",
+          "criterion": "If NTP validation is run, its captured NTP exchange uses UDP port 123 and its result is evaluated separately from HTTP validation.",
+          "observable": "Network packet capture of NTP and HTTP validation traffic, and the corresponding validation results",
+          "observable_kind": "signal",
+          "preconditions": [
+            "NTP validation is enabled and run.",
+            "The board has network connectivity and the configured NTP service is reachable."
+          ],
+          "procedure": [
+            "Capture network traffic while running NTP validation and HTTP validation.",
+            "Identify the NTP exchange and inspect its UDP destination port.",
+            "Inspect the validation results to confirm the NTP result is reported separately from the HTTP result."
+          ],
+          "expected": "The NTP exchange uses UDP destination port 123, and the NTP and HTTP validations have separate results.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "MQTT Communication",
+      "criteria": [
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "hardware",
+          "criterion": "After a USER-button press that toggles the application state, an MQTT publication carries the post-press application-state value.",
+          "observable": "MQTT packet capture of the device's publication and the application-state value before and after the button press",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "MQTT is available and the device is connected to the broker.",
+            "The application state before the press is observable, and a USER-button press toggles it."
+          ],
+          "procedure": [
+            "Record the current application state.",
+            "Capture MQTT traffic while pressing the USER button once.",
+            "Compare the application-state value in the resulting publication with the state after the press."
+          ],
+          "expected": "The publication contains the application-state value after the press, which differs from the value recorded before the press.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "hardware",
+          "criterion": "The device establishes an MQTT connection to broker.hivemq.com over plaintext TCP port 1883.",
+          "observable": "Network capture showing the device's TCP peer, MQTT CONNECT/CONNACK exchange, and absence of a TLS handshake",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Network connectivity is available.",
+            "The device is running and attempting to connect to the broker."
+          ],
+          "procedure": [
+            "Capture network traffic from the device during broker connection.",
+            "Inspect the destination endpoint and connection handshake."
+          ],
+          "expected": "The peer is broker.hivemq.com on TCP port 1883, a successful MQTT CONNACK is observed, and no TLS handshake occurs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "hardware",
+          "criterion": "Consecutive telemetry MQTT publications are emitted at 5-second intervals.",
+          "observable": "Timestamps of consecutive telemetry MQTT PUBLISH packets in a network capture",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "An MQTT connection is established and telemetry publishing is enabled.",
+            "The capture can timestamp outgoing MQTT packets."
+          ],
+          "procedure": [
+            "Capture at least three consecutive telemetry publications.",
+            "Compare the timestamps of each adjacent pair of publications."
+          ],
+          "expected": "Each adjacent pair of telemetry publications is separated by 5 seconds.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "hardware",
+          "criterion": "A telemetry MQTT publication is sent on the topic /firmgen/c5/telemetry.",
+          "observable": "Topic field of the device's MQTT PUBLISH packet",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "An MQTT connection is established.",
+            "Telemetry publication is active."
+          ],
+          "procedure": [
+            "Capture an outgoing telemetry MQTT PUBLISH packet.",
+            "Read its topic field."
+          ],
+          "expected": "The topic field is exactly /firmgen/c5/telemetry.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-005",
+          "verifiability": "hardware",
+          "criterion": "The device sends an MQTT SUBSCRIBE request for /firmgen/c5/control.",
+          "observable": "Topic filter in the device's MQTT SUBSCRIBE packet",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "An MQTT connection is established."
+          ],
+          "procedure": [
+            "Capture the device's MQTT subscription exchange.",
+            "Inspect the topic filter in the SUBSCRIBE packet."
+          ],
+          "expected": "The SUBSCRIBE packet contains the topic filter /firmgen/c5/control.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-005",
+          "verifiability": "hardware",
+          "criterion": "A publication made to /firmgen/c5/control is delivered to the device over its MQTT connection on TCP port 1883.",
+          "observable": "Network capture showing the device connection's TCP port and the inbound MQTT PUBLISH packet",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The device is connected to the broker and has subscribed to /firmgen/c5/control.",
+            "A test publisher can publish to the broker."
+          ],
+          "procedure": [
+            "Verify the device's MQTT connection uses TCP port 1883.",
+            "Publish a test message to /firmgen/c5/control from a separate MQTT client.",
+            "Capture traffic at the device and inspect the inbound MQTT PUBLISH packet."
+          ],
+          "expected": "The device connection uses TCP port 1883 and the device receives an MQTT PUBLISH packet on /firmgen/c5/control.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-007",
+          "verifiability": "hardware",
+          "criterion": "After network connectivity is restored following an MQTT disconnection, the device establishes a new MQTT connection to the broker.",
+          "observable": "A successful MQTT CONNACK received by the device after connectivity restoration",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "An MQTT connection has been established and then interrupted.",
+            "Network connectivity is available again."
+          ],
+          "procedure": [
+            "Capture traffic while interrupting the established connection.",
+            "Restore network connectivity.",
+            "Observe the device's subsequent MQTT connection exchange."
+          ],
+          "expected": "A new connection attempt from the device is followed by a successful MQTT CONNACK.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-5",
+      "name": "HTTP Weather & Time Services",
+      "criteria": [
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "hardware",
+          "criterion": "A captured HTTP GET to a public weather endpoint results in weather data being delivered to the firmware.",
+          "observable": "Ethernet capture of the HTTP request and response, plus the firmware's received weather-data result",
+          "observable_kind": "signal",
+          "preconditions": [
+            "Network connectivity is available.",
+            "A reachable public weather endpoint is available."
+          ],
+          "procedure": [
+            "Run the firmware with network capture enabled.",
+            "Observe the request and response and inspect the firmware's resulting weather data."
+          ],
+          "expected": "The request method is GET, the endpoint is public, and a nonempty weather-data response is received by the firmware.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "hardware",
+          "criterion": "The weather request selects Bengaluru, Karnataka as its location.",
+          "observable": "The location selection in the captured request or the firmware's weather-request configuration",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The firmware is configured to request weather data.",
+            "Network connectivity is available."
+          ],
+          "procedure": [
+            "Run the firmware while capturing its weather request.",
+            "Inspect the request's location selection or the configuration used to form that request."
+          ],
+          "expected": "The selected weather location is Bengaluru, Karnataka.",
+          "source": "derived",
+          "rationale": "The requirement's parameters / constraints specify Bengaluru, Karnataka; checking the request's location selection verifies that the successful retrieval is for the required location without assuming a particular endpoint's coordinate format.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "hardware",
+          "criterion": "The firmware receives the current date and time from an HTTP-accessible time service.",
+          "observable": "The time-service response and the firmware's resulting date and time fields",
+          "observable_kind": "state",
+          "preconditions": [
+            "Network connectivity is available.",
+            "An HTTP-accessible time service is available."
+          ],
+          "procedure": [
+            "Run the firmware with access to the time service.",
+            "Inspect the received response and the resulting date and time fields."
+          ],
+          "expected": "The firmware's date and time fields are populated from a nonempty time-service response.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "inspection",
+          "criterion": "The assumed weather sample data identifies its location as Bengaluru, Karnataka.",
+          "observable": "The location label or value in the assumed weather sample data",
+          "observable_kind": "state",
+          "preconditions": [
+            "Weather sample data is present."
+          ],
+          "procedure": [
+            "Inspect the assumed weather sample data's location field or label."
+          ],
+          "expected": "The location is Bengaluru, Karnataka.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-6",
+      "name": "ADC & Analog Measurement",
+      "criteria": [
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "hardware",
+          "criterion": "With no external analog source connected, the firmware obtains ADC samples from both VREFINT and the MCU internal temperature sensor.",
+          "observable": "Successful ADC sample results for the VREFINT and internal temperature-sensor channels",
+          "observable_kind": "state",
+          "preconditions": [
+            "The NUCLEO-C5A3ZG is powered and running the firmware.",
+            "No external analog hardware is connected to the ADC."
+          ],
+          "procedure": [
+            "Run the firmware on the NUCLEO-C5A3ZG without connecting external analog hardware.",
+            "Observe the ADC acquisition results for VREFINT and the internal temperature-sensor channels."
+          ],
+          "expected": "A successful sample result is obtained for each of the two internal channels.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "unverifiable",
+          "criterion": "The plausibility of the VREFINT and temperature-sensor readings cannot be assessed against a defined acceptance range.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "No pass/fail range or plausibility definition is specified.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": "The acceptance criteria call the readings “plausible” but provide no valid value ranges, tolerance, calibration assumptions, or other definition of plausibility.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-005",
+          "verifiability": "hardware",
+          "criterion": "After ADC sampling, the UART output contains the raw ADC sample value or values.",
+          "observable": "Captured UART output",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG.",
+            "ADC samples have been taken."
+          ],
+          "procedure": [
+            "Capture the firmware's UART output after ADC samples have been taken.",
+            "Inspect the output for the raw ADC sample value or values."
+          ],
+          "expected": "The UART output contains numeric raw ADC sample value or values.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-006",
+          "verifiability": "hardware",
+          "criterion": "After ADC sampling, the UART output contains the converted ADC measurement or measurements.",
+          "observable": "Captured UART output",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG.",
+            "ADC samples have been taken."
+          ],
+          "procedure": [
+            "Capture the firmware's UART output after ADC samples have been taken.",
+            "Inspect the output for converted ADC measurement value or values."
+          ],
+          "expected": "The UART output contains at least one numeric converted ADC measurement.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-7",
+      "name": "PWM Timer & Output",
+      "criteria": [
+        {
+          "requirement_id": "HW-004",
+          "verifiability": "inspection",
+          "criterion": "The firmware configuration assigns a hardware-timer PWM channel to a header pin whose board mapping supports that timer channel's PWM alternate function.",
+          "observable": "Firmware timer/channel configuration and the board pin alternate-function mapping for the selected header pin.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The firmware source and board pin-mapping configuration are available for inspection."
+          ],
+          "procedure": [
+            "Identify the configured PWM timer and channel in the firmware.",
+            "Identify the configured output pin and confirm it is a header pin in the board mapping.",
+            "Confirm the pin mapping supports the configured timer channel's PWM alternate function."
+          ],
+          "expected": "The configured output is a PWM-capable header pin mapped to the configured hardware-timer PWM channel.",
+          "source": "derived",
+          "rationale": "The stated acceptance criterion names hardware-timer PWM on a PWM-capable header pin, while the verification method is Inspection; inspecting the timer/channel setup and board mapping is the checkable evidence available without observing the electrical waveform.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-001",
+          "verifiability": "hardware",
+          "criterion": "With the default PWM test running, the PWM output frequency measured at the header pin is 1 kHz.",
+          "observable": "Frequency reading from an oscilloscope or logic analyzer connected to the PWM header pin.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The default PWM test is running.",
+            "The measurement instrument is connected to the configured PWM output pin and shares the board ground."
+          ],
+          "procedure": [
+            "Connect an oscilloscope or logic analyzer to the PWM output pin and ground.",
+            "Run the default PWM test.",
+            "Measure the output frequency."
+          ],
+          "expected": "1 kHz.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "PERF-002",
+          "verifiability": "hardware",
+          "criterion": "With the default PWM test running, the PWM output duty cycle measured at the header pin is 50%.",
+          "observable": "Duty-cycle measurement from an oscilloscope or logic analyzer connected to the PWM header pin.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The default PWM test is running.",
+            "The measurement instrument is connected to the configured PWM output pin and shares the board ground."
+          ],
+          "procedure": [
+            "Connect an oscilloscope or logic analyzer to the PWM output pin and ground.",
+            "Run the default PWM test.",
+            "Measure the output duty cycle."
+          ],
+          "expected": "50%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-008",
+          "verifiability": "hardware",
+          "criterion": "With PWM output enabled, the waveform frequency measured at the output pin is 1 kHz.",
+          "observable": "Frequency reading from an oscilloscope or logic analyzer connected to the PWM output pin.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM output is enabled.",
+            "The measurement instrument is connected to the configured PWM output pin and shares the board ground."
+          ],
+          "procedure": [
+            "Connect an oscilloscope or logic analyzer to the PWM output pin and ground.",
+            "Enable PWM output.",
+            "Measure the waveform frequency."
+          ],
+          "expected": "1 kHz.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-008",
+          "verifiability": "hardware",
+          "criterion": "With PWM output enabled, the waveform duty cycle measured at the output pin is 50%.",
+          "observable": "Duty-cycle measurement from an oscilloscope or logic analyzer connected to the PWM output pin.",
+          "observable_kind": "signal",
+          "preconditions": [
+            "PWM output is enabled.",
+            "The measurement instrument is connected to the configured PWM output pin and shares the board ground."
+          ],
+          "procedure": [
+            "Connect an oscilloscope or logic analyzer to the PWM output pin and ground.",
+            "Enable PWM output.",
+            "Measure the waveform duty cycle."
+          ],
+          "expected": "50%.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "DIAG-008",
+          "verifiability": "unverifiable",
+          "criterion": "The waveform's stability cannot be accepted as a bounded check until an observation interval and allowable frequency and duty-cycle variation are specified.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "Not defined by the requirement; an observation interval and allowable variation are needed.",
+          "source": "derived",
+          "rationale": "The requirement and its stated acceptance criterion call the waveform stable, but neither defines how long to observe it nor how much frequency or duty-cycle variation is acceptable, so no repeatable pass/fail threshold can be asserted.",
+          "blocked_reason": "The requirement provides no stability tolerance or observation duration, so a stable-versus-unstable waveform cannot be judged reproducibly.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    }
+  ]
+}

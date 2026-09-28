@@ -1,0 +1,159 @@
+{
+  "job_id": "5a074766-471e-4051-9365-a02860f1c3c9",
+  "document_id": "0e349b00-f1e8-46f0-88f8-f32a8fd90cc7",
+  "frozen_at": "2026-09-28T08:42:28.388Z",
+  "requirement_count": 33,
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Board Integration, LEDs & User Input",
+      "description": "Covers the integrated board demo, use of onboard resources, LED initialization and status indications, and debounced USER-button input and state toggling.",
+      "requirements": [
+        "The firmware shall be a single integrated application that validates major NUCLEO-C5A3ZG board functions.",
+        "The demo shall use onboard resources wherever possible to validate the major NUCLEO-C5A3ZG board functions.",
+        "The firmware shall initialize the onboard LEDs.",
+        "The firmware shall blink a status LED after boot.",
+        "The firmware shall use LEDs to indicate network state.",
+        "The firmware shall use LEDs to indicate MQTT state.",
+        "The firmware shall detect the onboard USER button.",
+        "Each press of the onboard USER button shall toggle an application state.",
+        "The firmware shall register each physical USER button actuation as exactly one press event despite switch contact transitions."
+      ],
+      "requirement_ids": [
+        "FR-001",
+        "HW-001",
+        "HW-002",
+        "FR-002",
+        "FR-003",
+        "FR-004",
+        "FR-005",
+        "FR-006",
+        "FR-012"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-2",
+      "name": "UART Console & Diagnostics",
+      "description": "Covers the ST-LINK virtual serial configuration and the firmware’s general and periodic board-health reporting over UART.",
+      "requirements": [
+        "The firmware shall use the ST-LINK Virtual COM Port at 115200 baud, 8 data bits, no parity, and 1 stop bit.",
+        "The firmware shall print boot, network, HTTP, MQTT, ADC, PWM, and button status over UART.",
+        "The firmware shall print a consolidated board-health status periodically over UART."
+      ],
+      "requirement_ids": [
+        "IF-001",
+        "DIAG-001",
+        "DIAG-007"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-3",
+      "name": "Ethernet Configuration & Network Validation",
+      "description": "Covers DHCP-based network setup, reporting acquired network addresses, and optional NTP validation over UDP.",
+      "requirements": [
+        "The firmware shall acquire network configuration through DHCP.",
+        "The firmware shall print the acquired IP address over UART.",
+        "The firmware shall print the acquired gateway address over UART.",
+        "The firmware shall print the acquired DNS server address over UART.",
+        "The demo may validate NTP separately over UDP port 123 as additional networking validation; NTP validation shall not be treated as HTTP validation."
+      ],
+      "requirement_ids": [
+        "IF-002",
+        "DIAG-002",
+        "DIAG-003",
+        "DIAG-004",
+        "IF-006"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-4",
+      "name": "MQTT Communication",
+      "description": "Covers broker connectivity and recovery, telemetry and button-state publishing, and control-topic subscription.",
+      "requirements": [
+        "After each USER button press, the firmware shall publish the updated application state over MQTT.",
+        "The firmware shall connect to broker.hivemq.com:1883 using non-TLS MQTT.",
+        "The firmware shall publish telemetry every 5 seconds.",
+        "The firmware shall publish MQTT messages to the topic /firmgen/c5/telemetry.",
+        "The firmware shall subscribe to the MQTT topic /firmgen/c5/control.",
+        "When an MQTT connection is lost and network connectivity is available again, the firmware shall re-establish the MQTT connection."
+      ],
+      "requirement_ids": [
+        "FR-007",
+        "IF-003",
+        "FR-008",
+        "IF-004",
+        "IF-005",
+        "IF-007"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-5",
+      "name": "HTTP Weather & Time Services",
+      "description": "Covers HTTP retrieval of Bengaluru weather data and current date and time from public services.",
+      "requirements": [
+        "The firmware shall use HTTP GET to fetch current Bengaluru weather information from a public endpoint such as Open-Meteo.",
+        "The firmware shall fetch the current date and time using an HTTP-accessible time service.",
+        "For the assumed sample data, the weather location shall be Bengaluru, Karnataka."
+      ],
+      "requirement_ids": [
+        "FR-009",
+        "FR-010",
+        "FR-011"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-6",
+      "name": "ADC & Analog Measurement",
+      "description": "Covers internal-reference and temperature-sensor ADC sampling and reporting of raw and converted measurements.",
+      "requirements": [
+        "The firmware shall validate the ADC without external hardware by sampling internal VREFINT and the MCU internal temperature sensor.",
+        "The firmware shall print raw ADC values.",
+        "The firmware shall print converted ADC values."
+      ],
+      "requirement_ids": [
+        "HW-003",
+        "DIAG-005",
+        "DIAG-006"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    },
+    {
+      "id": "cat-7",
+      "name": "PWM Timer & Output",
+      "description": "Covers timer-driven PWM generation on a header pin, its default frequency and duty cycle, and waveform verification.",
+      "requirements": [
+        "The firmware shall generate PWM using a hardware timer on an available PWM-capable header pin.",
+        "The default PWM test shall use a frequency of 1 kHz.",
+        "The default PWM test shall use a 50% duty cycle.",
+        "The PWM waveform shall be stable at 1 kHz and 50% duty cycle when verified with an oscilloscope or logic analyzer."
+      ],
+      "requirement_ids": [
+        "HW-004",
+        "PERF-001",
+        "PERF-002",
+        "DIAG-008"
+      ],
+      "tasks": [],
+      "gate": "ask",
+      "criteria": []
+    }
+  ],
+  "file_checksum": "f70c50469f3c70179c55ebaf69073d50f31752d19a339908949ce47bbde5de21"
+}

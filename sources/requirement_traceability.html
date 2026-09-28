@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requirement traceability</title>
+<style>
+:root {
+  --ink: #14171a; --dim: #5b6570; --line: #dfe3e8; --bg: #ffffff; --panel: #f6f7f9;
+  --ok: #157347; --warn: #9a5b00; --bad: #a5262b; --accent: #1f4e79;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --ink: #e6e9ec; --dim: #98a3ae; --line: #2c333a; --bg: #14171a; --panel: #1c2126;
+          --ok: #4ec27f; --warn: #e0a75a; --bad: #f08a8f; --accent: #8ab4e8; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; padding: 2.5rem 1.5rem 5rem; background: var(--bg); color: var(--ink);
+  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, sans-serif; }
+main { max-width: 1180px; margin: 0 auto; }
+h1 { font-size: 1.7rem; margin: 0 0 .35rem; letter-spacing: -.01em; }
+h2 { font-size: 1.15rem; margin: 2.5rem 0 .3rem; padding-top: 1.2rem;
+  border-top: 1px solid var(--line); }
+h3 { font-size: .95rem; margin: 1.6rem 0 .4rem; }
+p { margin: .5rem 0; }
+.sub { color: var(--dim); font-size: .875rem; }
+.lead { background: var(--panel); border: 1px solid var(--line); border-radius: 6px;
+  padding: .9rem 1.1rem; margin: 1.2rem 0; }
+.lead p:first-child { margin-top: 0; } .lead p:last-child { margin-bottom: 0; }
+.void { border-color: var(--bad); }
+.void strong { color: var(--bad); }
+.meta { color: var(--dim); font-size: .85rem; margin: .2rem 0 .8rem; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .84rem; }
+th, td { text-align: left; vertical-align: top; padding: .45rem .6rem;
+  border-bottom: 1px solid var(--line); }
+th { color: var(--dim); font-weight: 600; font-size: .74rem; text-transform: uppercase;
+  letter-spacing: .04em; white-space: nowrap; }
+td code { font-size: .82em; }
+code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+.none { color: var(--dim); }
+.pill { display: inline-block; padding: .1rem .45rem; border-radius: 999px;
+  font-size: .72rem; font-weight: 600; white-space: nowrap; border: 1px solid currentColor; }
+.s-verified { color: var(--ok); } .s-tests { color: var(--accent); }
+.s-impl { color: var(--warn); } .s-none { color: var(--bad); }
+.flag { color: var(--bad); font-size: .72rem; display: block; margin-top: .2rem; }
+ul { margin: .4rem 0; padding-left: 1.2rem; } li { margin: .18rem 0; }
+</style>
+</head><body><main>
+<h1>Requirement traceability</h1>
+<p class="sub">Generated 2026-09-28T11:05:43.769269900+00:00 · specification frozen 2026-09-28T08:43:10.017Z</p>
+<div class="lead"><p>33 of 33 requirements have code recorded against them — 0 with tests passing, 0 with tests written but not passing, 33 implemented with no test at all. 0 have nothing recorded.</p>
+</div>
+<div class="lead"><p><strong>Host unit tests.</strong> No host unit-test results have been imported for this project; nothing here rests on host test evidence.</p></div>
+<p class="sub">Derived from what the agent recorded with <code>requirement_trace</code> and from the frozen specification. An em dash means nothing was recorded, which is not the same as nothing being needed.</p>
+<h2>Board Integration, LEDs &amp; User Input</h2>
+<p class="meta">gate: deferred · tasks: 5/5 done · recorded in: 03e8f425-9f58-430f-b520-d188751ac0fc</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-001</code></td><td>The firmware shall be a single integrated application that validates major NUCLEO-C5A3ZG board functions.</td><td>inspection<br>not verifiable</td><td>The delivered demo is built and delivered as one firmware application image rather than as separate per-function images. (expected: One firmware application image contains the integrated demo entry point.)<br>The demo validates every major board function identified by the PRD. (expected: Not assessable from the supplied information.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_start<br>board_io_init<br>board_io_set_led</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-001</code></td><td>The demo shall use onboard resources wherever possible to validate the major NUCLEO-C5A3ZG board functions.</td><td>inspection</td><td>The demo's resource-to-function mapping uses onboard resources wherever possible and identifies each exception. (expected: Each board function uses an onboard resource where possible; every exception is identified.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_start<br>board_io_init<br>board_io_set_led</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>HW-002</code></td><td>The firmware shall initialize the onboard LEDs.</td><td>hardware / instrument</td><td>Each onboard LED responds to commands to turn it on and off after LED initialization. (expected: Each commanded LED visibly turns on and then off.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_process_task<br>board_io_init<br>board_io_set_led</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-002</code></td><td>The firmware shall blink a status LED after boot.</td><td>hardware / instrument</td><td>After boot, the status LED alternates between on and off at least once. (expected: The status LED changes from on to off or from off to on and then changes back after boot.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_process_task<br>board_io_init<br>board_io_set_led</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-003</code></td><td>The firmware shall use LEDs to indicate network state.</td><td>hardware / instrument</td><td>A change between distinct network states produces visibly distinguishable LED indications. (expected: The LED patterns for the two distinct network states are visibly distinguishable.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_start<br>board_io_set_led</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-004</code></td><td>The firmware shall use LEDs to indicate MQTT state.</td><td>hardware / instrument</td><td>A change between distinct MQTT states produces visibly distinguishable LED indications. (expected: The LED patterns for the two distinct MQTT states are visibly distinguishable.)</td><td><code>firmware/app/app.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_start<br>board_io_set_led</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-005</code></td><td>The firmware shall detect the onboard USER button.</td><td>hardware / instrument</td><td>A physical press of the onboard USER button produces a detectable press event. (expected: A press event is recorded after the physical press.)</td><td><code>firmware/app/app.c<br>firmware/modules/button_logic.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_process_task<br>board_io_button_is_pressed<br>button_logic_update</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-006</code></td><td>Each press of the onboard USER button shall toggle an application state.</td><td>host test</td><td>Each detected button-press event changes the application state from its current value to its toggled value. (expected: The state is toggled after each call and returns to its initial value after two calls.)</td><td><code>firmware/app/app.c<br>firmware/modules/button_logic.c</code></td><td><code>app_process_task<br>button_logic_toggle_state</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-012</code></td><td>The firmware shall register each physical USER button actuation as exactly one press event despite switch contact transitions.</td><td>hardware / instrument</td><td>One physical USER-button actuation, including its contact transitions, produces exactly one press event and exactly one application-state toggle. (expected: The event count increases by exactly one, and the application state is toggled exactly once.)</td><td><code>firmware/app/app.c<br>firmware/modules/button_logic.c<br>firmware/platforms/stm32/board_io_stm32.c</code></td><td><code>app_process_task<br>board_io_button_is_pressed<br>button_logic_update</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>FR-001</code>, <code>HW-001</code> — <span class="sub">Latest post-fix deploy boots the app and starts ADC/PWM services; Ethernet later linked and acquired a configured IPv4 through its timeout fallback, though no visual LED/button observation was made. Requirement FR-001 is not fully demonstrated because the PRD does not list all major board functions to validate.</span></li>
+<li><code>HW-002</code>, <code>FR-002</code> — <span class="sub">Boot blink logic runs on PA5; no visual LED observation recorded. PG LED polarity remains an assumption.</span></li>
+<li><code>FR-003</code>, <code>FR-004</code> — <span class="sub">Network eventually became ready on the fallback address and MQTT connected in the latest run before MQTT adapter changes. No physical indicator LED visual confirmation recorded.</span></li>
+<li><code>FR-005</code>, <code>FR-012</code> — <span class="sub">PC13 is configured active-high/no-pull with 10 ms polling and 50 ms debounce. No physical press occurred in captured logs.</span></li>
+<li><code>FR-006</code> — <span class="sub">No physical button press was captured. Button toggle logic remains reachable; host test results are not imported.</span></li>
+</ul>
+<h2>UART Console &amp; Diagnostics</h2>
+<p class="meta">gate: deferred · tasks: 3/3 done · recorded in: 03e8f425-9f58-430f-b520-d188751ac0fc</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>IF-001</code></td><td>The firmware shall use the ST-LINK Virtual COM Port at 115200 baud, 8 data bits, no parity, and 1 stop bit.</td><td>hardware / instrument</td><td>A serial terminal connected to the NUCLEO-C5A3ZG ST-LINK Virtual COM Port at 115200 baud, 8 data bits, no parity, and 1 stop bit receives firmware UART output. (expected: Firmware UART output is received and legible with the terminal configured for 115200 baud, 8-N-1.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_usart2.c<br>application/app_logger.c<br>firmware/platforms/stm32/diagnostics_uart_stm32.c</code></td><td><code>AppLoggerHeader<br>diagnostics_uart_write_line<br>mx_usart2_uart_init</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-001</code></td><td>The firmware shall print boot, network, HTTP, MQTT, ADC, PWM, and button status over UART.</td><td>hardware / instrument</td><td>The captured UART log contains identifiable status output for boot, network, HTTP, MQTT, ADC, PWM, and buttons. (expected: The captured log contains identifiable status output for all seven listed areas.)</td><td><code>firmware/app/app.c<br>firmware/utils/diagnostics/diagnostics.c</code></td><td><code>app_start<br>diagnostics_log_boot<br>diagnostics_log_status</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-007</code></td><td>The firmware shall print a consolidated board-health status periodically over UART.</td><td>hardware / instrument</td><td>The UART log contains at least two consolidated board-health status reports emitted at separate times. (expected: At least two consolidated board-health reports appear in the UART capture at separate times; no specific reporting interval is asserted.)</td><td><code>firmware/app/app.c<br>firmware/utils/diagnostics/diagnostics.c</code></td><td><code>app_process_task<br>diagnostics_log_health</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>IF-001</code> — <span class="sub">Latest post-fix deploy serial output was legible on COM12/ST-LINK VCP at 115200; setup remains generated USART2 8-N-1.</span></li>
+<li><code>DIAG-001</code> — <span class="sub">Latest capture emitted boot, network, HTTP, MQTT, ADC, PWM, and button statuses. ADC/PWM correctly show ready after initialization; no HTTP result because there was no lease.</span></li>
+<li><code>DIAG-007</code> — <span class="sub">Latest post-fix deployment showed periodic health reports with network/HTTP not-ready, MQTT disconnected, and ADC/PWM ready. Multiple reports were seen during the capture.</span></li>
+</ul>
+<h2>Ethernet Configuration &amp; Network Validation</h2>
+<p class="meta">gate: deferred · tasks: 3/3 done · recorded in: 03e8f425-9f58-430f-b520-d188751ac0fc</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>IF-002</code></td><td>The firmware shall acquire network configuration through DHCP.</td><td>hardware / instrument</td><td>The IPv4 address assigned to the Ethernet interface matches the address offered in a DHCP ACK. (expected: The interface IPv4 address matches the address in the DHCP ACK.)</td><td><code>NUCLEO-C5A3ZG/generated/middleware/lwip/mx_lwip.c<br>NUCLEO-C5A3ZG/generated/parts/lan8742/mx_lan8742.c<br>application/app_lwip.c</code></td><td><code>AppLwipNetifExtCallbackFn<br>AppLwipThread<br>mx_lan8742_get_link_mode<br>mx_lwip_init</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-002</code></td><td>The firmware shall print the acquired IP address over UART.</td><td>hardware / instrument</td><td>The UART output contains the acquired IP address. (expected: The acquired IP address appears in the UART output.)</td><td><code>application/app_lwip.c<br>firmware/utils/diagnostics/diagnostics.c</code></td><td><code>AppLwipNetifExtCallbackFn<br>diagnostics_log_network_address</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-003</code></td><td>The firmware shall print the acquired gateway address over UART.</td><td>hardware / instrument</td><td>The UART output contains the acquired gateway address. (expected: The acquired gateway address appears in the UART output.)</td><td><code>application/app_lwip.c<br>firmware/utils/diagnostics/diagnostics.c</code></td><td><code>AppLwipNetifExtCallbackFn<br>diagnostics_log_network_address</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-004</code></td><td>The firmware shall print the acquired DNS server address over UART.</td><td>hardware / instrument</td><td>The UART output contains the acquired DNS server address. (expected: The acquired DNS server address appears in the UART output.)</td><td><code>application/app_lwip.c<br>firmware/utils/diagnostics/diagnostics.c</code></td><td><code>AppLwipNetifExtCallbackFn<br>diagnostics_log_network_address</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-006</code></td><td>The demo may validate NTP separately over UDP port 123 as additional networking validation; NTP validation shall not be treated as HTTP validation.</td><td>hardware / instrument</td><td>If NTP validation is run, its captured NTP exchange uses UDP port 123 and its result is evaluated separately from HTTP validation. (expected: The NTP exchange uses UDP destination port 123, and the NTP and HTTP validations have separate results.)</td><td><code>application/app_lwip.c</code></td><td><code>AppLwipNetifExtCallbackFn<br>AppLwipNtpTask</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>IF-002</code> — <span class="sub">Final deploy shows LAN8742 link recovered during run: BSR 0x782d has link bit set; PHYSCSR 0x1058 read succeeded; LwIP server started waiting on static fallback 192.168.1.21:7 after DHCP timeout. No DHCP ACK/lease was seen, so DHCP acquisition itself remains unverified.</span></li>
+<li><code>DIAG-002</code>, <code>DIAG-003</code>, <code>DIAG-004</code> — <span class="sub">The app logs addresses on IPv4-valid callback; no DHCP lease/address output appeared in the captured window.</span></li>
+<li><code>IF-006</code> — <span class="sub">NTP UDP/123 is a separate post-IP task, but no lease callback occurred and no NTP request/packet capture was observed.</span></li>
+</ul>
+<h2>MQTT Communication</h2>
+<p class="meta">gate: deferred · tasks: 5/5 done · recorded in: 03e8f425-9f58-430f-b520-d188751ac0fc</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-007</code></td><td>After each USER button press, the firmware shall publish the updated application state over MQTT.</td><td>hardware / instrument</td><td>After a USER-button press that toggles the application state, an MQTT publication carries the post-press application-state value. (expected: The publication contains the application-state value after the press, which differs from the value recorded before the press.)</td><td><code>firmware/app/app.c<br>firmware/modules/button_logic.c<br>firmware/platforms/stm32/mqtt_platform_stm32.c</code></td><td><code>app_process_task<br>button_logic_toggle_state<br>mqtt_platform_publish_state</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-003</code></td><td>The firmware shall connect to broker.hivemq.com:1883 using non-TLS MQTT.</td><td>hardware / instrument</td><td>The device establishes an MQTT connection to broker.hivemq.com over plaintext TCP port 1883. (expected: The peer is broker.hivemq.com on TCP port 1883, a successful MQTT CONNACK is observed, and no TLS handshake occurs.)</td><td><code>firmware/interfaces/mqtt_platform_if.h<br>firmware/platforms/stm32/mqtt_platform_stm32.c<br>firmware/services/mqtt_service.c</code></td><td><code>mqtt_platform_connection_callback<br>mqtt_platform_task<br>mqtt_service_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-008</code></td><td>The firmware shall publish telemetry every 5 seconds.</td><td>hardware / instrument</td><td>Consecutive telemetry MQTT publications are emitted at 5-second intervals. (expected: Each adjacent pair of telemetry publications is separated by 5 seconds.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/mqtt_platform_stm32.c</code></td><td><code>mqtt_platform_publish_telemetry</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-004</code></td><td>The firmware shall publish MQTT messages to the topic /firmgen/c5/telemetry.</td><td>hardware / instrument</td><td>A telemetry MQTT publication is sent on the topic /firmgen/c5/telemetry. (expected: The topic field is exactly /firmgen/c5/telemetry.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/mqtt_platform_stm32.c</code></td><td><code>mqtt_platform_publish_telemetry</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-005</code></td><td>The firmware shall subscribe to the MQTT topic /firmgen/c5/control.</td><td>hardware / instrument</td><td>The device sends an MQTT SUBSCRIBE request for /firmgen/c5/control. (expected: The SUBSCRIBE packet contains the topic filter /firmgen/c5/control.)<br>A publication made to /firmgen/c5/control is delivered to the device over its MQTT connection on TCP port 1883. (expected: The device connection uses TCP port 1883 and the device receives an MQTT PUBLISH packet on /firmgen/c5/control.)</td><td><code>firmware/platforms/stm32/mqtt_platform_stm32.c</code></td><td><code>mqtt_platform_incoming_data_callback<br>mqtt_platform_on_connected</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>IF-007</code></td><td>When an MQTT connection is lost and network connectivity is available again, the firmware shall re-establish the MQTT connection.</td><td>hardware / instrument</td><td>After network connectivity is restored following an MQTT disconnection, the device establishes a new MQTT connection to the broker. (expected: A new connection attempt from the device is followed by a successful MQTT CONNACK.)</td><td><code>firmware/interfaces/mqtt_platform_if.h<br>firmware/platforms/stm32/mqtt_platform_stm32.c<br>firmware/services/mqtt_service.c</code></td><td><code>mqtt_platform_connection_callback<br>mqtt_platform_task<br>mqtt_service_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>FR-007</code> — <span class="sub">The button path passes the updated application state into MQTT publishing, but no physical press or state-specific MQTT publication was observed in the latest monitor capture.</span></li>
+<li><code>IF-003</code>, <code>IF-007</code> — <span class="sub">Latest build/flash/monitor logged LAN8742 link-up (BSR 0x782d, link bit set), MQTT CONNACK accepted from broker.hivemq.com:1883 over plaintext TCP, and MQTT marked ready in board health. An interruption/reconnect cycle was not tested.</span></li>
+<li><code>FR-008</code>, <code>IF-004</code> — <span class="sub">Latest monitor logged telemetry publish requests on /firmgen/c5/telemetry. No packet capture confirmed broker receipt or measured adjacent publish packet timestamps to verify the exact 5-second interval.</span></li>
+<li><code>IF-005</code> — <span class="sub">Latest monitor logged accepted CONNACK and subscription request result 0 for /firmgen/c5/control. No inbound control publication was sent or captured.</span></li>
+</ul>
+<h2>HTTP Weather &amp; Time Services</h2>
+<p class="meta">gate: deferred · tasks: 3/3 done · recorded in: 03e8f425-9f58-430f-b520-d188751ac0fc</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>FR-009</code></td><td>The firmware shall use HTTP GET to fetch current Bengaluru weather information from a public endpoint such as Open-Meteo.</td><td>hardware / instrument</td><td>A captured HTTP GET to a public weather endpoint results in weather data being delivered to the firmware. (expected: The request method is GET, the endpoint is public, and a nonempty weather-data response is received by the firmware.)<br>The weather request selects Bengaluru, Karnataka as its location. (expected: The selected weather location is Bengaluru, Karnataka.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/http_platform_stm32.c<br>firmware/services/http_service.c</code></td><td><code>APP_HTTP_WEATHER_HOST<br>APP_HTTP_WEATHER_LOCATION<br>APP_HTTP_WEATHER_URI<br>http_platform_get<br>http_platform_parse_response<br>http_platform_task</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-010</code></td><td>The firmware shall fetch the current date and time using an HTTP-accessible time service.</td><td>hardware / instrument</td><td>The firmware receives the current date and time from an HTTP-accessible time service. (expected: The firmware's date and time fields are populated from a nonempty time-service response.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/http_platform_stm32.c<br>firmware/services/http_service.c</code></td><td><code>APP_HTTP_TIME_HOST<br>APP_HTTP_TIME_URI<br>http_platform_get<br>http_platform_parse_response<br>http_platform_task</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>FR-011</code></td><td>For the assumed sample data, the weather location shall be Bengaluru, Karnataka.</td><td>inspection</td><td>The assumed weather sample data identifies its location as Bengaluru, Karnataka. (expected: The location is Bengaluru, Karnataka.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/http_platform_stm32.c</code></td><td><code>APP_HTTP_WEATHER_HOST<br>APP_HTTP_WEATHER_LOCATION<br>APP_HTTP_WEATHER_URI</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>FR-009</code>, <code>FR-010</code> — <span class="sub">Latest run reached network-ready after Ethernet link-up and static fallback address, but no HTTP GET/response diagnostic appeared in the capture; weather and time data were not observed. HTTP GET path now issues plain TCP/80 requests when network is available; runtime result remains unverified.</span></li>
+<li><code>FR-010</code> — <span class="sub">WorldTimeAPI /api/timezone/Asia/Kolkata is configured; no response-derived date/time was observed in the latest capture.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>FR-009</code>, <code>FR-011</code> — <span class="sub">Inspection: app_config.h selects Open-Meteo current weather with Bengaluru coordinates 12.9716,77.5946 and label Bengaluru, Karnataka.</span></li>
+</ul>
+<h2>ADC &amp; Analog Measurement</h2>
+<p class="meta">gate: deferred · tasks: 3/3 done · recorded in: 03e8f425-9f58-430f-b520-d188751ac0fc</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>HW-003</code></td><td>The firmware shall validate the ADC without external hardware by sampling internal VREFINT and the MCU internal temperature sensor.</td><td>hardware / instrument<br>not verifiable</td><td>With no external analog source connected, the firmware obtains ADC samples from both VREFINT and the MCU internal temperature sensor. (expected: A successful sample result is obtained for each of the two internal channels.)<br>The plausibility of the VREFINT and temperature-sensor readings cannot be assessed against a defined acceptance range. (expected: No pass/fail range or plausibility definition is specified.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_adc1.c<br>firmware/platforms/stm32/adc_platform_stm32.c</code></td><td><code>adc_platform_read_injected<br>adc_platform_start<br>adc_platform_task<br>mx_adc1_init</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-005</code></td><td>The firmware shall print raw ADC values.</td><td>hardware / instrument</td><td>After ADC sampling, the UART output contains the raw ADC sample value or values. (expected: The UART output contains numeric raw ADC sample value or values.)</td><td><code>firmware/platforms/stm32/adc_platform_stm32.c</code></td><td><code>adc_platform_task</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-006</code></td><td>The firmware shall print converted ADC values.</td><td>hardware / instrument</td><td>After ADC sampling, the UART output contains the converted ADC measurement or measurements. (expected: The UART output contains at least one numeric converted ADC measurement.)</td><td><code>firmware/platforms/stm32/adc_platform_stm32.c</code></td><td><code>adc_platform_task</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>HW-003</code> — <span class="sub">Latest deploy logged successful VREFINT/TEMPSENSOR injected sampling. Raw sample 1517/816 yielded VDDA 3617 mV, temperature input 720 mV, and calibrated temperature 30 C. Another early zero raw temperature sample was flagged invalid. Acquisition of both channels is observable.</span></li>
+<li><code>DIAG-005</code>, <code>DIAG-006</code> — <span class="sub">Latest capture printed raw VREFINT/TEMPSENSOR values and converted VDDA, sensor voltage, and temperature over the VCP. A zero raw temperature sample is reported invalid rather than a plausible converted temperature.</span></li>
+</ul>
+<p class="meta">Notes recorded with these traces</p><ul>
+<li><code>HW-003</code> — <span class="sub">The separate plausibility judgment criterion is not verifiable as written: the spec defines no acceptance range, tolerance, or calibration assumptions.</span></li>
+</ul>
+<h2>PWM Timer &amp; Output</h2>
+<p class="meta">gate: deferred · tasks: 2/2 done · recorded in: 03e8f425-9f58-430f-b520-d188751ac0fc</p>
+<div class="scroll"><table><thead><tr>
+<th>Req</th>
+<th>Statement</th>
+<th>Verified by</th>
+<th>Acceptance criteria</th>
+<th>Files</th>
+<th>Symbols</th>
+<th>Tests</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><code>HW-004</code></td><td>The firmware shall generate PWM using a hardware timer on an available PWM-capable header pin.</td><td>inspection</td><td>The firmware configuration assigns a hardware-timer PWM channel to a header pin whose board mapping supports that timer channel's PWM alternate function. (expected: The configured output is a PWM-capable header pin mapped to the configured hardware-timer PWM channel.)</td><td><code>NUCLEO-C5A3ZG/generated/hal/mx_tim2.c<br>NUCLEO-C5A3ZG/generated/hal/mx_tim2.h<br>firmware/platforms/stm32/pwm_platform_stm32.c</code></td><td><code>pwm_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-001</code></td><td>The default PWM test shall use a frequency of 1 kHz.</td><td>hardware / instrument</td><td>With the default PWM test running, the PWM output frequency measured at the header pin is 1 kHz. (expected: 1 kHz.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_platform_stm32.c</code></td><td><code>pwm_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>PERF-002</code></td><td>The default PWM test shall use a 50% duty cycle.</td><td>hardware / instrument</td><td>With the default PWM test running, the PWM output duty cycle measured at the header pin is 50%. (expected: 50%.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_platform_stm32.c</code></td><td><code>pwm_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+<tr><td><code>DIAG-008</code></td><td>The PWM waveform shall be stable at 1 kHz and 50% duty cycle when verified with an oscilloscope or logic analyzer.</td><td>hardware / instrument<br>not verifiable</td><td>With PWM output enabled, the waveform frequency measured at the output pin is 1 kHz. (expected: 1 kHz.)<br>With PWM output enabled, the waveform duty cycle measured at the output pin is 50%. (expected: 50%.)<br>The waveform's stability cannot be accepted as a bounded check until an observation interval and allowable frequency and duty-cycle variation are specified. (expected: Not defined by the requirement; an observation interval and allowable variation are needed.)</td><td><code>firmware/configs/app_config.h<br>firmware/platforms/stm32/pwm_platform_stm32.c</code></td><td><code>pwm_platform_start</code></td><td><code><span class="none">—</span></code></td><td><span class="pill s-impl">implemented, untested</span></td></tr>
+</tbody></table></div>
+<p class="meta">Observed on the board</p><ul>
+<li><code>HW-004</code> — <span class="sub">Latest final deployment logged successful TIM2_CH2 PWM startup on PB3. Board knowledge and generated timer header map this to PB3/D3 and AF1. No electrical waveform measurement was captured.</span></li>
+<li><code>PERF-001</code>, <code>PERF-002</code>, <code>DIAG-008</code> — <span class="sub">Configuration targets 1 kHz and 50% duty and the final monitor logged PWM active. No oscilloscope/logic-analyzer reading establishes actual frequency or duty. Stability is not verifiable as written: the specification omits measurement interval and tolerance.</span></li>
+</ul>
+<h2>Gaps</h2>
+<p class="sub">Listed rather than omitted. A matrix showing only what was built cannot be told apart from one showing full coverage.</p>
+<h3>Host tests you could write (1)</h3>
+<p class="sub">A `host` acceptance criterion and no test cited. The only requirements a unit test can cover — see the next block for the rest. They are tested at the end, from Artifacts -&gt; Unit Tests.</p>
+<ul>
+<li><code>FR-006</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+</ul>
+<h3>Acceptance needs non-host evidence (32)</h3>
+<p class="sub">No host acceptance criterion is recorded, so a unit test cannot close these: they need the board or inspection evidence specified here.</p>
+<ul>
+<li><code>FR-001</code> — checked by inspection, not verifiable <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>HW-001</code> — checked by inspection <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>HW-002</code> — checked by hardware / instrument <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>FR-002</code> — checked by hardware / instrument <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>FR-003</code> — checked by hardware / instrument <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>FR-004</code> — checked by hardware / instrument <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>FR-005</code> — checked by hardware / instrument <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>FR-012</code> — checked by hardware / instrument <span class="sub">· Board Integration, LEDs &amp; User Input</span></li>
+<li><code>IF-001</code> — checked by hardware / instrument <span class="sub">· UART Console &amp; Diagnostics</span></li>
+<li><code>DIAG-001</code> — checked by hardware / instrument <span class="sub">· UART Console &amp; Diagnostics</span></li>
+<li><code>DIAG-007</code> — checked by hardware / instrument <span class="sub">· UART Console &amp; Diagnostics</span></li>
+<li><code>IF-002</code> — checked by hardware / instrument <span class="sub">· Ethernet Configuration &amp; Network Validation</span></li>
+<li><code>DIAG-002</code> — checked by hardware / instrument <span class="sub">· Ethernet Configuration &amp; Network Validation</span></li>
+<li><code>DIAG-003</code> — checked by hardware / instrument <span class="sub">· Ethernet Configuration &amp; Network Validation</span></li>
+<li><code>DIAG-004</code> — checked by hardware / instrument <span class="sub">· Ethernet Configuration &amp; Network Validation</span></li>
+<li><code>IF-006</code> — checked by hardware / instrument <span class="sub">· Ethernet Configuration &amp; Network Validation</span></li>
+<li><code>FR-007</code> — checked by hardware / instrument <span class="sub">· MQTT Communication</span></li>
+<li><code>IF-003</code> — checked by hardware / instrument <span class="sub">· MQTT Communication</span></li>
+<li><code>FR-008</code> — checked by hardware / instrument <span class="sub">· MQTT Communication</span></li>
+<li><code>IF-004</code> — checked by hardware / instrument <span class="sub">· MQTT Communication</span></li>
+<li><code>IF-005</code> — checked by hardware / instrument <span class="sub">· MQTT Communication</span></li>
+<li><code>IF-007</code> — checked by hardware / instrument <span class="sub">· MQTT Communication</span></li>
+<li><code>FR-009</code> — checked by hardware / instrument <span class="sub">· HTTP Weather &amp; Time Services</span></li>
+<li><code>FR-010</code> — checked by hardware / instrument <span class="sub">· HTTP Weather &amp; Time Services</span></li>
+<li><code>FR-011</code> — checked by inspection <span class="sub">· HTTP Weather &amp; Time Services</span></li>
+<li><code>HW-003</code> — checked by hardware / instrument, not verifiable <span class="sub">· ADC &amp; Analog Measurement</span></li>
+<li><code>DIAG-005</code> — checked by hardware / instrument <span class="sub">· ADC &amp; Analog Measurement</span></li>
+<li><code>DIAG-006</code> — checked by hardware / instrument <span class="sub">· ADC &amp; Analog Measurement</span></li>
+<li><code>HW-004</code> — checked by inspection <span class="sub">· PWM Timer &amp; Output</span></li>
+<li><code>PERF-001</code> — checked by hardware / instrument <span class="sub">· PWM Timer &amp; Output</span></li>
+<li><code>PERF-002</code> — checked by hardware / instrument <span class="sub">· PWM Timer &amp; Output</span></li>
+<li><code>DIAG-008</code> — checked by hardware / instrument, not verifiable <span class="sub">· PWM Timer &amp; Output</span></li>
+</ul>
+<h3>Implemented, never tested (33)</h3>
+<p class="sub">Code exists and no test is recorded against it.</p>
+<ul>
+<li><code>FR-001</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>HW-001</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>HW-002</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>FR-002</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>FR-003</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>FR-004</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>FR-005</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>FR-006</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>FR-012</code> <span class="sub">(Board Integration, LEDs &amp; User Input)</span></li>
+<li><code>IF-001</code> <span class="sub">(UART Console &amp; Diagnostics)</span></li>
+<li><code>DIAG-001</code> <span class="sub">(UART Console &amp; Diagnostics)</span></li>
+<li><code>DIAG-007</code> <span class="sub">(UART Console &amp; Diagnostics)</span></li>
+<li><code>IF-002</code> <span class="sub">(Ethernet Configuration &amp; Network Validation)</span></li>
+<li><code>DIAG-002</code> <span class="sub">(Ethernet Configuration &amp; Network Validation)</span></li>
+<li><code>DIAG-003</code> <span class="sub">(Ethernet Configuration &amp; Network Validation)</span></li>
+<li><code>DIAG-004</code> <span class="sub">(Ethernet Configuration &amp; Network Validation)</span></li>
+<li><code>IF-006</code> <span class="sub">(Ethernet Configuration &amp; Network Validation)</span></li>
+<li><code>FR-007</code> <span class="sub">(MQTT Communication)</span></li>
+<li><code>IF-003</code> <span class="sub">(MQTT Communication)</span></li>
+<li><code>FR-008</code> <span class="sub">(MQTT Communication)</span></li>
+<li><code>IF-004</code> <span class="sub">(MQTT Communication)</span></li>
+<li><code>IF-005</code> <span class="sub">(MQTT Communication)</span></li>
+<li><code>IF-007</code> <span class="sub">(MQTT Communication)</span></li>
+<li><code>FR-009</code> <span class="sub">(HTTP Weather &amp; Time Services)</span></li>
+<li><code>FR-010</code> <span class="sub">(HTTP Weather &amp; Time Services)</span></li>
+<li><code>FR-011</code> <span class="sub">(HTTP Weather &amp; Time Services)</span></li>
+<li><code>HW-003</code> <span class="sub">(ADC &amp; Analog Measurement)</span></li>
+<li><code>DIAG-005</code> <span class="sub">(ADC &amp; Analog Measurement)</span></li>
+<li><code>DIAG-006</code> <span class="sub">(ADC &amp; Analog Measurement)</span></li>
+<li><code>HW-004</code> <span class="sub">(PWM Timer &amp; Output)</span></li>
+<li><code>PERF-001</code> <span class="sub">(PWM Timer &amp; Output)</span></li>
+<li><code>PERF-002</code> <span class="sub">(PWM Timer &amp; Output)</span></li>
+<li><code>DIAG-008</code> <span class="sub">(PWM Timer &amp; Output)</span></li>
+</ul>
+<h3>No observable exists (3)</h3>
+<p class="sub">These need a human decision — either the requirement is restated as something checkable, or it is accepted as unverifiable on the record. Inventing a test for one of these produces a test that passes and proves nothing.</p>
+<ul>
+<li><code>FR-001</code> — The demo validates every major board function identified by the PRD. <span class="sub">· The PRD's list of major board functions and a checkable validation outcome for each function are missing.</span></li>
+<li><code>HW-003</code> — The plausibility of the VREFINT and temperature-sensor readings cannot be assessed against a defined acceptance range. <span class="sub">· The acceptance criteria call the readings “plausible” but provide no valid value ranges, tolerance, calibration assumptions, or other definition of plausibility.</span></li>
+<li><code>DIAG-008</code> — The waveform's stability cannot be accepted as a bounded check until an observation interval and allowable frequency and duty-cycle variation are specified. <span class="sub">· The requirement provides no stability tolerance or observation duration, so a stable-versus-unstable waveform cannot be judged reproducibly.</span></li>
+</ul>
+</main></body></html>

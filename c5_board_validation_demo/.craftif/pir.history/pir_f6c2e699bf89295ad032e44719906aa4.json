@@ -1,0 +1,2282 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_c5_board_validation_demo",
+  "revision": "f6c2e699bf89295ad032e44719906aa4",
+  "provenance": {
+    "project_path": "C:/Users/sujit/Downloads/FirmGen/board_validation/c5_board_validation_demo",
+    "chat_id": "03e8f425-9f58-430f-b520-d188751ac0fc",
+    "revision": "f6c2e699bf89295ad032e44719906aa4",
+    "generated_at_ms": 1790585143328,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "NUCLEO-C5A3ZG/lwip_tcp_echo_freertos.ioc2",
+      "application/app_config.h",
+      "application/app_logger.c",
+      "application/app_logger.h",
+      "application/app_lwip.c",
+      "application/app_lwip.h",
+      "application/app_tcp_echo_client.c",
+      "application/app_tcp_echo_client.h",
+      "application/app_tcp_echo_server.c",
+      "application/app_tcp_echo_server.h",
+      "application/example.c",
+      "application/example.h",
+      "application/main.c",
+      "application/main.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.c",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.h",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.c",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.h"
+    ],
+    "file_hashes": {
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "firmware/app/app.c": "3206f3f5a8ec12ab95c15dd2995372e1",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba",
+      "firmware/utils/logger/logger.h": "642efceba068f0cfa4a70d8ce56bbd82",
+      "application/app_lwip.c": "ad6da25badaf0c2e5ab30ee492614f50",
+      "firmware/app/app.h": "ebc6cfe87fb8e2ab299633dd7a067f3b",
+      "application/example.c": "0c44f43c124549f68caeb22d4b205400",
+      "application/app_config.h": "ccdacc560c6585fcb5c14703b3155ab6",
+      "NUCLEO-C5A3ZG/lwip_tcp_echo_freertos.ioc2": "8e57e5972d29bfc4f8be97a75bc5d9ee",
+      "application/app_tcp_echo_client.c": "e5594dce75677a88ba2d00dc8d1bb87c",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "application/app_tcp_echo_server.h": "5b8a88ee9692578d89e5b276fca8623c",
+      "application/example.h": "c3d93f406017dbbed07d4bb1b6964989",
+      "application/main.c": "4780843bfb40a3ed3ccaf33683697794",
+      "application/main.h": "494961a07c07af6cfd235e803b4d9b48",
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "firmware/bsp/board.h": "0d2ad35583c79f15ef426e771f0f03ce",
+      "firmware/osal/osal.h": "f2f2c13784f7a100461b180f4028062b",
+      "application/app_logger.h": "96a96e3f3a0545eb2de37595922bf0b0",
+      "firmware/utils/logger/logger.c": "a0aa546944c77a82f438514b1f38d8cc",
+      "application/app_lwip.h": "e17e59d4f282d62b93828d6896f7560a",
+      "application/app_logger.c": "15b7a4b11a22fea1e66ae15450e49876",
+      "application/app_tcp_echo_server.c": "6b3ecdbd1fbfa2257e3615cde5d52437",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "application/app_tcp_echo_client.h": "6e2bb6dae95f2ee17bd1a188e61fbbc0",
+      "firmware/configs/app_config.h": "fb193524711242dbd05bfcad87bb8dfd"
+    },
+    "board_id": "NUCLEO-C5A3ZG",
+    "target_chip": null,
+    "config_hash": null,
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "pending"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "stm32"
+      },
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "f6c2e699bf89295ad032e44719906aa4"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/main.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "task_applwipthread",
+      "node_type": "rtos_task",
+      "label": "Task AppLwipThread",
+      "properties": {
+        "task_name": "AppLwipThread",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "application/app_lwip.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "f6c2e699bf89295ad032e44719906aa4"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/app_lwip.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for AppLwipThread.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "task_apptcpechoclientthread",
+      "node_type": "rtos_task",
+      "label": "Task AppTcpEchoClientThread",
+      "properties": {
+        "task_name": "AppTcpEchoClientThread",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "application/app_tcp_echo_client.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "f6c2e699bf89295ad032e44719906aa4"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/app_tcp_echo_client.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for AppTcpEchoClientThread.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "task_apptcpechoserverthread",
+      "node_type": "rtos_task",
+      "label": "Task AppTcpEchoServerThread",
+      "properties": {
+        "task_name": "AppTcpEchoServerThread",
+        "priority": 5,
+        "stack_size": 4096,
+        "period_ms": 0.0
+      },
+      "source_refs": [
+        {
+          "file": "application/app_tcp_echo_server.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "f6c2e699bf89295ad032e44719906aa4"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/app_tcp_echo_server.c"
+        ]
+      },
+      "editable_fields": [
+        "task_name",
+        "priority",
+        "stack_size",
+        "period_ms"
+      ],
+      "layer": "runtime",
+      "ai_summary": "Executes RTOS loop logic for AppTcpEchoServerThread.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "ethernet_manager_lwip___ethernet",
+      "node_type": "ethernet_manager",
+      "label": "LwIP / Ethernet",
+      "properties": {
+        "addressing": "dhcp"
+      },
+      "source_refs": [
+        {
+          "file": "application/app_lwip.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "f6c2e699bf89295ad032e44719906aa4"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/app_lwip.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "network",
+      "ai_summary": "Represents LwIP / Ethernet in the firmware topology.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "uart_device_usart",
+      "node_type": "uart_device",
+      "label": "USART",
+      "properties": {
+        "port": 1,
+        "baud_rate": 115200
+      },
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "f6c2e699bf89295ad032e44719906aa4"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/main.c"
+        ]
+      },
+      "editable_fields": [
+        "baud_rate"
+      ],
+      "layer": "physical",
+      "ai_summary": "Represents a UART peripheral with mapped serial pins.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_boot_task_applwipthread_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "task_applwipthread",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "application/app_lwip.c",
+          "symbol": "AppLwipThread",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_task_apptcpechoclientthread_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "task_apptcpechoclientthread",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "application/app_tcp_echo_client.c",
+          "symbol": "AppTcpEchoClientThread",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_task_apptcpechoserverthread_spawns",
+      "source_node_id": "boot",
+      "target_node_id": "task_apptcpechoserverthread",
+      "kind": "execution",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "application/app_tcp_echo_server.c",
+          "symbol": "AppTcpEchoServerThread",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "spawns",
+      "validated": false
+    },
+    {
+      "id": "e_boot_ethernet_manager_lwip___ethernet_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "ethernet_manager_lwip___ethernet",
+      "kind": "dependency",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "application/app_lwip.c",
+          "symbol": "LwIP / Ethernet",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_boot_uart_device_usart_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "uart_device_usart",
+      "kind": "hardware",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "symbol": "USART",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_applwip_initializes_ethernet",
+      "source_node_id": "task_applwipthread",
+      "target_node_id": "ethernet_manager_lwip___ethernet",
+      "kind": "network",
+      "confidence": 0.98,
+      "source_refs": [
+        {
+          "file": "application/app_lwip.c",
+          "symbol": "AppLwipThread (mx_lwip_init and netif registration)",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    },
+    {
+      "id": "e_applwip_publishes_ip_to_client",
+      "source_node_id": "task_applwipthread",
+      "target_node_id": "task_apptcpechoclientthread",
+      "kind": "event",
+      "confidence": 0.97,
+      "source_refs": [
+        {
+          "file": "application/app_lwip.c",
+          "symbol": "AppLwipNetifExtCallbackFn (sets EVT_IP_ADDR_SET)",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "application/app_tcp_echo_client.c",
+          "symbol": "AppTcpEchoClientThread (waits for EVT_IP_ADDR_SET)",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "publishes",
+      "validated": false
+    },
+    {
+      "id": "e_applwip_publishes_ip_to_server",
+      "source_node_id": "task_applwipthread",
+      "target_node_id": "task_apptcpechoserverthread",
+      "kind": "event",
+      "confidence": 0.97,
+      "source_refs": [
+        {
+          "file": "application/app_lwip.c",
+          "symbol": "AppLwipNetifExtCallbackFn (sets EVT_IP_ADDR_SET)",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        },
+        {
+          "file": "application/app_tcp_echo_server.c",
+          "symbol": "AppTcpEchoServerThread (waits for EVT_IP_ADDR_SET)",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "publishes",
+      "validated": false
+    },
+    {
+      "id": "e_tcp_client_depends_on_ethernet",
+      "source_node_id": "task_apptcpechoclientthread",
+      "target_node_id": "ethernet_manager_lwip___ethernet",
+      "kind": "network",
+      "confidence": 0.97,
+      "source_refs": [
+        {
+          "file": "application/app_tcp_echo_client.c",
+          "symbol": "AppConnect (DNS resolution, socket, and connect)",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "depends_on",
+      "validated": false
+    },
+    {
+      "id": "e_tcp_server_depends_on_ethernet",
+      "source_node_id": "task_apptcpechoserverthread",
+      "target_node_id": "ethernet_manager_lwip___ethernet",
+      "kind": "network",
+      "confidence": 0.97,
+      "source_refs": [
+        {
+          "file": "application/app_tcp_echo_server.c",
+          "symbol": "AppTcpEchoServerThread (socket, bind, listen, and accept)",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "depends_on",
+      "validated": false
+    }
+  ],
+  "layers": {
+    "physical": [
+      "uart_device_usart"
+    ],
+    "runtime": [
+      "task_applwipthread",
+      "task_apptcpechoclientthread",
+      "task_apptcpechoserverthread"
+    ],
+    "network": [
+      "ethernet_manager_lwip___ethernet"
+    ],
+    "system": [
+      "boot"
+    ]
+  },
+  "partitions": [],
+  "components": [],
+  "modules": [
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "application",
+      "label": "application",
+      "path": "application",
+      "kind": "application",
+      "files": [
+        "application/app_config.h",
+        "application/app_logger.c",
+        "application/app_logger.h",
+        "application/app_lwip.c",
+        "application/app_lwip.h",
+        "application/app_tcp_echo_client.c",
+        "application/app_tcp_echo_client.h",
+        "application/app_tcp_echo_server.c",
+        "application/app_tcp_echo_server.h",
+        "application/example.c",
+        "application/example.h",
+        "application/main.c",
+        "application/main.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 2,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 3,
+      "symbol": "logger.h"
+    },
+    {
+      "from": "application",
+      "to": "app",
+      "via": "include",
+      "file": "application/main.c",
+      "line": 20,
+      "symbol": "app.h"
+    },
+    {
+      "from": "application",
+      "to": "configs",
+      "via": "include",
+      "file": "application/app_lwip.c",
+      "line": 38,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 18,
+      "symbol": "app_config.h"
+    }
+  ],
+  "task_flows": [
+    {
+      "task_node_id": "task_applwipthread",
+      "task_label": "AppLwipThread",
+      "entry_fn": "AppLwipThread",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task AppLwipThread",
+          "kind": "entry",
+          "file": "application/app_lwip.c",
+          "line": 271
+        },
+        {
+          "id": "f2",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_lwip.c",
+          "line": 274
+        },
+        {
+          "id": "f3",
+          "label": "xTimerCreate(\"DHCP Timer Timeout\")",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 277
+        },
+        {
+          "id": "f4",
+          "label": "(AppLwipDhcpTimerHandle == NULL)",
+          "kind": "decision",
+          "file": "application/app_lwip.c",
+          "line": 282
+        },
+        {
+          "id": "f5",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_lwip.c",
+          "line": 284
+        },
+        {
+          "id": "f6",
+          "label": "mx_lwip_init()",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 292
+        },
+        {
+          "id": "f7",
+          "label": "(err != ERR_OK)",
+          "kind": "decision",
+          "file": "application/app_lwip.c",
+          "line": 293
+        },
+        {
+          "id": "f8",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_lwip.c",
+          "line": 295
+        },
+        {
+          "id": "f9",
+          "label": "netif_add_ext_callback(&AppLwipNetifExtCallbackListener)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 302
+        },
+        {
+          "id": "f10",
+          "label": "netif_set_remove_callback(&Netif1)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 305
+        },
+        {
+          "id": "f11",
+          "label": "netifapi_netif_add(&Netif1)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 308
+        },
+        {
+          "id": "f12",
+          "label": "mx_lwip_get_interface_context_1()",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 310
+        },
+        {
+          "id": "f13",
+          "label": "netifapi_netif_set_default(&Netif1)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 313
+        },
+        {
+          "id": "f14",
+          "label": "netifapi_netif_set_up(&Netif1)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 316
+        },
+        {
+          "id": "f15",
+          "label": "AppLwipMdnsSetup(&Netif1)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 319
+        },
+        {
+          "id": "f16",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_lwip.c",
+          "line": 325
+        },
+        {
+          "id": "f17",
+          "label": "xEventGroupWaitBits(AppLwipEvents)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 326
+        },
+        {
+          "id": "f18",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_lwip.c",
+          "line": 333
+        },
+        {
+          "id": "f19",
+          "label": "uxTaskGetStackHighWaterMark(NULL)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 333
+        },
+        {
+          "id": "f20",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_lwip.c",
+          "line": 336
+        },
+        {
+          "id": "f21",
+          "label": "vTaskDelete(NULL)",
+          "kind": "step",
+          "file": "application/app_lwip.c",
+          "line": 337
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f6",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f11",
+          "to": "f12",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f12",
+          "to": "f13",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f13",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f14",
+          "to": "f15",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f15",
+          "to": "f16",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f16",
+          "to": "f17",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f17",
+          "to": "f18",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f18",
+          "to": "f19",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f19",
+          "to": "f20",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f20",
+          "to": "f21",
+          "label": "",
+          "loop_back": false
+        }
+      ]
+    },
+    {
+      "task_node_id": "task_apptcpechoclientthread",
+      "task_label": "AppTcpEchoClientThread",
+      "entry_fn": "AppTcpEchoClientThread",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task AppTcpEchoClientThread",
+          "kind": "entry",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 285
+        },
+        {
+          "id": "f2",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 290
+        },
+        {
+          "id": "f3",
+          "label": "xEventGroupWaitBits(AppLwipEvents)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 291
+        },
+        {
+          "id": "f4",
+          "label": "Loop while (RunClient == pdTRUE)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 297
+        },
+        {
+          "id": "f5",
+          "label": "AppConnect(&sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 302
+        },
+        {
+          "id": "f6",
+          "label": "(echo_status == EXEC_STATUS_OK)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 305
+        },
+        {
+          "id": "f7",
+          "label": "Loop while i < APP_TCP_CLIENT_ECHO_NUMBER_BY_CONNE…",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 307
+        },
+        {
+          "id": "f8",
+          "label": "AppFillBuffer(SendBuffer)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 309
+        },
+        {
+          "id": "f9",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 314
+        },
+        {
+          "id": "f10",
+          "label": "xTaskGetTickCount()",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 318
+        },
+        {
+          "id": "f11",
+          "label": "AppSend(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 321
+        },
+        {
+          "id": "f12",
+          "label": "(echo_status == EXEC_STATUS_OK)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 323
+        },
+        {
+          "id": "f13",
+          "label": "AppRecv(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 325
+        },
+        {
+          "id": "f14",
+          "label": "(echo_status == EXEC_STATUS_OK)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 328
+        },
+        {
+          "id": "f15",
+          "label": "AppCompareBuffers(RecvBuffer)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 330
+        },
+        {
+          "id": "f16",
+          "label": "(echo_status == EXEC_STATUS_OK)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 333
+        },
+        {
+          "id": "f17",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 335
+        },
+        {
+          "id": "f18",
+          "label": "pdTICKS_TO_MS(xTaskGetTickCount() - tick_start)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 337
+        },
+        {
+          "id": "f19",
+          "label": "xTaskGetTickCount()",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 337
+        },
+        {
+          "id": "f20",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 341
+        },
+        {
+          "id": "f21",
+          "label": "AppDisconnect(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 347
+        },
+        {
+          "id": "f22",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 348
+        },
+        {
+          "id": "f23",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 351
+        },
+        {
+          "id": "f24",
+          "label": "vTaskDelay(pdMS_TO_TICKS(APP_TCP_CLIENT_CONNECT_DE…)",
+          "kind": "timer",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 352
+        },
+        {
+          "id": "f25",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 357
+        },
+        {
+          "id": "f26",
+          "label": "uxTaskGetStackHighWaterMark(NULL)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 357
+        },
+        {
+          "id": "f27",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 360
+        },
+        {
+          "id": "f28",
+          "label": "vTaskDelete(NULL)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_client.c",
+          "line": 361
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f7",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f11",
+          "to": "f12",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f12",
+          "to": "f13",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f13",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f12",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f14",
+          "to": "f15",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f15",
+          "to": "f16",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f14",
+          "to": "f16",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f16",
+          "to": "f17",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f17",
+          "to": "f18",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f18",
+          "to": "f19",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f16",
+          "to": "f20",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f19",
+          "to": "f7",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f20",
+          "to": "f7",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f7",
+          "to": "f21",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f21",
+          "to": "f22",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f22",
+          "to": "f23",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f23",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f23",
+          "to": "f24",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f24",
+          "to": "f4",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f4",
+          "to": "f25",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f25",
+          "to": "f26",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f26",
+          "to": "f27",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f27",
+          "to": "f28",
+          "label": "",
+          "loop_back": false
+        }
+      ]
+    },
+    {
+      "task_node_id": "task_apptcpechoserverthread",
+      "task_label": "AppTcpEchoServerThread",
+      "entry_fn": "AppTcpEchoServerThread",
+      "nodes": [
+        {
+          "id": "f1",
+          "label": "Task AppTcpEchoServerThread",
+          "kind": "entry",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 60
+        },
+        {
+          "id": "f2",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 78
+        },
+        {
+          "id": "f3",
+          "label": "xEventGroupWaitBits(AppLwipEvents)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 79
+        },
+        {
+          "id": "f4",
+          "label": "socket(PF_INET)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 90
+        },
+        {
+          "id": "f5",
+          "label": "(sock < 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 91
+        },
+        {
+          "id": "f6",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 93
+        },
+        {
+          "id": "f7",
+          "label": "htons(APP_TCP_ECHO_SERVER_LISTEN_PORT)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 100
+        },
+        {
+          "id": "f8",
+          "label": "bind(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 103
+        },
+        {
+          "id": "f9",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 106
+        },
+        {
+          "id": "f10",
+          "label": "listen(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 112
+        },
+        {
+          "id": "f11",
+          "label": "Loop while (RunServer == pdTRUE)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 116
+        },
+        {
+          "id": "f12",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 121
+        },
+        {
+          "id": "f13",
+          "label": "ip4addr_ntoa(netif_ip4_addr(netif_default))",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 121
+        },
+        {
+          "id": "f14",
+          "label": "netif_ip4_addr(netif_default)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 121
+        },
+        {
+          "id": "f15",
+          "label": "FD_ZERO(&read_fds)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 125
+        },
+        {
+          "id": "f16",
+          "label": "FD_SET(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 126
+        },
+        {
+          "id": "f17",
+          "label": "select(sock + 1)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 134
+        },
+        {
+          "id": "f18",
+          "label": "(ret < 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 135
+        },
+        {
+          "id": "f19",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 137
+        },
+        {
+          "id": "f20",
+          "label": "close(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 138
+        },
+        {
+          "id": "f21",
+          "label": "(ret == 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 141
+        },
+        {
+          "id": "f22",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 144
+        },
+        {
+          "id": "f23",
+          "label": "accept(sock)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 147
+        },
+        {
+          "id": "f24",
+          "label": "(socket_desc >= 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 154
+        },
+        {
+          "id": "f25",
+          "label": "inet_ntop(AF_INET)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 157
+        },
+        {
+          "id": "f26",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 159
+        },
+        {
+          "id": "f27",
+          "label": "xTaskGetTickCount()",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 161
+        },
+        {
+          "id": "f28",
+          "label": "setsockopt(socket_desc)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 166
+        },
+        {
+          "id": "f29",
+          "label": "(ret < 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 167
+        },
+        {
+          "id": "f30",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 169
+        },
+        {
+          "id": "f31",
+          "label": "setsockopt(socket_desc)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 175
+        },
+        {
+          "id": "f32",
+          "label": "(ret < 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 176
+        },
+        {
+          "id": "f33",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 178
+        },
+        {
+          "id": "f34",
+          "label": "Loop while (echo_status == EXEC_STATUS_OK)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 183
+        },
+        {
+          "id": "f35",
+          "label": "recv(socket_desc)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 185
+        },
+        {
+          "id": "f36",
+          "label": "(recv_len > 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 186
+        },
+        {
+          "id": "f37",
+          "label": "send(socket_desc)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 191
+        },
+        {
+          "id": "f38",
+          "label": "(sent_len <= 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 192
+        },
+        {
+          "id": "f39",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 196
+        },
+        {
+          "id": "f40",
+          "label": "(recv_len < 0)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 199
+        },
+        {
+          "id": "f41",
+          "label": "(errno == EAGAIN)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 201
+        },
+        {
+          "id": "f42",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 204
+        },
+        {
+          "id": "f43",
+          "label": "(errno == ENOTCONN)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 206
+        },
+        {
+          "id": "f44",
+          "label": "(echo_status == EXEC_STATUS_OK)",
+          "kind": "decision",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 219
+        },
+        {
+          "id": "f45",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 221
+        },
+        {
+          "id": "f46",
+          "label": "pdTICKS_TO_MS(xTaskGetTickCount() - tick_start)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 222
+        },
+        {
+          "id": "f47",
+          "label": "xTaskGetTickCount()",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 222
+        },
+        {
+          "id": "f48",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 226
+        },
+        {
+          "id": "f49",
+          "label": "APP_LOG_ERROR(APP_NAME)",
+          "kind": "error",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 231
+        },
+        {
+          "id": "f50",
+          "label": "close(socket_desc)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 237
+        },
+        {
+          "id": "f51",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 238
+        },
+        {
+          "id": "f52",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 242
+        },
+        {
+          "id": "f53",
+          "label": "uxTaskGetStackHighWaterMark(NULL)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 242
+        },
+        {
+          "id": "f54",
+          "label": "APP_LOG_INFO(APP_NAME)",
+          "kind": "output",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 245
+        },
+        {
+          "id": "f55",
+          "label": "vTaskDelete(NULL)",
+          "kind": "step",
+          "file": "application/app_tcp_echo_server.c",
+          "line": 246
+        }
+      ],
+      "edges": [
+        {
+          "from": "f1",
+          "to": "f2",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f2",
+          "to": "f3",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f3",
+          "to": "f4",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f4",
+          "to": "f5",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f6",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f5",
+          "to": "f7",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f7",
+          "to": "f8",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f8",
+          "to": "f9",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f9",
+          "to": "f10",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f6",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f10",
+          "to": "f11",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f11",
+          "to": "f12",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f12",
+          "to": "f13",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f13",
+          "to": "f14",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f14",
+          "to": "f15",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f15",
+          "to": "f16",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f16",
+          "to": "f17",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f17",
+          "to": "f18",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f18",
+          "to": "f19",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f19",
+          "to": "f20",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f18",
+          "to": "f21",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f21",
+          "to": "f22",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f20",
+          "to": "f23",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f22",
+          "to": "f23",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f21",
+          "to": "f23",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f23",
+          "to": "f24",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f24",
+          "to": "f25",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f25",
+          "to": "f26",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f26",
+          "to": "f27",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f27",
+          "to": "f28",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f28",
+          "to": "f29",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f29",
+          "to": "f30",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f30",
+          "to": "f31",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f29",
+          "to": "f31",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f31",
+          "to": "f32",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f32",
+          "to": "f33",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f33",
+          "to": "f34",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f32",
+          "to": "f34",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f34",
+          "to": "f35",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f35",
+          "to": "f36",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f36",
+          "to": "f37",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f37",
+          "to": "f38",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f38",
+          "to": "f39",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f36",
+          "to": "f40",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f40",
+          "to": "f41",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f41",
+          "to": "f42",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f41",
+          "to": "f43",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f39",
+          "to": "f34",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f38",
+          "to": "f34",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f42",
+          "to": "f34",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f43",
+          "to": "f34",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f43",
+          "to": "f34",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f40",
+          "to": "f34",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f34",
+          "to": "f44",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f44",
+          "to": "f45",
+          "label": "yes",
+          "loop_back": false
+        },
+        {
+          "from": "f45",
+          "to": "f46",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f46",
+          "to": "f47",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f44",
+          "to": "f48",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f24",
+          "to": "f49",
+          "label": "no",
+          "loop_back": false
+        },
+        {
+          "from": "f47",
+          "to": "f50",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f48",
+          "to": "f50",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f49",
+          "to": "f50",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f50",
+          "to": "f51",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f51",
+          "to": "f11",
+          "label": "next cycle",
+          "loop_back": true
+        },
+        {
+          "from": "f11",
+          "to": "f52",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f52",
+          "to": "f53",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f53",
+          "to": "f54",
+          "label": "",
+          "loop_back": false
+        },
+        {
+          "from": "f54",
+          "to": "f55",
+          "label": "",
+          "loop_back": false
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "headline": "No additive topology refinements are supported by the provided evidence.",
+    "node_count": 0,
+    "edge_count": 0,
+    "warnings": []
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph Startup[\"Application startup\"]\n    boot[\"Application entry<br/>application/main.c: main\"]\n    init[\"Create echo application tasks<br/>application/example.c: app_init\"]\n    lwiptask[\"Initialize LwIP interface<br/>application/app_lwip.c: AppLwipThread\"]\n    client[\"Run TCP echo client<br/>application/app_tcp_echo_client.c: AppTcpEchoClientThre…\"]\n    server[\"Run TCP echo server<br/>application/app_tcp_echo_server.c: AppTcpEchoServerThre…\"]\n  end\n  subgraph Network[\"TCP/IP\"]\n    stack[\"LwIP stack and netif<br/>mx_lwip_init, Netif1\"]\n    peers[\"TCP echo peers<br/>port 7#59; client default address 0.0.0.0\"]\n  end\n  subgraph Console[\"Console output\"]\n    logger[\"Serialize and format application logs<br/>application/app_logger.c: APP_LOG\"]\n    usart[\"USART console output<br/>printf via basic stdio\"]\n  end\n\n  boot -->|app_init| init\n  init -->|app_lwip_init| lwiptask\n  init -->|app_tcp_echo_client_start| client\n  init -->|app_tcp_echo_server_start| server\n  init -->|app_logger_init| logger\n  lwiptask -->|mx_lwip_init#59; netifapi_netif_add| stack\n  client -->|socket, DNS, connect, send, recv| stack\n  server -->|socket, bind, listen, accept, recv, send| stack\n  stack -->|TCP/IP traffic| peers\n  peers -->|TCP/IP traffic| stack\n  lwiptask -->|APP_LOG_INFO / APP_LOG_ERROR| logger\n  client -->|APP_LOG_INFO / APP_LOG_ERROR| logger\n  server -->|APP_LOG_INFO / APP_LOG_ERROR| logger\n  logger -->|PRINTF / stdout| usart",
+      "authored_by_model": true,
+      "node_notes": {
+        "client": "Run TCP echo client is a step in this firmware's runtime flow. The cite application/app_tcp_echo_client.c: AppTcpEchoClientThre… is the source evidence for it.",
+        "logger": "Serialize and format application logs is a step in this firmware's runtime flow. The cite application/app_logger.c: APP_LOG is the source evidence for it.",
+        "init": "Create echo application tasks is a step in this firmware's runtime flow. The cite application/example.c: app_init is the source evidence for it.",
+        "lwiptask": "Initialize LwIP interface is a step in this firmware's runtime flow. The cite application/app_lwip.c: AppLwipThread is the source evidence for it.",
+        "stack": "LwIP stack and netif is a step in this firmware's runtime flow. The cite mx_lwip_init, Netif1 is the source evidence for it.",
+        "peers": "TCP echo peers is a step in this firmware's runtime flow. The cite port 7#59; client default address 0.0.0.0 is the source evidence for it.",
+        "server": "Run TCP echo server is a step in this firmware's runtime flow. The cite application/app_tcp_echo_server.c: AppTcpEchoServerThre… is the source evidence for it.",
+        "usart": "USART console output is a step in this firmware's runtime flow. The cite printf via basic stdio is the source evidence for it.",
+        "boot": "Bootstraps firmware startup and initializes core subsystems."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "mermaid": "flowchart TD\n  subgraph LwipTask[\"AppLwipThread\"]\n    lw_start[\"Start DHCP timer and initialize LwIP<br/>application/app_lwip.c: AppLwipThread\"]\n    lw_netif[\"Register and bring up Netif1#59; configure mDNS<br/>application/app_lwip.c: AppLwi…\"]\n    lw_link{\"Ethernet link is up? — application/app_lwip.c: AppLwipNetifExtCallbackFn\"}\n    lw_dhcp[\"Start DHCP and timeout timer<br/>application/app_lwip.c: AppLwipNetifExtCallbac…\"]\n    lw_stop[\"Stop DHCP and timeout timer<br/>application/app_lwip.c: AppLwipNetifExtCallback…\"]\n    lw_timeout{\"DHCP timer expired without an IP address? — application/app_lwip.c: AppLwipDhcp…\"}\n    lw_manual[\"Stop DHCP and set manual IPv4 configuration<br/>application/app_lwip.c: AppLwip…\"]\n    lw_wait[\"Wait for the IP-address event, then delete task<br/>application/app_lwip.c: App…\"]\n    lw_start -->  lw_netif -->  lw_link\n    lw_link -->|yes| lw_dhcp -->  lw_timeout\n    lw_link -->|no| lw_stop -->  lw_timeout\n    lw_timeout -->|yes| lw_manual -->  lw_wait\n    lw_timeout -->|no| lw_wait\n  end\n\n  subgraph ClientTask[\"AppTcpEchoClientThread\"]\n    cl_wait[\"Wait for IP-address event<br/>application/app_tcp_echo_client.c: AppTcpEchoClie…\"]\n    cl_connect[\"Resolve target and connect TCP socket<br/>application/app_tcp_echo_client.c: Ap…\"]\n    cl_connected{\"Connection succeeded? — application/app_tcp_echo_client.c: AppTcpEchoClientThre…\"}\n    cl_exchange[\"Fill buffer, send, receive, and compare echo<br/>application/app_tcp_echo_clien…\"]\n    cl_ok{\"Echo exchange succeeded? — application/app_tcp_echo_client.c: AppTcpEchoClientT…\"}\n    cl_disconnect[\"Close connected socket<br/>application/app_tcp_echo_client.c: AppDisconnect\"]\n    cl_retry[\"Wait before next connection attempt<br/>application/app_tcp_echo_client.c: AppT…\"]\n    cl_wait -->  cl_connect -->  cl_connected\n    cl_connected -->|yes| cl_exchange -->  cl_ok\n    cl_connected -->|no| cl_retry\n    cl_ok -->|yes| cl_disconnect -->  cl_retry\n    cl_ok -->|no| cl_disconnect\n    cl_retry -->|10000 ms| cl_connect\n  end\n\n  subgraph ServerTask[\"AppTcpEchoServerThread\"]\n    sv_wait[\"Wait for IP-address event<br/>application/app_tcp_echo_server.c: AppTcpEchoServ…\"]\n    sv_listen[\"Create socket, bind port 7, and listen<br/>application/app_tcp_echo_server.c: A…\"]\n    sv_select[\"Wait for incoming connection with select<br/>application/app_tcp_echo_server.c:…\"]\n    sv_ready{\"Connection is ready? — application/app_tcp_echo_server.c: AppTcpEchoServerThread\"}\n    sv_accept[\"Accept client connection<br/>application/app_tcp_echo_server.c: AppTcpEchoServe…\"]\n    sv_receive[\"Receive client data and echo it back<br/>application/app_tcp_echo_server.c: App…\"]\n    sv_close[\"Close client socket<br/>application/app_tcp_echo_server.c: AppTcpEchoServerThre…\"]\n    sv_wait -->  sv_listen -->  sv_select -->  sv_ready\n    sv_ready -->|yes| sv_accept -->  sv_receive -->  sv_close -->  sv_select\n    sv_ready -->|no, timeout or select error| sv_select\n  end",
+      "authored_by_model": true,
+      "node_notes": {
+        "sv_listen": "Create socket, bind port 7, and listen is a step in this firmware's runtime flow. The cite application/app_tcp_echo_server.c: A… is the source evidence for it.",
+        "sv_close": "Close client socket is a step in this firmware's runtime flow. The cite application/app_tcp_echo_server.c: AppTcpEchoServerThre… is the source evidence for it.",
+        "cl_wait": "Wait for IP-address event is a step in this firmware's runtime flow. The cite application/app_tcp_echo_client.c: AppTcpEchoClie… is the source evidence for it.",
+        "lw_manual": "Stop DHCP and set manual IPv4 configuration is a step in this firmware's runtime flow. The cite application/app_lwip.c: AppLwip… is the source evidence for it.",
+        "lw_netif": "Register and bring up Netif1#59; configure mDNS is a step in this firmware's runtime flow. The cite application/app_lwip.c: AppLwi… is the source evidence for it.",
+        "sv_select": "Wait for incoming connection with select is a step in this firmware's runtime flow. The cite application/app_tcp_echo_server.c:… is the source evidence for it.",
+        "lw_link": "Ethernet link is up? — application/app_lwip.c: AppLwipNetifExtCallbackFn is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "lw_timeout": "DHCP timer expired without an IP address? — application/app_lwip.c: AppLwipDhcp… is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "cl_connect": "Resolve target and connect TCP socket is a step in this firmware's runtime flow. The cite application/app_tcp_echo_client.c: Ap… is the source evidence for it.",
+        "lw_dhcp": "Start DHCP and timeout timer is a step in this firmware's runtime flow. The cite application/app_lwip.c: AppLwipNetifExtCallbac… is the source evidence for it.",
+        "cl_ok": "Echo exchange succeeded? — application/app_tcp_echo_client.c: AppTcpEchoClientT… is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "lw_start": "Start DHCP timer and initialize LwIP is a step in this firmware's runtime flow. The cite application/app_lwip.c: AppLwipThread is the source evidence for it.",
+        "sv_ready": "Connection is ready? — application/app_tcp_echo_server.c: AppTcpEchoServerThread is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "lw_wait": "Wait for the IP-address event, then delete task is a step in this firmware's runtime flow. The cite application/app_lwip.c: App… is the source evidence for it.",
+        "sv_receive": "Receive client data and echo it back is a step in this firmware's runtime flow. The cite application/app_tcp_echo_server.c: App… is the source evidence for it.",
+        "cl_connected": "Connection succeeded? — application/app_tcp_echo_client.c: AppTcpEchoClientThre… is part of this project's architecture. Select neighbouring boxes to see how it is wired into the rest of the system.",
+        "sv_accept": "Accept client connection is a step in this firmware's runtime flow. The cite application/app_tcp_echo_server.c: AppTcpEchoServe… is the source evidence for it.",
+        "cl_retry": "Wait before next connection attempt is a step in this firmware's runtime flow. The cite application/app_tcp_echo_client.c: AppT… is the source evidence for it.",
+        "lw_stop": "Stop DHCP and timeout timer is a step in this firmware's runtime flow. The cite application/app_lwip.c: AppLwipNetifExtCallback… is the source evidence for it.",
+        "cl_exchange": "Fill buffer, send, receive, and compare echo is a step in this firmware's runtime flow. The cite application/app_tcp_echo_clien… is the source evidence for it.",
+        "sv_wait": "Wait for IP-address event is a step in this firmware's runtime flow. The cite application/app_tcp_echo_server.c: AppTcpEchoServ… is the source evidence for it.",
+        "cl_disconnect": "Close connected socket is a step in this firmware's runtime flow. The cite application/app_tcp_echo_client.c: AppDisconnect is the source evidence for it."
+      }
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "mermaid": "sequenceDiagram\n  participant Boot as main\n  participant Init as app_init\n  participant LWIP as AppLwipThread\n  participant Netif as LwIP Netif1\n  participant Client as TCP echo client\n  participant Server as TCP echo server\n  participant Peer as TCP echo peer\n  participant UART as USART console\n\n  Boot->>Init: Initialize logger and start LwIP, server, and client tasks\n  Init->>UART: APP_LOG output through printf and basic stdio\n  Init->>LWIP: app_lwip_init creates task\n  Init->>Server: app_tcp_echo_server_start creates task\n  Init->>Client: app_tcp_echo_client_start creates task\n  LWIP->>Netif: Initialize LwIP, add Netif1, and set interface up\n  alt Link is up\n    Netif->>LWIP: Link callback starts DHCP and timeout timer\n  else Link is down\n    Netif->>LWIP: Link callback stops DHCP and timeout timer\n  end\n  alt DHCP obtains an address before timeout\n    Netif->>LWIP: IPv4-valid callback sets IP event\n  else DHCP timeout with no address\n    LWIP->>Netif: Stop DHCP and apply configured manual IPv4 settings\n    Netif->>LWIP: IPv4-valid callback sets IP event\n  end\n  LWIP-->>Client: IP-address event releases client wait\n  LWIP-->>Server: IP-address event releases server wait\n  Server->>Netif: Bind and listen on TCP port 7\n  loop Client connection attempts with 10000 ms delay\n    Client->>Netif: Resolve configured target and connect TCP socket\n    alt Connection succeeds\n      Client->>Peer: Send echo-test buffer\n      Peer->>Server: Incoming TCP data when peer is this device's server client\n      Server->>Peer: Echo received data\n      Peer-->>Client: Return echo data from configured remote peer\n      alt Received buffer matches sent buffer\n        Client->>UART: Log completed echo\n      else Connection or echo operation fails\n        Client->>UART: Log error\n      end\n    else Connection fails\n      Client->>UART: Log connection error\n    end\n  end",
+      "participants": [
+        "Boot",
+        "Init",
+        "LWIP",
+        "Netif",
+        "Client",
+        "Server",
+        "Peer",
+        "UART"
+      ],
+      "generated_from": [
+        "application/main.c",
+        "application/app_lwip.c",
+        "application/app_tcp_echo_client.c",
+        "application/app_tcp_echo_server.c"
+      ],
+      "grounding": 0.125,
+      "authored_by_model": true
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [
+    {
+      "kind": "board_pin_unused",
+      "message": "LD1 (PA5) is on the board descriptor but no firmware call site drives it",
+      "pin": "PA5",
+      "label": "LD1",
+      "file": "NUCLEO-C5A3ZG/lwip_tcp_echo_freertos.ioc2"
+    },
+    {
+      "kind": "board_pin_unused",
+      "message": "LD2 (PG1) is on the board descriptor but no firmware call site drives it",
+      "pin": "PG1",
+      "label": "LD2",
+      "file": "NUCLEO-C5A3ZG/lwip_tcp_echo_freertos.ioc2"
+    },
+    {
+      "kind": "board_pin_unused",
+      "message": "LD3 (PG2) is on the board descriptor but no firmware call site drives it",
+      "pin": "PG2",
+      "label": "LD3",
+      "file": "NUCLEO-C5A3ZG/lwip_tcp_echo_freertos.ioc2"
+    },
+    {
+      "kind": "board_pin_unused",
+      "message": "B1 (PC13) is on the board descriptor but no firmware call site reads it",
+      "pin": "PC13",
+      "label": "B1",
+      "file": "NUCLEO-C5A3ZG/lwip_tcp_echo_freertos.ioc2"
+    }
+  ],
+  "read_only": false,
+  "graph_version": 3,
+  "generation": {
+    "mode": "hybrid_refine",
+    "model": "local_openai_proxy/gpt-6-luna",
+    "triggered_by": "mount",
+    "analyzed_at_ms": 1790585149321,
+    "input_files": [
+      "NUCLEO-C5A3ZG/lwip_tcp_echo_freertos.ioc2",
+      "application/app_config.h",
+      "application/app_logger.c",
+      "application/app_logger.h",
+      "application/app_lwip.c",
+      "application/app_lwip.h",
+      "application/app_tcp_echo_client.c",
+      "application/app_tcp_echo_client.h",
+      "application/app_tcp_echo_server.c",
+      "application/app_tcp_echo_server.h",
+      "application/example.c",
+      "application/example.h",
+      "application/main.c",
+      "application/main.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.c",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.h",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.c",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.h"
+    ],
+    "token_usage": {
+      "prompt_tokens": 17880,
+      "completion_tokens": 584
+    }
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": []
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "validated_at_ms": 1790585149321
+  }
+}

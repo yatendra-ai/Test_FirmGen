@@ -1,0 +1,10 @@
+{
+  "test_sources": [
+    "tests/test_application.c"
+  ],
+  "implementation_sources": [
+    "application/control.c"
+  ],
+  "command": "<actual command from project root to compile and execute tests>",
+  "review": "Record source ownership, linker contracts, timing boundaries and failure recovery findings; not a hardware approval."
+}

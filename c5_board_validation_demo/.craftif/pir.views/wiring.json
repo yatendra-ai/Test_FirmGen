@@ -1,0 +1,772 @@
+{
+  "schema_version": "3.0.0",
+  "view": "wiring",
+  "revision": "7629490d175ffaf0a74d169c610c674a",
+  "graph_version": 17,
+  "generated_at_ms": 1790593101540,
+  "graph": {
+    "schema_version": 1,
+    "id": "pir_c5_board_validation_demo",
+    "name": "c5_board_validation_demo topology",
+    "description": "Added the application board demo task and its evidenced boot and button-input connections.",
+    "board_id": "NUCLEO-C5A3ZG",
+    "nodes": [
+      {
+        "id": "boot",
+        "node_type": "system_init",
+        "label": "Boot / app_main",
+        "description": "Bootstraps firmware startup and initializes core subsystems.",
+        "ports": [
+          {
+            "id": "boot_boot_out_0",
+            "name": "boot_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "target": "stm32"
+        },
+        "execution": {},
+        "visual": {
+          "x": 0.0,
+          "y": 314.0,
+          "layer": 0
+        }
+      },
+      {
+        "id": "gpio_output_pa5",
+        "node_type": "gpio_output",
+        "label": "LD1",
+        "description": "Drives a digital output signal.",
+        "ports": [
+          {
+            "id": "gpio_output_pa5_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": true,
+            "multiplicity": "one"
+          },
+          {
+            "id": "gpio_output_pa5_gpio_in_1",
+            "name": "gpio_in",
+            "direction": "input",
+            "datatype": "gpio_level",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "pin": "PA5"
+        },
+        "execution": {},
+        "visual": {
+          "x": 376.0,
+          "y": 409.0,
+          "layer": 2
+        }
+      },
+      {
+        "id": "gpio_output_pg1",
+        "node_type": "gpio_output",
+        "label": "LD2",
+        "description": "Drives a digital output signal.",
+        "ports": [
+          {
+            "id": "gpio_output_pg1_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": true,
+            "multiplicity": "one"
+          },
+          {
+            "id": "gpio_output_pg1_gpio_in_1",
+            "name": "gpio_in",
+            "direction": "input",
+            "datatype": "gpio_level",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "pin": "PG1"
+        },
+        "execution": {},
+        "visual": {
+          "x": 376.0,
+          "y": 597.0,
+          "layer": 2
+        }
+      },
+      {
+        "id": "gpio_output_pg2",
+        "node_type": "gpio_output",
+        "label": "LD3",
+        "description": "Drives a digital output signal.",
+        "ports": [
+          {
+            "id": "gpio_output_pg2_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": true,
+            "multiplicity": "one"
+          },
+          {
+            "id": "gpio_output_pg2_gpio_in_1",
+            "name": "gpio_in",
+            "direction": "input",
+            "datatype": "gpio_level",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "pin": "PG2"
+        },
+        "execution": {},
+        "visual": {
+          "x": 424.0,
+          "y": 314.0,
+          "layer": 2
+        }
+      },
+      {
+        "id": "gpio_input_pc13",
+        "node_type": "gpio_input",
+        "label": "B1",
+        "description": "Reads a digital input signal.",
+        "ports": [
+          {
+            "id": "gpio_input_pc13_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "gpio_input_pc13_gpio_out_1",
+            "name": "gpio_out",
+            "direction": "output",
+            "datatype": "gpio_level",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "pin": "PC13"
+        },
+        "execution": {},
+        "visual": {
+          "x": 140.0,
+          "y": 8.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "task_ntp_udp_validation",
+        "node_type": "rtos_task",
+        "label": "Task ntp_udp_validation",
+        "description": "Executes RTOS loop logic for ntp_udp_validation.",
+        "ports": [
+          {
+            "id": "task_ntp_udp_validation_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_ntp_udp_validation_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_ntp_udp_validation_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_ntp_udp_validation_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "ntp_udp_validation",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 188.0,
+          "y": 612.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "task_applwipthread",
+        "node_type": "rtos_task",
+        "label": "Task AppLwipThread",
+        "description": "Executes RTOS loop logic for AppLwipThread.",
+        "ports": [
+          {
+            "id": "task_applwipthread_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_applwipthread_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_applwipthread_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_applwipthread_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "AppLwipThread",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 140.0,
+          "y": 400.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "task_apptcpechoclientthread",
+        "node_type": "rtos_task",
+        "label": "Task AppTcpEchoClientThread",
+        "description": "Executes RTOS loop logic for AppTcpEchoClientThread.",
+        "ports": [
+          {
+            "id": "task_apptcpechoclientthread_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_apptcpechoclientthread_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_apptcpechoclientthread_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_apptcpechoclientthread_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "AppTcpEchoClientThread",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 140.0,
+          "y": 604.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "task_apptcpechoserverthread",
+        "node_type": "rtos_task",
+        "label": "Task AppTcpEchoServerThread",
+        "description": "Executes RTOS loop logic for AppTcpEchoServerThread.",
+        "ports": [
+          {
+            "id": "task_apptcpechoserverthread_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_apptcpechoserverthread_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_apptcpechoserverthread_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_apptcpechoserverthread_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "AppTcpEchoServerThread",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 188.0,
+          "y": 0.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "task_adc_internal_task",
+        "node_type": "rtos_task",
+        "label": "Task adc_internal_task",
+        "description": "Executes RTOS loop logic for adc_internal_task.",
+        "ports": [
+          {
+            "id": "task_adc_internal_task_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_adc_internal_task_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_adc_internal_task_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_adc_internal_task_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "adc_internal_task",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 140.0,
+          "y": 196.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "task_http_services_task",
+        "node_type": "rtos_task",
+        "label": "Task http_services_task",
+        "description": "Executes RTOS loop logic for http_services_task.",
+        "ports": [
+          {
+            "id": "task_http_services_task_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_http_services_task_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_http_services_task_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_http_services_task_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "http_services_task",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 188.0,
+          "y": 204.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "task_mqtt_client_task",
+        "node_type": "rtos_task",
+        "label": "Task mqtt_client_task",
+        "description": "Executes RTOS loop logic for mqtt_client_task.",
+        "ports": [
+          {
+            "id": "task_mqtt_client_task_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_mqtt_client_task_trigger_in_1",
+            "name": "trigger_in",
+            "direction": "input",
+            "datatype": "event",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_mqtt_client_task_exec_out_2",
+            "name": "exec_out",
+            "direction": "output",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "task_mqtt_client_task_data_out_3",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "task_name": "mqtt_client_task",
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "execution": {
+          "priority": 5,
+          "stack_size": 4096,
+          "period_ms": 0.0
+        },
+        "visual": {
+          "x": 188.0,
+          "y": 408.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "ethernet_manager_lwip___ethernet",
+        "node_type": "ethernet_manager",
+        "label": "LwIP / Ethernet",
+        "description": "Represents LwIP / Ethernet in the firmware topology.",
+        "ports": [
+          {
+            "id": "ethernet_manager_lwip___ethernet_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": true,
+            "multiplicity": "one"
+          },
+          {
+            "id": "ethernet_manager_lwip___ethernet_network_out_1",
+            "name": "network_out",
+            "direction": "output",
+            "datatype": "network",
+            "required": true,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "addressing": "dhcp"
+        },
+        "execution": {},
+        "visual": {
+          "x": 376.0,
+          "y": 221.0,
+          "layer": 2
+        }
+      },
+      {
+        "id": "uart_device_usart",
+        "node_type": "uart_device",
+        "label": "USART",
+        "description": "Represents a UART peripheral with mapped serial pins.",
+        "ports": [
+          {
+            "id": "uart_device_usart_exec_in_0",
+            "name": "exec_in",
+            "direction": "input",
+            "datatype": "execution",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "uart_device_usart_data_in_1",
+            "name": "data_in",
+            "direction": "input",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "uart_device_usart_data_out_2",
+            "name": "data_out",
+            "direction": "output",
+            "datatype": "signal",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "port": 1,
+          "baud_rate": 115200
+        },
+        "execution": {},
+        "visual": {
+          "x": 236.0,
+          "y": 313.0,
+          "layer": 1
+        }
+      },
+      {
+        "id": "mqtt_client_mqtt",
+        "node_type": "mqtt_client",
+        "label": "MQTT",
+        "description": "Handles MQTT broker communication and message routing.",
+        "ports": [
+          {
+            "id": "mqtt_client_mqtt_network_in_0",
+            "name": "network_in",
+            "direction": "input",
+            "datatype": "network",
+            "required": true,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mqtt_client_mqtt_data_in_1",
+            "name": "data_in",
+            "direction": "input",
+            "datatype": "payload",
+            "required": false,
+            "multiplicity": "one"
+          },
+          {
+            "id": "mqtt_client_mqtt_publish_out_2",
+            "name": "publish_out",
+            "direction": "output",
+            "datatype": "mqtt_message",
+            "required": false,
+            "multiplicity": "one"
+          }
+        ],
+        "properties": {
+          "broker_url": "mqtt://broker.hivemq.com:1883",
+          "qos": 0
+        },
+        "execution": {},
+        "visual": {
+          "x": 376.0,
+          "y": 31.0,
+          "layer": 2
+        }
+      }
+    ],
+    "connections": [
+      [
+        "boot_boot_out_0",
+        "task_ntp_udp_validation_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "task_applwipthread_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "task_apptcpechoclientthread_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "task_apptcpechoserverthread_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "task_adc_internal_task_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "task_http_services_task_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "task_mqtt_client_task_exec_in_0"
+      ],
+      [
+        "task_mqtt_client_task_exec_out_2",
+        "gpio_output_pa5_exec_in_0"
+      ],
+      [
+        "task_mqtt_client_task_exec_out_2",
+        "gpio_output_pg1_exec_in_0"
+      ],
+      [
+        "task_mqtt_client_task_exec_out_2",
+        "gpio_output_pg2_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "ethernet_manager_lwip___ethernet_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "uart_device_usart_exec_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "mqtt_client_mqtt_network_in_0"
+      ],
+      [
+        "boot_boot_out_0",
+        "gpio_input_pc13_exec_in_0"
+      ],
+      [
+        "gpio_input_pc13_gpio_out_1",
+        "mqtt_client_mqtt_data_in_1"
+      ],
+      [
+        "task_ntp_udp_validation_exec_out_2",
+        "ethernet_manager_lwip___ethernet_exec_in_0"
+      ],
+      [
+        "task_http_services_task_exec_out_2",
+        "ethernet_manager_lwip___ethernet_exec_in_0"
+      ],
+      [
+        "task_mqtt_client_task_exec_out_2",
+        "ethernet_manager_lwip___ethernet_exec_in_0"
+      ],
+      [
+        "task_apptcpechoclientthread_exec_out_2",
+        "ethernet_manager_lwip___ethernet_exec_in_0"
+      ],
+      [
+        "task_apptcpechoserverthread_exec_out_2",
+        "ethernet_manager_lwip___ethernet_exec_in_0"
+      ]
+    ],
+    "layout": {
+      "orientation": "",
+      "node_width": 0.0,
+      "layer_gap": 0.0,
+      "node_gap": 0.0
+    }
+  },
+  "title": "Wiring Topology",
+  "authored_by_model": false
+}

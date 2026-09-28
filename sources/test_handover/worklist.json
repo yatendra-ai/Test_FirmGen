@@ -1,0 +1,58 @@
+{
+  "schema": "firmgen.test_handover.worklist/1",
+  "implementation_checks": {
+    "required": true,
+    "scope": "Test actual modules, not duplicated logic. Hardware criteria still require hardware evidence.",
+    "cases": [
+      "nominal and boundary inputs",
+      "initialization and reinitialization",
+      "delayed polling, tick crossing and full-counter-range uptime where timing applies",
+      "dependency failures, retry state and peripheral pin routing where drivers apply"
+    ],
+    "execution": "Provide executable test sources and a documented runner; report blocked/not run when the compatible host toolchain is unavailable."
+  },
+  "layers": {
+    "compilable": [
+      {
+        "layer": "modules",
+        "sources": 2
+      },
+      {
+        "layer": "services",
+        "sources": 4
+      },
+      {
+        "layer": "utils",
+        "sources": 3
+      },
+      {
+        "layer": "app",
+        "sources": 1
+      }
+    ],
+    "needs_mock": []
+  },
+  "requirements": [
+    {
+      "requirement_id": "FR-006",
+      "category": "Board Integration, LEDs & User Input",
+      "statement": "Each press of the onboard USER button shall toggle an application state.",
+      "criteria": [
+        "Each detected button-press event changes the application state from its current value to its toggled value. (expected: The state is toggled after each call and returns to its initial value after two calls.)"
+      ],
+      "code": {
+        "files": [
+          "firmware/modules/button_logic.c",
+          "firmware/app/app.c"
+        ],
+        "symbols": [
+          "button_logic_toggle_state",
+          "app_process_task"
+        ]
+      },
+      "tests_already_cited": []
+    }
+  ],
+  "source_fingerprint": "12f5bc02583e83dd2e4e82404dbd8fa87d140bf398f27e4b4810a1d9791cf1a4",
+  "firmware_root": "C:\\Users\\sujit\\Downloads\\FirmGen\\board_validation\\c5_board_validation_demo\\firmware"
+}

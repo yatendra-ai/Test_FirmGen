@@ -1,0 +1,31 @@
+{
+  "disclaimer": "Do not modify this file as it is used by STM32CubeMX2 to determine what and how to update your project with new configuration",
+  "version": "1.0.0",
+  "timestamp": "2026-05-18T22:09:41.931Z",
+  "files": [
+    {
+      "fileGroup": "project_file",
+      "checksum": {
+        "algo": "sha256",
+        "digest": "ffc09fd21aff2374d8a741d2ea1534f11effd5153f4918cac31e29419a6adc17"
+      },
+      "file": "lwip_tcp_echo_freertos.eww"
+    },
+    {
+      "fileGroup": "project_file",
+      "checksum": {
+        "algo": "sha256",
+        "digest": "d492f8603044469e93ae400e0c3a55706eb0711d57c29e57506c61b743cbb8bd"
+      },
+      "file": "project/lwip_tcp_echo_freertos.ewd"
+    },
+    {
+      "fileGroup": "project_file",
+      "checksum": {
+        "algo": "sha256",
+        "digest": "145d965f56661e3f4e0fa818e80978b080434399c7ce6cf5d5dd460d890d7edb"
+      },
+      "file": "project/lwip_tcp_echo_freertos.ewp"
+    }
+  ]
+}
