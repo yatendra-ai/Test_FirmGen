@@ -1,0 +1,203 @@
+ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/171 [00:00<?, ?it/s]
+PASS:   6%|5         | 10/171 [00:00<00:01, 96.69it/s]
+PASS:  89%|########9 | 153/171 [00:00<00:00, 749.91it/s]
+                                                        
+
+Creating c (debug) info json file C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output\network_c_info.json
+
+PASS:  89%|########9 | 153/171 [00:00<00:00, 749.91it/s]
+                                                        
+ 
+ Exec/report summary (generate)
+ -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ model file         :   C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\model\c5_dense_relu.onnx   
+ type               :   onnx                                                                                                                                      
+ c_name             :   network                                                                                                                                   
+ compression        :   lossless                                                                                                                                  
+ options            :   allocate-inputs, allocate-outputs, use-lite-runtime, use-st-ai                                                                            
+ optimization       :   balanced                                                                                                                                  
+ target/series      :   stm32c5                                                                                                                                   
+ workspace dir      :   C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\workspace         
+ output dir         :   C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output            
+ model_fmt          :   float                                                                                                                                     
+ model_name         :   c5_dense_relu                                                                                                                             
+ model_hash         :   0xf749dc9f20f44bcaf24f633250040b7d                                                                                                        
+ params #           :   6 items (24 B)                                                                                                                            
+ -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ input 1/1          :   'input', f32(1x2), 8 Bytes, activations                                                                                                   
+ output 1/1         :   'output', f32(1x2), 8 Bytes, activations                                                                                                  
+ macc               :   8                                                                                                                                         
+ weights (ro)       :   24 B (24 B) (1 segment)                                                                                                                   
+ activations (rw)   :   16 B (16 B) (1 segment) *                                                                                                                 
+ ram (total)        :   16 B (16 B) = 16 + 0 + 0                                                                                                                  
+ -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+ (*) 'input'/'output' buffers are allocated in the activations buffer
+
+PASS:  89%|########9 | 153/171 [00:00<00:00, 749.91it/s]
+                                                        
+
+Computing AI RT data/code size (target=stm32c5)..
+
+PASS:  89%|########9 | 153/171 [00:00<00:00, 749.91it/s]
+                                                        
+
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ Requested memory size by section - "stm32c5" target
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ ------------------------------- ------- -------- ------ -----
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ module                             text   rodata   data   bss
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ ------------------------------- ------- -------- ------ -----
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ network.o                           754       48      0     0
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ NetworkRuntime1201_CM33_GCC.a       752        0      0     0
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ lib (toolchain)*                      0        0      0     0
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ ------------------------------- ------- -------- ------ -----
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ RT total**                        1,506       48      0     0
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ ------------------------------- ------- -------- ------ -----
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ weights                               0       24      0     0
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ activations                           0        0      0    16
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ states                                0        0      0     0
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ io                                    0        0      0     0
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ ------------------------------- ------- -------- ------ -----
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ TOTAL                             1,506       72      0    16
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ ------------------------------- ------- -------- ------ -----
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ *  toolchain objects (libm/libgcc*)
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ ** RT AI runtime objects (kernels+infrastructure)
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  Summary - "stm32c5" target
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  --------------------------------------------------
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+               FLASH (ro)      %*   RAM (rw)      %
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  --------------------------------------------------
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  RT total          1,554   98.5%          0   0.0%
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  --------------------------------------------------
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  TOTAL             1,578                 16
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  --------------------------------------------------
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+  *  rt/total
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ Generated files (5)
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ --------------------------------------------------------------------------------------------------------------------------------------------------
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output\network_data.h
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output\network_data.c
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output\network.h
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output\network.c
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+ C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output\network_details.h
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+
+Creating txt report file C:\Users\YatendraBhargava\Downloads\29-9-26\ml_test\stm32_ml_quick_test\firmware\ml_c5_stai_cpu_compile_retry2\generate\output\network_generate_report.txt
+
+PASS:  89%|########9 | 153/171 [00:01<00:00, 749.91it/s]
+                                                        
+elapsed time (GENERATE): 10.980s
+

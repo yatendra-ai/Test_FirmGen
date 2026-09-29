@@ -1,0 +1,378 @@
+{
+  "buffers": [
+    {
+      "alignment": 4,
+      "batch": 0,
+      "channel_first": true,
+      "channel_last": true,
+      "epochs": {
+        "end": 1,
+        "start": 0
+      },
+      "flags": "STAI_FLAG_WEIGHTS|STAI_FLAG_CONST|STAI_FLAG_PREALLOCATED",
+      "format": "STAI_FORMAT_FLOAT",
+      "id": 59,
+      "intq": {},
+      "is_param": true,
+      "mpool_id": 1,
+      "name": "dense_bias_array",
+      "nbits": 32,
+      "offset_start": 16,
+      "qmn": {},
+      "shape": [
+        2
+      ],
+      "shape_map": [
+        "CH"
+      ],
+      "size_bytes": 8
+    },
+    {
+      "alignment": 4,
+      "batch": 0,
+      "channel_first": true,
+      "channel_last": true,
+      "epochs": {
+        "end": 6,
+        "start": 3
+      },
+      "flags": "STAI_FLAG_PREALLOCATED|STAI_FLAG_ACTIVATIONS",
+      "format": "STAI_FORMAT_FLOAT",
+      "id": 52,
+      "intq": {},
+      "is_param": false,
+      "mpool_id": 0,
+      "name": "dense_output_array",
+      "nbits": 32,
+      "offset_start": 8,
+      "qmn": {},
+      "shape": [
+        2
+      ],
+      "shape_map": [
+        "CH"
+      ],
+      "size_bytes": 8
+    },
+    {
+      "alignment": 4,
+      "batch": 0,
+      "channel_first": true,
+      "channel_last": true,
+      "epochs": {
+        "end": 1,
+        "start": 0
+      },
+      "flags": "STAI_FLAG_WEIGHTS|STAI_FLAG_CONST|STAI_FLAG_PREALLOCATED",
+      "format": "STAI_FORMAT_FLOAT",
+      "id": 56,
+      "intq": {},
+      "is_param": true,
+      "mpool_id": 1,
+      "name": "dense_weights_array",
+      "nbits": 32,
+      "offset_start": 0,
+      "qmn": {},
+      "shape": [
+        2,
+        2
+      ],
+      "shape_map": [
+        "CH",
+        "CH_IN"
+      ],
+      "size_bytes": 16
+    },
+    {
+      "alignment": 4,
+      "batch": 0,
+      "channel_first": true,
+      "channel_last": true,
+      "epochs": {
+        "end": 4,
+        "start": 2
+      },
+      "flags": "STAI_FLAG_INPUTS|STAI_FLAG_PREALLOCATED|STAI_FLAG_ACTIVATIONS",
+      "format": "STAI_FORMAT_FLOAT",
+      "id": 50,
+      "intq": {},
+      "is_param": false,
+      "mpool_id": 0,
+      "name": "input_output_array",
+      "nbits": 32,
+      "offset_start": 0,
+      "qmn": {},
+      "shape": [
+        2
+      ],
+      "shape_map": [
+        "CH"
+      ],
+      "size_bytes": 8
+    },
+    {
+      "alignment": 4,
+      "batch": 0,
+      "channel_first": true,
+      "channel_last": true,
+      "epochs": {
+        "end": 7,
+        "start": 5
+      },
+      "flags": "STAI_FLAG_OUTPUTS|STAI_FLAG_PREALLOCATED|STAI_FLAG_ACTIVATIONS",
+      "format": "STAI_FORMAT_FLOAT",
+      "id": 54,
+      "intq": {},
+      "is_param": false,
+      "mpool_id": 0,
+      "name": "output_output_array",
+      "nbits": 32,
+      "offset_start": 0,
+      "qmn": {},
+      "shape": [
+        2
+      ],
+      "shape_map": [
+        "CH"
+      ],
+      "size_bytes": 8
+    }
+  ],
+  "environment": {
+    "generated_model": {
+      "generated_time": "2026-09-29T17:12:19+0530",
+      "model_files": [
+        {
+          "name": "network_data.h",
+          "signature": "0xef952381b958af3911ca03e261062b9f"
+        },
+        {
+          "name": "network_data.c",
+          "signature": "0xdc9e38d21d31e938029403224840bc35"
+        },
+        {
+          "name": "network.h",
+          "signature": "0xe432ec24f62e0f1f74264d226453d17b"
+        },
+        {
+          "name": "network.c",
+          "signature": "0x7b32beeb24ba646cebc30b1e4275a463"
+        },
+        {
+          "name": "network_details.h",
+          "signature": "0xf732503d460df2518a663bc9e35d3c02"
+        }
+      ],
+      "name": "network"
+    },
+    "network_signature": "0xca513f953455926b",
+    "test_name": "",
+    "tools": [
+      {
+        "arguments": "generate --model C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test\\firmware\\ml_c5_stai_cpu_compile_retry2\\model\\c5_dense_relu.onnx --target stm32c5 --workspace C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test\\firmware\\ml_c5_stai_cpu_compile_retry2\\generate\\workspace --output C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test\\firmware\\ml_c5_stai_cpu_compile_retry2\\generate\\output --optimization balanced --c-api st-ai",
+        "environment": [],
+        "input_model": {
+          "model_files": [
+            {
+              "name": "c5_dense_relu.onnx",
+              "signature": "0xf749dc9f20f44bcaf24f633250040b7d"
+            }
+          ],
+          "n_params": 6,
+          "name": "c5_dense_relu",
+          "size": 24,
+          "type": "onnx"
+        },
+        "name": "ST.EdgeAI.Core",
+        "version": "4.0.1-20581 7ed50de05"
+      }
+    ]
+  },
+  "graphs": [
+    {
+      "edges": [
+        {
+          "buffer": 52,
+          "edge_kind": "EDGE_MEMORY",
+          "end": {
+            "node_id": 4,
+            "port": 0
+          },
+          "id": 0,
+          "name": "n3-p0_n4-p0",
+          "start": {
+            "node_id": 3,
+            "port": 0
+          }
+        }
+      ],
+      "id": 0,
+      "inputs": [
+        50
+      ],
+      "name": "c5_dense_relu",
+      "nodes": [
+        {
+          "attributes": {
+            "num_units": "2",
+            "use_bias": "True"
+          },
+          "id": 3,
+          "inputs": [
+            50,
+            56,
+            59
+          ],
+          "macc": 6,
+          "mapping": "NODE_SW",
+          "name": "dense",
+          "original_nodes": [
+            "2"
+          ],
+          "outputs": [
+            52
+          ],
+          "scratchs": [],
+          "subgraph_nodes": [],
+          "sw_functions": [
+            "forward_lite_dense_if32of32wf32"
+          ],
+          "type": "Dense"
+        },
+        {
+          "attributes": {
+            "nonlinearity": "relu"
+          },
+          "id": 4,
+          "inputs": [
+            52
+          ],
+          "macc": 2,
+          "mapping": "NODE_SW",
+          "name": "output",
+          "original_nodes": [
+            "3"
+          ],
+          "outputs": [
+            54
+          ],
+          "scratchs": [],
+          "subgraph_nodes": [],
+          "sw_functions": [
+            "forward_lite_nl_relu_if32of32"
+          ],
+          "type": "Nonlinearity"
+        }
+      ],
+      "original_inputs": [
+        {
+          "c_shape_map": [],
+          "data_format": {
+            "quantizer": "NONE",
+            "scale": [],
+            "size": 32,
+            "type": "FLOAT",
+            "zero": []
+          },
+          "name": "input",
+          "shape": [
+            1,
+            2
+          ],
+          "shape_map": [
+            "BATCH",
+            "CH"
+          ]
+        }
+      ],
+      "original_outputs": [
+        {
+          "c_shape_map": [],
+          "data_format": {
+            "quantizer": "NONE",
+            "scale": [],
+            "size": 32,
+            "type": "FLOAT",
+            "zero": []
+          },
+          "name": "output",
+          "shape": [
+            1,
+            2
+          ],
+          "shape_map": [
+            "BATCH",
+            "CH"
+          ]
+        }
+      ],
+      "outputs": [
+        54
+      ]
+    }
+  ],
+  "json_schema_version": "2.0",
+  "memory_footprint": {
+    "activations": 16,
+    "io": [
+      0,
+      0
+    ],
+    "kernel_flash": 1554,
+    "kernel_ram": 0,
+    "series": "stm32c5",
+    "toolchain": "arm-none-eabi-gcc (GNU Tools for STM32 14.3.rel1.20251027-0700) 14.3.1 20250623",
+    "toolchain_flash": 0,
+    "toolchain_ram": 0,
+    "weights": 24
+  },
+  "memory_pools": [
+    {
+      "address": "NULL",
+      "alignment": 4,
+      "attributes": {
+        "latency": "HIGH",
+        "score": 768,
+        "throughput": "LOW"
+      },
+      "buffers": [
+        50,
+        52,
+        54
+      ],
+      "id": 0,
+      "name": "heap_overlay_pool",
+      "offset_start": 0,
+      "persistent": false,
+      "rights": "ACC_WRITE",
+      "size_bytes": -1,
+      "subpools": [],
+      "used_size_bytes": 16,
+      "user_allocated": false,
+      "virtual": false
+    },
+    {
+      "address": "g_network_weights_array",
+      "alignment": 0,
+      "attributes": {
+        "latency": "UNDEF",
+        "score": 0,
+        "throughput": "UNDEF"
+      },
+      "buffers": [
+        56,
+        59
+      ],
+      "id": 1,
+      "name": "weights_array",
+      "offset_start": 0,
+      "persistent": true,
+      "rights": "ACC_READ",
+      "size_bytes": -1,
+      "subpools": [],
+      "used_size_bytes": 24,
+      "user_allocated": false,
+      "virtual": false
+    }
+  ]
+}

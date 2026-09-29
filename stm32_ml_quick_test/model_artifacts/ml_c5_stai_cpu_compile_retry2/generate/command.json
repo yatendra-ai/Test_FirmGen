@@ -1,0 +1,16 @@
+[
+  "C:\\ST\\STEdgeAI\\4.0\\Utilities\\windows\\stedgeai.exe",
+  "generate",
+  "--model",
+  "C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test\\firmware\\ml_c5_stai_cpu_compile_retry2\\model\\c5_dense_relu.onnx",
+  "--target",
+  "stm32c5",
+  "--workspace",
+  "C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test\\firmware\\ml_c5_stai_cpu_compile_retry2\\generate\\workspace",
+  "--output",
+  "C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test\\firmware\\ml_c5_stai_cpu_compile_retry2\\generate\\output",
+  "--optimization",
+  "balanced",
+  "--c-api",
+  "st-ai"
+]

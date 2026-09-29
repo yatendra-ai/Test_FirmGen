@@ -1,0 +1,9 @@
+Implement the attached PRD.pdf for my NUCLEO-C5A3ZG board with STM32C5A3ZGT6.
+
+Use the supplied c5_dense_relu.onnx from the c5_quick_test folder. I have imported/compiled it through Toolchains > ML model preparation (or do that first if needed). Use CPU inference for stm32c5 with the st-ai API. Locate the resulting generated output folder and keep its compiler lock, hashes and reports.
+
+Integrate the generated bundle, fg_ml runtime/STAI bridge, c5_quick_test.c/.h and c5_vectors.h through the existing mcu_component ownership flow. Add version-matched ST Edge AI middleware headers and the Cortex-M33 runtime library with matching FPU ABI. Initialize the clocks, FPU and ST-LINK VCP UART from the generated board BSP; implement the supplied console callback using that actual UART/console, without guessed pins or handles. Request 115200 8-N-1. Call c5_ml_quick_test after board setup.
+
+Build the complete firmware through mcu_build, then use the existing detected STM32 deploy/serial workflow to run it on my connected board. Capture the model banner, five ML_VECTOR lines and final ML_SUMMARY. Expected output vectors are [0.5,4], [0,4], [7.5,0], [0.5,0], [0,0], with absolute tolerance 0.000001. UART actual_milli prints those values multiplied by 1000. Compare actual model inference output; do not implement the equations as a substitute for the generated runtime.
+
+Preserve normal FirmGen ST generation/build/deploy behavior. Report import/compilation, complete firmware build, flash, and physical inference separately. State any unavailable board/tool or integration step clearly; do not claim TARGET_VALIDATED from a host test or generated C files.

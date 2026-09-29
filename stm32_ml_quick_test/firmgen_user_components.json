@@ -1,0 +1,40 @@
+{
+  "libraries": [
+    {
+      "name": "stedgeai_runtime_4_0_1_cm33",
+      "kind": "prebuilt",
+      "path": "user/lib/stedgeai_runtime_4_0_1_cm33/NetworkRuntime1201_CM33_GCC.a",
+      "include_dirs": [
+        "user/lib/stedgeai_runtime_4_0_1_cm33/Inc"
+      ]
+    },
+    {
+      "name": "stai_c5_model_sources",
+      "kind": "source",
+      "path": "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/generated/output",
+      "include_dirs": [
+        "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/generated/output",
+        "user/drivers/firmgen_ml_stai_binding/Inc"
+      ]
+    },
+    {
+      "name": "firmgen_ml_stai_source",
+      "kind": "source",
+      "path": "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/backend_stai",
+      "include_dirs": [
+        "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/backend_stai",
+        "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/generated/output",
+        "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/runtime",
+        "user/drivers/firmgen_ml_stai_binding/Inc"
+      ]
+    },
+    {
+      "name": "fg_ml_runtime_source",
+      "kind": "source",
+      "path": "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/runtime",
+      "include_dirs": [
+        "model_artifacts/ml_c5_stai_cpu_compile_retry2/bundle/runtime"
+      ]
+    }
+  ]
+}

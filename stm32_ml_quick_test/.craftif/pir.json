@@ -1,0 +1,410 @@
+{
+  "schema_version": "2.1.0",
+  "id": "pir_stm32_ml_quick_test",
+  "revision": "49d43247689c1b89d6cb3cba92e2f18f",
+  "provenance": {
+    "project_path": "C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test",
+    "chat_id": "3feb38cf-a2b1-426d-82f8-5258b1bbee42",
+    "revision": "49d43247689c1b89d6cb3cba92e2f18f",
+    "generated_at_ms": 1790680299058,
+    "analyzer_version": "pir_maker-static-0.13.0",
+    "analyzed_files": [
+      "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2",
+      "application/main.c",
+      "application/main.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.c",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.h",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.c",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.h"
+    ],
+    "file_hashes": {
+      "application/main.c": "8b66489f3048fc8f7d3dd62ab2e87d9c",
+      "firmware/app/app.h": "27f70ec8e5e01f15265f78a03fe091cd",
+      "firmware/utils/helpers/helpers.c": "914568ab7415fec17e74f306cbb5ae09",
+      "firmware/configs/feature_config.h": "08ef51c6dfb8aa157bd736ea8388e0ba",
+      "firmware/configs/build_config.h": "dd997e9a0a461df28c370a61963fd7e5",
+      "firmware/configs/platform_config.h": "010b01144dbd2d3fb63f3053b158ab7a",
+      "application/main.h": "d99caff8e91a0e1345a489e8916ce23f",
+      "firmware/utils/helpers/helpers.h": "ec8b635b7e5b55f8aeb8f47c3ff34312",
+      "firmware/configs/app_config.h": "ee2d2cf50af1bb5eade2bf3c47ae13e0",
+      "firmware/osal/osal.h": "f2f2c13784f7a100461b180f4028062b",
+      "firmware/app/app.c": "44e82ca09f5738d0686be5ef9ef86f0c",
+      "firmware/utils/logger/logger.c": "a0aa546944c77a82f438514b1f38d8cc",
+      "firmware/utils/logger/logger.h": "642efceba068f0cfa4a70d8ce56bbd82",
+      "firmware/bsp/board.c": "e630056f89563be97755fb3703f3a541",
+      "firmware/bsp/board.h": "0d2ad35583c79f15ef426e771f0f03ce",
+      "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2": "455c8ec21a4ea7659af7f2906a2f3233"
+    },
+    "board_id": "NUCLEO-C5A3ZG",
+    "target_chip": null,
+    "config_hash": null,
+    "feature_flags": "mode=hybrid;refine=true"
+  },
+  "approval": {
+    "status": "stale"
+  },
+  "nodes": [
+    {
+      "id": "boot",
+      "node_type": "system_init",
+      "label": "Boot / app_main",
+      "properties": {
+        "target": "stm32"
+      },
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "49d43247689c1b89d6cb3cba92e2f18f"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/main.c"
+        ]
+      },
+      "editable_fields": [],
+      "layer": "system",
+      "ai_summary": "Bootstraps firmware startup and initializes core subsystems.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    },
+    {
+      "id": "uart_device_usart",
+      "node_type": "uart_device",
+      "label": "USART",
+      "properties": {
+        "port": 1,
+        "baud_rate": 115200
+      },
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "sync": {
+        "state": "synced",
+        "last_synced_revision": "49d43247689c1b89d6cb3cba92e2f18f"
+      },
+      "ownership": {
+        "primary_files": [
+          "application/main.c"
+        ]
+      },
+      "editable_fields": [
+        "baud_rate"
+      ],
+      "layer": "physical",
+      "ai_summary": "Represents a UART peripheral with mapped serial pins.",
+      "confidence": 1.0,
+      "authority": "agent",
+      "semantic_tags": [],
+      "dependencies": []
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_boot_uart_device_usart_initializes",
+      "source_node_id": "boot",
+      "target_node_id": "uart_device_usart",
+      "kind": "hardware",
+      "confidence": 1.0,
+      "source_refs": [
+        {
+          "file": "application/main.c",
+          "symbol": "USART",
+          "confidence": 1.0,
+          "inferred_by": "static"
+        }
+      ],
+      "semantic_label": "initializes",
+      "validated": false
+    }
+  ],
+  "layers": {
+    "physical": [
+      "uart_device_usart"
+    ],
+    "runtime": [],
+    "network": [],
+    "system": [
+      "boot"
+    ]
+  },
+  "partitions": [],
+  "components": [],
+  "modules": [
+    {
+      "id": "app",
+      "label": "app",
+      "path": "app",
+      "kind": "application",
+      "files": [
+        "firmware/app/app.c",
+        "firmware/app/app.h"
+      ]
+    },
+    {
+      "id": "application",
+      "label": "application",
+      "path": "application",
+      "kind": "application",
+      "files": [
+        "application/main.c",
+        "application/main.h"
+      ]
+    },
+    {
+      "id": "bsp",
+      "label": "bsp",
+      "path": "bsp",
+      "kind": "board",
+      "files": [
+        "firmware/bsp/board.c",
+        "firmware/bsp/board.h"
+      ]
+    },
+    {
+      "id": "configs",
+      "label": "configs",
+      "path": "configs",
+      "kind": "configuration",
+      "files": [
+        "firmware/configs/app_config.h",
+        "firmware/configs/build_config.h",
+        "firmware/configs/feature_config.h",
+        "firmware/configs/platform_config.h"
+      ]
+    },
+    {
+      "id": "osal",
+      "label": "osal",
+      "path": "osal",
+      "kind": "abstraction",
+      "files": [
+        "firmware/osal/osal.h"
+      ]
+    },
+    {
+      "id": "utils_helpers",
+      "label": "utils/helpers",
+      "path": "utils/helpers",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/helpers/helpers.c",
+        "firmware/utils/helpers/helpers.h"
+      ]
+    },
+    {
+      "id": "utils_logger",
+      "label": "utils/logger",
+      "path": "utils/logger",
+      "kind": "utility",
+      "files": [
+        "firmware/utils/logger/logger.c",
+        "firmware/utils/logger/logger.h"
+      ]
+    }
+  ],
+  "module_deps": [
+    {
+      "from": "app",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 13,
+      "symbol": "app_config.h"
+    },
+    {
+      "from": "app",
+      "to": "utils_logger",
+      "via": "include",
+      "file": "firmware/app/app.c",
+      "line": 14,
+      "symbol": "logger.h"
+    },
+    {
+      "from": "application",
+      "to": "app",
+      "via": "include",
+      "file": "application/main.c",
+      "line": 11,
+      "symbol": "app.h"
+    },
+    {
+      "from": "bsp",
+      "to": "configs",
+      "via": "include",
+      "file": "firmware/bsp/board.h",
+      "line": 18,
+      "symbol": "app_config.h"
+    }
+  ],
+  "task_flows": [],
+  "summary": {
+    "headline": "No additive topology changes are supported by the provided firmware snippets.",
+    "node_count": 0,
+    "edge_count": 0,
+    "warnings": []
+  },
+  "diagrams": {
+    "hld": {
+      "title": "High-Level Design",
+      "mermaid": "flowchart TD\n  subgraph Runtime[\"Firmware startup\"]\n    boot[\"Startup entry<br/>application/main.c\"]\n    app[\"Application test state<br/>firmware/app/app.c\"]\n    logger[\"Printf logger<br/>firmware/utils/logger/logger.h\"]\n  end\n  subgraph ConsolePath[\"Serial console\"]\n    usart[\"USART2 console interface<br/>application/main.c\"]\n    console[\"Console output<br/>VCP console\"]\n  end\n  boot -->|mx_system_init configures USART2| usart\n  boot -->|app_start| app\n  app -->|LOGI| logger\n  logger -->|printf| usart\n  usart -->|VCP console output| console",
+      "authored_by_model": true,
+      "node_notes": {
+        "app": "This module initializes the test status, vector counters, and comparison results before test processing. firmware/app/app.c calls LOGI after the reset state is initialized.",
+        "console": "This is the VCP console output for the application's startup message. firmware/app/app.h describes runtime reporting through the initialized console, while firmware/utils/logger/logger.h identifies UART/VCP routing as platform-owned.",
+        "usart": "USART2 is the serial interface used for the initialized console path. application/main.c identifies USART2 setup in system initialization and requires basic stdio setup before app_start; no pin bindings are established by these files.",
+        "boot": "This is the STM32 reset entry and hands off to the firmware after startup checks. application/main.c calls mx_system_init, which its comment identifies as setting up USART2, then calls app_start.",
+        "logger": "The logger macros are printf-backed and provide the application's LOGI call. firmware/utils/logger/logger.h documents printf as the backing mechanism and says UART/VCP routing belongs in the STM32 platform."
+      }
+    },
+    "lld": {
+      "title": "Low-Level Design (Firmware Workflow)",
+      "mermaid": "flowchart TD\n  entry[\"Initialize board startup<br/>application/main.c\"]\n  sysok{\"System initialization succeeded — application/main.c\"}\n  stdio[\"Initialize basic stdio<br/>application/main.c\"]\n  stdiook{\"Basic stdio initialization succeeded — application/main.c\"}\n  halt[\"Remain in startup failure loop<br/>application/main.c\"]\n  start[\"Start application<br/>firmware/app/app.c\"]\n  state[\"Reset test status and vector results<br/>firmware/app/app.c\"]\n  log[\"Log initialized startup state<br/>firmware/app/app.c\"]\n  console[\"Write log through printf console<br/>firmware/utils/logger/logger.h\"]\n  entry -->|mx_system_init| sysok\n  sysok -->|yes| stdio\n  sysok -->|no| halt\n  stdio -->|mx_basic_stdio_init| stdiook\n  stdiook -->|yes| start\n  stdiook -->|no| halt\n  start -->  state\n  state -->  log\n  log -->|LOGI| console",
+      "authored_by_model": true,
+      "node_notes": {
+        "stdio": "Basic stdio is initialized after successful system startup so application logging has a configured console. application/main.c calls mx_basic_stdio_init here.",
+        "start": "This step hands execution to the firmware application after system and console startup succeed. application/main.c calls app_start, implemented in firmware/app/app.c.",
+        "stdiook": "This branch prevents the application from starting if basic stdio setup fails. application/main.c handles that failure with a non-returning loop.",
+        "state": "The application clears status and vector counters and marks every comparison result not run. firmware/app/app.c performs this reset before any test processing.",
+        "entry": "The reset entry begins the checked startup sequence before application code runs. application/main.c calls mx_system_init and enters a non-returning failure loop if it fails.",
+        "console": "This step represents the printf-backed serial-console destination for the startup log. firmware/utils/logger/logger.h documents printf logging and platform-owned UART/VCP routing.",
+        "halt": "This step represents the startup failure loops reached when either initialization call fails. application/main.c contains an empty infinite loop for each failure path.",
+        "sysok": "This branch checks the system initialization result before proceeding to stdio setup. The check and failure behavior are in application/main.c.",
+        "log": "The application emits the startup_state=initialized message after resetting its test state. firmware/app/app.c uses LOGI, which resolves through the printf macros in firmware/utils/logger/logger.h."
+      }
+    },
+    "sequence": {
+      "title": "Sequence Diagram",
+      "mermaid": "sequenceDiagram\n  participant Main as Startup entry\n  participant System as System initialization\n  participant Stdio as Basic stdio\n  participant App as Application\n  participant Logger as Printf logger\n  participant USART2 as USART2 console\n  participant Console as VCP console\n  Main->>System: mx_system_init\n  System-->>Main: SYSTEM_OK status\n  alt System initialization failed\n    Note over Main: Remain in startup failure loop\n  else System initialization succeeded\n    Main->>Stdio: mx_basic_stdio_init\n    Stdio-->>Main: SYSTEM_OK status\n    alt Basic stdio initialization failed\n      Note over Main: Remain in startup failure loop\n    else Basic stdio initialization succeeded\n      Main->>App: app_start\n      App->>App: Initialize test status, counters, and comparison results\n      App->>Logger: LOGI startup_state=initialized\n      Logger->>USART2: printf log output\n      USART2->>Console: VCP console output\n    end\n  end",
+      "participants": [
+        "Main",
+        "System",
+        "Stdio",
+        "App",
+        "Logger",
+        "USART2",
+        "Console"
+      ],
+      "generated_from": [
+        "application/main.c"
+      ],
+      "grounding": 0.0,
+      "authored_by_model": true
+    },
+    "model_pass_expected": true
+  },
+  "change_log": [],
+  "unresolved": [
+    {
+      "kind": "board_pin_unused",
+      "message": "LD1 (PA5) is identified by the board descriptor, but no firmware call site drives it; omitted from topology.",
+      "pin": "PA5",
+      "file": "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2"
+    },
+    {
+      "kind": "board_pin_unused",
+      "message": "LD2 (PG1) is identified by the board descriptor, but no firmware call site drives it; omitted from topology.",
+      "pin": "PG1",
+      "file": "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2"
+    },
+    {
+      "kind": "board_pin_unused",
+      "message": "LD3 (PG2) is identified by the board descriptor, but no firmware call site drives it; omitted from topology.",
+      "pin": "PG2",
+      "file": "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2"
+    },
+    {
+      "kind": "board_pin_unused",
+      "message": "B1 (PC13) is identified by the board descriptor, but no firmware call site reads it; omitted from topology.",
+      "pin": "PC13",
+      "file": "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2"
+    },
+    {
+      "kind": "sparse_extraction",
+      "message": "The provided application entry only shows startup handoff to app_start(); application implementation is not included, so GPIOs, tasks, and sensor wiring cannot be established.",
+      "file": "application/main.c"
+    },
+    {
+      "kind": "uart_pin_bindings_unavailable",
+      "message": "USART is present in the baseline, but no provided snippet establishes its pin bindings; no UART properties were updated."
+    }
+  ],
+  "read_only": false,
+  "graph_version": 6,
+  "generation": {
+    "mode": "hybrid_refine",
+    "model": "local_openai_proxy/gpt-6-luna",
+    "triggered_by": "agent_turn",
+    "analyzed_at_ms": 1790680306082,
+    "input_files": [
+      "NUCLEO-C5A3ZG/template_start_from_nucleo.ioc2",
+      "application/main.c",
+      "application/main.h",
+      "firmware/app/app.c",
+      "firmware/app/app.h",
+      "firmware/bsp/board.c",
+      "firmware/bsp/board.h",
+      "firmware/configs/app_config.h",
+      "firmware/configs/build_config.h",
+      "firmware/configs/feature_config.h",
+      "firmware/configs/platform_config.h",
+      "firmware/osal/osal.h",
+      "firmware/utils/helpers/helpers.c",
+      "firmware/utils/helpers/helpers.h",
+      "firmware/utils/logger/logger.c",
+      "firmware/utils/logger/logger.h",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.c",
+      "NUCLEO-C5A3ZG/generated/hal/mx_usart2.h",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.c",
+      "NUCLEO-C5A3ZG/generated/utilities/basic_stdio/mx_basic_stdio_app.h"
+    ],
+    "token_usage": {
+      "prompt_tokens": 7766,
+      "completion_tokens": 697
+    }
+  },
+  "sync_metadata": {
+    "project_file": "",
+    "content_hash": "",
+    "pending_patches": [],
+    "last_diff": {
+      "from_revision": "666edf3307e07cd5a1c163a6f9397073",
+      "to_revision": "49d43247689c1b89d6cb3cba92e2f18f",
+      "nodes_added": [],
+      "nodes_removed": [],
+      "nodes_changed": [],
+      "edges_added": [],
+      "edges_removed": []
+    }
+  },
+  "validation_state": {
+    "valid": true,
+    "error_count": 0,
+    "warning_count": 0,
+    "validated_at_ms": 1790680306082
+  }
+}

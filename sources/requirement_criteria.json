@@ -1,0 +1,1720 @@
+{
+  "job_id": "0be3cdad-3b8e-40d2-9f9b-e7a5ae8d1a25",
+  "document_id": "cecbfb54-2469-4236-ae0c-ed98e9ee8717",
+  "saved_at": "2026-09-29T11:07:46.751Z",
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "STM32 Board Bring-up & Startup",
+      "criteria": [
+        {
+          "requirement_id": "HW-001",
+          "verifiability": "inspection",
+          "criterion": "The selected firmware target configuration identifies the NUCLEO-C5A3ZG board and its MB2310 reference.",
+          "observable": "Board-target configuration entry",
+          "observable_kind": "artifact",
+          "preconditions": [],
+          "procedure": [
+            "Inspect the firmware's selected board-target configuration.",
+            "Compare the board name and reference with the required target."
+          ],
+          "expected": "The configuration identifies NUCLEO-C5A3ZG, reference MB2310.",
+          "source": "derived",
+          "rationale": "The requirement specifies the board and reference, and its verification method is Inspection; checking the selected target configuration is a checkable way to establish which board the firmware targets.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "inspection",
+          "criterion": "The selected MCU target configuration names STM32C5A3ZGT6 and specifies the Cortex-M33 core.",
+          "observable": "MCU target and processor-core configuration",
+          "observable_kind": "artifact",
+          "preconditions": [],
+          "procedure": [
+            "Inspect the selected MCU target and processor configuration.",
+            "Compare the part number and core with the requirement."
+          ],
+          "expected": "The target is STM32C5A3ZGT6 and the core is Cortex-M33.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-002",
+          "verifiability": "inspection",
+          "criterion": "The MCU part specification identifies single-precision FPU and DSP capability for STM32C5A3ZGT6.",
+          "observable": "MCU part specification for STM32C5A3ZGT6",
+          "observable_kind": "artifact",
+          "preconditions": [],
+          "procedure": [
+            "Inspect the specification for the selected MCU part.",
+            "Check its listed FPU precision and DSP capability."
+          ],
+          "expected": "The specification lists a single-precision FPU and DSP capability.",
+          "source": "derived",
+          "rationale": "The requirement's parameters name these MCU capabilities, but its stated acceptance criterion only names the MCU and core; the part specification provides an inspection observable for the additional constraints.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "inspection",
+          "criterion": "The configured maximum CPU clock does not exceed 144 MHz.",
+          "observable": "Clock configuration's maximum CPU frequency",
+          "observable_kind": "artifact",
+          "preconditions": [],
+          "procedure": [
+            "Inspect the selected clock configuration.",
+            "Read the configured maximum CPU clock."
+          ],
+          "expected": "CPU clock is at most 144 MHz.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "inspection",
+          "criterion": "The linked firmware image occupies no more than 1 MiB of Flash.",
+          "observable": "Linker map or equivalent image-size report",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware image has been built."
+          ],
+          "procedure": [
+            "Inspect the linker map or image-size report.",
+            "Read the total Flash image size."
+          ],
+          "expected": "Flash image size is at most 1 MiB.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-003",
+          "verifiability": "inspection",
+          "criterion": "The linked firmware's SRAM usage does not exceed 256 KiB.",
+          "observable": "Linker map or equivalent memory-usage report",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware image has been built."
+          ],
+          "procedure": [
+            "Inspect the linker map or memory-usage report.",
+            "Read the SRAM allocation, including static and reserved application sections reported there."
+          ],
+          "expected": "Reported SRAM usage is at most 256 KiB.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-004",
+          "verifiability": "inspection",
+          "criterion": "The application's required dependency and startup configuration contains no mandatory external sensor, external memory, network service, RTOS, or NPU.",
+          "observable": "Application dependency list and startup/configuration code",
+          "observable_kind": "artifact",
+          "preconditions": [],
+          "procedure": [
+            "Inspect the application dependency list and startup/configuration path.",
+            "Check whether any listed component or service is required for the application to start and execute its test."
+          ],
+          "expected": "None of the five listed components or services is a mandatory application dependency.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-002",
+          "verifiability": "inspection",
+          "criterion": "The selected board configuration names the UART instance and pins used by the application, and those pins match a UART mapping supported by the board.",
+          "observable": "Selected board configuration's UART instance and pin assignments, compared with the board mapping",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "A board configuration has been selected."
+          ],
+          "procedure": [
+            "Inspect the selected board configuration for the UART instance and pin assignments used by the application.",
+            "Compare that instance and pin mapping with the supported mapping for the selected board."
+          ],
+          "expected": "The UART instance and pins are identified and form a board-supported mapping.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "target",
+          "criterion": "After reset, clock and FPU initialization are complete before the application enters the test sequence.",
+          "observable": "Target-side initialization state and test-sequence entry event",
+          "observable_kind": "state",
+          "preconditions": [
+            "The MCU has been reset."
+          ],
+          "procedure": [
+            "Reset the MCU and run the application on the target.",
+            "Observe the clock and FPU initialization completion state and the test-sequence entry event."
+          ],
+          "expected": "Clock and FPU initialization complete before test-sequence entry.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "target",
+          "criterion": "After reset, serial-console initialization completes before the application enters the test sequence.",
+          "observable": "Target-side serial-console initialization state and test-sequence entry event",
+          "observable_kind": "state",
+          "preconditions": [
+            "The MCU has been reset."
+          ],
+          "procedure": [
+            "Reset the MCU and run the application on the target.",
+            "Observe serial-console initialization completion and the test-sequence entry event."
+          ],
+          "expected": "Serial-console initialization completes before test-sequence entry.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-008",
+          "verifiability": "target",
+          "criterion": "If clock, FPU, or serial-console initialization fails, the target run reports test failure and does not proceed into the test sequence.",
+          "observable": "Target test status and test-sequence entry state under an injected initialization failure",
+          "observable_kind": "state",
+          "preconditions": [
+            "The target test can induce or simulate an initialization failure."
+          ],
+          "procedure": [
+            "Induce each initialization failure supported by the test setup.",
+            "Observe the reported test status and whether the test sequence is entered."
+          ],
+          "expected": "The run reports failure and does not enter the test sequence.",
+          "source": "derived",
+          "rationale": "The requirement's failure behavior explicitly says any initialization failure shall fail the test; checking the failure status and blocked sequence is the observable consequence of that behavior.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-023",
+          "verifiability": "hardware",
+          "criterion": "After firmware flashing and a hardware reset, the ST-LINK Virtual COM Port receives startup output and the application reaches its execution-start state.",
+          "observable": "ST-LINK Virtual COM Port output and application execution-start state",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware has been flashed to the board.",
+            "The ST-LINK Virtual COM Port is connected to a capture host."
+          ],
+          "procedure": [
+            "Apply a hardware reset to the board.",
+            "Capture the Virtual COM Port output.",
+            "Observe whether the application reaches its execution-start state."
+          ],
+          "expected": "Startup output is present after reset and the application reaches its execution-start state.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-026",
+          "verifiability": "hardware",
+          "criterion": "Firmware flashes to a physical NUCLEO-C5A3ZG and, after hardware reset, produces startup output and begins application execution.",
+          "observable": "ST-LINK flashing result, startup output, and application execution-start state",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "A physical NUCLEO-C5A3ZG board and ST-LINK connection are available.",
+            "A successful firmware build is available."
+          ],
+          "procedure": [
+            "Flash the firmware to the physical board using ST-LINK.",
+            "Apply a hardware reset.",
+            "Capture startup output and observe whether application execution begins."
+          ],
+          "expected": "Flashing completes, startup output is present after reset, and application execution begins.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-037",
+          "verifiability": "target",
+          "criterion": "The target execution trace records clock and FPU initialization completion before ML runtime initialization and before the first inference call.",
+          "observable": "Target-side ordered initialization and inference trace",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The MCU has been reset.",
+            "Target instrumentation records the relevant initialization and inference events."
+          ],
+          "procedure": [
+            "Run the instrumented application on the target.",
+            "Read the event trace through the first inference call.",
+            "Compare the event ordering."
+          ],
+          "expected": "Clock and FPU initialization complete before ML runtime initialization, and both complete before the first inference call.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-037",
+          "verifiability": "target",
+          "criterion": "If required clock or FPU initialization fails, the target run fails without entering ML runtime initialization or executing inference.",
+          "observable": "Target failure status and ML-runtime/inference event trace after an induced initialization failure",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The target test can induce or simulate clock or FPU initialization failure."
+          ],
+          "procedure": [
+            "Induce a required clock or FPU initialization failure.",
+            "Run the application and inspect its status and event trace."
+          ],
+          "expected": "The run reports failure, with no ML runtime initialization or inference event after the failure.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-039",
+          "verifiability": "target",
+          "criterion": "Repeated hardware resets produce identical initial test-status, vector-counter, and comparison-result state before the first vector executes.",
+          "observable": "Target RAM snapshot of test status, vector counters, and comparison results immediately before first-vector execution",
+          "observable_kind": "state",
+          "preconditions": [
+            "The application is running on the target.",
+            "The test can capture the listed state before the first vector execution."
+          ],
+          "procedure": [
+            "Capture the listed state immediately before the first vector on one run.",
+            "Hardware-reset the board and capture the same state at the same point on a second run.",
+            "Compare the snapshots."
+          ],
+          "expected": "The initial snapshots are identical across the two runs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-039",
+          "verifiability": "target",
+          "criterion": "Under identical execution conditions, repeated hardware-reset runs produce the same vector count, comparison results, and final PASS/FAIL status.",
+          "observable": "Target-reported vector count, comparison results, and final status for each run",
+          "observable_kind": "state",
+          "preconditions": [
+            "The same test inputs and execution conditions can be applied to repeated runs."
+          ],
+          "procedure": [
+            "Run the test and record its vector count, comparison results, and final status.",
+            "Hardware-reset the board and repeat under identical execution conditions.",
+            "Compare the recorded results."
+          ],
+          "expected": "Vector count, comparison results, and final PASS/FAIL status match between runs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-039",
+          "verifiability": "target",
+          "criterion": "The test-state initialization event occurs before the first vector execution, and a run with stale or indeterminate initial state cannot report PASS.",
+          "observable": "Target event ordering and final test status when stale or indeterminate state is introduced",
+          "observable_kind": "state",
+          "preconditions": [
+            "The target test can observe initialization and vector-execution events.",
+            "The test setup can introduce or simulate stale or indeterminate state."
+          ],
+          "procedure": [
+            "Observe initialization and first-vector event ordering during a normal run.",
+            "Introduce or simulate stale or indeterminate test state before a run.",
+            "Observe whether the run reports PASS."
+          ],
+          "expected": "Initialization precedes the first vector; the stale-state run does not report PASS.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-2",
+      "name": "UART Console & Result Reporting",
+      "criteria": [
+        {
+          "requirement_id": "FR-002",
+          "verifiability": "hardware",
+          "criterion": "The captured ST-LINK VCP log contains a result for each of the five specified vector comparisons.",
+          "observable": "Captured ST-LINK VCP log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the NUCLEO-C5A3ZG after reset."
+          ],
+          "procedure": [
+            "Capture the complete VCP output for one run.",
+            "Check the log for a result corresponding to each of the five specified vectors."
+          ],
+          "expected": "5 vector comparison results, one for each specified vector.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "hardware",
+          "criterion": "Repeated reset runs with the same firmware and model produce byte-identical result output containing a PASS or FAIL status.",
+          "observable": "Captured result output from repeated reset runs",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The same firmware and model are deployed for all runs.",
+            "The board can be reset between runs."
+          ],
+          "procedure": [
+            "Capture the result output after a reset.",
+            "Reset the board and capture the result output again.",
+            "Compare the result output bytes and check that a PASS or FAIL status is present."
+          ],
+          "expected": "The result output is byte-identical across runs and contains a PASS or FAIL status.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-003",
+          "verifiability": "unverifiable",
+          "criterion": "The result output is concise.",
+          "observable": "",
+          "observable_kind": "none",
+          "preconditions": [],
+          "procedure": [],
+          "expected": "No pass condition can be stated because no maximum length or other definition of “concise” is specified.",
+          "source": "derived",
+          "rationale": "The statement requires concision but supplies no length limit or definition that would distinguish a passing result from a failing one.",
+          "blocked_reason": "A maximum output length or objective definition of “concise” is missing.",
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "The UART signal to the ST-LINK VCP uses 115200 baud, 8 data bits, no parity, 1 stop bit, and no flow control.",
+          "observable": "UART configuration and framing on the ST-LINK VCP connection",
+          "observable_kind": "signal",
+          "preconditions": [
+            "The NUCLEO-C5A3ZG is powered and the ST-LINK VCP connection is available."
+          ],
+          "procedure": [
+            "Run the firmware.",
+            "Inspect the UART framing with a serial analyzer or equivalent instrument."
+          ],
+          "expected": "115200 baud, 8 data bits, no parity, 1 stop bit, and no flow control.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-001",
+          "verifiability": "hardware",
+          "criterion": "A VCP receiver configured for 115200 baud and 8-N-1 without flow control captures the firmware's console output without framing errors.",
+          "observable": "Captured console output and receiver framing-error indication",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running on the board.",
+            "The VCP receiver is configured for 115200 baud, 8 data bits, no parity, 1 stop bit, and no flow control."
+          ],
+          "procedure": [
+            "Connect the configured receiver to the ST-LINK VCP.",
+            "Capture a complete firmware run.",
+            "Check that output is received and the receiver reports no framing errors."
+          ],
+          "expected": "Console output is received and the receiver reports zero framing errors.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-013",
+          "verifiability": "hardware",
+          "criterion": "A successful run produces exactly five vector result lines and one final summary line in the console log.",
+          "observable": "Captured ST-LINK VCP log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running with all five reference vectors available."
+          ],
+          "procedure": [
+            "Capture the complete console output for a run.",
+            "Count the vector result lines and final summary lines."
+          ],
+          "expected": "Exactly 5 vector result lines and exactly 1 final summary line.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-013",
+          "verifiability": "hardware",
+          "criterion": "A console transmission failure during the run causes the test result to fail rather than pass.",
+          "observable": "Captured final status and test result",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "A test setup can force a console transmission failure."
+          ],
+          "procedure": [
+            "Force a console transmission failure during a required result transmission.",
+            "Capture any subsequent console output and inspect the final test status."
+          ],
+          "expected": "The test status is FAIL; it is not reported as PASS.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-022",
+          "verifiability": "hardware",
+          "criterion": "An injected vector or runtime failure produces a final FAIL status and a log entry identifying the failing condition when subsequent console output is available.",
+          "observable": "Captured ST-LINK VCP log and final status",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The test setup can inject a vector or runtime failure.",
+            "Console output remains available after the injected failure."
+          ],
+          "procedure": [
+            "Inject a vector failure and capture the console output.",
+            "Repeat with a runtime-operation failure.",
+            "Check each log for the failure condition and final status."
+          ],
+          "expected": "Each run reports the injected failing condition and ends with status FAIL.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-005",
+          "verifiability": "hardware",
+          "criterion": "Each displayed output value is an integer equal to the corresponding comparison output multiplied by 1000.",
+          "observable": "Parsed integer output values in the captured console log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Output comparisons have completed.",
+            "The corresponding unscaled output values are available to the test."
+          ],
+          "procedure": [
+            "Capture the output values printed for the comparisons.",
+            "For each value, multiply its corresponding unscaled output by 1000.",
+            "Compare the result with the printed integer and check that the printed representation is an integer."
+          ],
+          "expected": "For every displayed output, printed integer = corresponding output × 1000.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-006",
+          "verifiability": "hardware",
+          "criterion": "The startup console output contains the SHA-256 digest of the model deployed with the firmware.",
+          "observable": "Model identifier in the captured startup log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The model deployed with the firmware is available to compute or retrieve its SHA-256 digest."
+          ],
+          "procedure": [
+            "Compute the SHA-256 digest of the deployed model.",
+            "Capture the startup console output after reset.",
+            "Check that the output contains the matching digest."
+          ],
+          "expected": "The printed model identifier matches the SHA-256 digest of the deployed model.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-021",
+          "verifiability": "hardware",
+          "criterion": "ML_RUNTIME_READY appears after successful model and runtime initialization and is absent when either initialization fails.",
+          "observable": "ML_RUNTIME_READY occurrences in the captured console log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The test setup can exercise successful initialization and inject model or runtime initialization failures."
+          ],
+          "procedure": [
+            "Run with successful model and runtime initialization and capture the log.",
+            "Inject a model initialization failure and capture the log.",
+            "Inject a runtime initialization failure and capture the log."
+          ],
+          "expected": "The successful run contains ML_RUNTIME_READY after initialization; neither failure run contains ML_RUNTIME_READY.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-007",
+          "verifiability": "hardware",
+          "criterion": "The log contains exactly one ML_VECTOR result line for each executed vector and no ML_VECTOR result line for a vector that was not executed.",
+          "observable": "ML_VECTOR lines in the captured console log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The test setup can determine which vectors execute."
+          ],
+          "procedure": [
+            "Capture the console log for a run.",
+            "Count the ML_VECTOR lines and associate each line with its executed vector."
+          ],
+          "expected": "Each executed vector has exactly 1 ML_VECTOR line; each unexecuted vector has 0 such lines.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-008",
+          "verifiability": "host",
+          "criterion": "A simulated unsuccessful transmission of each required startup, vector-result, or final-status message sets the test result to FAIL and prevents a PASS summary.",
+          "observable": "Application test-result state and summary text captured by the fake console transport",
+          "observable_kind": "state",
+          "preconditions": [
+            "The console transport is injectable or replaceable by a fake that can report a failed transmission.",
+            "The application flow can be run in a host unit test."
+          ],
+          "procedure": [
+            "Configure the fake transport to fail one required startup message and check the test result and summary.",
+            "Repeat for a vector-result message and for a final-status message."
+          ],
+          "expected": "For each injected failure, the test result is FAIL and no PASS summary is emitted.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-009",
+          "verifiability": "hardware",
+          "criterion": "Each named reference vector has exactly one ML_VECTOR line that identifies the vector and contains an explicit, parseable FP32 comparison outcome.",
+          "observable": "ML_VECTOR lines in the captured console log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The five reference vectors have been executed and compared."
+          ],
+          "procedure": [
+            "Capture the console log.",
+            "For each of positive, first_clamped, second_clamped, zero_input, and both_clamped, locate its ML_VECTOR line.",
+            "Check that each line identifies one vector and contains a comparison outcome token that can be parsed."
+          ],
+          "expected": "Exactly 1 identifiable ML_VECTOR line per named vector, each with an explicit parseable comparison outcome.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-027",
+          "verifiability": "hardware",
+          "criterion": "The captured serial log reports positive, first_clamped, second_clamped, zero_input, and both_clamped.",
+          "observable": "Named vector results in the captured serial log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware is running after reset with the five test vectors enabled."
+          ],
+          "procedure": [
+            "Capture the serial log for one run.",
+            "Check that a result for each of the five named vectors is present."
+          ],
+          "expected": "A result is present for each of the 5 named vectors.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-010",
+          "verifiability": "hardware",
+          "criterion": "After all five vector comparisons and cleanup succeed, the final log contains exactly ML_SUMMARY passed=5 total=5 status=PASS.",
+          "observable": "Final summary line in the captured console log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "All five reference vectors execute.",
+            "All five comparisons and cleanup succeed."
+          ],
+          "procedure": [
+            "Run the firmware with all five comparisons and cleanup succeeding.",
+            "Capture the complete console output.",
+            "Check the final summary line for an exact match."
+          ],
+          "expected": "The final summary is exactly `ML_SUMMARY passed=5 total=5 status=PASS`.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-010",
+          "verifiability": "hardware",
+          "criterion": "A failed vector, comparison, or cleanup operation prevents emission of a PASS summary.",
+          "observable": "PASS summary occurrences in the captured console log",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The test setup can separately inject a vector, comparison, or cleanup failure."
+          ],
+          "procedure": [
+            "Run separate cases injecting each of the three failure types.",
+            "Capture the console output for each case.",
+            "Check each log for a PASS summary."
+          ],
+          "expected": "Zero PASS summaries are emitted in every failure case.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-3",
+      "name": "Build, Memory & Release Configuration",
+      "criteria": [
+        {
+          "requirement_id": "NFR-001",
+          "verifiability": "inspection",
+          "criterion": "The startup and test-sequence call paths contain no dynamic heap allocation or reachable allocator calls.",
+          "observable": "Source and call-graph audit for the complete test sequence, including calls to heap-allocation APIs",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The complete startup and test-sequence source is available."
+          ],
+          "procedure": [
+            "Trace the startup and test-sequence call paths, including calls into linked libraries.",
+            "Check whether any path used during the sequence performs dynamic heap allocation."
+          ],
+          "expected": "No dynamic heap allocation occurs on any startup or test-sequence path.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-003",
+          "verifiability": "inspection",
+          "criterion": "The build configuration and component artifacts identify the same Cortex-M33 CPU/FPU ABI for generated model sources, runtime libraries, and application objects.",
+          "observable": "Compiler and linker ABI options and CPU/FPU attributes in the component objects and libraries",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Build configuration and generated model, runtime, and application artifacts are available."
+          ],
+          "procedure": [
+            "Inspect the CPU/FPU ABI options used to build each component.",
+            "Inspect the ABI attributes recorded in the component artifacts.",
+            "Compare the CPU and FPU ABI settings across all listed components."
+          ],
+          "expected": "All listed components use mutually compatible Cortex-M33 CPU/FPU ABI settings.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-004",
+          "verifiability": "inspection",
+          "criterion": "The final link produces a firmware artifact without unresolved symbols, ABI mismatch diagnostics, or overlapping memory-region diagnostics.",
+          "observable": "Final linker output and linked firmware artifact",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware build and link have been performed."
+          ],
+          "procedure": [
+            "Inspect the final linker output for unresolved-symbol, ABI-mismatch, and overlapping-memory-region diagnostics.",
+            "Confirm that the linked firmware artifact was produced."
+          ],
+          "expected": "A linked firmware artifact is present, with zero diagnostics for the three listed link conditions.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-005",
+          "verifiability": "inspection",
+          "criterion": "The linker map places all Flash sections within 1 MiB and all SRAM sections within 256 KiB of the target memory regions.",
+          "observable": "Linker map section addresses, sizes, and target memory-region bounds",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware has linked and its linker map is available."
+          ],
+          "procedure": [
+            "Read the Flash and SRAM region bounds from the linker map.",
+            "Check each placed section's address range against its assigned region."
+          ],
+          "expected": "Placed Flash sections remain within 1 MiB, and placed SRAM sections remain within 256 KiB.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-025",
+          "verifiability": "inspection",
+          "criterion": "A complete build configured for NUCLEO-C5A3ZG produces a successfully linked firmware artifact.",
+          "observable": "Build result and final firmware artifact for NUCLEO-C5A3ZG",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Complete application source and model are available."
+          ],
+          "procedure": [
+            "Run the complete firmware build configured for NUCLEO-C5A3ZG.",
+            "Inspect the build result and confirm the final firmware artifact was produced."
+          ],
+          "expected": "The build and link succeed for NUCLEO-C5A3ZG, and the target firmware artifact is present.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-006",
+          "verifiability": "hardware",
+          "criterion": "Two fresh builds from identical source and model inputs produce equivalent startup, five-vector, and final-summary behavior when run on the target board.",
+          "observable": "Serial-console logs from the two target-board runs",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The two builds use identical source and model inputs.",
+            "The target board and ST-LINK Virtual COM Port are available."
+          ],
+          "procedure": [
+            "Create two fresh firmware builds from the identical source and model inputs.",
+            "Run each build on the same target board and capture its serial-console output.",
+            "Compare the startup output, all five vector results, and the final summary between the captures."
+          ],
+          "expected": "The two captures show equivalent startup behavior, the same five vector results, and equivalent final-summary behavior.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-030",
+          "verifiability": "inspection",
+          "criterion": "The delivered package contains the STM32 project source required to build the application.",
+          "observable": "Delivered package file tree and STM32 project source files",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The delivery package is available for review."
+          ],
+          "procedure": [
+            "Inspect the delivered package file tree.",
+            "Confirm it contains the STM32 project source needed for the application build."
+          ],
+          "expected": "STM32 project source required to build the application is present in the delivered package.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-032",
+          "verifiability": "inspection",
+          "criterion": "The delivered package contains a final firmware binary or ELF artifact for the target board.",
+          "observable": "Delivered package file tree and firmware binary/ELF artifact",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "A successful firmware build has been performed.",
+            "The delivery package is available for review."
+          ],
+          "procedure": [
+            "Inspect the delivered package file tree.",
+            "Confirm that it contains the final firmware binary or ELF artifact for the target board."
+          ],
+          "expected": "At least one final firmware binary or ELF artifact for the target board is present in the package.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-033",
+          "verifiability": "inspection",
+          "criterion": "The delivered package contains a SHA-256 identifier that matches the deployed model.",
+          "observable": "Delivered SHA-256 identifier and SHA-256 digest computed from the deployed model",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The deployed model and delivery package are available for review."
+          ],
+          "procedure": [
+            "Read the SHA-256 identifier in the delivered package.",
+            "Compute the SHA-256 digest of the deployed model.",
+            "Compare the delivered identifier with the computed digest."
+          ],
+          "expected": "The delivered identifier is a 64-character hexadecimal SHA-256 digest and matches the deployed model's computed digest.",
+          "source": "derived",
+          "rationale": "The stated acceptance criterion requires delivery of the model's SHA-256 identifier; comparing it with the deployed model's digest checks that the delivered identifier actually identifies that model rather than merely being present.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-034",
+          "verifiability": "inspection",
+          "criterion": "The delivered serial-log capture contains startup output, five vector-result lines, and a final PASS or FAIL summary.",
+          "observable": "Delivered serial-log file",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware has been executed on the target board.",
+            "The delivery package is available for review."
+          ],
+          "procedure": [
+            "Open the delivered serial-log capture.",
+            "Check for startup output, count the vector-result lines, and inspect the final summary."
+          ],
+          "expected": "The capture contains startup output, exactly five vector-result lines, and a final PASS or FAIL summary.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-035",
+          "verifiability": "inspection",
+          "criterion": "The delivered validation record identifies the board used, firmware build result, flash result, and observed inference result.",
+          "observable": "Delivered validation record",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "Validation has been performed.",
+            "The delivery package is available for review."
+          ],
+          "procedure": [
+            "Open the delivered validation record.",
+            "Check for an entry identifying each of the board, build result, flash result, and observed inference result."
+          ],
+          "expected": "All four required items are identified in the record.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-007",
+          "verifiability": "inspection",
+          "criterion": "The memory map and runtime-storage evidence account for stack, static, activation, context, and I/O storage within the target's 256 KiB SRAM allocation.",
+          "observable": "Linker map and runtime-storage sizing evidence for the listed storage categories",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The final linked firmware and its memory map are available.",
+            "Runtime-storage sizes for stack, static, activation, context, and I/O storage are available."
+          ],
+          "procedure": [
+            "Inspect the map and runtime-storage evidence for each listed storage category.",
+            "Check that the accounted storage fits within the target SRAM allocation without exceeding its bounds."
+          ],
+          "expected": "All listed runtime storage is accounted for within 256 KiB (262144 bytes) of target SRAM.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-007",
+          "verifiability": "target",
+          "criterion": "During startup and execution of all five vectors, the stack high-water mark remains within its allocated stack range and the runtime stack-overflow indicator remains clear.",
+          "observable": "Target runtime stack high-water mark and stack-overflow indicator",
+          "observable_kind": "state",
+          "preconditions": [
+            "The final firmware is running on the target MCU.",
+            "Runtime stack high-water and overflow evidence is available."
+          ],
+          "procedure": [
+            "Run startup and the complete five-vector sequence on the target.",
+            "Read the stack high-water mark and stack-overflow indicator after the sequence."
+          ],
+          "expected": "The measured stack use does not exceed the allocated stack size, and the stack-overflow indicator is clear.",
+          "source": "derived",
+          "rationale": "The acceptance criterion requires worst-case sequence execution without stack overflow and calls for runtime evidence. Checking stack high-water use against its allocation and the overflow indicator provides observable evidence for that runtime condition.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-4",
+      "name": "ONNX Model & ST AI Runtime",
+      "criteria": [
+        {
+          "requirement_id": "FR-001",
+          "verifiability": "hardware",
+          "criterion": "The NUCLEO-C5A3ZG completes an inference by executing the supplied FP32 model on its MCU CPU.",
+          "observable": "ST-LINK Virtual COM Port inference trace and the target-side model execution trace",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware containing the supplied FP32 model is flashed to the NUCLEO-C5A3ZG."
+          ],
+          "procedure": [
+            "Reset the board and capture the ST-LINK Virtual COM Port output and target-side execution trace.",
+            "Run the model inference and check that the trace records execution on the MCU CPU and completion."
+          ],
+          "expected": "The trace records a completed model inference on the MCU CPU.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-004",
+          "verifiability": "inspection",
+          "criterion": "A comparison of the deployed model with c5_dense_relu.onnx finds no graph or weight changes.",
+          "observable": "The source and deployed model graph and weight data",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The supplied model and deployed model artifact are available for inspection."
+          ],
+          "procedure": [
+            "Compare the source and deployed model graphs.",
+            "Compare the corresponding model weight data."
+          ],
+          "expected": "The graph and weights match without changes.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-003",
+          "verifiability": "inspection",
+          "criterion": "Inspection of the deployed ONNX artifact confirms FP32 tensors, opset 17, IR version 8, and exactly one input named input and one output named output, each with shape [1,2].",
+          "observable": "The deployed ONNX model metadata, graph inputs, and graph outputs",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The deployed ONNX model artifact is available for inspection."
+          ],
+          "procedure": [
+            "Read the model IR version and opset metadata.",
+            "Inspect the input and output tensor counts, names, element types, and shapes."
+          ],
+          "expected": "IR version is 8; opset is 17; there is one FP32 input named input with shape [1,2] and one FP32 output named output with shape [1,2].",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "IF-004",
+          "verifiability": "inspection",
+          "criterion": "Inspection of the deployed model graph finds MatMul, Add, and Relu as its operations and finds no other operation types.",
+          "observable": "The deployed ONNX graph's node operation types",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The deployed ONNX model artifact is available for inspection."
+          ],
+          "procedure": [
+            "Enumerate the operation type of each node in the deployed model graph.",
+            "Compare the resulting operation types with the required set."
+          ],
+          "expected": "The graph operation types are MatMul, Add, and Relu only.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-005",
+          "verifiability": "inspection",
+          "criterion": "Inspection of the inference data path finds direct FP32 input and output handling and no additional preprocessing or postprocessing.",
+          "observable": "The source code path from FP32 input delivery to FP32 output retrieval",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The inference implementation is available for source inspection."
+          ],
+          "procedure": [
+            "Trace how input values are passed to the model.",
+            "Trace how output values are retrieved and returned.",
+            "Check those paths for transformations beyond direct FP32 handling."
+          ],
+          "expected": "Input and output values are handled directly as FP32, with no additional preprocessing or postprocessing.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-006",
+          "verifiability": "hardware",
+          "criterion": "The inference execution trace shows inference dispatched through the compiled model using the ST AI runtime.",
+          "observable": "The target-side inference trace identifying the compiled model and ST AI runtime call",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The firmware with the compiled model and ST AI runtime is flashed to the target."
+          ],
+          "procedure": [
+            "Reset the target and capture its inference execution trace.",
+            "Run an inference and inspect the recorded dispatch path."
+          ],
+          "expected": "The trace identifies an inference call through the ST AI runtime using the compiled model.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-007",
+          "verifiability": "inspection",
+          "criterion": "The inference call path invokes the compiled model's inference entry point rather than a handwritten implementation of the model equations.",
+          "observable": "The source-level inference call path",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The inference implementation and generated model sources are available for inspection."
+          ],
+          "procedure": [
+            "Trace the application inference call to its implementation.",
+            "Check whether that path invokes the compiled model or performs the model equations directly."
+          ],
+          "expected": "The application inference path invokes the compiled model and does not substitute handwritten model equations.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-009",
+          "verifiability": "target",
+          "criterion": "After reset initialization, generated-network initialization succeeds and all required activation, context, and I/O buffers are available before the first inference.",
+          "observable": "The target-side network initialization result, required buffer descriptors, and ordering relative to the first inference",
+          "observable_kind": "state",
+          "preconditions": [
+            "Reset initialization is complete.",
+            "The generated network's required activation, context, and I/O buffers are identified by its generated configuration."
+          ],
+          "procedure": [
+            "Start the firmware on the target and observe generated-network initialization.",
+            "Check the initialization result and required buffer descriptors.",
+            "Confirm these checks occur before the first inference."
+          ],
+          "expected": "Network initialization succeeds; every required buffer is available to the network before the first inference.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-012",
+          "verifiability": "target",
+          "criterion": "The ML runtime deinitialization operation is invoked after completion of the fifth vector execution.",
+          "observable": "The target-side sequence of vector-completion and runtime-deinitialization events",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The test sequence executes all five vectors on the target."
+          ],
+          "procedure": [
+            "Capture the target-side event trace for the five vector executions.",
+            "Check the position of the runtime deinitialization event in the trace."
+          ],
+          "expected": "All five vector executions complete before the ML runtime deinitialization operation is invoked.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "inspection",
+          "criterion": "The build configuration and generated model artifacts identify STM32C5 CPU execution as the model target.",
+          "observable": "The model-generation configuration and generated model target metadata",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The model-generation configuration and generated model artifacts are available for inspection."
+          ],
+          "procedure": [
+            "Inspect the model-generation target settings.",
+            "Inspect the generated model target metadata."
+          ],
+          "expected": "Both identify STM32C5 CPU execution as the target.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "NFR-002",
+          "verifiability": "inspection",
+          "criterion": "The delivered runtime integration identifies an ST AI compatible C runtime for model execution.",
+          "observable": "The runtime integration configuration and linked runtime component records",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The runtime integration configuration and build records are available for inspection."
+          ],
+          "procedure": [
+            "Inspect the runtime configuration used for model execution.",
+            "Inspect the build records for the runtime component used."
+          ],
+          "expected": "The model execution runtime is identified as an ST AI compatible C runtime.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-024",
+          "verifiability": "inspection",
+          "criterion": "Comparison of the supplied ONNX model with the conversion inputs and outputs finds no changes to the model graph or weights.",
+          "observable": "The supplied ONNX model and conversion artifacts",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The supplied ONNX model and conversion artifacts are available for inspection."
+          ],
+          "procedure": [
+            "Compare the graph used for conversion with the supplied model graph.",
+            "Compare the corresponding weights."
+          ],
+          "expected": "The graph and weights are unchanged from the supplied model.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-024",
+          "verifiability": "inspection",
+          "criterion": "The delivered conversion output contains inference code generated for deployment on STM32C5.",
+          "observable": "The conversion output and its target metadata",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The conversion output is available for inspection."
+          ],
+          "procedure": [
+            "Inspect the conversion output for generated inference code.",
+            "Inspect its target metadata."
+          ],
+          "expected": "Inference code is present and the target metadata identifies STM32C5.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-031",
+          "verifiability": "inspection",
+          "criterion": "The delivered project package contains the compiled ML model sources and the runtime integration files required by its build configuration.",
+          "observable": "The delivered package file list and project build configuration",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The delivered project package and its build configuration are available for inspection."
+          ],
+          "procedure": [
+            "Identify the compiled model sources and runtime integration files required by the build configuration.",
+            "Check that each is present in the delivered package."
+          ],
+          "expected": "All compiled ML model sources and runtime integration files required by the build configuration are present in the package.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-005",
+          "verifiability": "inspection",
+          "criterion": "Inspection of the firmware image and linked model data confirms that the model weights and biases required for inference are embedded in the image.",
+          "observable": "The firmware image, linker map, and linked model-weight and bias symbols",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The final firmware image and its linker map are available for inspection."
+          ],
+          "procedure": [
+            "Inspect the linker map for the model weight and bias data.",
+            "Confirm the corresponding data is linked into the firmware image."
+          ],
+          "expected": "The firmware image contains the model weights and biases required for inference.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "HW-005",
+          "verifiability": "inspection",
+          "criterion": "Inspection of the inference data path finds no dependency on external model or weight storage.",
+          "observable": "The firmware's model-loading and inference data-access paths",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The firmware source and model-loading implementation are available for inspection."
+          ],
+          "procedure": [
+            "Trace how the inference path obtains model weights and biases.",
+            "Check whether the path requires reading model or weight data from external storage."
+          ],
+          "expected": "Inference obtains the required model data from the firmware image and does not require external model or weight storage.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-038",
+          "verifiability": "inspection",
+          "criterion": "The SHA-256 identifier in the startup log matches an independently calculated SHA-256 of the model artifact embedded in the firmware and used by the ST AI runtime.",
+          "observable": "The captured startup log, firmware image, embedded model artifact, and independently calculated SHA-256 value",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The model artifact and firmware image are available for inspection.",
+            "A startup log from the deployed firmware is available."
+          ],
+          "procedure": [
+            "Identify the model artifact embedded in the firmware and used by the ST AI runtime.",
+            "Calculate its SHA-256 independently.",
+            "Compare that value with the identifier in the startup log."
+          ],
+          "expected": "The startup identifier exactly matches the independently calculated SHA-256 of the embedded model artifact used by the runtime.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    },
+    {
+      "id": "cat-5",
+      "name": "Inference Test Harness & Verification",
+      "criteria": [
+        {
+          "requirement_id": "FR-010",
+          "verifiability": "host",
+          "criterion": "A run records exactly one inference call for each of the five reference-vector IDs and records no other inference calls.",
+          "observable": "The host test's inference-call trace, including vector IDs and call counts.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The ML application flow is callable with a fake inference interface."
+          ],
+          "procedure": [
+            "Initialize the application flow with the fake inference interface.",
+            "Run the reference-vector test once.",
+            "Inspect the complete inference-call trace."
+          ],
+          "expected": "The trace contains exactly five calls, one for each reference-vector ID, with no duplicate or additional calls.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-011",
+          "verifiability": "host",
+          "criterion": "For each vector, the event trace records comparisons of both original FP32 outputs against their expected values before any display conversion or formatting event.",
+          "observable": "The host test's ordered comparison and formatting event trace.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The application flow supports recording comparison and formatting events.",
+            "A vector inference has completed."
+          ],
+          "procedure": [
+            "Run the test with event recording enabled.",
+            "Inspect the events for each vector in order."
+          ],
+          "expected": "Each vector has two FP32 comparison events before its first display-conversion or formatting event; the full run contains ten comparison events.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-014",
+          "verifiability": "host",
+          "criterion": "Injecting each listed initialization, inference, non-finite-output, deinitialization, and console-transmission failure leaves the final test status at FAIL and does not set or report PASS.",
+          "observable": "The application’s final status and pass-reported state after each injected failure.",
+          "observable_kind": "state",
+          "preconditions": [
+            "Each failure source can be injected through a replaceable interface or test hook.",
+            "The application’s final status remains inspectable even when console transmission fails."
+          ],
+          "procedure": [
+            "Run the test once for each of the five failure sources, injecting that failure in its corresponding operation.",
+            "After each run, inspect the final status and whether PASS was reported."
+          ],
+          "expected": "For every injected failure, final status is FAIL and PASS is not reported.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-015",
+          "verifiability": "hardware",
+          "criterion": "The positive-vector run supplies input [1,2], produces FP32 outputs within 0.000001 absolute error of [0.5,4], and displays [500,4000] milli-units.",
+          "observable": "The target’s vector input/output test trace and the corresponding ST-LINK Virtual COM Port output line.",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The ML network is initialized on the NUCLEO-C5A3ZG.",
+            "The test trace and ST-LINK Virtual COM Port capture are available."
+          ],
+          "procedure": [
+            "Run the reference-vector test on the target.",
+            "Capture the input/output trace and console output for the positive vector.",
+            "Compare the recorded input, FP32 outputs, and displayed milli-unit values with the expected values."
+          ],
+          "expected": "Input is [1,2]; each FP32 output differs from its expected value by at most 0.000001; the displayed values are [500,4000].",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-016",
+          "verifiability": "hardware",
+          "criterion": "The first_clamped run supplies input [-2,1], produces FP32 outputs within 0.000001 absolute error of [0,4], and displays [0,4000] milli-units.",
+          "observable": "The target’s vector input/output test trace and the corresponding ST-LINK Virtual COM Port output line.",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The ML network is initialized on the NUCLEO-C5A3ZG.",
+            "The test trace and ST-LINK Virtual COM Port capture are available."
+          ],
+          "procedure": [
+            "Run the reference-vector test on the target.",
+            "Capture the input/output trace and console output for first_clamped.",
+            "Compare the recorded input, FP32 outputs, and displayed milli-unit values with the expected values."
+          ],
+          "expected": "Input is [-2,1]; each FP32 output differs from its expected value by at most 0.000001; the displayed values are [0,4000].",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-017",
+          "verifiability": "hardware",
+          "criterion": "The second_clamped run supplies input [3,-1], produces FP32 outputs within 0.000001 absolute error of [7.5,0], and displays [7500,0] milli-units.",
+          "observable": "The target’s vector input/output test trace and the corresponding ST-LINK Virtual COM Port output line.",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The ML network is initialized on the NUCLEO-C5A3ZG.",
+            "The test trace and ST-LINK Virtual COM Port capture are available."
+          ],
+          "procedure": [
+            "Run the reference-vector test on the target.",
+            "Capture the input/output trace and console output for second_clamped.",
+            "Compare the recorded input, FP32 outputs, and displayed milli-unit values with the expected values."
+          ],
+          "expected": "Input is [3,-1]; each FP32 output differs from its expected value by at most 0.000001; the displayed values are [7500,0].",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-018",
+          "verifiability": "hardware",
+          "criterion": "The zero_input run supplies input [0,0], produces FP32 outputs within 0.000001 absolute error of [0.5,0], and displays [500,0] milli-units.",
+          "observable": "The target’s vector input/output test trace and the corresponding ST-LINK Virtual COM Port output line.",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The ML network is initialized on the NUCLEO-C5A3ZG.",
+            "The test trace and ST-LINK Virtual COM Port capture are available."
+          ],
+          "procedure": [
+            "Run the reference-vector test on the target.",
+            "Capture the input/output trace and console output for zero_input.",
+            "Compare the recorded input, FP32 outputs, and displayed milli-unit values with the expected values."
+          ],
+          "expected": "Input is [0,0]; each FP32 output differs from its expected value by at most 0.000001; the displayed values are [500,0].",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-019",
+          "verifiability": "hardware",
+          "criterion": "The both_clamped run supplies input [-1,-1], produces FP32 outputs within 0.000001 absolute error of [0,0], and displays [0,0] milli-units.",
+          "observable": "The target’s vector input/output test trace and the corresponding ST-LINK Virtual COM Port output line.",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "The ML network is initialized on the NUCLEO-C5A3ZG.",
+            "The test trace and ST-LINK Virtual COM Port capture are available."
+          ],
+          "procedure": [
+            "Run the reference-vector test on the target.",
+            "Capture the input/output trace and console output for both_clamped.",
+            "Compare the recorded input, FP32 outputs, and displayed milli-unit values with the expected values."
+          ],
+          "expected": "Input is [-1,-1]; each FP32 output differs from its expected value by at most 0.000001; the displayed values are [0,0].",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-020",
+          "verifiability": "host",
+          "criterion": "The FP32 comparator accepts an output whose absolute difference is within 0.000001 of the expected value and rejects one outside that bound, without adding relative-tolerance allowance.",
+          "observable": "The comparator function’s return value for the supplied FP32 actual and expected values.",
+          "observable_kind": "return_value",
+          "preconditions": [
+            "The comparator function is callable in a host test."
+          ],
+          "procedure": [
+            "Compare FP32 actual 1.0000009536743164 against expected 1.0.",
+            "Compare FP32 actual 1.0000010728836059 against expected 1.0.",
+            "Inspect the comparator result for each call."
+          ],
+          "expected": "The first comparison passes and the second fails; the acceptance boundary is absolute error <= 0.000001 with relative tolerance 0.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-028",
+          "verifiability": "host",
+          "criterion": "A complete five-vector test run counts as passing only when all ten original FP32 output comparisons are within absolute tolerance 0.000001 with relative tolerance 0.",
+          "observable": "The host test’s per-output comparison results and final vector/test pass states.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The application comparison flow is callable in a host test.",
+            "The five reference vectors and their expected FP32 outputs are available to the test."
+          ],
+          "procedure": [
+            "Run the comparison flow for all five vectors using outputs within the specified tolerance.",
+            "Repeat with one output outside the specified tolerance.",
+            "Inspect the ten comparison results and the affected vector’s pass state."
+          ],
+          "expected": "With all outputs in tolerance, all ten comparisons pass; when any output is outside tolerance, its comparison and vector do not pass.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-029",
+          "verifiability": "host",
+          "criterion": "Injecting a wrong output, a missing output, a non-finite output, or an ML runtime failure produces an outcome other than PASS for each case.",
+          "observable": "The application’s final test outcome after each injected condition.",
+          "observable_kind": "state",
+          "preconditions": [
+            "The ML output and runtime-failure paths can be controlled through test hooks or replaceable interfaces.",
+            "The final test outcome is inspectable."
+          ],
+          "procedure": [
+            "Run one test for each of the four conditions: wrong output, missing output, non-finite output, and runtime failure.",
+            "Inspect the final outcome after each run."
+          ],
+          "expected": "None of the four runs has final outcome PASS.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-036",
+          "verifiability": "inspection",
+          "criterion": "The test documentation identifies a fixed execution order containing each of the five reference vectors exactly once.",
+          "observable": "The documented reference-vector execution sequence in the test documentation or source comments.",
+          "observable_kind": "artifact",
+          "preconditions": [
+            "The application source and its test documentation are available for review."
+          ],
+          "procedure": [
+            "Locate the documented reference-vector execution sequence.",
+            "Check its entries and their order."
+          ],
+          "expected": "One fixed sequence is stated, and it lists each of the five reference vectors exactly once.",
+          "source": "derived",
+          "rationale": "The requirement explicitly calls for a documented order but does not provide the order itself; this checks that the order is actually specified without inventing which vector must come first.",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        },
+        {
+          "requirement_id": "FR-036",
+          "verifiability": "hardware",
+          "criterion": "Repeated target resets with the same firmware produce the five vector executions and result lines in the documented order on every run.",
+          "observable": "The ordered vector-execution and result lines captured through the ST-LINK Virtual COM Port across reset runs.",
+          "observable_kind": "log_output",
+          "preconditions": [
+            "Application initialization succeeds on the NUCLEO-C5A3ZG.",
+            "The fixed vector order is documented.",
+            "The ST-LINK Virtual COM Port is connected and captures complete output."
+          ],
+          "procedure": [
+            "Reset the target and capture the vector execution and result lines.",
+            "Repeat the reset and capture the lines again.",
+            "Compare each run’s order with the documented sequence and with the other run."
+          ],
+          "expected": "Every captured run contains the five vectors once, in the documented order, and the ordered sequences are identical across runs.",
+          "source": "explicit",
+          "rationale": "",
+          "blocked_reason": null,
+          "review_state": "accepted",
+          "user_note": null,
+          "superseded_criterion": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+Captured current reset output from mcu_deploy, COM5 at 115200. The monitor delivered buffered prior-run characters before the fresh model banner; that old segment is intentionally excluded from the current-run record.
+
+ML_MODEL_SHA256=15deb03ca6bbc45c47b4eaec4d9a9cdeca291c2e6bf5a0e64fdaea702778d090
+ML_RUNTIME_READY
+ML_VECTOR id=positive comparison=PASS output_milli=[500,4000]
+ML_VECTOR id=first_clamped comparison=PASS output_milli=[0,4000]
+ML_VECTOR id=second_clamped comparison=PASS output_milli=[7500,0]
+ML_VECTOR id=zero_input comparison=PASS output_milli=[500,0]
+ML_VECTOR id=both_clamped comparison=PASS output_milli=[0,0]
+ML_SUMMARY passed=5 total=5 status=PASS

@@ -1,0 +1,10 @@
+{
+  "schema_version": "3.0.0",
+  "view": "sequence",
+  "revision": "49d43247689c1b89d6cb3cba92e2f18f",
+  "graph_version": 6,
+  "generated_at_ms": 1790680331973,
+  "mermaid": "sequenceDiagram\n  participant Main as Startup entry\n  participant System as System initialization\n  participant Stdio as Basic stdio\n  participant App as Application\n  participant Logger as Printf logger\n  participant USART2 as USART2 console\n  participant Console as VCP console\n  Main->>System: mx_system_init\n  System-->>Main: SYSTEM_OK status\n  alt System initialization failed\n    Note over Main: Remain in startup failure loop\n  else System initialization succeeded\n    Main->>Stdio: mx_basic_stdio_init\n    Stdio-->>Main: SYSTEM_OK status\n    alt Basic stdio initialization failed\n      Note over Main: Remain in startup failure loop\n    else Basic stdio initialization succeeded\n      Main->>App: app_start\n      App->>App: Initialize test status, counters, and comparison results\n      App->>Logger: LOGI startup_state=initialized\n      Logger->>USART2: printf log output\n      USART2->>Console: VCP console output\n    end\n  end",
+  "title": "Sequence Diagram",
+  "authored_by_model": true
+}

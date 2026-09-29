@@ -1,0 +1,67 @@
+{
+  "model": "c5_dense_relu.onnx",
+  "format": "onnx",
+  "framework": "ONNX",
+  "sha256": "15deb03ca6bbc45c47b4eaec4d9a9cdeca291c2e6bf5a0e64fdaea702778d090",
+  "size_bytes": 245,
+  "inputs": [
+    {
+      "name": "input_output_array",
+      "shape": [
+        2
+      ],
+      "dtype": "float32",
+      "size_bytes": 8,
+      "quantization": {}
+    }
+  ],
+  "outputs": [
+    {
+      "name": "output_output_array",
+      "shape": [
+        2
+      ],
+      "dtype": "float32",
+      "size_bytes": 8,
+      "quantization": {}
+    }
+  ],
+  "operators": [
+    "Add",
+    "MatMul",
+    "Relu"
+  ],
+  "quantization": "float",
+  "inspection": "onnx",
+  "warnings": [],
+  "inspector_version": "1.23.0",
+  "original_model": {
+    "inputs": [
+      {
+        "name": "input",
+        "shape": [
+          1,
+          2
+        ],
+        "dtype": "float32"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "output",
+        "shape": [
+          1,
+          2
+        ],
+        "dtype": "float32"
+      }
+    ],
+    "operators": [
+      "Add",
+      "MatMul",
+      "Relu"
+    ],
+    "quantization": "unquantized_or_unknown"
+  },
+  "compiler_inspected": true
+}

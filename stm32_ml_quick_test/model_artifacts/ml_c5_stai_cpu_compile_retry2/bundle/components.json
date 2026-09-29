@@ -1,0 +1,35 @@
+{
+  "libraries": [
+    {
+      "name": "firmgen_ml_runtime",
+      "kind": "source",
+      "path": "ml/runtime",
+      "include_dirs": [
+        "ml/runtime"
+      ],
+      "defines": []
+    },
+    {
+      "name": "firmgen_ml_model",
+      "kind": "source",
+      "path": "ml/generated",
+      "include_dirs": [
+        "ml/backend_stai",
+        "ml/generated/output",
+        "ml/runtime"
+      ],
+      "defines": []
+    },
+    {
+      "name": "firmgen_ml_stai",
+      "kind": "source",
+      "path": "ml/backend_stai",
+      "include_dirs": [
+        "ml/backend_stai",
+        "ml/generated/output",
+        "ml/runtime"
+      ],
+      "defines": []
+    }
+  ]
+}

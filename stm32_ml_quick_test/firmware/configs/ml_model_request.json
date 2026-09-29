@@ -1,0 +1,6 @@
+{
+  "model": "C:\\ML\\Firmgen\\deliverables\\FirmGen_NUCLEO-C5A3ZG_ML_Quick_Test\\C5_Quick_Test\\firmgen-ml-519a58b5-9754-4866-aca4-6f7b32a11522\\c5_dense_relu.onnx",
+  "output": "C:\\Users\\YatendraBhargava\\Downloads\\29-9-26\\ml_test\\stm32_ml_quick_test\\firmware\\ml_c5_stai_cpu_compile_retry2",
+  "board": "NUCLEO-C5A3ZG",
+  "stage": "compile"
+}

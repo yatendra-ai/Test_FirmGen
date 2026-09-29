@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "run_id": "bd98559f7ba04e1fa6806bfe45d62905",
+  "created_at": "2026-09-29T11:38:53.579874+00:00",
+  "requested_stage": "compile",
+  "state": "MODEL_UNSUPPORTED",
+  "history": [
+    {
+      "state": "MODEL_RECEIVED",
+      "at": "2026-09-29T11:38:53.579874+00:00"
+    },
+    {
+      "state": "MODEL_UNSUPPORTED",
+      "at": "2026-09-29T11:38:53.584990+00:00"
+    }
+  ],
+  "deployment_success": false,
+  "warnings": [],
+  "error": {
+    "code": "MODEL_UNSUPPORTED",
+    "message": "Model is missing or empty: C:\\ML\\Firmgen\\deliverables\\FirmGen_NUCLEO-C5A3ZG_ML_Quick_Test\\C5_Quick_Test\\firmgen-ml-519a58b5-9754-4866-aca4-6f7b32a11522\\c5_dense_relu.onnx"
+  }
+}

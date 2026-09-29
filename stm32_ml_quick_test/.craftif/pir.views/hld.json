@@ -1,0 +1,17 @@
+{
+  "schema_version": "3.0.0",
+  "view": "hld",
+  "revision": "49d43247689c1b89d6cb3cba92e2f18f",
+  "graph_version": 6,
+  "generated_at_ms": 1790680331972,
+  "mermaid": "flowchart TD\n  subgraph Runtime[\"Firmware startup\"]\n    boot[\"Startup entry<br/>application/main.c\"]\n    app[\"Application test state<br/>firmware/app/app.c\"]\n    logger[\"Printf logger<br/>firmware/utils/logger/logger.h\"]\n  end\n  subgraph ConsolePath[\"Serial console\"]\n    usart[\"USART2 console interface<br/>application/main.c\"]\n    console[\"Console output<br/>VCP console\"]\n  end\n  boot -->|mx_system_init configures USART2| usart\n  boot -->|app_start| app\n  app -->|LOGI| logger\n  logger -->|printf| usart\n  usart -->|VCP console output| console",
+  "title": "High-Level Design",
+  "node_notes": {
+    "app": "This module initializes the test status, vector counters, and comparison results before test processing. firmware/app/app.c calls LOGI after the reset state is initialized.",
+    "console": "This is the VCP console output for the application's startup message. firmware/app/app.h describes runtime reporting through the initialized console, while firmware/utils/logger/logger.h identifies UART/VCP routing as platform-owned.",
+    "usart": "USART2 is the serial interface used for the initialized console path. application/main.c identifies USART2 setup in system initialization and requires basic stdio setup before app_start; no pin bindings are established by these files.",
+    "boot": "This is the STM32 reset entry and hands off to the firmware after startup checks. application/main.c calls mx_system_init, which its comment identifies as setting up USART2, then calls app_start.",
+    "logger": "The logger macros are printf-backed and provide the application's LOGI call. firmware/utils/logger/logger.h documents printf as the backing mechanism and says UART/VCP routing belongs in the STM32 platform."
+  },
+  "authored_by_model": true
+}

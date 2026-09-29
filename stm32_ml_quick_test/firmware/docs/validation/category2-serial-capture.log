@@ -1,0 +1,6 @@
+Captured ST-LINK VCP output from mcu_deploy after reset, COM5 at 115200 baud:
+
+ML_FAIL reason=model_runtime_not_integrated
+ML_SUMMARY passed=0 total=5 status=FAIL
+
+This is the actual output for the currently integrated category-2 console/reporting firmware. It is an intentional failure because the model and inference runtime have not yet been integrated. It is not evidence of successful inference. No model SHA-256 banner, ML_RUNTIME_READY, or ML_VECTOR lines appeared in this run.

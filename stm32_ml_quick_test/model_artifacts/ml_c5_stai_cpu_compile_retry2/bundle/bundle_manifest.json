@@ -1,0 +1,17 @@
+{
+  "artifacts.json": "f6f3f3d472820b4b7f0a65c63eb7970123059c825bbcbecabbcbd4686e46ddb1",
+  "backend_stai/fg_ml_stai.c": "f139945f7f65093a1252e9865aab510190e20e4812ff78f614472d8ee1313b6f",
+  "backend_stai/fg_ml_stai.h": "e83759bfa77cc70d7a4d07a68cfc43ce19c20c79e126c74e2cd21d2749ef3452",
+  "components.json": "37e78934bac5c669a44b17172eb41ba07e73df59c7ea7d4fb9163ad9c17265aa",
+  "generated/output/LICENSE.txt": "89a4b36db219612d2ccd64fc594919dddadc013f1c98ca1f019abc13fae1f14f",
+  "generated/output/network.c": "7db45a8a8e6c85eac42fff232cdda37515c40ee0ba1d1c993f4f5b6377fd0613",
+  "generated/output/network.h": "c2dce473015139750e9e3230b235717f2700b9cb133355c7a9e59794addbe01e",
+  "generated/output/network_data.c": "626ecaebf281123c4daae1c95fdd66e8d990a59fc918eae5c10691d5a3b4f1fa",
+  "generated/output/network_data.h": "7717c5e4041e843f04f5fe2ebca9c56e65980db578ea99f0c60b531ac1997dc3",
+  "generated/output/network_details.h": "42b7ef3ec88aae619a8fc5975ad816e0f5cb870fdb234c4ece06daa72849d5c8",
+  "INTEGRATION.md": "9b1ec9964414d79f71e61627967f61b5ef01633825aad346ae545eed7a8387b6",
+  "model/model_manifest.json": "91195f74bc6feca185ce343320bc4695614f695da07fa65d6cf8f7176bc20bf0",
+  "pipeline.json": "9c95d7e56303176a459ad44768e2e6126ee485d83ba4ad64337bfeded71e58a0",
+  "runtime/fg_ml_runtime.c": "5c2ee740395ff7db2d5bee845542e23f5a72c792eb340f839a788a3d2a3d33dd",
+  "runtime/fg_ml_runtime.h": "c0658a36d2227004c541a28675bd83c2f94c8e2b820c6d93d43bdd0268e74393"
+}

@@ -1,0 +1,5 @@
+{
+  "preprocessing": "caller_supplied",
+  "postprocessing": "caller_supplied",
+  "reference_domain": "compiled_model_native_tensors"
+}
